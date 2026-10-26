@@ -139,11 +139,11 @@ teaching/engagement review remain pending. Initial pilot predates later supplied
 song hooks; consolidated HIP_HOP_TEACHING_NOTES.txt maps those into full lessons.
 CURRENT WRITING CHECKPOINT
 All four parts have complete first drafts, pending editorial/teaching review.
-Part 1: 6866 narration words; estimated 58.57 minutes at the provisional pace.
+Part 1: 6980 narration words; estimated 59.55 minutes at the provisional pace.
 Part 2: 6864 narration words; estimated 58.56 minutes at the provisional pace.
 Part 3: 6846 narration words; estimated 58.40 minutes at the provisional pace.
 Part 4: 6877 narration words; estimated 58.67 minutes at the provisional pace.
-Total: 27453 words, approximately 234 minutes at the candidate pace.
+Total: 27567 words, approximately 234 minutes at the candidate pace.
 These estimates exclude metadata and stage directions. They are not measured
 full-part audio durations or finished videos. course_manifest.json records
 prerequisite order; draft-progress.json records reproducible counts.

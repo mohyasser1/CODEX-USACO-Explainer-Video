@@ -1,11 +1,11 @@
 ROHAIL V2 — FOUR-PART FIRST-DRAFT REVIEW CHECKPOINT
 
 All 26 script sections are drafted. Read in course_manifest.json order.
-Part 1: 6,866 spoken words; estimated 58.57 minutes.
+Part 1: 6,980 spoken words; estimated 59.55 minutes.
 Part 2: 6,864 spoken words; estimated 58.56 minutes.
 Part 3: 6,846 spoken words; estimated 58.40 minutes.
 Part 4: 6,877 spoken words; estimated 58.67 minutes.
-Total: 27,453 words, about 234.2 minutes at the audition's measured overall
+Total: 27,567 words, about 235.2 minutes at the audition's measured overall
 117.22 words/minute. These are estimates, not measured full-part audio.
 
 REVIEW PRIORITIES
@@ -13,7 +13,10 @@ Check beginner prerequisites, correctness of each continuous example,
 proof versus intuition, cognitive load, and whether the story/humor helps.
 Review each script alongside its named standalone C++ example. Visual stage
 directions are specifications, not evidence that animations already exist.
-visual_contracts.json and check_visual_examples.py verify 22 exact examples.
+check_visual_examples.py verifies final stdout for 22 input/output fixtures.
+check_trace_states.py separately verifies all 10 authored intermediate-data
+fields (loop states, prefix rows, search bounds, queues, component count,
+coin/knapsack DP and Fenwick arrays). Neither check validates rendered media.
 Independent exhaustive/naive-oracle test reports are in verification/;
 2,243 program cases passed across the saved reports, including invalid input
 cases for signed_total. Additional basic-program smoke checks also passed.
@@ -28,3 +31,9 @@ final student workbook, timed captions, integrated pilot approval, and full
 media QA remain outstanding. Human listening signoff is not claimed.
 V1 and superseded pilots are preserved separately. Active story uses Rohail.
 Cloud scratch has about 29 GB available; no Mac storage is used.
+
+CONTINUITY REVISION
+The actual foundations narration now stages the empty cash box, four receipts,
+reported eight dollars versus Maya's counted five, and skipped refunds before
+the loop lesson. No audition viewing is assumed. The coin DP visual now says
+1+dp[0]=1; denomination three chooses the predecessor, not the count increment.

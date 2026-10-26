@@ -1,6 +1,6 @@
 PART 1 DRAFT — WHAT A PROGRAM DOES
 Status: original narration draft, not yet synthesized or timed. Bracketed
-directions describe visuals. This precedes the signed-total pilot lesson.
+directions describe visuals. This precedes the signed-total loop lesson.
 
 [School music-night planning board. Three jobs appear: read the contract;
 model the state; justify the steps.]
@@ -179,5 +179,22 @@ belong together; indentation helps people see it. Use both. The condition i
 less than n visits indices zero through n minus one. Changing it to less than
 or equal would request one more iteration, but there is no element at index n.
 One more time sounds like an encore, but the boundary check decides
-whether another iteration is legal. We will now trace a complete signed-total example, including the
-last false condition check, instead of trusting the rhythm of the loop.
+whether another iteration is legal.
+
+[Return to the ticket desk. Cash box starts at $0. Receipt cards show
++3, -2, +5, -1. Wrong program selects only +3 and +5: reported $8.
+Maya counts $5 in the box. Label: example ledger, no other transactions.]
+Before we trace a loop, Rohail has a mystery at the ticket desk.
+The cash box started empty, and his program reports eight dollars,
+but Maya counts only five. Sam proposes investigating the snack table.
+Maya suggests a cheaper detective: the receipt list.
+There are exactly four transactions. Three dollars came in, two were
+refunded, another five came in, and one more was refunded.
+Rohail's program added the two incoming payments, three and five,
+but skipped both refunds. Eight is the money received before refunds;
+it is not the money remaining. The missing three dollars did not
+buy a secret sandwich. They went back to the customers.
+Rohail decides that payments will be positive and refunds negative,
+so both kinds of transaction can affect one running balance.
+We will now turn that decision into a complete loop and trace
+every step, including the last condition check that stops it.

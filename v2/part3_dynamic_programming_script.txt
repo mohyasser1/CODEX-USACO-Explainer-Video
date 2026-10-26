@@ -101,7 +101,7 @@ an exact-amount question. It does not mean the best result up to that
 amount. Confusing exact amount with at-most amount changes the state and
 can silently produce the wrong recurrence.
 
-[Amount3 candidates:1+dp2=3;3+dp0 gives count1. dp3=1.]
+[Amount3 candidates:1+dp2=3;coin3 selects predecessor amount0;1+dp[0]=1. dp3=1.]
 At amount three, choosing a last token of one gives dp two plus
 one, or three tokens. Choosing a last token of three gives dp zero
 plus one, or one token. Four does not fit. Take one, so dp

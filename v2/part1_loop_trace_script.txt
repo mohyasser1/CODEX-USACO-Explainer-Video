@@ -4,8 +4,7 @@ Complete program signed_total.cpp. Numerical example stays3,-2,5,-1 throughout.
 
 [Rohail and Maya at the ticket desk. Input4 followed by3,-2,5,-1.
 Program listing includes input reading, not only the computation excerpt.]
-Rohail now understands why counting only incoming payments gave the wrong
-balance. A refund must reduce the total. He and Maya agree on
+With the refund mistake identified, Rohail and Maya agree on
 the exact task before changing the program: read a count, followed
 by that many signed transactions, and print their net sum. The
 count may be zero, and each transaction may be positive, negative

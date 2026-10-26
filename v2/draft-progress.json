@@ -3,16 +3,16 @@
   "parts": [
     {
       "part": 1,
-      "spoken_words": 6866,
-      "estimated_minutes": 58.57,
+      "spoken_words": 6980,
+      "estimated_minutes": 59.55,
       "scripts": [
         {
           "file": "part1_foundations_script.txt",
-          "spoken_words": 1805
+          "spoken_words": 1932
         },
         {
           "file": "part1_loop_trace_script.txt",
-          "spoken_words": 1488
+          "spoken_words": 1475
         },
         {
           "file": "part1_functions_cost_script.txt",
@@ -67,8 +67,8 @@
     },
     {
       "part": 3,
-      "spoken_words": 6846,
-      "estimated_minutes": 58.4,
+      "spoken_words": 6848,
+      "estimated_minutes": 58.42,
       "scripts": [
         {
           "file": "part3_graph_models_script.txt",
@@ -88,7 +88,7 @@
         },
         {
           "file": "part3_dynamic_programming_script.txt",
-          "spoken_words": 1732
+          "spoken_words": 1734
         },
         {
           "file": "part3_topological_script.txt",
@@ -138,5 +138,5 @@
       "missing_drafts": []
     }
   ],
-  "total_spoken_words": 27453
+  "total_spoken_words": 27569
 }

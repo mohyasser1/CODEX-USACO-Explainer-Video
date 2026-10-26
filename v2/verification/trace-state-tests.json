@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "checked_fields": [
+    "signed_total.condition_states",
+    "empty_total.condition_states",
+    "prefix_categories.prefix_rows",
+    "shipping.search_rows",
+    "bfs_rooms.queues_after_processing",
+    "consistent_slots.components",
+    "minimum_coins.dp",
+    "knapsack.rows",
+    "fenwick_updates.bit_before",
+    "fenwick_updates.bit_after"
+  ],
+  "limitation": "Authored data only; no animation, highlighting, audio or timing checked."
+}
