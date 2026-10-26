@@ -15,6 +15,19 @@ Both fully decode and their downloaded Drive copies match local SHA256 values
 recorded in audition-verification.json. No human listening/quality approval is
 recorded. No further Kokoro audition iterations without feedback/evidence.
 
+USER FEEDBACK AND STORYTELLING REVISION
+User selected Voice A identity but rejected rapid, short-sentence delivery.
+New requested revision, not yet accepted:
+https://drive.google.com/file/d/1gbjoxQKnuYsq96xYeQEo94fAFNj2qpXP/view
+170 spoken words; 87.016 seconds including 5.8 seconds of purposeful pauses;
+117.22 overall words/minute. Same af_heart voice/model; native generation speed
+0.74, versus initial A speed 1.0; sentence_pause 0.30, clause_pause 0.12,
+continuous=False, en-us. Connected medium-length sentences form five story
+passages. No playback time stretching or pitch shift. First pacing attempt at
+0.85 measured 144 wpm, so it was retained locally and replaced with this
+target-range sample. Complete decode and downloaded-Drive SHA256 comparison
+pass. See storytelling-verification.json. Full narration awaits acceptance.
+
 Premise: Rohail is a fictional tenth grader helping classmates Maya and Sam
 organize a school music night. Their concrete tasks introduce algorithms:
 ticket refunds; rehearsal-set choices; interval attendance counts; group

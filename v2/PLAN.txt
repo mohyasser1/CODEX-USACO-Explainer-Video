@@ -102,6 +102,11 @@ completed part, 228–252 total. This is not a claim of completed script duratio
 That calibration used the now-rejected voice. Recalibrate after the new voice
 is accepted; a brief conversational audition does not establish technical-lesson
 speaking rate. Preserve the four-hour goal through substantive lesson depth.
+Latest requested Voice A storytelling revision measures 117.22 overall words/min
+(170 words/87.016 s, including 5.8 s useful pauses); delivery approval is pending.
+At this pace, begin with roughly 6900–7500 spoken words per part, approximately
+28000–30000 total, then measure each actual lesson. These replace the faster-
+voice drafting estimate provisionally, not the four-part duration requirement.
 Measure synthesized audio before finalizing. If short, deepen worked examples;
 if long, move clearly marked extension material into the workbook. Never stretch
 speech unnaturally, repeat passages or add silence to manufacture four hours.

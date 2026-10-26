@@ -1,0 +1,71 @@
+{
+  "voice": "af_heart",
+  "model": "/workspace/usaco-film/assets/kokoro-v1.0.onnx",
+  "previous_voice_A_settings": {
+    "speed": 1.0,
+    "continuous": false,
+    "sentence_pause": 0.3,
+    "clause_pause": 0.12
+  },
+  "current_settings": {
+    "speed": 0.74,
+    "continuous": false,
+    "sentence_pause": 0.3,
+    "clause_pause": 0.12,
+    "lang": "en-us"
+  },
+  "delivery_changes": "Connected medium-length sentences in contextual paragraphs; native synthesis pacing; purposeful reflection pauses; no audio time stretch or pitch shift.",
+  "duration_seconds": 87.01599999999999,
+  "spoken_words": 170,
+  "overall_words_per_minute": 117.21982164199689,
+  "explicit_pause_seconds": 5.8,
+  "cues": [
+    {
+      "start": 0,
+      "end": 15.274666666666667,
+      "text": "On Friday afternoon, Rohail is helping Maya prepare for their school music night. He has written a little program to check the ticket money, and for a moment, everything seems to be working.",
+      "pause_after": 0.8,
+      "pause_purpose": "Establish the scene before introducing the problem."
+    },
+    {
+      "start": 16.074666666666666,
+      "end": 32.714666666666666,
+      "text": "The program reports eight dollars, but Maya finds only five in the cash box. Before anyone blames a missing sandwich or an imaginary ticket, she asks Rohail to look at the refunds with her.",
+      "pause_after": 1.2,
+      "pause_purpose": "Let the mismatch register; neither student is blamed."
+    },
+    {
+      "start": 33.91466666666667,
+      "end": 48.976,
+      "text": "There's no need for us to rush this through. They read the transactions in order: three dollars came in, two went back, another five came in, and one more was refunded. What should remain?",
+      "pause_after": 2.0,
+      "pause_purpose": "A short prediction opportunity after the complete input."
+    },
+    {
+      "start": 50.976,
+      "end": 69.68533333333333,
+      "text": "Rohail follows the balance carefully, moving from three dollars to one, then to six, and finally to five. Now he understands the mistake: his program counted incoming payments, but ignored money that went back out.",
+      "pause_after": 1.2,
+      "pause_purpose": "Reflect on why the plausible first approach failed."
+    },
+    {
+      "start": 70.88533333333334,
+      "end": 86.416,
+      "text": "Together, they change the plan so that every payment and every refund affects the running total. Next, we will turn that idea into a loop, and explain why it works for any valid list.",
+      "pause_after": 0.6,
+      "pause_purpose": "Transition from story to the forthcoming general proof."
+    }
+  ],
+  "build_seconds": 46.26019188600003,
+  "listening_approval": "pending",
+  "file": "Rohail-Voice-A-Storytelling-Audition.mp4",
+  "bytes": 1811464,
+  "sha256": "73b4c477325a51aaf2d251294d4d5f76de902b1395c9589bbaef44eac890a86c",
+  "complete_decode": "passed",
+  "av_end_difference_seconds": 0.006666999999993095,
+  "subtitle_timing": "word-fraction approximation within each synthesized paragraph",
+  "human_listening": "pending",
+  "drive_id": "1gbjoxQKnuYsq96xYeQEo94fAFNj2qpXP",
+  "remote_sha256": "73b4c477325a51aaf2d251294d4d5f76de902b1395c9589bbaef44eac890a86c",
+  "remote_roundtrip": "MATCH"
+}
