@@ -4,10 +4,10 @@ directions describe visuals. This precedes the signed-total pilot lesson.
 
 [An imaginary festival poster falls over. Three backstage jobs appear:
 read the contract; model the state; justify the steps.]
-Bessie's festival has a problem. Her manager has booked one hundred thousand
+Rohail's festival has a problem. Her manager has booked one hundred thousand
 fans, but his ticket checker compares every fan with every other fan. The
 opening act has finished. The closing act has finished. A blade of grass has
-earned a doctorate. The manager is still comparing wristbands. We are going
+earned a doctorate. Sam is still comparing wristbands. We are going
 to replace his algorithm, but first we need to understand what an algorithm
 and a program actually are. An algorithm is a precise method for solving a
 problem. A program expresses a method in instructions a computer can execute.
@@ -72,7 +72,7 @@ not produce the required result. These are different categories. Start with
 the first meaningful compiler diagnostic: one missing brace can trigger many
 later messages. For a wrong answer, write down an input, the expected output,
 and the actual output. Then trace the variables. Saying it does not work is
-an understandable emotion, but it is not yet a test case. The manager's latest
+an understandable emotion, but it is not yet a test case. Sam's latest
 debugging strategy is to look disappointed at the laptop. We are trying a more
 evidence-based workflow.
 
@@ -161,7 +161,7 @@ but the requested element does not exist.
 A string also gives us an indexed sequence. Our neutral counting example is
 BANANA. Its length is six, its valid indices are zero through five, and the
 letter A occurs three times. Length, last valid index and frequency are three
-different quantities. The manager announces that BANANA has five characters
+different quantities. Sam announces that BANANA has five characters
 because the last index is five. The audience hands him a zero-based invoice.
 To read a single whitespace-delimited word, standard extraction works. To
 read an entire line containing spaces, use getline and account for any newline

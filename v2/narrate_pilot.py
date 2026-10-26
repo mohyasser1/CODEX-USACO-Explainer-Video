@@ -2,13 +2,14 @@
 import os
 os.environ['OMP_NUM_THREADS'] = '1'
 os.environ['OPENBLAS_NUM_THREADS'] = '1'
-import hashlib, json, re, time
+import hashlib, json, re, time, importlib
 from pathlib import Path
 import numpy as np
 import soundfile as sf
 import onnxruntime as ort
 from kokoro_onnx import Kokoro
-from pilot import SCENES
+SCENES=importlib.import_module(os.environ.get('V2_LESSON_MODULE','pilot')).SCENES
+PREFIX=os.environ.get('V2_PREFIX','v2-pilot')
 
 OUT = Path('/workspace/usaco-film-v2/output')
 CACHE = OUT / 'sentence-cache'
@@ -41,6 +42,6 @@ for idx, scene in enumerate(SCENES):
     pos += .65
     scenes.append(dict(start=start, end=pos, **scene))
     print(f'Scene {idx+1}/{len(SCENES)}: cumulative {pos:.1f}s', flush=True)
-sf.write(OUT/'v2-pilot.wav', np.concatenate(pieces), sr)
-(OUT/'v2-pilot-timing.json').write_text(json.dumps(dict(duration=pos, cues=cues, scenes=scenes), indent=2))
+sf.write(OUT/(PREFIX+'.wav'), np.concatenate(pieces), sr)
+(OUT/(PREFIX+'-timing.json')).write_text(json.dumps(dict(duration=pos, cues=cues, scenes=scenes), indent=2))
 print(f'COMPLETE {pos:.3f}s', flush=True)

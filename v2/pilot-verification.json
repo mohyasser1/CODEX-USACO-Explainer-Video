@@ -1,7 +1,7 @@
 {
   "file": "V2-pilot-execution-and-proof.mp4",
-  "bytes": 7251665,
-  "sha256": "0361bbf401d2b3b367b4d1baec2186ba37cde0c1c154026c5711204ee1e07bde",
+  "bytes": 7397888,
+  "sha256": "6c164593391a8a08919c4706b9bec788025e7c0eced5c03b345c149ff8627839",
   "duration_seconds": 395.2,
   "narration_seconds": 395.1833333333325,
   "resolution": "1280x720",
@@ -14,8 +14,8 @@
     "Captions are timed within synthesized sentences by word fraction",
     "This is an early visual/teaching pilot, not a finished one-hour part"
   ],
-  "drive_id": "1caj52eyJMDL_smkpFcBXUsbwGyW89TFu",
-  "drive_url": "https://drive.google.com/file/d/1caj52eyJMDL_smkpFcBXUsbwGyW89TFu/view",
-  "remote_download_sha256": "0361bbf401d2b3b367b4d1baec2186ba37cde0c1c154026c5711204ee1e07bde",
-  "remote_roundtrip": "MATCH"
+  "remote_roundtrip": "MATCH",
+  "remote_download_sha256": "6c164593391a8a08919c4706b9bec788025e7c0eced5c03b345c149ff8627839",
+  "presentation_status": "SUPERSEDED: user rejected voice and cow/mascot; technical repair retained only",
+  "drive_id": "1caj52eyJMDL_smkpFcBXUsbwGyW89TFu"
 }

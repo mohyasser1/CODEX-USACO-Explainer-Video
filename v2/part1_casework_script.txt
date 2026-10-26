@@ -4,11 +4,11 @@ Visual directions in brackets are not narrated. Programs use stdin/stdout.
 
 [Contract card: three numbered booths, one golden backstage pass. n events,
 each (left booth, right booth, guessed booth). Swap first, then score the guess.]
-Bessie has hidden one golden pass in one of three booths. The manager keeps
+Rohail has hidden one golden pass in one of three booths. Sam keeps
 swapping booth contents, then guessing where the pass is. We know every swap
 and every guess. We do not know where the pass started. Find the largest score
 that any starting position could produce. A correct guess earns one point.
-The pass does not move because the manager points at it. Only a swap moves it.
+The pass does not move because Sam points at it. Only a swap moves it.
 That distinction is our first defense against accidentally programming a
 different game. This is an original festival framing of the simulation pattern
 you will practice in the official Bronze problem Shell Game. Read that original

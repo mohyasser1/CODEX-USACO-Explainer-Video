@@ -2,10 +2,13 @@
 import json, math, subprocess, textwrap, os
 from functools import lru_cache
 from pathlib import Path
+if os.environ.get('ALLOW_SUPERSEDED_REVIEW_RENDER') != '1':
+    raise SystemExit('Superseded presentation: use v2/recast; no current-style full renders.')
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 import soundfile as sf
 from pilot import CODE, VALUES
+from pilot_states import state_at
 OUT=Path('/workspace/usaco-film-v2/output')
 data=json.loads((OUT/'v2-pilot-timing.json').read_text())
 # Original procedural percussion. No sampled recordings or artist reference.
@@ -42,18 +45,8 @@ for cue in data['cues']:
         a=len(words)*j//count;b=len(words)*(j+1)//count
         cards.append(dict(start=cue['start']+(cue['end']-cue['start'])*a/len(words),
                           end=cue['start']+(cue['end']-cue['start'])*b/len(words),text=' '.join(words[a:b])))
-def change_time(s):
-    # Keep old state until the explicit result sentence has been spoken.
-    candidates=[c for c in data['cues'] if c['start']>=s['start'] and c['end']<=s['end']]
-    markers={3:'Old total',4:'Three plus',5:'At index',6:'Six plus'}
-    idx=data['scenes'].index(s)
-    return next((c['end'] for c in candidates if c['text'].startswith(markers.get(idx,'!!!'))),s['end'])
-def increment_time(s):
-    idx=data['scenes'].index(s)
-    markers={3:'Then the increment',4:'Store one',5:'Then advance',6:'Increment i'}
-    return next((c['end'] for c in data['cues'] if s['start']<=c['start']<s['end'] and c['text'].startswith(markers.get(idx,'!!!'))),s['end'])
 def frame(t):
-    s=scene_at(t); im=Image.new('RGB',(W,H),BG);d=ImageDraw.Draw(im)
+    state=state_at(data,t); s=state['scene']; im=Image.new('RGB',(W,H),BG);d=ImageDraw.Draw(im)
     d.text((35,22),'BESSIE’S ALGORITHM TOUR  /  V2 TEACHING PILOT',font=font(20, bold=True),fill=MINT)
     d.text((35,60),s['title'],font=font(35,bold=True),fill=FG)
     # Small original cow host, deliberately outside code and caption areas.
@@ -64,35 +57,33 @@ def frame(t):
     d.ellipse((cx-25,cy-5,cx-15,cy+5),fill=BG);d.ellipse((cx+15,cy-5,cx+25,cy+5),fill=BG)
     d.ellipse((cx-25,cy+8,cx+25,cy+29),fill=PINK)
     d.rounded_rectangle((30,120,735,420),18,fill='#182239')
-    changed='next_total' in s and t>=change_time(s)
-    incremented='next_total' in s and t>=increment_time(s)
-    active=s['i']+int(incremented)
-    highlight=2 if incremented else s['line']
-    transfer=False; transfer_answer=False
-    if s is data['scenes'][-1]:
-        transfer_start=next(c['start'] for c in data['cues'] if c['text'].startswith('Your transfer task'))
-        answer_start=next(c['end'] for c in data['cues'] if c['text'].startswith('The totals are'))
-        transfer=t>=transfer_start;transfer_answer=t>=answer_start
-        if transfer:highlight=-1
-    for j,line in enumerate(CODE):
-        if j==highlight:d.rounded_rectangle((42,136+j*42,725,176+j*42),8,fill='#294c48')
-        d.text((50,143+j*42),line,font=font(23,mono=True),fill=MINT if j==highlight else FG)
-    d.text((770,126),'TRANSFER INPUT' if transfer else 'TRANSACTIONS a',font=font(23,bold=True),fill=FG)
-    value=s.get('next_total') if changed else s['total']
-    if transfer:active=4 if transfer_answer else -1;value=0 if transfer_answer else '?'
-    for j,v in enumerate([-4,0,7,-3] if transfer else VALUES):
-        x=775+j*110
-        d.rounded_rectangle((x,176,x+94,251),10,fill='#294c48' if j==active else '#182239',outline=MINT if j==active else '#51617d',width=3)
-        d.text((x+25,193),str(v),font=font(30,mono=True),fill=FG)
-        d.text((x+31,261),str(j),font=font(20),fill='#9dacbf')
-    d.text((775,311),f'i = {active if active>=0 else "?"}',font=font(29,mono=True),fill=YELLOW)
-    d.text((775,359),f'total = {value}',font=font(29,mono=True),fill=MINT)
-    phase='BODY UPDATED; increment next' if changed and not incremented else 'At condition check'
-    if transfer:phase='Final condition check' if transfer_answer else 'Pause and trace this input'
-    d.text((775,402),phase,font=font(19),fill=PINK)
+    highlight=state['highlight']; active=state['i']; value=state['total']
+    display_code=state['code']; spacing=37 if len(display_code)>6 else 42
+    for j,line in enumerate(display_code):
+        if j==highlight:d.rounded_rectangle((42,136+j*spacing,725,173+j*spacing),8,fill='#294c48')
+        d.text((50,143+j*spacing),line,font=font(23,mono=True),fill=MINT if j==highlight else FG)
+    d.text((770,126),state['label'],font=font(23,bold=True),fill=FG)
+    if state['mode']=='types':
+        for j,line in enumerate(['n <= 100,000', '|a[i]| <= 1,000,000,000', '|total| <= 100,000,000,000,000', 'a[i]: int    total: long long']):
+            d.text((775,180+j*46),line,font=font(20,mono=True),fill=MINT if j==2 else FG)
+    elif state['mode']=='contract':
+        for j,line in enumerate(['INPUT: 4 transactions', '3, -2, 5, -1', 'Include payments AND refunds', 'OUTPUT: one net total']):
+            d.text((775,180+j*42),line,font=font(22),fill=FG)
+    else:
+        for j,v in enumerate(state['values']):
+            x=775+j*110
+            d.rounded_rectangle((x,176,x+94,251),10,fill='#294c48' if j==active else '#182239',outline=MINT if j==active else '#51617d',width=3)
+            d.text((x+25,193),str(v),font=font(30,mono=True),fill=FG)
+            d.text((x+31,261),str(j),font=font(20),fill='#9dacbf')
+        if not state['values']:d.text((775,196),'a = [ ]  (no elements)',font=font(24,mono=True),fill=FG)
+    if state['mode'] not in ('types','contract'):
+        d.text((775,311),f'i = {active}',font=font(29,mono=True),fill=YELLOW)
+        d.text((775,359),f'total = {value}',font=font(23 if isinstance(value,str) else 29,mono=True),fill=MINT)
+    d.text((775,402),state['phase'],font=font(18),fill=PINK)
     d.text((45,449),'CONTRACT: add ALL signed values, including refunds.',font=font(24,bold=True),fill=FG)
-    d.text((45,495),'INVARIANT at each condition check:',font=font(23,bold=True),fill=YELLOW)
-    d.text((45,532),'total = sum of the first i elements',font=font(27,mono=True),fill=MINT)
+    proof_label='PROOF NOTATION: prefix(k) = sum of first k values' if s is data['scenes'][7] else 'INVARIANT at each condition check:'
+    d.text((45,495),proof_label,font=font(23,bold=True),fill=YELLOW)
+    d.text((45,532),state['invariant'],font=font(27,mono=True),fill=MINT)
     cue=next((c for c in cards if c['start']<=t<c['end']),None)
     d.rectangle((0,590,W,682),fill='#050914')
     if cue:
@@ -105,6 +96,10 @@ def stamp(t):
     return f'{h:02}:{m:02}:{s:02},{ms:03}'
 (OUT/'v2-pilot.srt').write_text('\n\n'.join(f"{i+1}\n{stamp(c['start'])} --> {stamp(c['end'])}\n{c['text']}" for i,c in enumerate(cards)))
 for j,s in enumerate(data['scenes']):frame((s['start']+s['end'])/2).save(OUT/f'pilot-frame-{j:02}.png')
+for t in [94,106,160,196,274,305,312,318,379,383]:
+    frame(t).save(OUT/f'pilot-corrected-{t}s.png')
+if os.environ.get('PREVIEW_ONLY')=='1':
+    raise SystemExit(0)
 target=OUT/'V2-pilot-execution-and-proof.mp4'
 temp=OUT/f'V2-pilot-{os.getpid()}.partial.mp4'
 cmd=['ffmpeg','-v','error','-y','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-i','-','-i',str(OUT/'v2-pilot-mix.wav'),'-c:v','libx264','-preset','veryfast','-crf','24','-threads','2','-pix_fmt','yuv420p','-c:a','aac','-b:a','96k','-af','loudnorm=I=-16:TP=-1.5:LRA=11','-shortest','-movflags','+faststart',str(temp)]

@@ -1,0 +1,37 @@
+{
+  "text": "Meet Rohail. Tenth grade, school music night, and one very suspicious ticket total. His program says eight dollars. The cash box says five. Okay... who bought a ticket with imaginary money? Maya pulls up the transactions: three dollars in, two refunded, five in, one refunded. Rohail spots it. His code ignored the refunds! There's no need for us to rush this through. Let's follow the numbers. Start at zero. Add three: we're at three. Subtract two: one. Add five: six. Subtract one: five. There it is. The cash box was right. Now the interesting question: how do we write a loop that gets this right every time, including an empty list? That's where an invariant earns its backstage pass.",
+  "voices": [
+    {
+      "label": "A",
+      "stock_voice": "af_heart",
+      "duration": 43.79866666666667,
+      "build_seconds": 43.027235730998655,
+      "synthesis": "whole-passage batched generation; no pitch shift/time stretch",
+      "listening_review": "pending",
+      "file": "Voice-A-Rohail-story-audition.mp4",
+      "bytes": 946751,
+      "sha256": "fe00fc3fbc1d6e87f7305978cef2d26da4f5080645684868542c36164ccf3a9f",
+      "complete_decode": "passed",
+      "drive_id": "19HsZlYfPtfR1O_2OHzhD0U-tWevBGVZH",
+      "remote_sha256": "fe00fc3fbc1d6e87f7305978cef2d26da4f5080645684868542c36164ccf3a9f",
+      "remote_roundtrip": "MATCH"
+    },
+    {
+      "label": "B",
+      "stock_voice": "am_eric",
+      "duration": 32.342666666666666,
+      "build_seconds": 20.0567702190001,
+      "synthesis": "whole-passage batched generation; no pitch shift/time stretch",
+      "listening_review": "pending",
+      "file": "Voice-B-Rohail-story-audition.mp4",
+      "bytes": 755586,
+      "sha256": "9e71d106900bf9dc77b873ed88d77c0257fae914a74a307f493e58e2e124893f",
+      "complete_decode": "passed",
+      "drive_id": "1YaO9rMpxABWH6Ga0LDfKMH7Zp1bfRsgV",
+      "remote_sha256": "9e71d106900bf9dc77b873ed88d77c0257fae914a74a307f493e58e2e124893f",
+      "remote_roundtrip": "MATCH"
+    }
+  ],
+  "hook": "Selected user-supplied Too Much heading excerpt; educational reinterpretation; metadata unverified",
+  "presentation": "Rohail, fictional tenth grader; no mascot; no background music for voice evaluation"
+}

@@ -1,0 +1,165 @@
+PART 2 DRAFT — PREFIX COUNTS: DO THE WORK ONCE
+Status: original narration draft; not synthesized or duration-approved.
+Complete program: prefix_counts.cpp. Original example; official transfer link
+is Breed Counting. Course program uses stdin/stdout, not historical file names.
+
+[Six wristbands in fixed order: category 2,1,3,1,2,1. Categories use numbers
+AND distinct shapes, not color alone. Query positions 2 through 5 inclusive.]
+Rohail's festival has three wristband categories. Fans stand in a fixed line.
+For many intervals of that line, Sam wants the count of each category.
+Our six categories are two, one, three, one, two, one. A query from position
+two through position five includes both endpoints. Those four fans have categories
+one, three, one, two, so the answer is two category-one fans, one category-two
+fan, and one category-three fan. Keep that order of output fixed. Sorting the
+fans would destroy the original intervals, even though sorting is often useful
+elsewhere. An algorithmic tool is not permission to change the data's meaning.
+
+[Direct scan visits the requested cells; three counters start at zero.]
+The simplest correct method scans each requested interval and increments the
+appropriate counter. For one query, that is fine. We will keep this method
+as an independent test oracle. But suppose there are one hundred thousand
+fans and one hundred thousand queries, each covering most of the line. Repeated
+scans could examine about ten billion category entries. Sam announces
+that he will hire ten billion interns. We are going to store a useful summary
+instead. Before proposing the summary, identify what repeats: the same early
+fans are counted again whenever a query extends past them. We want to reuse
+those counts without rearranging the line.
+
+[Boundary labels 0,1,2,3,4,5,6 between cells. Prefix row P[k] is first k fans.]
+Define prefix k as the three counts among the first k fans. This is a boundary
+convention. Prefix zero describes no fans, so its three counts are all zero.
+Prefix six describes all six fans. The table needs n plus one rows, because
+there are n plus one boundaries around n elements. This extra zero row is
+not wasted space. It lets queries starting at the first fan use the same
+formula as every other query. A special case we can remove through a good
+representation is often one less place for an off-by-one bug to hide.
+
+[Table fills one row per narrated step; columns category1,category2,category3.]
+Build the table from left to right. The first fan has category two. Copy
+the previous row, zero zero zero, then increase the category-two count. Prefix
+one is zero one zero. The second fan has category one. Copy prefix one and
+increase the first count, giving prefix two equal to one one zero. The third
+fan has category three, so prefix three is one one one. The fourth fan has
+category one, giving prefix four equal to two one one. The fifth has category
+two, giving prefix five equal to two two one. The sixth has category one,
+giving prefix six equal to three two one. Every row summarizes an entire
+prefix, not merely the last fan's category.
+
+[Freeze after P[3]; wrong candidate row for P[4] = (1,0,0).]
+Sam suggests setting the next row to one zero zero when he sees a
+category-one fan. That records only this fan and forgets everyone before it.
+We need to copy the previous counts before incrementing one component. The
+invariant is precise: after processing i fans, prefix i contains the correct
+counts among exactly those first i fans. Prefix zero satisfies it. Copying
+preserves every existing count, and incrementing the new fan's category adds
+exactly the one newly processed fan. By induction, all rows satisfy the invariant.
+This proof is also an implementation checklist: if you omit the copy, you
+break the preservation step.
+
+[Highlight query2..5: P[5]=(2,2,1); P[1]=(0,1,0); subtract componentwise.]
+Now answer the query from position two through position five. Prefix five
+counts positions one through five. Prefix one counts the unwanted position
+before the query begins. Subtract component by component: two minus zero,
+two minus one, one minus zero. The answer is two one one, matching our direct
+scan. Why does subtraction work? Each category count in the larger prefix
+contains the desired interval plus the earlier fans. The earlier prefix contains
+exactly those unwanted fans. Subtracting cancels them. There is no sorting,
+search or guess about where the categories occur. The stored summaries were
+chosen so cancellation gives exactly the requested interval.
+
+[Two number lines: problem positions1..6; internal indices0..5; boundary range[1,5).]
+Be careful with coordinate systems. The problem's query uses one-based inclusive
+positions l through r. Our internal array uses zero-based indices. The same
+set of fans occupies the half-open index range from l minus one up to r.
+The left boundary is included; the right boundary is excluded. In boundary
+notation, the count is prefix r minus prefix l minus one. Read those as two
+separate row indices: prefix at r, minus prefix at l minus one. For query
+two through five, the rows are five and one, not five and two. Draw the
+fans between the boundaries before memorizing the formula. The picture is
+the meaning; the formula is a compact way to express it.
+
+[Single-fan query3..3. P[3]-P[2]=(1,1,1)-(1,1,0)=(0,0,1).]
+Test a single-fan interval. Position three has category three. Prefix three
+minus prefix two yields zero zero one. If you mistakenly subtract prefix
+three from itself, you would report no fans. That error often comes from
+mixing an inclusive endpoint convention with a half-open formula. Now test
+the full interval one through six. Subtract prefix zero from prefix six,
+giving three two one. The empty prefix row makes this work without reading
+a negative index. We have selected boundary tests because they expose common
+wrong interpretations, not because small inputs are inherently more important
+than large ones.
+
+[Code: vector<array<int,3>> prefix(n+1,...); loop input category; copy; increment.]
+Translate the model into code. Each row is an array of three int counts.
+The vector holds n plus one such rows, initialized to zero. When reading
+the fan at internal index i, assign prefix i to prefix i plus one, copying
+all three counts. Then increment the component category minus one, because
+categories are labeled one through three while component indices are zero
+through two. Input category two maps to component index one. That subtraction
+is another coordinate conversion, separate from query boundaries. Good variable
+names and a tiny trace make both conversions visible rather than leaving
+them as mysterious minus ones sprinkled through the program.
+
+[Code query loop; three outputs separated by spaces, newline after row.]
+For each query, read l and r, validate their contract in our learning version,
+and output the three component differences. The official historical practice
+problem specifies file names; our companion program is explicitly adapted
+to standard input and output. Change the input/output mechanism if your chosen
+judge requires those historical names. The algorithm itself is unchanged.
+Our course variant also permits zero queries, in which case it prints no
+answer rows. The official statement's exact limits still govern an official
+submission. Distinguishing a teaching variant from its practice anchor prevents
+us from accidentally claiming the judge accepts a contract we invented.
+
+[Complexity counters: 3n build operations, 3q query differences; storage3(n+1).]
+Building one row costs constant work because there are exactly three categories.
+Building all rows takes order n time. Each query takes constant time, so
+q queries take order q. Total time is order n plus q, with order n table
+storage. If the number of categories were a variable k rather than the fixed
+number three, copying every row and reporting every category would introduce
+a factor of k. Constants can stop being constants when the problem changes.
+The maximum count in a component is n, at most one hundred thousand in this
+contract, so int is sufficient for these counts. A prefix sum of large monetary
+values can need long long instead. Representation size follows the values
+being accumulated, not the name prefix.
+
+[Fan at position2 changes category1->3. Rows2..6 turn stale.]
+Now Sam changes a wristband and demands instant updated answers.
+Our stored table was built for a fixed line. Changing one category can affect
+every later prefix row. The original constant-time query formula remains
+mathematically correct only if those rows are current. This is a limitation,
+not a failure of the proof. The proof assumed the table describes the current
+input. For many updates mixed with queries, we will need a different structure,
+such as a Fenwick tree. Do not advertise a static prefix table as a dynamic
+solution because the word prefix sounds efficient. The workload matters as
+much as the query formula.
+
+[Transfer prompt: same six categories, query4..6. Hide result table values
+until learner has selected the two rows.]
+Pause and solve the interval from position four through six. Name the two
+prefix rows, give the three counts, and verify them by directly scanning
+the original line. Then explain why the count of category one cannot become
+negative for a valid interval. Finally, suppose we want only the number of
+category-two fans. Do we need three columns, or can we summarize a simpler
+sequence? Write your reasoning before the answer appears.
+
+[Separate answer: P[6]-P[3]=(3,2,1)-(1,1,1)=(2,1,0).]
+Rows six and three produce two one zero. The interval contains categories
+one, two, one. Every prefix category count is nondecreasing as the prefix
+grows, so subtracting an earlier row from a later row cannot give a negative
+count. If it does, suspect invalid bounds, stale data or an implementation
+bug. If only category two matters, replace each category by an indicator:
+one when it is category two, zero otherwise. One ordinary prefix-sum column
+then counts category-two fans. That reduction is useful: a counting question
+can become a sum question by choosing the right per-element contribution.
+
+[Direct-scan oracle and prefix implementation run on the same generated queries.]
+For verification, our test harness directly scans each interval and compares
+its category counts with the program's answers. The oracle does not reuse
+the prefix formula; independence helps it catch indexing mistakes in that
+formula. We test singleton intervals, full intervals, repeated categories,
+the final position, and randomized valid ranges. Passing those tests is evidence
+on those cases. The invariant and cancellation argument explain why the
+method works generally. Next, we will reverse the perspective: instead of
+summarizing many values to answer a range query, we will record just the
+boundaries of a range update and reconstruct its effect later.

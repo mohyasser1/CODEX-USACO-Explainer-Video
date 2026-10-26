@@ -1,0 +1,140 @@
+PART 2 DRAFT — BINARY SEARCH NEEDS A REASON TO DISCARD
+Status: narration draft; timing pending. Complete program shipping_capacity.cpp.
+Original school-event problem, not a copied official statement.
+
+[Rohail and Maya plan equipment trips. Ordered weights: 3,2,2,4,1,4.
+At most three trips. One capacity used for every trip. No splitting/reordering.]
+Rohail's music-night equipment is packed in a fixed order. The weights are
+three, two, two, four, one, four. We may make at most three trips. Each trip
+takes the next consecutive boxes in the list, and all trips share the same
+capacity limit. A box cannot be split. What is the smallest capacity that
+works? These rules matter. If we could rearrange boxes freely, or split them,
+we would have a different problem. For now, forget binary search and ask a
+simpler question: given one capacity, can we check whether it works?
+
+[Capacity6, trip1 boxes3,2; next2 would make7, so stop.]
+Try capacity six. Start the first trip with load zero. Add three, then two,
+giving load five. Adding the next two would make seven, which is too much.
+Start the second trip, and put that two on it. The next four fits exactly,
+making six. Start a third trip for the next one, then add the final four,
+making five. We used three trips. Capacity six is feasible. Show the boundaries
+between trips: after the second box and after the fourth. We did not discard
+the box that failed to fit; it became the first box of the next trip.
+
+[Capacity5, trips [3,2], [2], [4,1], [4]. Counter says4 > allowed3.]
+Now try capacity five. The first trip still takes three and two. The second
+takes the next two, but the following four cannot fit with it. The third
+takes four and one. The final four needs a fourth trip. Four exceeds our
+allowed three, so capacity five fails. Notice the check returns a Boolean:
+feasible or not feasible. The number of trips is evidence used inside the
+check. The outside search only needs the Boolean answer. Mixing those two
+meanings can make a binary-search condition point the wrong way.
+
+[Wrong check skips a heavy box; contract violation highlighted.]
+The check must reject any individual box heavier than the capacity. Starting
+a fresh trip cannot solve that problem: the box would still be too heavy.
+Our search bounds will already avoid such capacities, but the checker makes
+its own contract explicit. It starts with one trip because the input is
+nonempty. The count increases when the next box would exceed the current
+capacity, and that same box is then added to the fresh load. If zero-weight
+boxes are allowed, they fit without consuming capacity. For an all-zero input,
+capacity zero works. Do not initialize a lower bound to one merely because
+most examples happen to contain positive values.
+
+[Greedy prefix frontier: after each trip, our packing has reached at least
+as far as any feasible packing with that many trips.]
+Why does filling each trip as much as possible minimize the number of trips?
+Because the order is fixed and weights are nonnegative. The greedy first
+trip takes the longest prefix that fits. Any valid first trip cannot end
+farther right. Suppose after k trips greedy has carried at least as many
+boxes as another valid packing. On the next trip, starting no earlier cannot
+make the remaining prefix through that packing's next endpoint heavier: we
+have removed some nonnegative weights. Greedy can therefore reach at least
+that endpoint too. By induction, no packing with fewer trips can finish when
+greedy cannot. This is the proof behind the checker. A fast binary search
+around an incorrect checker would only find an incorrect answer efficiently.
+
+[Feasibility strip: capacity4 F,5 F,6 T,7 T,8 T,9 T.]
+Next prove monotonicity. If capacity C works, the very same trip grouping
+also fits any larger capacity. We do not need to invent a better grouping
+to prove that implication. Therefore capacities form an initial false region
+followed by a true region. We want the first true capacity. This ordered
+structure is what permits binary search. An arbitrary list of yes/no answers
+does not. If the predicate alternates false and true, deleting half the
+candidates based on one middle answer has no general justification.
+
+[Bounds low4 high16; both include the answer, high is feasible.]
+The answer is at least the largest box weight, four. It is at most the sum
+of all weights, sixteen, because that capacity carries everything in one
+trip. The number of allowed trips is at least one. Maintain an inclusive
+interval from low to high that contains the first feasible answer. High
+is feasible, but low need not be infeasible. That last distinction matters:
+there are several correct binary-search conventions, and their updates cannot
+be mixed casually. Our convention stops when low equals high. The remaining
+single value is the answer.
+
+[Trace table columns low,high,mid,groups,feasible,next interval.]
+Start with low four and high sixteen. The middle is ten. The greedy check
+uses two trips: three, two, two on the first, and four, one, four on the
+second. Two is at most three, so ten works. The first feasible capacity
+could be ten or smaller. Keep ten and everything below it in our interval:
+set high to ten. Do not remove ten itself, because a successful middle value
+might be the minimum. The new interval is four through ten.
+
+[Row2 mid7: groups [3,2,2],[4,1],[4], three trips; high7.]
+The next middle is seven. Greedy uses three trips, so seven works. Set high
+to seven. The interval is now four through seven. The next middle is five.
+We already traced its four trips, so five fails. Monotonicity tells us all
+smaller capacities fail too. The answer must be strictly greater than five:
+set low to six. Keeping five would fail to make progress in some boundary
+cases. This is where the plus one in the code earns its place.
+
+[Row4 low6 high7 mid6: three trips; high6. Stop low=high=6.]
+Now low is six and high is seven. Integer division makes the middle six.
+The check uses three trips, so set high to six. Low equals high. Stop and
+print six. The successive intervals were four through sixteen, four through
+ten, four through seven, six through seven, and six through six. Every step
+retained the first feasible answer and removed at least one candidate.
+We have both an invariant and a termination argument, rather than a loop
+whose updates merely resemble a remembered template.
+
+[Code highlights mid = lo + (hi-lo)/2; long long variables and sum bound.]
+Compute the middle as low plus half of high minus low. Within our nonnegative
+bounds, that avoids adding low and high before dividing. Use long long for
+weights, loads, bounds and the accumulated sum. With one hundred thousand
+weights of at most one billion, the total can reach one hundred trillion.
+The number of trips fits in int under our contract. An off-by-one fix cannot
+repair overflow; type choices and search logic are separate correctness issues.
+Our complete companion program states the bounds it accepts and checks input
+before solving. A contest submission can rely on the judge's stated contract,
+but it still has to choose sufficient arithmetic types.
+
+[Cost: one check scans n boxes; search halves integer range each iteration.]
+Each feasibility check scans the weights once, so it takes order n time.
+The search performs logarithmically many checks in the number of candidate
+capacities. If the initial interval has R integer candidates, the total
+time is order n times log of R plus one, including the initial input scan.
+It is not simply log n: we search an answer-value range and each middle
+requires a nonconstant check. The stored weights use order n memory; the
+checker and search use constant extra state. For huge answer ranges, even
+around fifty checks can be manageable when each check is a simple linear
+scan. Estimate the actual bound instead of pretending every binary search
+does exactly twenty iterations.
+
+[Transfer exercise: weights4,1,1; two trips. Hide answer.]
+Pause and solve weights four, one, one with at most two trips. Establish
+the bounds, trace each tested capacity and state the minimum. Then consider
+one allowed trip, and finally three allowed trips. Which extreme answers
+can you predict without binary search? Explain why your reasoning uses both
+the no-splitting rule and the order constraint. Try an all-zero input too.
+
+[Answer: two trips min4, one trip6, three trips4; zeros0.]
+With two trips, capacity four works: carry four, then one and one. No
+smaller capacity can carry the four-weight box, so four is minimal. With
+one trip, all weights must fit together, requiring six. With three trips,
+the largest box weight four is again sufficient. All-zero weights need
+capacity zero. Our automated oracle verifies small instances by enumerating
+every placement of contiguous trip boundaries and taking the smallest maximum
+group sum among groupings using at most the allowed number. That oracle
+uses neither our greedy check nor binary search. Agreement is more meaningful
+when two methods reach the answer independently.

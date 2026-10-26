@@ -21,8 +21,8 @@ because of that assignment. Keep the two actions separate in your trace.
 Pass by value is a useful default for small numbers because it makes the
 callee's working state independent. A local variable's name is visible only
 within its scope. Another function may have a variable with the same name
-without sharing the same storage. Two DJs called Alex do not automatically
-share one bank account, although Bessie's manager has proposed the efficiency.
+without sharing the same storage. Two DJs called Rohail do not automatically
+share one bank account, although Rohail's manager has proposed the efficiency.
 
 [Reference arrow: parameter alias points to caller x.]
 An int reference parameter instead refers to the caller's existing object.

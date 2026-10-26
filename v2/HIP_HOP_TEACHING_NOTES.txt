@@ -1,5 +1,9 @@
 V2 engagement revision: selected user-supplied lyric hooks, 2026-10-26
 
+CURRENT PRESENTATION: Rohail, fictional tenth grader, with classmates Maya/Sam.
+Earlier cow/mascot pilot and its hook sample are superseded. New narration must
+pass a voice/story audition. Preserve technical concepts; rewrite old framing.
+
 Use brief, clean hooks within original teaching scenes, never as padding.
 These are classroom mnemonic reinterpretations, not claims about song meaning.
 Attribute the referenced songs: SICKO MODE, Travis Scott featuring Drake;
@@ -108,3 +112,73 @@ place-name graph must say its edges/weights are invented, not travel advice.
 User-labeled 'High Fives' text: retain only an original high-five celebration
 for passing the test suite. No verses or unverified release claims. Passing
 tests is evidence on tested cases, not a universal proof of correctness.
+
+SUPPLIED PDF EXCERPTS — SELECTIVE INTEGRATION
+Source: user-uploaded drake-iconic-lines-excerpts.pdf, Library ID
+libfile_a33b8b20aed48191a3c5d8c0b41d0fa2. Selected text was relayed by the
+coordinator; the production agent has not independently read the complete PDF.
+Its headings/wording are supplied labels, not independently verified credits.
+Do not publish the PDF or a raw excerpt collection. No external lyric retrieval.
+
+Part 1 Boolean scene: supplied 'flipped a switch' hook -> flag = !flag.
+Show false -> true -> false. Contrast toggling with flag = true, which stays
+true on repeated assignment. A light analogy is only useful with this truth table.
+Part 1 functions: supplied 'Where the function at?' hook -> jump to a function
+definition, bind argument 21 to parameter x, return x+1, resume caller with 22.
+Draw separate caller/callee boxes; distinguish calling from merely defining.
+The phone-call hook can be omitted to avoid two metaphors for the same concept.
+Part 1 termination: supplied 'don't plan on stoppin'' fragment is the WRONG
+algorithm. Show a loop whose index never advances, then repair the decreasing
+remaining-work measure. Do not celebrate an infinite loop as persistence.
+Part 3 DP: supplied 'Started from the bottom' hook -> base case dp[0]=0,
+then compute increasing amounts from already solved dependencies. Explain that
+bottom-up describes dependency order, not necessarily visual screen position.
+Part 4 optimization: supplied 'best I ever had' hook -> define what 'best' means
+in the contract (minimum distance, maximum value, or count); never compare
+algorithms with different objectives as though their answers are interchangeable.
+Use only a few of these hooks; the supplied complexity-class 'big three' idea
+is not needed because there are more than three relevant growth classes.
+
+SECOND SUPPLIED PDF — OPTIONAL VARIETY, NOT MORE FILLER
+Source: user-uploaded Kanye West iconic lines excerpts PDF.pdf, Library ID
+libfile_6aa96f47c1788191bd903a9a4fb865a0. Coordinator relayed selected text;
+headings/attributions remain supplied, not independently verified. No raw PDF
+publication, lyric browsing, artist imitation, recording or melody reuse.
+Supplied 'always find something wrong' fragment -> construct a counterexample
+to a specific incorrect algorithm, without claiming all correct code is wrong.
+Supplied clock/hurry fragments -> count direct interval scans, then derive the
+prefix-summary improvement; show n*q versus n+q, not invented runtime seconds.
+Supplied 'It all falls down' -> one visible failed invariant and the exact line
+that breaks preservation. Avoid implying that a slogan diagnoses the failure.
+Supplied bright-lights fragment -> highlight the currently explained line only.
+Supplied homecoming fragment -> return to the waiting call frame, not the root
+of the entire program. Prefer one hook per worked sequence; explanation leads.
+
+FOUR DISTINCT PDF COLLECTIONS, SIX ATTACHMENTS
+Drake original: libfile_a33b8b20aed48191a3c5d8c0b41d0fa2
+Kanye original: libfile_6aa96f47c1788191bd903a9a4fb865a0
+Drake Vol.2: libfile_503e1c4d64c88191b195ee4b123409e8
+Kanye Vol.2: libfile_3a0edbfbd434819192a2ea7bffceebb2
+Duplicate Drake attachment: libfile_64858468dd608191a99bd6d54deda3e7
+Duplicate Kanye attachment: libfile_38262293948c81919a9d02c40327d966
+Coordinator reports duplicates have matching extracted text/byte counts. This
+agent has received selected excerpts, not independently extracted all PDFs.
+
+Vol.2 editorial pool:
+* Supplied 'There's no need for us to rush this through' -> Rohail/Maya trace
+  signed ticket transactions before changing code. Used in new voice audition.
+* Supplied forward-motion hook -> a monotone index and termination measure.
+* Friends/clique hooks -> explicitly distinguish connected component from
+  clique: a path A-B-C is connected but is not a three-vertex clique without A-C.
+* Repeated-work hook -> repeated DP states, with state equality defined first.
+* Supplied foot/slide hook -> a pointer moves only when the discard proof permits.
+* Fair-trade hook -> concrete time/space tradeoff, with both costs stated.
+* Supplied fridge/sandwich joke -> one visible state change in an inventory
+  model, not a fabricated anecdote about an actual musician.
+* Bridges fragment -> distinguish a bridge edge whose removal increases
+  components from a merely important-looking edge; use a cycle counterexample.
+Only selected conceptually useful hooks enter scripts. Do not force every song.
+
+Representative integration sample: hook_sample.py uses one supplied switch
+excerpt followed by original Boolean explanation, two toggles, two assignments
+and a transfer counterexample. render_hook.py shows the values at those steps.

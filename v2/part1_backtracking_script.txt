@@ -5,7 +5,7 @@ Not yet synthesized or timed. Bracketed directions are not spoken.
 [A set-list audition splits into INCLUDE and EXCLUDE lanes. Brief attribution:
 In My Feelings — Drake. User-supplied excerpt; classroom reinterpretation.]
 They gotta make some choices. We are borrowing that supplied song phrase as
-a mnemonic, not explaining the song's meaning. Bessie's next problem really
+a mnemonic, not explaining the song's meaning. Rohail's next problem really
 does require choices: each transaction is either included or excluded. Given
 a list of signed integers and a target, count how many subsets of indices
 have that target sum. A subset is a choice of positions, not an ordering.
@@ -21,7 +21,7 @@ are zero, five, negative three, and two. Exactly one subset works. Listing
 these possibilities by hand is easy with two positions. With twenty positions
 there are over a million subsets. That is still a possible brute-force scale
 for a suitably small problem. With one hundred thousand positions, it is not.
-The technique must fit the constraints. Bessie cannot solve an exponential
+The technique must fit the constraints. Rohail cannot solve an exponential
 guest list by telling the laptop to lock in harder.
 
 [Function contract: count_subsets(a,i,sum,target). Return value = number of

@@ -1,6 +1,7 @@
-BESSIE'S ALGORITHM TOUR — V2 production plan, 2026-10-26
+ALEX'S SCHOOL MUSIC NIGHT — V2 production plan, 2026-10-26
 
-Status: curriculum proposal; no full V2 render authorized until pilot QA.
+Status: PRESENTATION RECAST after user rejected the original pilot voice/mascot.
+No full V2 render until a new voice/story audition and technical template pass.
 V1 remains preserved. V2 outputs use /workspace/usaco-film-v2/output.
 
 AUDIT OF THE ACTUAL V1
@@ -98,19 +99,27 @@ in 395.183 seconds (~158 words/minute including brief gaps). Revised planning
 estimate: approximately 36,000–38,000 substantive spoken words across four
 parts, with each part measured independently. Target 57–63 minutes per
 completed part, 228–252 total. This is not a claim of completed script duration.
+That calibration used the now-rejected voice. Recalibrate after the new voice
+is accepted; a brief conversational audition does not establish technical-lesson
+speaking rate. Preserve the four-hour goal through substantive lesson depth.
 Measure synthesized audio before finalizing. If short, deepen worked examples;
 if long, move clearly marked extension material into the workbook. Never stretch
 speech unnaturally, repeat passages or add silence to manufacture four hours.
 
 ENTERTAINMENT / VISUAL DESIGN
-Original synthetic narrator, DJ Byte, manages Bessie's chaotic festival tour.
-Every joke must reveal a misconception or motivate a state change. A manager
-who calls every algorithm 'linear' loses his backstage pass to a growth chart.
-Queue animation is a concert line; priority is distance, not follower count.
-Backtracking is a set-list audition with visible undo, not random teleporting.
+Rohail, a fictional tenth grader, helps Maya and Sam organize a school music
+night. Use believable ticket refunds, rehearsal choices, group constraints and
+equipment budgets. Large contest bounds are hypothetical stress tests, not
+claims about actual school attendance. No cow, mascot or Bessie in active V2.
+Every joke must reveal a misconception or motivate a state change. Queue
+animation is an entry line; priority is distance, not follower count.
+Backtracking is a set-list audition with visible undo. Warm original synthetic
+narration requires a listening audition; the earlier flat voice was rejected.
 Original rap transitions recap an invariant in plain language immediately after.
 Song titles and factual high-level Drake–Kendrick rivalry references can frame
-competition; no lyrics, recordings, artist voice imitation or endorsement.
+competition. Selected clean user-supplied excerpts may be adapted as short
+pedagogical hooks with original explanations; no additional lyric retrieval,
+recordings, melody copying, artist voice imitation or implied endorsement.
 
 PILOT GATE
 First produce the signed-total execution/invariant lesson (~5–8 minutes), with
@@ -118,11 +127,12 @@ readable code, synchronized state transitions, captions and a separate solution.
 Request parent QA of teaching pace, humor, voice and diagram legibility before
 full renders. Continue source, exercises and independent tests while QA is pending.
 
-PILOT CHECKPOINT
+SUPERSEDED PILOT CHECKPOINT — NOT APPROVED VOICE/STORY
 6:35.2 MP4 delivered at:
 https://drive.google.com/file/d/1caj52eyJMDL_smkpFcBXUsbwGyW89TFu/view
-7,251,665 bytes; full decode passed; audio/video end difference zero.
-SHA256 0361bbf401d2b3b367b4d1baec2186ba37cde0c1c154026c5711204ee1e07bde
+Corrected technical revision: 7,397,888 bytes; full decode passed;
+audio/video end difference zero.
+SHA256 6c164593391a8a08919c4706b9bec788025e7c0eced5c03b345c149ff8627839
 Downloaded Drive copy independently hashed and MATCHED. Human listening and
 teaching/engagement review remain pending. Initial pilot predates later supplied
 song hooks; consolidated HIP_HOP_TEACHING_NOTES.txt maps those into full lessons.
