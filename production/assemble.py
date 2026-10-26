@@ -1,17 +1,38 @@
 """Join completed chapters, preserve chapter navigation, export captions, validate."""
-import json,subprocess,time,sys,hashlib,zipfile
+import json,subprocess,time,sys,hashlib,zipfile,math
+from PIL import ImageFont
 from pathlib import Path
 from curriculum import lessons
 ROOT=Path('/workspace/usaco-film/output');REPO=Path(__file__).resolve().parents[1]
 def probe(path):return json.loads(subprocess.check_output(['ffprobe','-v','error','-show_format','-show_streams','-show_chapters','-of','json',str(path)]))
 def stamp(s):
  ms=round(s*1000);h,ms=divmod(ms,3600000);m,ms=divmod(ms,60000);sec,ms=divmod(ms,1000);return f'{h:02}:{m:02}:{sec:02},{ms:03}'
+def caption_chunks(text):
+ words=text.split();count=max(1,math.ceil(len(words)/16))
+ return [(' '.join(words[j*len(words)//count:(j+1)*len(words)//count]),j*len(words)//count/len(words),(j+1)*len(words)//count/len(words)) for j in range(count)]
+def ass_stamp(s):
+ cs=round(s*100);h,cs=divmod(cs,360000);m,cs=divmod(cs,6000);sec,cs=divmod(cs,100);return f'{h}:{m:02}:{sec:02}.{cs:02}'
+def ass_header():
+ return ["[Script Info]\nScriptType: v4.00+\nPlayResX: 1280\nPlayResY: 720\nWrapStyle: 2\nScaledBorderAndShadow: yes\n[V4+ Styles]\nFormat: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding\nStyle: Default,DejaVu Sans,25,&H00FFFFFF,&H00FFFFFF,&H0010200B,&H0010200B,0,0,0,0,100,100,0,0,1,0,0,2,50,50,55,1\n[Events]\nFormat: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text"]
+def ass_line(begin,end,chunk):
+ size=25
+ while True:
+  font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',size);lines=[];line=''
+  for word in chunk.split():
+   test=(line+' '+word).strip()
+   if font.getlength(test)>1150 and line:lines.append(line);line=word
+   else:line=test
+  lines.append(line)
+  if len(lines)<=2:break
+  size-=1
+ text='\\N'.join(lines).replace('{','').replace('}','')
+ return f'Dialogue: 0,{ass_stamp(begin)},{ass_stamp(end)},Default,,0,0,0,,{{\\fs{size}}}'+text
 def run():
  paths=[ROOT/'chapters'/f'{i:03d}.mp4' for i in range(len(lessons))]
  while not all(p.exists() for p in paths):
   if '--wait' not in sys.argv:raise RuntimeError('Chapters are still rendering')
   time.sleep(3)
- srt=[];chapters=[];ffmeta=[';FFMETADATA1','title=Bessie vs. the Algorithm','artist=Original educational production','comment=Synthetic narration; original procedural music; C++ through Platinum extensions.'];offset=0.;counter=1
+ srt=[];ass=ass_header();chapters=[];ffmeta=[';FFMETADATA1','title=Bessie vs. the Algorithm','artist=Original educational production','comment=Synthetic narration; original procedural music; C++ through Platinum extensions.'];offset=0.;counter=1
  for i,path in enumerate(paths):
   media=probe(path);duration=float(media['format']['duration']);meta=json.loads((ROOT/'audio'/f'{i:03d}.json').read_text())
   video=next(s for s in media['streams'] if s['codec_type']=='video');audio=next(s for s in media['streams'] if s['codec_type']=='audio')
@@ -21,12 +42,13 @@ def run():
   chapters.append(dict(number=i+1,title=lessons[i]['title'],level=lessons[i]['level'],start=offset,duration=duration))
   ffmeta += ['[CHAPTER]','TIMEBASE=1/1000',f'START={round(offset*1000)}',f'END={round((offset+duration)*1000)}','title='+lessons[i]['title'].replace('=','\\=').replace(';','\\;').replace('#','\\#')]
   for cue in meta['cues']:
-   words=cue['text'].split();chunks=[' '.join(words[j:j+16]) for j in range(0,len(words),16)]
-   for j,chunk in enumerate(chunks):
-    begin=offset+cue['start']+(cue['end']-cue['start'])*j/len(chunks);end=offset+cue['start']+(cue['end']-cue['start'])*(j+1)/len(chunks)
+   for chunk,first,last in caption_chunks(cue['text']):
+    begin=offset+cue['start']+(cue['end']-cue['start'])*first;end=offset+cue['start']+(cue['end']-cue['start'])*last
+    ass.append(ass_line(begin,end,chunk))
     import textwrap
     srt.append(f'{counter}\n{stamp(begin)} --> {stamp(end)}\n'+ '\n'.join(textwrap.wrap(chunk,48))+'\n');counter+=1
   offset+=duration
+ (ROOT/'Bessie-USACO-captions.ass').write_text('\n'.join(ass)+'\n')
  (ROOT/'Bessie-USACO-captions.srt').write_text('\n'.join(srt));(ROOT/'chapters.json').write_text(json.dumps(chapters,indent=2));(ROOT/'chapters.ffmeta').write_text('\n'.join(ffmeta)+'\n')
  (ROOT/'chapter-index.txt').write_text('\n'.join(f'{stamp(c["start"]).split(",")[0]}  {c["number"]:02d}. {c["title"]} [{c["level"]}]' for c in chapters)+'\n')
  (ROOT/'concat.txt').write_text('\n'.join("file '"+str(p)+"'" for p in paths)+'\n')
@@ -45,7 +67,7 @@ def run():
    else:data=data[:target]
    sink.write(data)
  final=ROOT/'Bessie-vs-the-Algorithm-USACO.mp4';partial=final.with_suffix('.partial.mp4')
- subprocess.run(['ffmpeg','-hide_banner','-loglevel','warning','-y','-f','concat','-safe','0','-i',str(ROOT/'concat.txt'),'-i',str(joined_audio),'-i',str(ROOT/'chapters.ffmeta'),'-i',str(ROOT/'Bessie-USACO-captions.srt'),'-map','0:v:0','-map','1:a:0','-map','3:0','-map_metadata','2','-map_chapters','2','-c:v','copy','-c:a','aac','-b:a','128k','-af','loudnorm=I=-16:TP=-1.5:LRA=11','-ar','48000','-c:s','mov_text','-metadata:s:s:0','language=eng','-metadata:s:s:0','title=English','-movflags','+faststart',str(partial)],check=True)
+ subprocess.run(['ffmpeg','-hide_banner','-loglevel','warning','-y','-f','concat','-safe','0','-i',str(ROOT/'concat.txt'),'-i',str(joined_audio),'-i',str(ROOT/'chapters.ffmeta'),'-i',str(ROOT/'Bessie-USACO-captions.srt'),'-map','0:v:0','-map','1:a:0','-map','3:0','-map_metadata','2','-map_chapters','2','-vf',f"setpts=PTS-STARTPTS,drawbox=x=0:y=590:w=iw:h=82:color=0x0b1020:t=fill,ass=filename={ROOT/'Bessie-USACO-captions.ass'}",'-r','15','-fps_mode:v','cfr','-c:v','libx264','-profile:v','high','-level:v','3.1','-preset','veryfast','-crf','22','-threads','4','-c:a','aac','-b:a','96k','-af',f'loudnorm=I=-16:TP=-1.5:LRA=11,atrim=duration={offset},asetpts=PTS-STARTPTS','-ar','48000','-c:s','mov_text','-metadata:s:s:0','language=eng','-metadata:s:s:0','title=English','-movflags','+faststart',str(partial)],check=True)
  partial.rename(final)
  result=probe(final);actual=float(result['format']['duration']);assert abs(actual-offset)<2,(actual,offset)
  assert len(result['chapters'])==len(lessons)

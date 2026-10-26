@@ -21,6 +21,8 @@ Build sequence:
 3. python production/render.py (resumes completed chapter videos)
 4. python production/build_workbook.py
 5. python production/assemble.py (after all chapters finish)
+6. python production/finalize.py (caption packaging and final media checks)
+7. python production/package.py (small offline course bundle)
 
 Dependencies: Python, numpy, Pillow, soundfile, kokoro-onnx, onnxruntime, reportlab,
 FFmpeg with libx264/AAC, DejaVu Sans/Mono fonts, and g++ for the examples.
