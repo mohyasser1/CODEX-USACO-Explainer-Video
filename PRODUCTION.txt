@@ -1,0 +1,41 @@
+BESSIE VS. THE ALGORITHM
+A 46-chapter USACO learning film for a 10th-grade beginner.
+
+Scope: C++ fundamentals, Bronze and Silver problem-solving patterns, Gold algorithms,
+and a clearly labeled Platinum extension. No claim of exhaustive algorithm coverage,
+guaranteed promotion, or mastery through watching alone. Every chapter has a challenge.
+
+Deliverables:
+- One final chaptered 1280x720 H.264/AAC MP4, 15 fps motion graphics.
+- PDF workbook, full text script, SRT captions, chapter index.
+- Runnable C++17 examples and deterministic/seeded differential tests.
+- Source bundle and resumable production scripts.
+
+Cloud workspace: /workspace/usaco-film (assets and render outputs)
+Repository: /workspace/CODEX-USACO-Explainer-Video (small source files only)
+Drive folder: https://drive.google.com/drive/folders/1fhZpaAOOJ5lGtUVgKSvpJsr773qjTcfw
+
+Build sequence:
+1. Download Kokoro ONNX int8 model and voices from upstream model-files-v1.0 release.
+2. python production/narrate.py (resumes matching completed chapter audio)
+3. python production/render.py (resumes completed chapter videos)
+4. python production/build_workbook.py
+5. python production/assemble.py (after all chapters finish)
+
+Dependencies: Python, numpy, Pillow, soundfile, kokoro-onnx, onnxruntime, reportlab,
+FFmpeg with libx264/AAC, DejaVu Sans/Mono fonts, and g++ for the examples.
+Model files are not committed. Respect upstream licenses when redistributing models.
+Upstream: https://github.com/thewh1teagle/kokoro-onnx
+
+Music is synthesized from original procedural percussion/bass patterns.
+Narration uses the stock af_heart synthetic voice, not an imitation of an artist.
+Cartoon and motion graphics are drawn by the included Python code.
+Cultural humor is original and classroom-appropriate.
+
+Verification:
+- C++ tests compare selected algorithms with independent brute-force or alternative oracles.
+- Sanitizer build checks memory and undefined behavior for the test suite.
+- Caption boundaries derive from individual synthesized sentence durations; short within-
+  sentence caption cards use proportional timing, not forced word alignment.
+- Visual labs are illustrative examples, not a claim to animate every narrated sentence.
+- Advanced chapters introduce several topics whose full implementation needs further study.
