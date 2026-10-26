@@ -5,6 +5,16 @@ Existing V1 artifacts remain unchanged. Earlier V2 pilot/hook files remain
 recoverable review artifacts, not approved templates or current presentation.
 No long-form synthesis/rendering until a new voice/story audition is accepted.
 
+BOUNDED AUDITION COMPLETE (not yet accepted)
+Same Rohail story, no music, no pitch shift or time stretch:
+Voice A, 43.799 seconds:
+https://drive.google.com/file/d/19HsZlYfPtfR1O_2OHzhD0U-tWevBGVZH/view
+Voice B, 32.343 seconds:
+https://drive.google.com/file/d/1YaO9rMpxABWH6Ga0LDfKMH7Zp1bfRsgV/view
+Both fully decode and their downloaded Drive copies match local SHA256 values
+recorded in audition-verification.json. No human listening/quality approval is
+recorded. No further Kokoro audition iterations without feedback/evidence.
+
 Premise: Rohail is a fictional tenth grader helping classmates Maya and Sam
 organize a school music night. Their concrete tasks introduce algorithms:
 ticket refunds; rehearsal-set choices; interval attendance counts; group

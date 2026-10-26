@@ -1,0 +1,180 @@
+PART 3 DRAFT — BFS: DISCOVERY, DISTANCE, AND THE WAY BACK
+Status: narration draft; final duration and voice pending.
+Complete program bfs_routes.cpp; test_bfs_routes.py uses an independent oracle.
+
+[Fictional school-event map: vertices0..6. Edges0-1,0-2,1-3,2-4,3-5,4-5.
+Vertex6 isolated. All edges count as ONE step; map not drawn to physical scale.]
+Rohail needs to move a spare microphone from room zero to room five. Each
+allowed connection between rooms counts as one step. We want a route with
+the fewest steps. This is a deliberately unweighted model: an edge means
+one equal-cost move, not a measured number of meters or minutes. If hallway
+lengths differ and we care about distance, we must change the model and
+algorithm. A diagram can look like a real building while representing a
+different question. Always say what a vertex and an edge mean before choosing
+a technique. Maya's shortcut through a locked door is not an edge merely
+because it would be convenient.
+
+[Adjacency lists appear beside the map, both directions for each connection.]
+Our connections work in both directions, so the graph is undirected. Store
+each edge in both endpoints' adjacency lists. Room zero lists one and two.
+Room one lists zero and three. Room two lists zero and four. Room three
+lists one and five. Room four lists two and five. Room five lists three
+and four. Room six has an empty list. That last room is part of the input,
+but there is no route to it from zero. Do not erase isolated vertices
+from your model just because no edge line mentions them. The declared vertex
+count tells you they exist.
+
+[State arrays: distance[-1,-1,-1,-1,-1,-1,-1]; parent all-1; empty queue.]
+We will maintain three kinds of state. Distance records the fewest discovered
+number of steps from the start, using negative one as an undiscovered marker.
+Parent records which vertex first led us to a vertex, so we can later
+recover a route. A queue holds discovered vertices whose neighbors still
+need examination. These three structures answer different questions: how far,
+how did we get here, and what work remains? A visited marker alone cannot
+reconstruct a route. A parent pointer alone does not tell us which vertices
+are still waiting to be processed. Clear state meanings keep the implementation
+from turning into a collection of arrays we hope will cooperate.
+
+[Set distance0=0, queue[0]. Front and back labeled visibly.]
+Set the start's distance to zero and put it in the queue. A queue follows
+first in, first out. Remove from the front; add at the back. It is a
+waiting line, not a popularity contest. Original classroom joke: queue, are
+you FIFO? It replies by serving the person who arrived first. The important
+effect is that vertices are processed in increasing distance layers. The
+start is layer zero. Its newly discovered neighbors will be layer one.
+Their newly discovered neighbors will be layer two. We will prove this
+ordering after tracing the actual operations.
+
+[Pop0; discover1 then2. Distances0,1,1,-1,-1,-1,-1. Queue[1,2].]
+Remove zero from the front. Inspect neighbor one. Its distance is negative
+one, so it has not been discovered. Set its distance to one, set its parent
+to zero, and enqueue it. Do the same for neighbor two. The queue now
+contains one followed by two. Marking happens when a vertex enters the
+queue, not when we eventually remove it. The supplied phrase 'You left
+your mark on me' becomes our mnemonic here: discovery leaves a marker
+immediately. The phrase is a teaching reinterpretation, not an explanation
+of the song's meaning. The actual marker in this code is the changed
+distance value.
+
+[Pop1; neighbor0 already discovered; discover3. Queue[2,3].]
+Next remove one. Its neighbor zero is already discovered, so skip it.
+Neighbor three is new. Its distance becomes distance of one plus one,
+which is two. Its parent becomes one. Put three at the back. The queue
+is now two, three. Notice that newly found three does not jump ahead
+of two. Two was discovered earlier and still needs its turn. A stack
+would behave differently, often diving down one branch before finishing
+nearby vertices. That is useful for depth-first search, but this queue
+discipline is what gives our breadth-first distance layers.
+
+[Pop2 -> discover4 at distance2; queue[3,4].]
+Remove two. Zero is already discovered. Four is new, so set its distance
+to two, its parent to two, and enqueue it. The queue contains three,
+four. Both are at distance two. We have processed all distance-one vertices
+before processing either distance-two vertex. Keep the distance row beside
+the queue; that visual relationship is more important than the movement
+of the circles. If an animation makes a vertex bounce but hides its
+distance, it can look energetic while teaching very little.
+
+[Pop3 -> discover5 at distance3,parent3; queue[4,5].]
+Remove three. One is already known. Five is new. Set distance five to
+three, parent five to three, and enqueue five. The queue is four, five.
+We have found a route to the target, but continue the full traversal
+because our program also reports distances to every vertex. If a different
+contract asked only for this target's distance, we could stop once its
+shortest distance is established. Optimize according to the requested output,
+not according to how exciting it feels to announce that we found it.
+
+[Pop4 sees5 already discovered. No new queue entry. Queue[5].]
+Now remove four. It also has an edge to five. But five was already
+marked when it was enqueued, so we do not enqueue it again or overwrite
+its parent. This graph has two equally short routes to five. Keeping the
+first discovered route is fine because the contract asks for one shortest
+route, not every shortest route. Changing adjacency order might choose the
+other route without changing the distance. Our tests should check validity
+and optimal length, not reject a different correct tie choice.
+
+[Pop5; all neighbors discovered; queue empty. Vertex6 stays-1.]
+Finally remove five. Three and four are already discovered. Add nothing.
+The queue is empty, so traversal ends. Distances are zero, one, one,
+two, two, three, negative one. The negative one at vertex six means
+unreachable from our chosen start. It does not mean the room is one
+step backward, or that we should silently assign distance zero. If Rohail
+asks for a route to that room, report that no route exists in this
+graph. A program cannot repair missing connectivity by returning a cheerful
+empty list and calling it a shortcut.
+
+[Layer proof: any path to new neighbor v passes through a predecessor one
+step closer. Earlier layers have already been processed.]
+Why is the first discovered distance shortest? The queue processes vertices
+in nondecreasing distance. When a vertex at distance d discovers a neighbor,
+it assigns distance d plus one. All vertices at smaller distance were
+already processed, and any remaining vertices at distance d stay ahead of
+the newly appended next-layer vertices. Suppose the newly discovered neighbor
+had a shorter path from the start. The predecessor on that shorter path
+would have a smaller distance and would already have discovered it. That
+contradicts the fact that it was still unmarked. Therefore first discovery
+gives the shortest distance in this equal-edge-cost model.
+
+[Contrast: marking on dequeue allows both3 and4 to enqueue5.]
+Mark-on-enqueue also gives a clean resource bound. Each vertex enters the
+queue at most once. If we delay marking until removal, multiple neighbors
+can enqueue the same vertex before it gets processed. Variants can handle
+that with additional checks, but it introduces duplicate work and complicates
+distance and parent updates. Our simple implementation avoids the issue.
+Do not claim that every algorithm marking on removal is automatically
+incorrect; explain the actual invariant your chosen implementation maintains.
+Here, a nonnegative distance means discovered, whether the vertex is still
+waiting in the queue or already processed.
+
+[Parent chain: 5 ->3 ->1 ->0 ->-1; then reverse to0,1,3,5.]
+To reconstruct our route, start at the target five and follow parents.
+Five's parent is three, three's parent is one, and one's parent is zero.
+Zero has no parent, marked negative one. We collected the route backward:
+five, three, one, zero. Reverse the list to obtain zero, one, three, five.
+Each parent edge reduces distance by one, so following parents terminates
+at the start. The supplied 'going home' hook fits this return route,
+but a parent pointer is a recorded discovery edge, not a magical navigation
+service. Check reachability before reconstructing, or an unreachable target
+could misleadingly produce a list containing only itself.
+
+[Code: front then pop; iterate neighbors; test; set distance,parent; push.]
+The C plus plus queue's pop operation removes the front element; it does
+not return it. Read front first, save that vertex in u, then pop.
+For every neighbor v, skip it if distance v is not negative one.
+Otherwise assign its distance, assign its parent, and push it. The ordering
+of those last actions makes the discovery marker visible before any later
+neighbor can consider the vertex. The graph is already fully constructed,
+so the traversal does not append new edges while iterating adjacency lists.
+Our complete program uses zero-based input vertex labels consistently.
+When adapting a one-based problem, convert labels once at the boundary
+and keep your internal representation consistent.
+
+[Cost: n vertices,2m undirected adjacency entries; queue maximum n.]
+Every reachable vertex is processed once, and each of its adjacency entries
+is examined once. An undirected graph stores two entries per edge, still
+order m. Including array initialization, time is order n plus m. The
+graph itself takes order n plus m space; distance, parent and queue
+take order n additional space. A dense adjacency matrix would use n
+squared storage and force different neighbor-scanning costs. Representation
+affects complexity. Drawing seven vertices makes either representation look
+small; the contest bounds tell you which one scales.
+
+[Transfer: target6 unreachable; add edge5-6; ask newdistance4 and parent5.]
+Pause for a transfer task. Add one edge between five and six. What
+distance will six receive, and what parent leads to it in this trace?
+Then explain why running another BFS from six in the original disconnected
+graph would not make six reachable from zero. Finally, replace every edge
+with its own travel time. Does the same first-discovery proof still work?
+Write the assumption that breaks before naming the next algorithm.
+
+[Separate answer scene.]
+With the new edge, six is discovered from five at distance four, with
+parent five. In the original graph, starting a different BFS explores
+a different start's reachable region; it does not create a path from
+zero. To count connected components, we can start a traversal from each
+still-unvisited vertex, but those are separate searches with separate roots.
+For unequal travel times, a path with fewer edges can cost more, so
+the layer argument no longer proves minimum total weight. We will use
+Dijkstra for nonnegative weighted paths later. Breadth-first search is powerful
+because its assumptions are precise. Knowing where they stop applying is
+part of knowing the algorithm.
