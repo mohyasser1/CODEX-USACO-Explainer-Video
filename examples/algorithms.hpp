@@ -13,6 +13,21 @@ namespace film {
 using ll = long long;
 constexpr ll INF = std::numeric_limits<ll>::max() / 4;
 // All array ranges are half-open [l,r). Inputs must fit the documented types.
+// Integer values, wide target; promote before addition to avoid int overflow.
+inline bool two_sum(std::vector<int> a, ll target) {
+  std::sort(a.begin(), a.end());
+  int l = 0, r = static_cast<int>(a.size()) - 1;
+  while (l < r) {
+    ll sum = 1LL * a[l] + a[r];
+    if (sum == target)
+      return true;
+    if (sum < target)
+      ++l;
+    else
+      --r;
+  }
+  return false;
+}
 struct Prefix {
   std::vector<ll> p;
   explicit Prefix(const std::vector<ll> &a) : p(a.size() + 1) {

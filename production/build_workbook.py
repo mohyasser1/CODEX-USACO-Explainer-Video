@@ -7,7 +7,9 @@ from reportlab.lib.colors import HexColor
 from reportlab.lib.enums import TA_CENTER
 ROOT=Path('/workspace/usaco-film/output');ROOT.mkdir(exist_ok=True)
 esc=html.escape
-styles=getSampleStyleSheet();styles.add(ParagraphStyle(name='CodeBlock',fontName='Courier',fontSize=8.2,leading=10.8,backColor=HexColor('#eef3f7'),spaceBefore=8,spaceAfter=10));styles['BodyText'].fontSize=10.5;styles['BodyText'].leading=15;styles['BodyText'].spaceAfter=9
+styles=getSampleStyleSheet();styles.add(ParagraphStyle(name='CodeBlock',fontName='Courier',fontSize=8.2,leading=10.8,backColor=HexColor('#eef3f7'),spaceBefore=8,spaceAfter=10));styles['BodyText'].fontSize=10;styles['BodyText'].leading=13;styles['BodyText'].spaceAfter=6
+styles['BodyText'].allowWidows=0;styles['BodyText'].allowOrphans=0
+styles['Heading2'].spaceBefore=8;styles['Heading2'].spaceAfter=4
 story=[]
 def p(s,style='BodyText'):story.append(Paragraph(s,styles[style]))
 def code(s):story.append(Preformatted(s,styles['CodeBlock']))
@@ -40,7 +42,6 @@ for i,l in enumerate(lessons):
  for h,t in l['beats']:p(esc(h),'Heading2');p(esc(t))
  if l['code']:p('On-screen code excerpt','Heading2');code(l['code']);p('Excerpts may depend on surrounding declarations. Use the full companion examples for runnable programs.')
  p('Pause and solve','Heading2');p(esc(l['challenge']));p('Answer and reasoning checkpoint','Heading2');p(esc(l['answer']))
- p('Transfer task','Heading2');p('Find or create a related problem with different numbers or constraints. Before coding, write the input contract, state meaning, correctness argument, time complexity, memory use, and one condition under which this method would fail.')
 story.append(PageBreak());p('Complexity and assumption reference','Heading1')
 rows=[
 ('Prefix sums','O(n) build; O(1) query; O(n) space','Static additive range queries.'),
@@ -69,7 +70,7 @@ rows=[
 ('General Dinic bound','O(V^2 E)','Special networks admit better bounds; advanced implementation required.'),
 ('Convex hull by sorting','O(n log n)','Correct orientation predicates and collinearity policy.')]
 for name,cost,condition in rows:p(esc(name),'Heading2');p(esc(cost)+'<br/><i>'+esc(condition)+'</i>')
-story.append(PageBreak());p('The Wrong Answer Awards: spot the bug','Heading1')
+p('The Wrong Answer Awards: spot the bug','Heading1')
 traps=[
 ('The overflow remix','long long area = a*b, where a and b are int and both 100000.','The multiplication happens as int before assignment. Promote an operand first: 1LL*a*b. Signed overflow has undefined behavior.'),
 ('The disappearing window','Use the nonnegative sliding-window rule on [4,-3,1] with sum limit 2.','It may discard the initial 4, missing the full length-3 window whose sum is 2. Negative values invalidate the standard monotonic argument.'),

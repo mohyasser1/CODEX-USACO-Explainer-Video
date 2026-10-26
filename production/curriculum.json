@@ -317,7 +317,7 @@
         "For nonnegative values, a window sum increases when you extend right and decreases when you remove left. This supports finding the longest window with sum at most a limit. Negative values destroy that monotonic behavior, so the same procedure may fail. Do not use two pointers just because you own two fingers. First explain why moving one boundary can safely discard candidates."
       ]
     ],
-    "code": "int l = 0, r = (int)a.size() - 1;\nwhile (l < r) {\n    long long s = a[l] + a[r];\n    if (s == target) break;\n    if (s < target) ++l;\n    else --r;\n}",
+    "code": "// a: vector<int>; target: long long\nint l = 0, r = (int)a.size() - 1;\nwhile (l < r) {\n    long long s = 1LL * a[l] + a[r];\n    if (s == target) break;\n    if (s < target) ++l;\n    else --r;\n}",
     "challenge": "Why must the simple sum-limited sliding window assume nonnegative values?",
     "answer": "With negatives, extending can reduce a sum and removing can increase it; the usual discard argument fails."
   },

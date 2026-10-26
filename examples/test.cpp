@@ -259,6 +259,23 @@ int main() {
         check(actual[v] == (dist[u][v] == 1000 ? -1 : dist[u][v]));
     }
   }
+  check(two_sum({1500000000, 1500000000}, 3000000000LL));
+  check(two_sum({-1500000000, -1500000000}, -3000000000LL));
+  check(!two_sum({1500000000, 1500000000}, -1294967296LL));
+  check(!two_sum({}, 0));
+  check(!two_sum({1}, 2));
+  for (int rep = 0; rep < 100; ++rep) {
+    std::vector<int> a(10);
+    for (int &v : a)
+      v = (int(rng() % 3) - 1) * 1500000000;
+    ll target = (ll(rng() % 5) - 2) * 1500000000LL;
+    bool want = false;
+    for (int i = 0; i < 10; ++i)
+      for (int j = i + 1; j < 10; ++j)
+        if (static_cast<ll>(a[i]) + static_cast<ll>(a[j]) == target)
+          want = true;
+    check(two_sum(a, target) == want);
+  }
   std::cout << "PASS: " << checks
             << " deterministic and seeded differential assertions\n";
 }
