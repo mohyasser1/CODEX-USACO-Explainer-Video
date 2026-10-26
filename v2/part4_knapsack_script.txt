@@ -1,0 +1,166 @@
+PART 4 DEEP DIVE — EACH ITEM ONCE: ZERO-ONE KNAPSACK
+Status: narration draft; standalone program knapsack01.cpp. Weight capacity is
+an upper bound, not an exact-fill requirement. Values are nonnegative.
+
+[Rohail chooses equipment for a limited bag. ItemsA(w2,v3),B(w3,v4),C(w4,v5).
+Capacity5; each physical item available once.]
+Rohail can borrow three pieces of equipment for the school
+music night, but the carrying bag has limited capacity.
+The items have weight and usefulness pairs two-three, three-four,
+and four-five. Capacity is five. Each physical item may
+be chosen at most once, and unused capacity is
+allowed. We want the largest total usefulness without exceeding
+the weight limit. Unlike unlimited coin change, choosing an
+item removes it from future choices. The remaining capacity
+alone no longer tells the whole story unless we also
+know which items have already been considered.
+
+[State sentence: dp[i][c]=maximum value using only firsti items, totalweight<=c.]
+Define dp of i,c as the maximum total value
+obtainable from only the first i items, with total
+weight at most c. The item index describes available
+choices; capacity describes the resource limit. Before considering
+any item, every capacity has value zero, because
+we can choose nothing. This is different from an
+exact-weight problem, where many initial states would be impossible.
+Initializing every capacity to zero is correct because of
+our at-most interpretation, not because all DP tables should
+begin with zero everywhere.
+
+[Two branches for itemi:skip ->previousrow[c];take ->previousrow[c-w]+v.]
+When considering the next item, either skip it or
+take it. Skipping leaves the previous row's answer at
+the same capacity. Taking is possible only if the
+item fits; it gives the previous row's answer at
+capacity c minus its weight, plus its value.
+Use the previous row in both cases, because the
+current item may be used only once. Choose the
+larger result. Every valid selection either includes this item
+or does not, so the two cases cover every
+possibility without inventing a third option such as borrowing
+half of an indivisible amplifier.
+
+[Row0 capacities0..5 all0. RowA0,0,3,3,3,3.]
+Trace the table rather than memorizing its shape. With
+no items, capacities zero through five all have value
+zero. After considering the weight-two, value-three item,
+capacities zero and one still give zero because it
+does not fit. Capacities two through five can take
+it once, giving value three. Capacity four does
+not give value six: we own one copy, not
+an unlimited supply. This single row already distinguishes the
+new problem from the unbounded choices in the coin lesson.
+
+[RowB0,0,3,4,4,7; explain capacity5=max(old5=3,old2=3+4).]
+Now consider the weight-three, value-four item. Capacity two
+keeps the old value three. Capacity three can take
+the new item, improving to four. Capacity four
+also gives four. At capacity five, skipping gives
+three, while taking leaves capacity two for earlier items.
+The earlier row at capacity two gives three; add
+the new item's value four to obtain seven. Thus
+the first two items together exactly fill capacity five
+and give value seven. We used a previous-row state
+whose meaning is already established, rather than searching for
+an arbitrary cell containing a promising number.
+
+[RowC0,0,3,4,5,7. Atcapacity5,takeC gives5,skip keeps7.]
+Finally consider the weight-four, value-five item. Capacity four
+improves to five. At capacity five, taking it
+leaves capacity one for earlier items, whose best value
+is zero, giving five overall. Skipping keeps seven,
+so the final answer is seven. The best-looking individual
+item did not have to appear in the best set.
+Rohail chooses the first two items. The table answers
+the optimization question; recovering chosen items would require
+recording or reconstructing which branch produced each selected state.
+Our companion program's contract asks only for the maximum value.
+
+[Correctness proof: partition selections by current item; valid branches and
+optimal earlier subproblem; induction on number of considered items.]
+The recurrence's correctness follows from that include-or-exclude partition.
+Every candidate it constructs is a valid selection, because
+the previous row uses only earlier items and the
+remaining capacity accounts for the new weight. Conversely,
+an optimal selection either skips the item or includes
+it. In the included case, replacing its earlier-item
+portion with a better feasible earlier selection could only
+improve the total. Therefore the best earlier value is
+the right subproblem. Assuming the previous row is correct,
+taking the maximum of the two cases makes the
+next row correct. The all-zero base row starts the
+induction under the at-most contract.
+
+[Storage compression: one capacity row. Process capacities downward for eachitem.]
+We do not need to keep every row if only
+the final maximum value is requested. A one-dimensional array
+can store the current row, but update order now
+matters. Process capacities from the largest down to the
+item's weight. At capacity c, the entry at
+c minus weight has not yet been changed for
+this item, because it lies to the left and
+we are moving downward. It still belongs to the
+previous conceptual row. This is the invariant that makes
+the compressed version equivalent to the two-dimensional recurrence.
+
+[One itemw2,v3,capacity4. Ascending wrong:dp2=3,then dp4=dp2+3=6.
+Descending correct:dp4 reads olddp2=0 ->3,then dp2=3.]
+A minimal counterexample explains the danger. With one weight-two,
+value-three item and capacity four, the answer must be
+three. If we update capacities upward, capacity two
+becomes three, and then capacity four reads that already
+updated entry and becomes six. We have used the
+same item twice. Updating downward reads the old zero
+at capacity two when calculating capacity four, giving three.
+Only later does capacity two itself become three. Loop
+direction is not a coding superstition; it controls which
+logical row a transition reads.
+
+[Contrast unlimited version and exact-weight version; state definition highlighted.]
+If copies were unlimited, ascending updates could deliberately allow
+reuse. If exact weight were required, the initial
+state and unreachable markers would change. These are different
+problems, not interchangeable variations of a magic three-line template.
+Before compressing a DP table, write which old states
+each new state needs, then choose an order that
+preserves those meanings. When the reasoning is unclear,
+keep the larger table while learning. Saving memory is
+not helpful if it erases your explanation of correctness.
+
+[Greedy density counterexample:capacity4,items(3,5),(2,3),(2,3).]
+Why not take the highest value-per-weight item first? With
+capacity four and items weight-three value-five, weight-two value-three,
+and another weight-two value-three, the highest ratio belongs
+to the first item. Taking it gives value five
+and leaves too little capacity for another item. The
+two smaller items give value six. A ratio rule
+works for a different fractional problem where items can
+be split, but not for these indivisible items.
+The counterexample identifies the assumption that separates those problems,
+rather than dismissing greedy reasoning as inherently unreliable.
+
+[Cost n*capacity, memorycapacity+1, numeric bounds and unused space.]
+The compressed program considers every item across the capacity
+range, using order n times capacity time and order
+capacity space. It is practical only when those bounds
+are manageable. Very large weights or capacity may require
+a different state, such as minimizing weight for a
+given value, or a meet-in-the-middle approach when item count
+is small. Those are extensions, not automatic replacements.
+Our program uses long long for values: a hundred
+items each worth a billion can sum to one
+hundred billion. The capacity index and stored objective have
+different bounds and may need different types.
+
+[Transfer:items(2,4),(3,5),capacity3; then capacity0 and noitems.]
+Pause and solve two items, weight-two value-four and
+weight-three value-five, with capacity three. The answer is
+five, because the two items do not fit together.
+At capacity zero, or with no items, the
+answer is zero under our positive-weight, at-most contract.
+Then explain the one-item ascending-loop bug without referring to
+the code's indentation. Our tests enumerate every item subset
+on small inputs and compare its total weight and value
+with the program's maximum. That independent enumeration checks both
+the recurrence and the storage-compression behavior, including the case
+that would accidentally reuse one item.

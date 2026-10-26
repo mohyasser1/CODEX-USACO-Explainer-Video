@@ -1,0 +1,109 @@
+PART 2 INTRODUCTION — ORDER IS INFORMATION
+Status: draft. Complete introductory exercise: sorting_inventory.cpp.
+Ordered containers and compression are introductions, not full library coverage.
+
+[Rohail's price inventory4,2,4,9,2. Sorted2,2,4,4,9; positions visibly change.]
+Rohail has a list of item prices and wants to
+summarize it. The values are four, two, four,
+nine and two. Sorting produces two, two, four,
+four and nine. The values have not changed, but
+their positions have. That new order makes equal values
+adjacent and makes smallest and largest values easy to locate.
+It can also enable algorithms that safely discard candidates, which
+we will use in the two-pointer lesson. First, however,
+decide whether changing positions is allowed by the problem.
+
+[Contrast inventory values with attendees in a fixed line.]
+For counting distinct prices, the original order is irrelevant.
+For answering questions about the people in positions two through
+five of a line, reordering would change the question.
+Sorting is useful information processing, but it is not a
+free operation on meaning. If the answer must refer to
+original positions, attach an index to each value before
+sorting. A pair of value and original index preserves
+the information needed to report where an item came from.
+Otherwise you may find the correct value and return a
+position that belongs only to your rearranged copy.
+
+[std::sort(begin,end); begin inclusive, end exclusive.]
+In C plus plus, std sort rearranges the range
+from begin up to, but not including, end.
+For a vector of integers, the default ordering is
+ascending. The end iterator is a boundary, not
+an extra element to inspect. Sorting the entire vector
+with begin and end is valid even when it is
+empty. Our inventory program then scans the sorted values,
+counting the first value and every change from the previous
+value. On two, two, four, four, nine,
+there are three distinct prices. The sum remains twenty-one.
+
+[Scan distinct count:1,1,2,2,3; first position handled before accessingi-1.]
+The distinct-count scan must handle its first position carefully.
+There is no previous element at index negative one.
+The condition checks whether i is zero first, and
+uses short-circuit logical or to avoid evaluating the previous-element
+comparison in that case. For an empty vector, the
+loop never runs and the distinct count remains zero.
+These boundary choices follow from the representation. They are
+not patches added after a sample crashes. The sum
+uses long long because many individually small prices can create
+a large total.
+
+[Pairs(8,3),(8,1),(6,2) sort to(6,2),(8,1),(8,3).]
+Pairs have lexicographic ordering by default: compare first components,
+and use the second component to break a tie.
+This gives a convenient deterministic ordering for a value paired
+with an index. For more complex records, a custom
+comparison must express a consistent strict ordering. Do not
+use less-than-or-equal as a sort comparator: an item must
+not compare as preceding itself. If two records have
+equal primary keys, either treat them as equivalent or
+apply a clear tie rule. Sorting cannot make an
+inconsistent comparison function sensible merely by calling it many times.
+
+[set: unique keys; multiset: duplicates; map:key->value.]
+Different containers answer different questions. A set stores unique
+keys in sorted order, so it can support membership
+and ordered lookup. A multiset retains repeated keys. A
+map associates each key with a value, such as
+the number of times a price occurs. Standard ordered
+sets and maps provide logarithmic lookup and update operations.
+An unordered map uses hashing and often has average constant-time
+operations, but that is not a universal worst-case guarantee.
+Choose a container based on required operations, not on
+the word unordered sounding more relaxed about your deadline.
+
+[Multiset[2,2,4]; erase value2 removes both; erase one found iterator removesone.]
+Duplicate handling can change the answer. If a multiset
+contains two copies of two and one copy of
+four, erasing by the value two removes all matching
+copies. Erasing one found iterator removes one element. A
+set would have discarded the duplicate from the beginning.
+For a problem requiring two distinct positions whose values
+sum to eight, two entries both holding four can
+be useful. A unique-value container may lose that possibility.
+State whether multiplicity matters before choosing the storage structure.
+
+[Compression10,100,1000 ->ranks0,1,2. Show original gaps90 and900 versus rank gaps1 and1.]
+Coordinate compression replaces distinct values by their sorted ranks.
+Values ten, one hundred and one thousand become ranks
+zero, one and two. Order and equality are
+preserved, which is useful when an algorithm needs small
+indices for very large labels. Physical distances are not
+preserved: original gaps ninety and nine hundred both become
+a rank gap of one. If a later computation
+needs actual length, retain the original values or weights.
+Compression changes a representation; it does not make geometry
+forget what a unit means.
+
+[Runtime and transfer exercise.]
+Comparison sorting takes order n log n comparisons, followed
+by a linear scan for our inventory summary. The
+input vector uses linear storage. A transfer exercise is
+to try no prices, all equal prices, and
+one very large repeated price. Explain the distinct count
+and sum before running the program. Then ask which
+information sorting would destroy if these numbers represented a
+time sequence. That question prepares us for prefix sums:
+sometimes the right optimization is to preserve the order
+and store summaries of it, rather than rearrange it.

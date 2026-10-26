@@ -1,0 +1,101 @@
+PART 4 INTRODUCTION — CONNECT EVERYTHING WITHOUT PAYING FOR CYCLES
+Status: DSU and Kruskal mechanism, trace and proof sketch; not all connectivity
+algorithms. Complete program minimum_network.cpp.
+
+[Four fictional event stations; possible links0-1 cost1,1-2 cost2,0-2 cost3,
+2-3 cost4,0-3 cost10. Goal allconnected, minimum SUM of chosen edge costs.]
+Rohail wants the event stations to share messages through a
+connected network. Each possible link has a cost, and
+the goal is to connect every station while minimizing the
+sum of selected link costs. This differs from Dijkstra's
+problem: we are not minimizing the route from one
+start to each destination. A minimum spanning tree minimizes
+the total cost of a connected spanning network. Confusing
+those objectives can produce a beautifully implemented answer to
+the wrong question.
+
+[DSU starts with singleton components{0},{1},{2},{3}.]
+A disjoint-set union structure, or DSU, maintains which
+vertices currently belong to the same component. Initially every
+vertex is alone. Find returns a representative of a
+vertex's component. Union merges two different components and reports
+whether a merge occurred. The clean supplied hook 'I'm
+the glue' fits the merge operation, but adding glue
+between vertices already connected does not create a new
+component. Their representative equality tells us that the connection
+would close a cycle in the growing forest.
+
+[Kruskal sortededge trace:accept1,accept2,reject3,accept4; cost7.]
+Kruskal's algorithm sorts all candidate edges by cost. Accept
+the edge zero-one of cost one, merging those components.
+Accept one-two of cost two, bringing vertex two into
+the same component. Now consider zero-two of cost three.
+Its endpoints are already connected through one, so skip
+it. Accept two-three of cost four, connecting the final
+station. The chosen costs sum to seven. The remaining
+cost-ten edge is unnecessary. A tree on four vertices
+uses three edges; our accepted edges connect all four
+without a cycle.
+
+[Parent forest versus chosen graph edges; parent2 may point to0 although
+accepted graph connection was1-2. Label REPRESENTATIVE LINKS, NOT ROUTES.]
+DSU's parent pointers are an internal representation of components,
+not the selected communication links. Union by size may
+attach vertex two's representative directly under zero even though
+the accepted graph edge was one-two. You cannot recover
+an actual network route by following DSU parents. If
+you need the selected tree's edges, store accepted original
+edges separately. This distinction is especially important because both
+BFS and DSU use something called a parent, but
+those variables have different contracts and purposes.
+
+[Find compression flattens representative chains; union smaller root underlarger.]
+Union by size attaches the smaller component's root beneath
+the larger one's root. Path compression shortens future find
+operations by redirecting traversed parent links toward a representative.
+Together they give extremely efficient amortized operations, formally bounded
+by an inverse-Ackermann factor. You do not need that
+function's derivation to use the structure here, but do
+not describe arbitrary unoptimized parent chains as constant time.
+The small implementation uses path halving while walking to
+the root. Component sizes are meaningful at representatives, so
+find the roots before comparing sizes or merging.
+
+[Cut argument: accepted edge is cheapest crossing between currently distinct
+components; exchange with a crossing edge of an optimal tree.]
+Why does taking a cheap edge not trap us
+later? Consider a currently separate component and the accepted
+edge connecting it outward. In any spanning tree, some
+edge must cross from that component to the rest.
+Because edges are considered in sorted order, the chosen
+edge is no more expensive than the relevant available crossing
+alternative. Add the chosen edge to an optimal tree;
+if it creates a cycle, remove a crossing edge
+on that cycle without increasing total cost. Thus an
+optimal tree can be made consistent with the greedy
+choice. This cut-and-exchange reasoning is the justification behind
+Kruskal, not the idea that cheap things are always safe.
+
+[Disconnected input: two separate pairs, no spanning tree.]
+If the graph is disconnected, no algorithm can produce
+a spanning tree using only its edges. Kruskal will
+produce a minimum spanning forest, but our program's contract
+asks for a spanning tree and therefore reports disconnected.
+For one vertex and no edges, the empty tree
+has cost zero. Unlike Dijkstra's assumptions, negative edge
+weights do not invalidate the minimum-spanning-tree cut argument. Read
+the algorithm's own requirements rather than transferring a restriction
+from another weighted-graph problem just because both use costs.
+
+[Cost sortingm edges; near-linear DSU work; transfer adds parallel cheaperedge.]
+Sorting dominates with order m log m time, followed
+by nearly linear DSU work. Storage is order n
+plus m for the structure and edge list. For
+a transfer question, add a second zero-three edge costing
+one. It can change the optimum, even though
+another zero-three edge already exists. Preserve parallel edges unless
+you have a justified reduction. Our test oracle enumerates
+all small subsets of n minus one edges, checks
+connectivity using an independent traversal, and compares their total
+costs. It handles negative weights and disconnected cases without
+reusing Kruskal's sorted-edge rule.

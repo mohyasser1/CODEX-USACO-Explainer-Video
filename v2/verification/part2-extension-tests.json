@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "seed": 216,
+  "cases": {
+    "two-sum": 105,
+    "window": 100,
+    "differences": 100,
+    "rectangles": 60,
+    "intervals": 80
+  },
+  "oracles": "all pairs; all subarrays; direct updates; direct rectangles; all interval subsets"
+}

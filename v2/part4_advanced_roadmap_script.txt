@@ -1,0 +1,135 @@
+PART 4 ROADMAP — WHAT TO LEARN NEXT, AND WHY
+Status: explicitly roadmap-only except short mathematical illustrations.
+Do not present this section as full implementation mastery of advanced topics.
+
+[Roadmap labeled NEXT COURSES, not mastered badges. Arrows show prerequisites
+from graphs,DP,rangequeries and arithmetic rather than a flat list of names.]
+We now have several foundations, but competitive programming has
+more depth than four hours can teach. This next
+section is a study map, not a claim that
+hearing an algorithm's name means you can implement it.
+Follow the branch that matches a problem you can
+already describe. Division labels are approximate learning groups,
+not a fixed exhaustive USACO syllabus. The official archive
+and the community-maintained Guide linked in the companion material
+provide practice and further explanations; the Guide is not
+an official promise about what a division may contain.
+
+[Tree branch: connectedacyclic graph,unique paths; entry-only Euler tour gives
+subtree interval[tin,tout); connect toFenwick lesson.]
+For trees, learn how a chosen root creates parent,
+depth and subtree relationships. An entry-only DFS ordering
+places every subtree in one contiguous interval of entry
+indices. That can turn subtree queries into the range
+queries you already understand. Specify the traversal convention:
+some Euler tours record vertices more than once, so
+their indices do not have exactly the same meaning.
+The technique is valuable because of the subtree-contiguity proof,
+not because calling an array Euler makes a tree
+query disappear.
+
+[BinaryliftingLCA: powers-of-two ancestors; pathdistance depthu+depthv-2depthLCA.]
+Lowest common ancestor queries ask where two root paths
+meet deepest. Binary lifting precomputes ancestors at powers of
+two distances, allowing efficient jumps while equalizing depths
+and approaching the common ancestor. Once LCA is known,
+an unweighted path length is depth u plus depth
+v minus twice the LCA depth. Tree DP and
+rerooting then reuse information across neighboring root choices.
+For example, moving a root across an edge makes
+one subtree's vertices one step closer and all others
+one step farther. Derive that change before using a
+reroot formula as another memorized template.
+
+[Graph structure branch:SCC condensationDAG;bridges;Eulerian edges vsHamiltonianvertices.]
+For directed graphs, strongly connected components group vertices that
+can reach each other in both directions; contracting them
+produces a DAG. For undirected graphs, bridges identify
+edges whose removal increases the component count. Parallel edges
+require care in low-link implementations, because removing one
+of two parallel edges need not disconnect anything. Eulerian
+traversal uses every edge once, which differs from visiting
+every vertex once in a Hamiltonian problem. In an
+undirected graph, appropriate connectivity and zero or two odd-degree
+vertices characterize the usual Eulerian circuit or trail setting.
+Directed conditions differ, so study the model-specific theorem.
+
+[Arithmetic branch:GCD,sieve,modularmultiplication,binaryexponentiation; explicitbounds.]
+Number theory begins with divisibility, Euclid's greatest-common-divisor algorithm,
+and sieves for prime information. Modular arithmetic is useful
+for large counting answers, but division requires an inverse
+that exists under appropriate coprimality conditions. Fermat's familiar
+inverse shortcut assumes a prime modulus and a nonzero
+residue. Fast exponentiation uses powers of two to reduce
+the number of multiplications. Intermediate products still need safe
+types or a safe modular multiplication method. A modulus
+does not prevent overflow if the multiplication overflows before
+the remainder operation is performed.
+
+[State-space branch:bitmasks,subsetDP,meet-in-the-middle; 40items split20+20.]
+Bitmasks represent small sets compactly and support subset DP,
+but two to the n states still grow exponentially.
+Meet in the middle splits a moderate-size set into
+two halves, enumerates each half and combines compatible
+results. Forty binary choices are far too many to
+enumerate directly in many settings, while two sets of
+about a million half-subsets can be manageable. The combination
+step still needs a correct search or counting method.
+Check shift widths and integer bounds; a compact bitwise
+expression is not exempt from language rules.
+
+[DP branch:LIS,intervalDP,weightedintervals; optimizations need structuralproofs.]
+Further DP lessons include longest increasing subsequences, grid and
+sequence alignment states, interval DP and weighted interval scheduling.
+Each begins with a different state sentence and dependency
+order. Optimizations such as monotone-queue transitions, divide-and-conquer optimization
+or convex-hull techniques require additional structure. Do not apply
+one because a recurrence looks slow. First prove the
+monotonicity, ordering or algebraic form it needs, then
+show that the optimized computation returns the same states
+as the simpler correct method. A slow oracle is
+especially valuable while learning these transformations.
+
+[Strings branch:prefix-function fallback,KMP,Z,trie; hashingcollision caveat.]
+String algorithms exploit repeated prefix and suffix structure. KMP's
+prefix-function fallback avoids restarting every comparison after a mismatch;
+the Z algorithm organizes a related family of prefix
+matches. Tries index prefixes, and Aho-Corasick extends matching
+to many patterns. Suffix structures support broader substring questions.
+Hashing can make comparisons convenient, but collisions mean it
+is not automatically a deterministic equality proof. Study the
+guarantees of the chosen method instead of assuming two
+equal hash values certify identical strings in every possible input.
+
+[Flow branch:capacity,residualedges,augmentingpath; matching as unit-capacitynetwork.]
+Flow networks model limited-capacity movement or assignment. Residual edges
+allow later augmentations to undo earlier routing choices, which
+is why a naive irrevocable greedy assignment can fail
+while a flow method succeeds. Bipartite matching can be
+modeled with unit capacities, and the max-flow/min-cut relationship
+connects a best flow with a limiting cut. This
+is a substantial next lesson, not a few lines
+to insert into a beginner solution without understanding residual
+capacity and correctness.
+
+[Structures/offline/geometry branch with concrete workloads rather than badges.]
+Advanced data structures add new workload guarantees: lazy propagation
+for interval updates, persistence for historical versions, and
+rollback techniques for reversible offline connectivity. Sweeps process events
+in a useful order; coordinate compression must preserve the
+information the geometry actually needs. Geometry adds orientation tests,
+intersections and degenerate cases, with products whose bounds may
+exceed ordinary sixty-four-bit arithmetic. Heavy-light and centroid decompositions
+organize difficult tree queries. Choose these topics when a
+well-understood problem motivates them, and keep a simpler
+reference implementation for small cases whenever possible.
+
+[Roadmap close: select one nexttopic,one prerequisite,one practiceproblem.]
+Rohail does not need to learn every branch tonight.
+He needs a reliable next step. Pick one topic,
+check its prerequisites, work through one full example,
+then solve a new problem without copying the implementation.
+If the prerequisite is shaky, return to it.
+That is a productive training decision, not a demotion.
+The roadmap tells you where the current course ends
+and where sustained problem-solving practice begins.

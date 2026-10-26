@@ -1,0 +1,6 @@
+{
+  "cases": 125,
+  "passed": true,
+  "seed": 902,
+  "oracle": "all contiguous partitions using at most d groups"
+}

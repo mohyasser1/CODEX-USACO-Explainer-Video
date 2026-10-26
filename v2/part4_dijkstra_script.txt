@@ -1,0 +1,156 @@
+PART 4 DEEP DIVE — FEWEST EDGES IS NOT CHEAPEST ROUTE
+Status: narration draft. Program weighted_routes.cpp; nonnegative directed edges.
+
+[Fictional route costs:0->1 cost10;0->2 cost3;2->1 cost4;
+1->3 cost2;2->3 cost12. Costs are invented, not actual travel estimates.]
+Rohail's next route question uses costs, not just the
+number of connections. Going directly from station zero to
+one costs ten, while going through station two costs
+three plus four, or seven. The cheaper route
+uses more edges. BFS would minimize edge count in
+the unweighted model, which is a different objective.
+Now every edge has an explicitly stated nonnegative cost,
+and we want minimum total cost from a chosen
+start. The fictional travel story motivates the model; the
+numbers on the edges define what the algorithm must optimize.
+
+[Tentative distances0,inf,inf,inf. Priority queue entries(distance,vertex).]
+Dijkstra's algorithm keeps a tentative best distance for each
+vertex. The start has distance zero, and other
+vertices begin unreachable. A priority queue selects the smallest
+tentative distance next. This is not the FIFO queue
+from BFS: a newly found cheaper candidate can move
+ahead of an older expensive one. Store entries as
+distance followed by vertex, so the priority ordering uses
+the cost rather than the vertex label. Room number
+one is not automatically more urgent than room number
+two. The distance determines the priority.
+
+[Remove(0,0). Relax1 to10,2 to3. Queue(3,2),(10,1).]
+Start by processing vertex zero at distance zero. The
+edge to one offers a route of cost ten,
+so record ten and enqueue that candidate. The edge
+to two offers cost three, so record three and
+enqueue it. The next candidate selected is vertex two
+at cost three. Calling this operation relaxation simply means
+checking whether a route through the current vertex improves
+the best known distance to its neighbor. It is
+a comparison and update, not a reason to become
+casual about the arithmetic.
+
+[Remove(3,2). Improve1 from10 to7,discover3 at15. Queue7,1;10,1;15,3.]
+From vertex two, the edge of cost four offers
+a route to one costing three plus four, or
+seven. Seven improves on ten, so update distance
+one and add a new queue entry for seven.
+The edge to three costs twelve, giving a tentative
+distance of fifteen. The queue still contains the older
+ten-cost entry for vertex one. The standard C plus
+plus priority queue does not conveniently edit that old
+entry in place, so our implementation leaves it there
+and will recognize it as stale when it reaches the front.
+
+[Remove(7,1). Improve3 from15 to9. Remove(9,3). Skipstale(10,1),(15,3).]
+Next process vertex one at its current best distance,
+seven. Its edge of cost two improves vertex three
+to nine. Process three at nine, then eventually
+remove the old entry saying vertex one costs ten.
+Compare ten with the current distance seven. They differ,
+so skip the stale entry without scanning its neighbors.
+The old fifteen-cost entry for three is stale too.
+The final distances are zero, seven, three and
+nine. Queue entries are snapshots of discoveries; the distance
+array holds the current best values.
+
+[Why extraction is safe: shortest unseen route must cross from settled to
+unsettled, with nonnegative remaining costs.]
+The essential proof explains why the smallest current tentative
+distance can be finalized. Suppose we select a vertex
+whose tentative distance is smallest among unfinished vertices, but
+there were a cheaper route to it. Follow that
+cheaper route from the start and find its first
+not-yet-finalized vertex. Its predecessor was already finalized and
+would have offered the corresponding prefix distance when its
+outgoing edge was examined. Because all remaining edge costs
+are nonnegative, that prefix cannot cost more than the
+supposed cheaper full route. We would therefore have a
+smaller unfinished candidate than the one selected, a contradiction.
+
+[Zero edge allowed; negative edge counterexample0->1=2,0->2=5,2->1=-4.]
+Nonnegative is the important word; zero-cost edges are allowed.
+Negative costs break the argument. In this counterexample,
+the direct route to one costs two, so it
+looks ready to finalize before vertex two at cost
+five. But two has a negative-four edge to one,
+giving a later route of total cost one. A
+rule that permanently finalized one at two would be
+wrong. Some implementations might revisit vertices and happen to
+repair some negative-edge cases, but Dijkstra's correctness and
+runtime guarantees no longer follow. Our program rejects negative
+weights rather than pretending those guarantees still apply.
+
+[Code: greater<pair<distance,vertex>> makes min-priority queue; stalecheck precedes
+neighbor loop; strict improvement only.]
+In C plus plus, the default priority queue is
+a maximum queue. Use the appropriate comparison so the
+smallest distance is returned first. After removing an entry,
+perform the stale check before scanning its outgoing edges.
+For each neighbor, compute the proposed distance and update
+only when it is strictly smaller than the stored
+distance. Equal-cost alternatives do not need extra entries for
+this distance-only contract. That is particularly useful with
+zero-cost cycles, where repeatedly enqueuing equal values could
+otherwise create pointless work. The exact queue operations should
+follow the state meanings we just traced.
+
+[Unreachable vertex remainsinf; output-1 only at final formatting boundary.]
+An unreachable vertex keeps its infinity marker. Do not
+add edge weights to infinity or print it as
+though it were a real travel cost. Our program
+converts unreachable entries to negative one only in the
+output. Distances and edge weights use long long,
+with input bounds that keep finite shortest paths comfortably
+within range. The code also guards the addition against
+the infinity bound. A large sentinel is a representation
+choice, not a number we can safely manipulate without
+thinking about overflow and reachability.
+
+[Directed versus undirected graph; reverse edge only when contract permits.]
+Our sample graph is directed. If the real problem
+gives undirected roads, store each edge in both directions.
+Do not make that change because a route drawing
+happens to look symmetric. The same algorithm can operate
+on either representation, but it answers the graph you
+actually constructed. As with BFS, a parent can
+be recorded whenever a distance improves to recover one
+shortest route. Our standalone program reports all distances;
+path reconstruction is an extension using the earlier parent-chain
+idea, with ties handled according to the required output.
+
+[Cost: successful relaxations create heap entries; stale entries discarded.
+Safe lazy-heap boundO((n+m)log(n+m)), storageO(n+m).]
+The lazy heap may store several candidate entries for
+one vertex, so do not claim the queue always
+contains at most n entries. There are at most
+a linear number in the edges of successful relaxations,
+and each heap operation is logarithmic in its size.
+A safe bound for this implementation is order n
+plus m, multiplied by log of n plus m,
+with order n plus m storage including the graph
+and heap entries. In common simple-graph descriptions this is
+often expressed using log n. The important practical point
+is that we are not repeatedly scanning every vertex
+to find the next minimum candidate.
+
+[Transfer: adddirect0->3 cost8, compare old9 and new8. Then change to12.]
+Pause and add a direct edge from zero to
+three of cost eight. The new shortest distance to
+three is eight, beating the previous route of cost
+nine. If that direct edge instead costs twelve,
+the old multi-edge route still wins. The number of
+edges alone cannot choose between them. Our test oracle
+uses Floyd-Warshall on small graphs to compute all-pairs distances,
+then compares the chosen start's row with this program.
+It includes duplicate edges, zero weights, self-loops and
+unreachable vertices, so the tests exercise more than the
+one friendly picture used to explain the algorithm.

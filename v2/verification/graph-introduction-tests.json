@@ -1,0 +1,10 @@
+{
+  "functional_cases": 288,
+  "topological_cases": 72,
+  "passed": true,
+  "seed": 612,
+  "oracles": [
+    "independent cycle-membership/self-return checks",
+    "exhaustive vertex permutations"
+  ]
+}

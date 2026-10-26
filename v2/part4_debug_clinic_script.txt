@@ -1,0 +1,74 @@
+PART 4 TRANSFER CLINIC — WHEN THE ADAPTER IS THE BUG
+Status: fresh diagnostic exercises; answers separated from prompts.
+
+[Three-vertex directedgraph:0->1 costs9 and2;1->2 cost0;0->2 cost7.
+Predict distances and stale entries before showing answer.]
+Maya brings Rohail three small test cases before he
+reuses the new algorithms in a larger project. First,
+two directed edges go from zero to one, with
+costs nine and two. One connects to two with
+cost zero, and a direct zero-to-two edge costs seven.
+What are the shortest distances from zero? Pause and
+track the heap entries as well as the current
+distance array. They are related structures, but they
+do not always contain the same version of a
+vertex's best-known cost.
+
+[Answer distances0,2,2. Oldentries9for1 and7for2 skipped.]
+The cheaper parallel edge gives vertex one distance two.
+Its zero-cost edge gives vertex two distance two as
+well, improving the direct cost seven. The final
+distances are zero, two, two. Entries for
+nine and seven may still be in the heap,
+but the stale check discards them. Zero cost did
+not require a special exception to relaxation; it is
+nonnegative and fits the proof. A test that used
+only positive distinct edge weights would not exercise these
+particular details.
+
+[Fenwickadapter scenario:array2,-1,4;assignindex1to3 twice. Querywholearray aftereach.]
+Second, the dashboard requests assignments, but Rohail wants
+to reuse his Fenwick addition routine. Starting from two,
+negative one, four, assign index one to three,
+then assign it to three again. Predict the two
+whole-array sums. Then inspect an adapter that computes new
+minus old but forgets to update its stored old
+value after the first assignment. The Fenwick implementation itself
+can be perfectly correct while this surrounding state bookkeeping
+produces wrong answers.
+
+[Correct sums9,9. Deltafirst4,second0. Staleold=-1 would add4again ->13.]
+The original sum is five. The first assignment adds
+a delta of four, giving nine. The second
+assignment changes nothing, so its delta is zero and
+the sum remains nine. If the adapter still believes
+the old value is negative one, it adds four
+again and incorrectly reaches thirteen. After applying the delta,
+store the new current value as well. The invariant
+now involves both representations: the current-value array and the
+Fenwick summaries must describe the same underlying data.
+
+[Knapsackcontract changes fromweight<=2 toweight exactly2;oneitemweight3,value8.]
+Third, there is one weight-three, value-eight item and
+a capacity of two. Under our at-most-capacity contract,
+the best value is zero because choosing nothing is
+allowed. If the new question instead requires exact weight
+two, there is no feasible selection. The same
+zero output would mean something different and would be
+misleading. An exact-weight DP needs an unreachable representation for
+positive weights that cannot yet be formed, along with
+a zero-weight base case. The original implementation has not
+become incorrect for its own contract; the new request
+requires a different state meaning and initialization.
+
+[Rohail writes a contract above each reused routine.]
+These tests reveal three different sources of failure: mishandling
+allowed graph edges, breaking consistency between two representations,
+and reusing an algorithm after changing its contract. None
+is fixed by adding more advanced topic names to
+a notebook. When a familiar routine fails, first
+check what its inputs and outputs mean in the
+new problem. Then build a small example that distinguishes
+the intended behavior from the plausible wrong behavior. That
+habit makes the roadmap ahead much easier to use
+without treating every new technique as another unexplained template.

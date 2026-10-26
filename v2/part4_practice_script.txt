@@ -1,0 +1,78 @@
+PART 4 CLOSING — TURN THE COURSE INTO A PRACTICE HABIT
+Status: original mixed transfer and practice plan; no mastery/promotion promise.
+
+[Rohail's notebook contains contracts,small examples,failedideas and fixes.]
+Before the final credits, choose techniques for three changed
+versions of the music-night project. First, the ticket
+sequence is fixed and the dashboard asks many interval
+sums. Second, a single transaction changes between queries.
+Third, the query asks for the smallest value in
+a fixed interval rather than its sum. Pause and
+name the operation contract before naming an algorithm.
+
+[Separate answer:staticprefix;Fenwickadd or segmentassignment;staticsparseminimum.]
+Static prefix sums fit the first case. Fenwick sums
+fit point additions, while a segment tree can directly
+support point assignments with range sums. If assignment is
+implemented through Fenwick, convert new value to a delta
+using the current value. A sparse table is one
+option for static range minimum. These answers are not
+a ranking from weak to powerful structures. They are
+matches between required operations, preprocessing, update behavior and
+the resources available.
+
+[Second mixed exercise:shortest route versus cheapest spanningnetwork; limited
+items versus unlimited denominations.]
+Now compare two graph objectives: cheapest route from a
+start, and cheapest total network connecting every station.
+The first suggests Dijkstra when weights are nonnegative; the
+second is a minimum-spanning-tree problem such as Kruskal's.
+Compare two selection contracts: unlimited denominations for an exact
+amount, and individual items available once under a capacity
+limit. Those require different DP states or update orders.
+A correct solution begins by refusing to blur these
+differences, even when the input files look almost identical.
+
+[Practice loop:attempt ->counterexample ->explanation ->implementation ->transfer.]
+For each study session, attempt a problem before reading
+its solution. Write what the variables mean and why
+the algorithm should work. If the attempt fails,
+find a small counterexample and explain the broken assumption.
+After studying an editorial, close it and implement
+the idea from your own explanation. Then solve a
+related but different problem. Reproducing familiar code from memory
+is useful rehearsal, but independent transfer is stronger evidence
+that you understand the technique.
+
+[Testing checklist:contract-validboundaries,independentoracle,randomseed,reproduciblefailure.]
+Use tests with a purpose: empty cases only where
+allowed, one element, duplicates, negative values when
+permitted, disconnected graphs, and totals near type limits.
+For an optimized algorithm, compare small random cases with
+a slow independent oracle. Save the random seed and
+failing input so the bug can be reproduced. Passing
+tests does not replace the correctness argument, and a
+proof does not excuse a mismatched implementation. They support
+different parts of your confidence in the final solution.
+
+[Contest workflow and official links in companion; no fixed futurepolicyclaims.]
+During a contest, read all available problems, estimate
+which parts you can solve, and manage the clock.
+Reserve time for boundary tests and final input/output checks.
+Consult current official rules for compiler versions, contest format
+and submission requirements; these can change. Use the
+official archive for historical practice, and treat community topic
+guides as learning aids rather than guaranteed division boundaries.
+No four-hour course can promise a promotion, but a
+consistent cycle of reasoning, implementation and reflection gives you
+a concrete way to improve.
+
+[Rohail and Maya close the ledger; final balance5,not8.]
+Rohail's first bug came from ignoring refunds, not from
+missing an advanced data structure. By the end,
+he can explain the state, test the boundary,
+choose a representation and justify an algorithm. That is
+the habit worth keeping. Celebrate a passing test suite,
+then ask what it did and did not check.
+The next unfamiliar problem is not an interruption to
+the training arc. It is where the training becomes real.

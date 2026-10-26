@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "seed": 404,
+  "cases": {
+    "knapsack01": 92,
+    "weighted_routes": 90,
+    "minimum_network": 75,
+    "fenwick_queries": 66,
+    "segment_queries": 66,
+    "static_minimum": 65
+  },
+  "oracles": [
+    "all item subsets",
+    "Floyd-Warshall",
+    "all n-1 edge subsets with independent reachability",
+    "direct mutable-array sums",
+    "direct slice minima"
+  ]
+}

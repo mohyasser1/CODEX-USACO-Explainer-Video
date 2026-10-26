@@ -1,4 +1,4 @@
-ALEX'S SCHOOL MUSIC NIGHT — V2 production plan, 2026-10-26
+ROHAIL'S SCHOOL MUSIC NIGHT — V2 production plan, 2026-10-26
 
 Status: PRESENTATION RECAST after user rejected the original pilot voice/mascot.
 No full V2 render until a new voice/story audition and technical template pass.
@@ -94,28 +94,22 @@ PART 4 — GOLD FOUNDATIONS AND THE ADVANCED MAP (60 min)
  57–60  Mixed technique-selection exercise, test oracle method, training plan.
 
 RUNTIME POLICY
-Initial estimate was 28,000–32,000 words. Measured pilot: 1,041 spoken words
-in 395.183 seconds (~158 words/minute including brief gaps). Revised planning
-estimate: approximately 36,000–38,000 substantive spoken words across four
-parts, with each part measured independently. Target 57–63 minutes per
-completed part, 228–252 total. This is not a claim of completed script duration.
-That calibration used the now-rejected voice. Recalibrate after the new voice
-is accepted; a brief conversational audition does not establish technical-lesson
-speaking rate. Preserve the four-hour goal through substantive lesson depth.
-Latest requested Voice A storytelling revision measures 117.22 overall words/min
-(170 words/87.016 s, including 5.8 s useful pauses); delivery approval is pending.
-At this pace, begin with roughly 6900–7500 spoken words per part, approximately
-28000–30000 total, then measure each actual lesson. These replace the faster-
-voice drafting estimate provisionally, not the four-part duration requirement.
-Measure synthesized audio before finalizing. If short, deepen worked examples;
-if long, move clearly marked extension material into the workbook. Never stretch
-speech unnaturally, repeat passages or add silence to manufacture four hours.
+Target four parts of 57–63 minutes each, approximately four hours total.
+The current Voice A storytelling candidate measures 117.22 overall words/minute:
+170 words in 87.016 seconds, including 5.8 seconds of purposeful reflection.
+The user selected the voice identity; slower delivery approval is still pending.
+Use roughly 6900–7500 spoken words per part as a provisional drafting guide,
+approximately 28000–30000 total, then measure each actual synthesized lesson.
+A short audition does not guarantee the pace of a technical explanation.
+If short, deepen worked examples; if long, move clearly marked extensions into
+companion material. Never stretch speech, repeat passages or add silence merely
+to manufacture four hours. Learner-controlled coding pauses are outside runtime.
 
 ENTERTAINMENT / VISUAL DESIGN
 Rohail, a fictional tenth grader, helps Maya and Sam organize a school music
 night. Use believable ticket refunds, rehearsal choices, group constraints and
 equipment budgets. Large contest bounds are hypothetical stress tests, not
-claims about actual school attendance. No cow, mascot or Bessie in active V2.
+claims about actual school attendance. No cow or mascot in active V2.
 Every joke must reveal a misconception or motivate a state change. Queue
 animation is an entry line; priority is distance, not follower count.
 Backtracking is a set-list audition with visible undo. Warm original synthetic
@@ -127,10 +121,12 @@ pedagogical hooks with original explanations; no additional lyric retrieval,
 recordings, melody copying, artist voice imitation or implied endorsement.
 
 PILOT GATE
-First produce the signed-total execution/invariant lesson (~5–8 minutes), with
-readable code, synchronized state transitions, captions and a separate solution.
-Request parent QA of teaching pace, humor, voice and diagram legibility before
-full renders. Continue source, exercises and independent tests while QA is pending.
+Current slower Voice A storytelling sample awaits user acceptance:
+https://drive.google.com/file/d/1gbjoxQKnuYsq96xYeQEo94fAFNj2qpXP/view
+After acceptance, validate a short integrated Rohail teaching segment with
+correct semantic state transitions, readable code and captions before scaling
+full renders. Do not reuse the rejected presentation template. Continue scripts,
+complete examples and independent tests while listening feedback is pending.
 
 SUPERSEDED PILOT CHECKPOINT — NOT APPROVED VOICE/STORY
 6:35.2 MP4 delivered at:
@@ -141,8 +137,16 @@ SHA256 6c164593391a8a08919c4706b9bec788025e7c0eced5c03b345c149ff8627839
 Downloaded Drive copy independently hashed and MATCHED. Human listening and
 teaching/engagement review remain pending. Initial pilot predates later supplied
 song hooks; consolidated HIP_HOP_TEACHING_NOTES.txt maps those into full lessons.
-Part 1 drafts currently contain roughly 6,500 words, about 41 minutes at the
-pilot rate, not yet a finished hour. Other full-part scripts remain to be written.
+CURRENT WRITING CHECKPOINT
+All four parts have complete first drafts, pending editorial/teaching review.
+Part 1: 6866 narration words; estimated 58.57 minutes at the provisional pace.
+Part 2: 6864 narration words; estimated 58.56 minutes at the provisional pace.
+Part 3: 6846 narration words; estimated 58.40 minutes at the provisional pace.
+Part 4: 6877 narration words; estimated 58.67 minutes at the provisional pace.
+Total: 27453 words, approximately 234 minutes at the candidate pace.
+These estimates exclude metadata and stage directions. They are not measured
+full-part audio durations or finished videos. course_manifest.json records
+prerequisite order; draft-progress.json records reproducible counts.
 
 VERIFICATION / DELIVERY
 Use separate V2 names/IDs. Cloud only; current free scratch about 29 GB.

@@ -1,0 +1,74 @@
+PART 3 INTRODUCTION — ONE SUCCESSOR, THEN A CYCLE
+Status: introductory mechanism and trace, not a full functional-graph course.
+Complete companion: functional_walk.cpp. Advanced jump queries are a roadmap.
+
+[Fictional equipment-handoff plan:0->1->2->3->1; separate4->4.]
+Rohail writes a handoff plan in which every station sends an equipment
+tag to exactly one next station. This gives a functional graph:
+every vertex has exactly one outgoing edge. That does not mean
+every vertex has one incoming edge. Several stations may send to
+the same station, and some may receive from none. The one-successor
+rule makes the walk deterministic. Once we know the current vertex,
+there is no choice about the next one.
+
+[Walk0,1,2,3,1. Mark first visit positions0,1,2,3.]
+Start at zero. The walk visits one, then two, then three,
+then one again. Why must some vertex eventually repeat in any
+finite functional graph? There are only n possible vertices. A walk
+of n plus one visits cannot contain all distinct vertices. When
+a vertex repeats, its future repeats too, because its successor is
+always the same. The path therefore consists of a possibly empty
+tail followed by a cycle. The tag keeps circling the same block,
+because each station sends it to the same next stop every time.
+
+[Tail[0], cycle[1,2,3], entry1. Lengths1 and3.]
+In our example the tail contains vertex zero, and the cycle
+contains one, two and three. The first repeated vertex, one,
+is the cycle entry for this starting walk. Record the position
+where each vertex was first visited. When one repeats, its first
+position is one. We have stored four distinct vertices, so the
+tail length is one and the cycle length is four minus one,
+or three. Starting from two would give a different entry and
+no tail, even though the underlying cycle is the same.
+
+[Code: seen initialized-1; store path index; advance until seen[u]!=-1.]
+The companion program stores a visit position for each vertex, initialized
+to negative one. While the current vertex has no stored position,
+record the current path length, append the vertex and move to
+its successor. On the first repeat, use its stored position to
+split the path into tail and cycle. This takes order n time
+and order n space for one walk. The local visit positions
+belong to this particular walk. A global visited flag from unrelated
+earlier searches would not, by itself, identify the cycle entry
+for a new start in the same way.
+
+[Self-loop4->4; tail0 cycle1. Contrast ordinary branching graph.]
+A self-loop is a cycle of length one. Starting at vertex
+four in this example gives tail length zero, cycle length one,
+entry four. Also remember the assumption: exactly one successor.
+In an ordinary graph with choices, seeing a previously visited
+vertex does not imply the future route must repeat identically.
+The deterministic walk proof cannot be copied unchanged into every
+graph traversal. Similar pictures can support different conclusions when
+the edge rules differ.
+
+[Future query: where after k moves? Tail then modular cycle index.]
+Once the tail and cycle are known, a single-start far-future
+query can use the cycle length to avoid walking every step.
+After reaching the cycle, only the remaining step count modulo
+the cycle length affects the final cycle position. For many starts
+and many successor queries, binary jumping is another useful structure:
+precompute successors after powers of two steps, then combine them.
+That is a roadmap here, not a claim that we have taught
+all its implementation details. First be able to explain the tail,
+the cycle and the meaning of a step count without a diagram.
+
+[Transfer: successor array1,2,2; start0 versus start2.]
+Pause and trace zero to one to two to two. From zero,
+the tail length is two and the cycle length is one.
+From two, the tail is empty and the cycle is still one.
+The graph did not change; the start changed the walk's tail.
+Our independent tests classify which vertices return to themselves
+within n successor steps, then find the first such vertex reached
+from each start. That gives a separate check of the program's
+entry and lengths rather than repeating its visit-position formula.

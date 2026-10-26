@@ -1,0 +1,125 @@
+PART 4 INTRODUCTIONS — MERGEABLE RANGES AND STATIC MINIMA
+Status: segment-tree sum mechanics and sparse-table contrast; lazy propagation
+is a later-study topic. Programs segment_queries.cpp and static_minimum.cpp.
+
+[Rohail's array3,1,4,1,5. Balanced range tree; paddingzero to8 leaves.]
+Fenwick sums are compact when their operations fit the problem.
+A segment tree takes a more general approach: split an
+array into ranges and store a summary for each range.
+To combine two neighboring ranges, merge their summaries. For
+sum, merge means addition. For minimum, merge means
+minimum. The merge must be associative so regrouping adjacent
+pieces does not change the answer. Associative does not
+mean every operation is commutative; order can still matter
+for summaries such as string concatenation or matrix multiplication.
+
+[Sum identity0; leaves storevalues; parents sumchildren; root14.]
+Our sum example is three, one, four, one,
+five. The iterative implementation pads to a power-of-two leaf
+count, using zero for unused leaves. Zero is the
+sum identity, so those padding entries do not alter
+the result. Parents store the sum of their children,
+and the root stores fourteen. For a minimum tree,
+padding would need an appropriate positive-infinity identity instead,
+not zero if values can be positive. The meaning
+of an empty or padded region belongs in the
+data structure's contract.
+
+[Query[1,4) decomposes into[1,2)=1 and[2,4)=5, totals6.]
+To query indices one through four, decompose that interval
+into stored ranges that cover it without including unwanted
+elements. Here the pieces are one through two,
+holding one, and two through four, holding four
+plus one. Their total is six. We do
+not need to visit every leaf in a long
+query. At each tree level, only the boundary
+pieces require attention; whole interior blocks can be taken
+as summaries. That is the reason the query has
+logarithmic cost rather than a cost proportional to the
+number of selected elements.
+
+[Iterative boundary loop: left/right atleafboundaries; take oddleft, takeleft
+sibling ofoddright after decrement; move both upward.]
+In the iterative implementation, move the half-open query boundaries
+to their leaf positions. If the left boundary is
+a right child, its block belongs in the query
+before advancing left. If the right boundary is a
+right child, move it left and take that block.
+Then move both boundaries to their parents. Repeat until
+they meet. For sums, one accumulator is sufficient
+because addition is commutative. A generic order-sensitive merge needs
+separate left and right accumulators combined in the correct
+order. Do not copy the sum implementation unchanged into
+an operation whose ordering rules differ.
+
+[Assignindex2=10; leafchanges4->10; recomputeancestors; root20.]
+A point assignment changes one leaf and recomputes each ancestor
+on the path to the root. Setting index two
+from four to ten increases the total from fourteen
+to twenty. The new query one through four returns
+one plus ten plus one, or twelve. Other
+subtrees do not contain that point and need no
+change. The tree invariant is that each node stores
+the correct merged summary of its covered range. Recomputing
+ancestors from already-correct children restores that invariant after an
+assignment.
+
+[Code operationX is assignment, unlike Fenwick A addition.]
+Our segment-tree companion uses X for assignment and S
+for a range-sum query. The Fenwick companion used A
+for addition. These interfaces intentionally differ because the lesson
+must distinguish the operations rather than hide them behind
+similar variable names. The segment tree builds in linear
+time, uses linear storage, and supports point assignments
+and range queries in logarithmic time. Empty sum ranges
+return zero. A padded leaf is never a valid
+user update position; input bounds still use the original
+array size.
+
+[Rangeupdate warning: assigning one parent without descendants/pending tags
+breaks later partialqueries. Lazy propagation marked ROADMAP ONLY.]
+What if Rohail wants to update an entire interval?
+Changing a parent summary alone would leave descendants stale
+for later partial queries. Lazy propagation stores pending operations
+and defines how they affect summaries and compose with
+other pending operations. Addition and assignment require different
+composition rules. This is an introduction to why lazy
+propagation exists, not an implementation lesson for it. The
+current program supports point assignment only. That limitation is
+deliberate and visible in its operation contract.
+
+[Static range minimum: table storesblocks lengths1,2,4,...; no updates.]
+For a fixed array with many minimum queries and
+no updates, a sparse table offers another tradeoff.
+Precompute minima for power-of-two block lengths. A larger
+block's minimum comes from the minima of its two
+halves. Building all levels takes order n log n
+time and space. To query a nonempty interval,
+choose the largest power-of-two length that fits inside it,
+then take one block from the left boundary and
+one ending at the right boundary. Together they cover
+the query, possibly overlapping.
+
+[Overlapping minblocks safe; example[3,1,4],length3 uses[3,1] and[1,4].
+Minimum1; sums4+5=9 would double-count1 instead oftrue8.]
+The overlap is harmless for minimum because taking the
+minimum of a value with itself changes nothing. This
+property is called idempotence. On three, one, four,
+the two length-two blocks both include one, but
+their combined minimum is still correct. The same two-block
+trick does not give a range sum: four plus
+five gives nine, double-counting the middle one, while
+the true sum is eight. Associativity alone does not
+justify overlapping blocks. The sparse-table query relies on the
+specific operation's additional property.
+
+[Comparison: staticmin sparseO(1)query withlogtable; dynamicpoint segmentO(logn).]
+With precomputed integer logs, this sparse-table minimum query
+takes constant time. Updating the array efficiently is not
+part of that structure's contract; many stored blocks could
+be affected. Our sparse-table program therefore reads a fixed
+array and answers only nonempty minimum queries. For transfer,
+explain why a static minimum workload and an interleaved
+assignment-and-sum workload deserve different structures. The answer should
+mention operations, preprocessing, memory and updates, not simply
+declare one named tree universally better than another.

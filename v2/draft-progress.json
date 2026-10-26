@@ -1,0 +1,142 @@
+{
+  "status": "Provisional estimates; no full-part narration measured",
+  "parts": [
+    {
+      "part": 1,
+      "spoken_words": 6866,
+      "estimated_minutes": 58.57,
+      "scripts": [
+        {
+          "file": "part1_foundations_script.txt",
+          "spoken_words": 1805
+        },
+        {
+          "file": "part1_loop_trace_script.txt",
+          "spoken_words": 1488
+        },
+        {
+          "file": "part1_functions_cost_script.txt",
+          "spoken_words": 1255
+        },
+        {
+          "file": "part1_casework_script.txt",
+          "spoken_words": 1094
+        },
+        {
+          "file": "part1_backtracking_script.txt",
+          "spoken_words": 1224
+        }
+      ],
+      "missing_drafts": []
+    },
+    {
+      "part": 2,
+      "spoken_words": 6864,
+      "estimated_minutes": 58.56,
+      "scripts": [
+        {
+          "file": "part2_sorting_script.txt",
+          "spoken_words": 797
+        },
+        {
+          "file": "part2_prefix_script.txt",
+          "spoken_words": 1569
+        },
+        {
+          "file": "part2_ranges_script.txt",
+          "spoken_words": 899
+        },
+        {
+          "file": "part2_two_pointers_script.txt",
+          "spoken_words": 1177
+        },
+        {
+          "file": "part2_binary_search_script.txt",
+          "spoken_words": 1333
+        },
+        {
+          "file": "part2_greedy_script.txt",
+          "spoken_words": 685
+        },
+        {
+          "file": "part2_transfer_script.txt",
+          "spoken_words": 404
+        }
+      ],
+      "missing_drafts": []
+    },
+    {
+      "part": 3,
+      "spoken_words": 6846,
+      "estimated_minutes": 58.4,
+      "scripts": [
+        {
+          "file": "part3_graph_models_script.txt",
+          "spoken_words": 891
+        },
+        {
+          "file": "part3_bfs_script.txt",
+          "spoken_words": 1633
+        },
+        {
+          "file": "part3_parity_script.txt",
+          "spoken_words": 1415
+        },
+        {
+          "file": "part3_functional_graph_script.txt",
+          "spoken_words": 612
+        },
+        {
+          "file": "part3_dynamic_programming_script.txt",
+          "spoken_words": 1732
+        },
+        {
+          "file": "part3_topological_script.txt",
+          "spoken_words": 563
+        }
+      ],
+      "missing_drafts": []
+    },
+    {
+      "part": 4,
+      "spoken_words": 6877,
+      "estimated_minutes": 58.67,
+      "scripts": [
+        {
+          "file": "part4_knapsack_script.txt",
+          "spoken_words": 1167
+        },
+        {
+          "file": "part4_dijkstra_script.txt",
+          "spoken_words": 1099
+        },
+        {
+          "file": "part4_dsu_mst_script.txt",
+          "spoken_words": 690
+        },
+        {
+          "file": "part4_fenwick_script.txt",
+          "spoken_words": 1137
+        },
+        {
+          "file": "part4_segment_sparse_script.txt",
+          "spoken_words": 843
+        },
+        {
+          "file": "part4_debug_clinic_script.txt",
+          "spoken_words": 497
+        },
+        {
+          "file": "part4_advanced_roadmap_script.txt",
+          "spoken_words": 923
+        },
+        {
+          "file": "part4_practice_script.txt",
+          "spoken_words": 521
+        }
+      ],
+      "missing_drafts": []
+    }
+  ],
+  "total_spoken_words": 27453
+}

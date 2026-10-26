@@ -50,11 +50,9 @@ Remove zero from the front. Inspect neighbor one. Its distance is negative
 one, so it has not been discovered. Set its distance to one, set its parent
 to zero, and enqueue it. Do the same for neighbor two. The queue now
 contains one followed by two. Marking happens when a vertex enters the
-queue, not when we eventually remove it. The supplied phrase 'You left
-your mark on me' becomes our mnemonic here: discovery leaves a marker
-immediately. The phrase is a teaching reinterpretation, not an explanation
-of the song's meaning. The actual marker in this code is the changed
-distance value.
+queue, not when we eventually remove it. You left your mark on me.
+That is a useful reminder here: discovery leaves its mark immediately.
+In this code, the marker is the changed distance value.
 
 [Pop1; neighbor0 already discovered; discover3. Queue[2,3].]
 Next remove one. Its neighbor zero is already discovered, so skip it.
@@ -70,10 +68,10 @@ discipline is what gives our breadth-first distance layers.
 Remove two. Zero is already discovered. Four is new, so set its distance
 to two, its parent to two, and enqueue it. The queue contains three,
 four. Both are at distance two. We have processed all distance-one vertices
-before processing either distance-two vertex. Keep the distance row beside
-the queue; that visual relationship is more important than the movement
-of the circles. If an animation makes a vertex bounce but hides its
-distance, it can look energetic while teaching very little.
+before processing either distance-two vertex. Rohail notices that both waiting vertices have distance two. A newly
+discovered distance-three vertex will join behind them, so it cannot
+skip the unfinished distance-two work. That ordering will matter in
+the shortest-path proof.
 
 [Pop3 -> discover5 at distance3,parent3; queue[4,5].]
 Remove three. One is already known. Five is new. Set distance five to
@@ -132,9 +130,9 @@ Five's parent is three, three's parent is one, and one's parent is zero.
 Zero has no parent, marked negative one. We collected the route backward:
 five, three, one, zero. Reverse the list to obtain zero, one, three, five.
 Each parent edge reduces distance by one, so following parents terminates
-at the start. The supplied 'going home' hook fits this return route,
-but a parent pointer is a recorded discovery edge, not a magical navigation
-service. Check reachability before reconstructing, or an unreachable target
+at the start. Just hold on, we're going home. In this picture,
+home means the starting room, and the saved parent edges show the way
+back; there is no magical navigation service. Check reachability before reconstructing, or an unreachable target
 could misleadingly produce a list containing only itself.
 
 [Code: front then pop; iterate neighbors; test; set distance,parent; push.]

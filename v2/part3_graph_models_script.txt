@@ -1,0 +1,105 @@
+PART 3 DRAFT — FIRST DECIDE WHAT THE GRAPH MEANS
+Status: original narration draft; timing pending. Leads into bfs_routes.cpp.
+
+[Rohail's planning notebook: room map, rehearsal constraints, task dependencies.
+Same circle-and-line notation, three different meanings.]
+Rohail's school music night creates several questions that look unrelated.
+Which rooms can a volunteer reach? Which rehearsal groups need matching
+time slots? Which setup tasks must happen before others? A graph can
+represent all three, but the meaning of a vertex and an edge changes.
+Do not choose BFS merely because a diagram has circles. First describe
+the objects, their relationships and the answer you need. Modeling is
+the step that turns a story into a precise computational problem.
+
+[Room graph: vertex=room; edge=allowed direct movement.]
+For the room map, a vertex is a room and an edge is an allowed
+direct move. A path is a sequence of vertices connected by edges.
+A route can revisit a vertex, but a shortest unweighted route never
+needs a useless detour around a cycle. If a hallway works both ways,
+represent it as an undirected edge. If a door is one-way, use a
+directed edge. The picture's line thickness and physical length have no
+algorithmic meaning unless our model assigns them one. We will label
+all weights explicitly whenever cost matters.
+
+[Directed edge A->B contrasted with undirected A--B.]
+An undirected connection permits movement in either direction. A directed
+connection from A to B does not automatically permit movement from B
+to A. This affects both reachability and how we store input. For
+an undirected edge, add B to A's neighbor list and A to B's.
+For a directed edge, add only the specified direction. Accidentally adding
+the reverse of every prerequisite would turn many simple task schedules
+into artificial cycles. A compiler cannot detect that modeling mistake;
+the code is legal, but it describes the wrong relationship.
+
+[Four representations: edge list, adjacency list, matrix, implicit grid.]
+An edge list stores pairs of endpoints. It is useful when an algorithm
+needs to sort or scan all edges. An adjacency list stores each
+vertex's neighbors, which is convenient for traversal. An adjacency matrix
+stores a cell for each ordered pair of vertices, making individual
+edge lookup simple but using quadratic space. An implicit graph generates
+neighbors when needed instead of storing every edge explicitly. There is
+no single representation that is best for every problem. Choose based
+on the operations and size constraints, not on which picture looks
+most familiar from a textbook.
+
+[Adjacency list example:0->[1,2],1->[0,3],2->[0],3->[1].]
+Consider four rooms with undirected connections zero-one, zero-two and
+one-three. The neighbor lists shown on screen contain six entries,
+because each of the three edges appears twice. The vector of lists
+has one slot per vertex, including vertices with no neighbors. Scanning
+all lists touches every vertex and every stored adjacency entry, giving
+order n plus m work. A matrix would reserve n squared cells even
+if there were only a few edges. For two hundred thousand vertices,
+that difference is decisive. Sparse graphs need not pretend every possible
+connection actually exists.
+
+[Component example: path0-1-2 and separate edge3-4 and isolated5.]
+In an undirected graph, vertices belong to the same connected component
+when paths connect them. This example has three components: the first
+path, the separate pair, and the isolated vertex. A component need
+not be a clique. The first path is connected even though its two
+ends lack a direct edge. Rohail circles the missing connection before
+calling the group a clique. Familiar social words can have stricter
+mathematical definitions, so check the actual edge requirements.
+
+[Grid with blocked cells; four candidate neighbor coordinates and bounds.]
+A grid can also be a graph. Let each open cell be a vertex,
+and let edges connect permitted neighboring cells. With four-direction movement,
+the candidate offsets are one row up, one row down, one column
+left and one column right. Reject a candidate outside the grid or
+inside a blocked cell before accessing it. Do not add diagonal movement
+unless the problem allows it. Flood fill is traversal of this implicit
+graph. You can generate neighbors from coordinates rather than building
+a separate adjacency list for every cell, while keeping the same
+visited-state reasoning.
+
+[State graph: vertex may include position AND a key-held bit.]
+Sometimes location alone is not the full state. If a volunteer can
+enter a locked room only after picking up a key, arriving at
+the same room with and without that key can lead to different
+future moves. The graph vertex may need to represent both location
+and key status. This is an introduction to state modeling, not a
+request to memorize every possible extra dimension. Ask whether two
+visits have exactly the same future options and costs. If not,
+merging them into one visited marker can discard a useful possibility.
+
+[Model checklist applied before the next BFS trace.]
+Before coding a traversal, answer five questions. What is a vertex?
+What creates an edge? Is direction important? Are all moves equal
+cost? What counts as a complete answer: reachability, a distance,
+a route, or all components? In the next lesson, the answers
+are rooms, allowed direct moves, undirected connections, one step per
+edge, and shortest step counts plus one reconstructed route. That
+specific contract will justify BFS. Later, changing an assumption will
+lead us to a different algorithm instead of forcing the same queue
+onto a problem it was not designed to solve.
+
+[Transfer prompt and answer on separate cards.]
+Pause and model a setup rule saying that microphones must be tested
+before the sound check. Is the relationship directed? Should testing
+one microphone create a reverse prerequisite from the sound check?
+The answer is a directed dependency from the earlier task to the
+later one, with no automatic reverse edge. We will return to
+that model when we study topological ordering. For now, the key
+habit is to let the contract decide the graph, before letting
+the graph suggest an algorithm.

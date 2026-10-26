@@ -1,0 +1,61 @@
+PART 2 TRANSFER — CHOOSE THE REPRESENTATION BEFORE THE TOOL
+Status: original closing exercise; explicit learner-controlled pause and answer.
+
+[Rohail's dashboard receives a batch of range corrections, then many static
+range-sum queries. Timeline: all updates first, all queries second.]
+Rohail's attendance dashboard starts with the sequence two, one,
+three and zero. Before anyone asks questions, a correction
+adds two to positions one through three, half-open. After
+all corrections are finished, the dashboard must answer many
+range-sum queries. Pause and choose a plan. Which
+technique handles the batch of additions, which handles the
+later queries, and does sorting help? Explain the
+order of operations before naming a data structure.
+
+[Answer phase: diff update +2 at1,-2 at3; reconstruct changes0,2,2,0;
+corrected values2,3,5,0; prefix0,2,5,10,10.]
+Use difference events to record every correction, then reconstruct
+the total addition at each position and apply it to
+the original sequence. Our corrected values become two, three,
+five and zero. Build a prefix table from these
+final values: zero, two, five, ten and
+ten. A query on the first three positions now
+returns ten minus zero, or ten. Sorting would
+change the original positions, so it would answer a
+different question. The useful order is corrections, reconstruction,
+then prefix preprocessing—not whichever algorithm we learned most recently.
+
+[Cost n+updates+queries. Store intermediate values only as needed.]
+With n positions, u updates and q queries,
+this plan takes order n plus u plus q
+time. Each update creates two events, reconstruction and
+prefix construction are linear, and each query uses one
+subtraction. Linear-size arrays are enough. Rohail is spending
+memory to avoid repeating work on every question. That
+is a concrete time-space tradeoff: identify both the extra
+stored information and the work it eliminates. Simply calling
+something a fair trade does not tell us what
+we are trading.
+
+[Change timeline: update,query,update,query. Old prefixes turn stale.]
+Now change the contract so that queries arrive between
+updates and must be answered immediately. The earlier plan
+cannot wait until every correction is complete. Rebuilding the
+entire prefix table after each change may be too slow.
+This is the motivation for later dynamic query structures,
+not a reason to pretend the static prefix table
+updates itself. The values, operation types and timing
+of requests together determine the appropriate algorithm.
+
+[Technique-selection checklist; no new topic names introduced.]
+Before leaving this part, write one sentence for each
+technique's justification. Prefix queries cancel an unwanted earlier region.
+Difference updates start and stop an additive effect. Sorted
+two-sum discards an endpoint that cannot work. The simple
+sum-limited window relies on nonnegative values. Binary search
+requires a monotone predicate and bounds containing an answer.
+Earliest-finish scheduling needs its exchange argument and equal-value objective.
+If you can explain those sentences on a fresh
+example, you have something more useful than a folder
+of templates: you can recognize when a familiar tool
+fits, and when its assumptions have quietly disappeared.

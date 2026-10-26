@@ -1,0 +1,163 @@
+PART 4 DEEP DIVE — FENWICK TREES STORE CAREFULLY CHOSEN BLOCKS
+Status: point addition/range sum lesson. Complete program fenwick_queries.cpp.
+
+[Rohail's live counts3,1,4,1,5,9,2,6. Queries interleave with point additions.]
+Rohail's dashboard now receives changes while people are asking
+range-sum questions. A static prefix table answers queries quickly,
+but changing one value can make many later prefixes
+stale. Rebuilding all of them after every change is
+too expensive for a large input. A Fenwick tree
+stores selected partial sums so that both point additions
+and prefix queries take logarithmic time. It does not
+store a complete prefix sum at every entry, and
+it does not update itself by magic. The block
+definitions explain exactly which entries must change.
+
+[External indices0..7; internal positions1..8. bit[i] covers[i-lowbit(i),i)
+in external zero-based boundaries.]
+Our public array uses zero-based indices, while the internal
+Fenwick array uses positions one through n. At internal
+position i, store the sum of the block ending
+at boundary i whose length is the lowest set
+bit of i. This block is the half-open original
+range i minus lowbit through i. For example,
+internal six has binary representation one-one-zero, whose lowest
+set bit has value two. Entry six therefore summarizes
+original indices four and five. Draw the boundary mapping
+before trying to remember the bit expression.
+
+[Block values:bit1=3,bit2=4,bit3=4,bit4=9,bit5=5,bit6=14,bit7=2,bit8=31.]
+For values three, one, four, one, five,
+nine, two, six, the blocks are easy
+to verify. Entry one holds three. Entry two
+holds three plus one, or four. Entry three
+holds just the value four. Entry four holds
+the first four values, totaling nine. Entry five
+holds five, entry six holds five plus nine,
+or fourteen, entry seven holds two, and entry
+eight holds the entire sum, thirty-one. These entries
+have different block lengths because their indices have different
+lowest set bits.
+
+[Prefix7 takesbit7[6,7)=2,bit6[4,6)=14,bit4[0,4)=9 ->25.]
+To sum the first seven values, start at boundary
+seven. Add entry seven, which covers the last
+one of those values. Subtract its lowbit, moving
+to six. Add entry six, covering the preceding
+two values. Subtract lowbit two, moving to four.
+Add entry four, covering the first four values,
+then move to zero and stop. The result is
+two plus fourteen plus nine, or twenty-five. The
+blocks do not overlap, and together they cover
+exactly the desired prefix. This is why we add
+them rather than merely hoping a few stored sums
+happen to combine correctly.
+
+[Each prefix step removes lowest set bit. At most one step per binarydigit.]
+Every query step removes the lowest set bit from
+the boundary index. The number of steps is at
+most the number of binary digits in n, so
+the query is logarithmic. The code expresses lowbit as
+i bitwise-and negative i on the contest platform's integer
+representation. All indices here are small positive integers,
+so negating them does not overflow. Do not start
+an update at internal zero: its lowbit is zero,
+and adding zero would never advance the loop. The
+external-to-internal plus one in the update routine prevents that bug.
+
+[Range[2,7)=prefix7-prefix2=25-4=21.]
+A half-open range sum from l through r is
+still prefix r minus prefix l. The Fenwick tree
+changes how we obtain each prefix, not the cancellation
+argument. For indices two through seven, subtract prefix
+two, which is four, from prefix seven,
+which is twenty-five. The answer is twenty-one. The
+prefix function accepts boundaries from zero through n,
+including the empty prefix and the whole array. Point
+updates instead accept element indices zero through n minus
+one. Mixing those two ranges causes many Fenwick bugs.
+
+[Point addition index4 +=3. Internal5->6->8; valuesbit5=8,bit6=17,bit8=34.]
+Now add three to the value at original index
+four, changing it from five to eight. Internally,
+start at position five. Update entry five, then
+add its lowbit one to reach six. Update
+entry six, then add its lowbit two to
+reach eight. Update entry eight, then move beyond
+n and stop. Those are exactly the stored blocks
+containing the changed element in this structure. Entry four
+does not contain original index four, so it stays
+nine. Entry seven also stays two. We change
+the summaries affected by the point, not every summary.
+
+[Requeryprefix7=bit7 2+bit6 17+bit4 9=28;range[2,7)=24.]
+After the update, the first-seven sum becomes two
+plus seventeen plus nine, or twenty-eight. The range
+two through seven becomes twenty-eight minus four, or
+twenty-four. It increased by three because the changed
+index lies inside that query. A range excluding index
+four should not change. This is a useful check
+when testing the structure: compare queries that include the
+updated point with queries that do not. A visualization
+should distinguish the changed original element from the multiple
+summary entries updated on its behalf.
+
+[Update ancestor rulei+=lowbit(i), blocks grow to next containing block.]
+The upward update rule moves to the next larger
+stored block containing the point. The binary index structure
+ensures the visited blocks grow through the relevant levels,
+so the number of update steps is logarithmic as
+well. The invariant of the data structure is that
+each entry equals the sum of its defined block.
+Initially that can be established by adding all input
+values. A point addition preserves it by adding the
+same delta exactly to the blocks containing that point.
+Once this invariant holds, the disjoint-prefix-block proof guarantees
+queries return the correct sums after any sequence of updates.
+
+[Addition versus assignment: current5,new8 ->delta3, notadd8.]
+The operation we implemented is add a delta, not
+assign a new value. To change a value from
+five to eight, add three. Adding eight would
+make thirteen instead. If a problem requests assignment,
+retain current values or query the point to compute
+new minus old before calling the addition routine. Negative
+deltas are allowed for sums, so a correction can
+decrease a value. Our tests compare many interleaved additions
+and queries with a plain mutable array, rather than
+testing only the initial construction and one convenient update.
+
+[Limits: prefix subtraction requires invertible sum; arbitrary minimum cannot
+be recovered by subtracting two prefix minima.]
+This version relies on addition and subtraction. You cannot
+replace plus with minimum everywhere and expect arbitrary range
+minimum queries to work by subtracting two prefix minima.
+A minimum does not contain enough information to undo
+an earlier prefix that way. Some specialized Fenwick variants
+support other workloads under additional restrictions, but our current
+contract is point addition and range sum. Keep that
+contract attached to the implementation rather than describing every
+binary-indexed structure as a universal replacement for a segment tree.
+
+[Cost O(logn) operations,O(n) storage; initializationhereO(nlogn).]
+The tree uses linear storage. Each update and prefix
+query is logarithmic; a range query performs two prefix
+queries. Our straightforward initialization adds each input value,
+so it costs order n log n. A linear-time
+construction is possible, but we are not relying on
+it in this code. Long long stores the block
+sums and deltas because accumulated values can exceed int.
+The array indices can remain int under our stated
+size bound. Type choices follow what each field represents.
+
+[Transfer: add-2 atindex0; which blocks1,2,4,8; effectonrange[2,7)none.]
+Pause and subtract two from original index zero.
+Which internal entries change? They are one, two,
+four and eight. What happens to the range
+two through seven? Nothing, because it excludes index
+zero. Both prefix seven and prefix two decrease
+by two, and their difference stays the same.
+This transfer question connects the block-update trace with the
+cancellation proof instead of treating them as separate tricks.
+If you can explain both views, the compact loops
+in the implementation have a meaning you can reconstruct.

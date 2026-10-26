@@ -1,0 +1,7 @@
+{
+  "cases": 104,
+  "queries": 3006,
+  "oracle": "direct Python slice counts",
+  "seed": 304,
+  "passed": true
+}

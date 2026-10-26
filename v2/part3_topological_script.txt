@@ -1,0 +1,74 @@
+PART 3 INTRODUCTION — DEPENDENCIES BEFORE DEPENDENTS
+Status: introduction with trace and runnable companion, not advanced DAG mastery.
+Program topological_order.cpp uses Kahn's algorithm.
+
+[Setup tasks0..4. Dependencies0->2,1->2,2->3,1->4.]
+Rohail's volunteers cannot perform every setup task immediately. Tasks
+zero and one must finish before task two; two precedes three;
+one also precedes four. These directed edges represent prerequisites,
+not routes people walk along. We want an order in which every
+prerequisite appears before the task that depends on it. Such an
+order is called a topological order. There may be several valid
+orders, and that flexibility is useful rather than a sign that
+the problem is underspecified.
+
+[Indegrees0,0,2,1,1. Ready queue[0,1].]
+Count each vertex's incoming edges. Initially tasks zero and one
+have no prerequisites, so they are ready. Put them in a
+queue. Remove zero, append it to the answer, and remove
+its outgoing prerequisite edge to two. Two's remaining incoming count
+drops from two to one, so it is not ready yet.
+An incoming count means unprocessed prerequisites, not how many times
+we have seen the task mentioned in the narration.
+
+[Remove1 -> indegree2=0,4=0; enqueue2,4. Then2 releases3.]
+Next process task one. Its edges release two and four,
+whose counts now become zero. Enqueue both. Processing two then
+releases three. One resulting order is zero, one, two,
+four, three. Check every edge against that order. Four
+does not need to wait for three because there is no
+dependency between them. Adding imaginary dependencies makes a schedule
+less flexible and can hide what the graph actually says.
+
+[Invariant: every selected task has no remaining prerequisites.]
+Why is it safe to choose a zero-incoming-count vertex? All
+of its prerequisites have already been removed, so appending it
+cannot violate a remaining prerequisite edge. In a finite directed
+acyclic graph, at least one such vertex exists: if every
+vertex had an incoming edge, following incoming predecessors indefinitely
+would eventually repeat a vertex and reveal a directed cycle.
+Removing a ready vertex leaves another acyclic graph, so the
+process can continue until every task is ordered.
+
+[Add edge3->1. Cycle1->2->3->1. Task4 blocked downstream but not on cycle.]
+Now add a dependency from three back to one. The cycle
+one, two, three, one makes a valid ordering impossible:
+each task requires another to come first. If the ready
+queue empties before all vertices are processed, report a cycle
+and no complete topological order. Be precise about the leftovers.
+Task four may also remain blocked even though it is not
+on the cycle itself; it depends on a task trapped by
+the cycle. Unprocessed does not mean every remaining vertex lies
+on a cycle. Finding exact cycle components requires additional reasoning.
+
+[DP connection: evaluate states in any topological dependency order.]
+This connects directly to dynamic programming. Our coin table had
+dependencies from smaller amounts to larger amounts, so increasing amount
+was already a convenient topological order. A more general acyclic
+dependency graph may require an explicit ordering before evaluating states.
+The direction must match the meaning of a dependency: if a
+state needs another state's answer, compute the needed answer first.
+Drawing arrows without explaining whether they mean needs or enables
+can reverse the intended evaluation order.
+
+[Cost and transfer: count every edge once, check order not exact tie choices.]
+Kahn's algorithm processes every vertex once and decrements a count
+once per directed edge, taking order n plus m time and
+space with adjacency lists. A self-loop correctly prevents its task
+from becoming ready. Duplicate edges are counted and removed consistently.
+For a transfer exercise, remove task one's edge to task four.
+Four is now ready at the beginning, so it can appear
+earlier without violating anything. Our small-case test oracle enumerates
+all vertex permutations to determine whether any valid order exists,
+and checks every returned order against every edge. It does not
+require our particular queue tie order.

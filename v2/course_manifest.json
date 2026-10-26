@@ -1,0 +1,71 @@
+{
+  "title": "Rohail's School Music Night: USACO Foundations and Beyond",
+  "production_status": "Full narration paused pending approval of slower Voice A storytelling delivery",
+  "provisional_words_per_minute": 117.219821642,
+  "part_duration_target_seconds": 3600,
+  "part_duration_tolerance_seconds": 180,
+  "voice_identity": "af_heart",
+  "delivery_candidate": "recast/storytelling_a.py",
+  "parts": [
+    {
+      "number": 1,
+      "title": "C++ execution and Bronze problem solving",
+      "scripts": [
+        "part1_foundations_script.txt",
+        "part1_loop_trace_script.txt",
+        "part1_functions_cost_script.txt",
+        "part1_casework_script.txt",
+        "part1_backtracking_script.txt"
+      ],
+      "missing_drafts": []
+    },
+    {
+      "number": 2,
+      "title": "Avoid repeated work",
+      "scripts": [
+        "part2_sorting_script.txt",
+        "part2_prefix_script.txt",
+        "part2_ranges_script.txt",
+        "part2_two_pointers_script.txt",
+        "part2_binary_search_script.txt",
+        "part2_greedy_script.txt",
+        "part2_transfer_script.txt"
+      ],
+      "missing_drafts": []
+    },
+    {
+      "number": 3,
+      "title": "Graphs and dynamic programming",
+      "scripts": [
+        "part3_graph_models_script.txt",
+        "part3_bfs_script.txt",
+        "part3_parity_script.txt",
+        "part3_functional_graph_script.txt",
+        "part3_dynamic_programming_script.txt",
+        "part3_topological_script.txt"
+      ],
+      "missing_drafts": []
+    },
+    {
+      "number": 4,
+      "title": "Gold foundations and an advanced roadmap",
+      "scripts": [
+        "part4_knapsack_script.txt",
+        "part4_dijkstra_script.txt",
+        "part4_dsu_mst_script.txt",
+        "part4_fenwick_script.txt",
+        "part4_segment_sparse_script.txt",
+        "part4_debug_clinic_script.txt",
+        "part4_advanced_roadmap_script.txt",
+        "part4_practice_script.txt"
+      ],
+      "missing_drafts": []
+    }
+  ],
+  "limits": [
+    "Word-count estimates are not measured lesson audio durations.",
+    "Complete first drafts still require editorial, code-to-visual and learner review.",
+    "Advanced introductions and roadmap items do not establish implementation mastery.",
+    "Independent coding practice occurs through learner-controlled pauses outside delivered runtime."
+  ]
+}

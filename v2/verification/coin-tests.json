@@ -1,0 +1,6 @@
+{
+  "cases": 107,
+  "passed": true,
+  "seed": 610,
+  "oracle": "exhaustive denomination multiplicities; independent boundary formula"
+}

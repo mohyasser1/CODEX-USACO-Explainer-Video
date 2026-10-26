@@ -1,0 +1,195 @@
+PART 3 DRAFT — DYNAMIC PROGRAMMING STARTS WITH A SENTENCE
+Status: original narration draft; timing pending. Complete program:
+minimum_coins.cpp. Unlimited positive denominations, exact target, minimum count.
+
+[Rohail designs a fictional token exchange for the music night. Token values
+1,3,4; exact credit6; minimize number of tokens. Unlimited stock in this model.]
+Rohail is testing a token-exchange program for the school music night. For
+this exercise, token values are one, three and four, and there is unlimited
+stock of each. We need to make exactly six credits using as few tokens
+as possible. These are invented denominations chosen to expose a useful
+mistake, not a claim about a real payment system. The objective is minimum
+token count, not minimum value, maximum value or number of combinations.
+Before writing a recurrence, finish the sentence describing what answer
+the program must produce. Dynamic programming becomes confusing very quickly
+when we change the question halfway through the table.
+
+[Largest-first choice4 leaves2, then1,1: three tokens. Alternative3,3: two.]
+Rohail first tries the largest token that fits. Four leaves two credits,
+so he adds one and one, using three tokens. Maya notices that two
+three-credit tokens make six with only two tokens. Largest-first greedy
+therefore fails for these denominations. This does not prove greedy algorithms
+are bad; it proves this particular choice rule is not justified for this
+contract. Some currency systems have additional structure that makes certain
+greedy rules work. Our input can contain arbitrary positive denominations,
+so a successful everyday habit is not a correctness proof.
+
+[Recursion tree: remaining6 branches to5,3,2. Path6->5->4->3 reaches3 again.]
+One complete approach tries every possible next token and solves the remaining
+amount. From six, choosing one leaves five, choosing three leaves three,
+and choosing four leaves two. We could recursively explore these possibilities.
+But look at the repeated state three. We reach it directly from six
+by choosing three, and also along the chain six, five, four, three
+by repeatedly choosing one. The remaining amount and available denominations
+are identical. Solving that same remaining problem again does not provide
+new information. Work, work, work: the same little subtree keeps asking
+for another shift. Repetition in a song can be the point, but this
+search can reuse an answer it has already earned.
+
+[State definition in plain language before any formula.]
+Define dp of x as the minimum number of tokens needed to make exactly
+x credits, using unlimited copies of the given denominations. This sentence
+is the most important line in the lesson. The amount alone is sufficient
+because every state has access to the same unlimited token types. If we
+had a limited stock or could only use later items, the remaining amount
+alone might not describe the whole subproblem. Two calls with the same
+amount but different allowed choices would not necessarily have the same
+answer. Memoization is safe when the complete meaningful state matches,
+not merely when two function arguments happen to look similar.
+
+[Base dp[0]=0. Other cells marked unreachable, not zero.]
+The base case is dp zero equals zero: no tokens are needed to make
+zero credits. Zero is a real answer, so we cannot use it to mean
+unknown or impossible. For other amounts, begin with an unreachable marker.
+Our implementation uses target plus one as a sentinel. Since every denomination
+is a positive integer, any reachable amount no larger than target can
+be formed with at most target tokens in a minimum solution. The sentinel
+is therefore larger than every legitimate answer. The exact sentinel choice
+comes from bounds, not from typing a large-looking number and hoping it
+behaves like mathematical infinity.
+
+[Consider the LAST token c. Remaining amount x-c, then add one token.]
+To compute dp of x, consider which token could be last. If its value
+is c, the other tokens must make exactly x minus c. If that amount
+is reachable, the candidate count is dp of x minus c, plus one
+for the last token. Try every denomination no larger than x and take
+the minimum candidate. If none is reachable, x remains unreachable.
+We use the last-token viewpoint to make the recurrence easy to justify;
+the program is not assigning a special physical meaning to which token
+you place on the desk last.
+
+[Proof in two directions: every candidate constructs a solution; every
+optimal solution has a last token whose remainder cannot need more than it uses.]
+Every candidate is valid because it combines a valid smaller solution with
+one allowed token. So the minimum of those candidates cannot invent a
+solution with an impossibly low count. Conversely, take an optimal solution
+for amount x and remove one of its tokens, of value c. The remainder
+makes x minus c. If a better solution existed for that remainder, we
+could substitute it and improve the supposedly optimal solution for x.
+Therefore an optimal solution is represented by one of our candidate
+transitions. The recurrence considers all possible last denominations and
+chooses the best. That is optimal substructure stated as an argument,
+not used as a mysterious phrase that replaces the argument.
+
+[Dependency arrows x -> x-c all point to smaller nonnegative amounts.]
+Because all token values are positive, every dependency goes to a smaller
+amount. We can fill the table from zero upward, knowing that a cell's
+dependencies are already solved. This is bottom-up dynamic programming.
+Started from the bottom, now we're here. Our starting point is the
+base case, but bottom-up means dependency order; it does not require
+the smallest answer to sit at the bottom of the screen. If zero-value or negative-value tokens
+were allowed, these dependencies would not have the same strictly decreasing
+structure. That would be a different problem requiring fresh reasoning.
+Our program rejects those values under its stated contract.
+
+[Table columns0..6. Compute dp1 from dp0+1; dp2 from dp1+1.]
+Now fill the actual table. Amount zero is zero tokens. For amount one,
+only denomination one fits, and dp zero plus one gives one token.
+For amount two, only one fits again, and dp one plus one gives
+two tokens. The row begins zero, one, two. Each table entry answers
+an exact-amount question. It does not mean the best result up to that
+amount. Confusing exact amount with at-most amount changes the state and
+can silently produce the wrong recurrence.
+
+[Amount3 candidates:1+dp2=3;3+dp0 gives count1. dp3=1.]
+At amount three, choosing a last token of one gives dp two plus
+one, or three tokens. Choosing a last token of three gives dp zero
+plus one, or one token. Four does not fit. Take one, so dp
+three equals one. We are comparing counts, not adding denomination values
+to counts. The three-credit token contributes one token to the objective.
+Keeping units visible is a good debugging habit: an amount and a token
+count may both be integers, but they represent different quantities.
+
+[Amount4 candidates counts2,2,1 ->dp4=1; amount5 counts2,3,2 ->dp5=2.]
+For amount four, the last-token candidates have counts two, two and
+one. The four-credit token alone wins, so dp four is one. For
+amount five, the candidates are dp four plus one, dp two plus
+one, and dp one plus one. That is two, three and two.
+The minimum is two. There are tied ways to reach that count, such
+as one plus four and four plus one. Since our objective is the
+minimum count, either corresponding reconstruction is acceptable. We are
+not counting orderings in this problem.
+
+[Amount6 candidates:1+dp5=3;1+dp3=2;1+dp2=3. Highlight3+3 solution.]
+At amount six, using a final one gives three tokens. Using a final
+three gives two tokens. Using a final four gives three tokens. The
+minimum is two, exactly the three-plus-three solution Maya noticed. The
+completed row is zero, one, two, one, one, two, two. This
+table is not required to increase from left to right. Amount three
+needs fewer tokens than amount two because a new denomination fits exactly.
+A table that looks irregular is not automatically wrong; compare it
+with the state definition rather than with an imagined visual pattern.
+
+[Reconstruction array last[6]=3; remaining6->3->0.]
+To recover one actual solution, record the chosen last token whenever a
+candidate improves a cell. At amount six, the stored token is three.
+Subtract it, leaving three. The stored token at amount three is also
+three. Subtract again and reach zero. The reconstructed choice contains
+two tokens with total value six. Each subtraction decreases the remaining
+amount because denominations are positive, so reconstruction terminates.
+If the target is unreachable, do not follow missing predecessor information.
+Report impossibility first. If the target is zero, the correct reconstruction
+contains no tokens, which is different from being impossible.
+
+[Counterexample: denominations4,6 target5; unreachable cells stay marked.]
+Try denominations four and six with target five. Amount four is reachable
+with one token, but amount five has no valid candidate: subtracting four
+leaves one, which is unreachable, and six is too large. The answer
+is impossible. Returning zero tokens here would be wrong because zero
+tokens make amount zero, not five. Our code explicitly checks whether
+a predecessor is reachable before considering its count. This habit also
+prevents dangerous arithmetic with very large infinity sentinels in other
+dynamic programs, where adding to a maximum integer could overflow.
+
+[Top-down memoized tree compared with bottom-up table; same state meaning.]
+We could instead keep the recursive formulation and cache each amount's
+answer after computing it. That is top-down memoization. It explores the
+states requested by the recursion, whereas our bottom-up version visits
+amounts in a known dependency order. Both can implement the same recurrence.
+Top-down needs a distinct uncomputed marker if impossible is also a
+possible computed result. It can also have deep recursion for a large
+target with denomination one. Bottom-up avoids that call-stack depth here.
+Choose the evaluation method separately from the mathematical state; changing
+one does not excuse forgetting the other.
+
+[Cost display: target+1 states; at most n denominations per state.]
+There are target plus one states, and each nonzero amount considers n
+denominations. Time is order n times target, and the table plus reconstruction
+information use order target space. The numeric size of target matters.
+A target of a trillion does not become practical merely because its
+decimal representation occupies a short line of input. This method is
+appropriate only when the given target bound makes the table and work
+reasonable. Our teaching program allows at most one hundred denominations
+and target one hundred thousand; we still assess the resulting operation
+count rather than announcing that all dynamic programming is automatically fast.
+
+[Transfer: denominations2,5 target7, then target3; learner states recurrence
+and predicts outputs before the separate answer scene.]
+Pause and solve denominations two and five for target seven. State the
+answer in tokens and give one reconstruction. Then change the target
+to three. Finally, explain why this exact recurrence cannot automatically
+solve the case where each listed token is available only once. Identify
+which information the state would be missing, rather than merely saying
+that limited supply is harder.
+
+[Answer:7 ->two tokens2,5;3 impossible; limited supply needs item availability.]
+Seven needs two tokens, two and five. Three is unreachable. With limited
+supply, the remaining amount alone does not reveal which tokens have
+already been used. The next part will add an item index to the
+state and derive zero-one knapsack, including why loop direction matters
+when compressing storage. Our test oracle for the current unlimited problem
+enumerates possible multiplicities of each denomination on small targets.
+It checks totals and counts directly, without reusing the DP recurrence.
+We also validate that reconstructed tokens are allowed, sum to the target
+and match the reported minimum count. A correct table value and a
+correct reconstructed witness are two related claims worth checking separately.

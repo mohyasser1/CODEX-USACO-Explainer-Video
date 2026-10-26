@@ -1,0 +1,199 @@
+PART 1 DRAFT — FOLLOW THE MONEY, THEN PROVE THE LOOP
+Status: active Rohail lesson replacing the superseded technical pilot text.
+Complete program signed_total.cpp. Numerical example stays3,-2,5,-1 throughout.
+
+[Rohail and Maya at the ticket desk. Input4 followed by3,-2,5,-1.
+Program listing includes input reading, not only the computation excerpt.]
+Rohail now understands why counting only incoming payments gave the wrong
+balance. A refund must reduce the total. He and Maya agree on
+the exact task before changing the program: read a count, followed
+by that many signed transactions, and print their net sum. The
+count may be zero, and each transaction may be positive, negative
+or zero. Our running example has four transactions: three, negative
+two, five and negative one. We will keep these same values
+in the input, code trace and explanation, so every changing
+box on screen has a clear meaning.
+
+[Read n=4; create vector of4 elements; input loop fills each slot.
+Show data-reading code during narration about input.]
+The first input value is the count, not a transaction to
+include in the sum. Reading four into n tells the program
+how many values to read next. The vector creates four element
+slots, and the input loop fills them with the transactions.
+Only after those reads succeed do we begin the calculation.
+Declaring a vector does not read the values automatically. That
+is why the input-reading statement belongs on the screen when
+we explain it. The computation loop will inspect these stored
+values without changing them.
+
+[Initialize total=0, then i=0. Highlight the actual statements in order.]
+Create total as a long long and initialize it to zero.
+Then the for loop initializes its index i to zero. The
+index describes a position in the vector; total describes money.
+They can have different values and change for different reasons.
+Assignment means evaluating an expression and storing its result.
+The statement total plus-equals a at i reads the old total
+and the selected element, adds them, and stores the new
+total. It does not move the index. The increment in
+the loop header handles that separate step.
+
+[Condition i<n:0<4 true. Body selects a[0]=3. Show0+3 ->3.
+Only after assignment, animate increment i0->1 and return to condition.]
+At the first condition check, zero is less than four,
+so the loop enters its body. Index zero selects the
+value three. Adding it to the old total zero gives
+three, which becomes the stored total. Then the increment
+moves i from zero to one. Pause the animation between
+the assignment and the increment: for that brief moment total
+has changed but i has not. A useful trace respects
+the order of actual statements instead of updating every variable
+at once because that makes the animation look smoother.
+
+[Condition1<4 true; old total3, a[1]=-2; store1; then i2.]
+The next check asks whether one is less than four.
+It is, so index one selects the refund, negative
+two. Three plus negative two gives one. Store one
+in total, then advance i to two. The refund
+was not skipped or converted to a positive amount. Its
+sign is part of the data's meaning. The earlier incorrect
+program would have left the balance at three by ignoring
+this transaction. Showing both results makes the failure concrete:
+the difference comes from a specific discarded value, not
+from a mysterious disagreement with the judge.
+
+[Condition2<4 true;1+5=6; i3. Then condition3<4 true;6-1=5; i4.]
+At index two, the value five raises the total
+from one to six. The index advances to three.
+The last value is negative one, so the total
+falls from six to five. After that assignment, increment
+i to four. The next condition checks four less
+than four, which is false. The loop stops without
+reading a at four. Only indices zero through three
+are valid in this vector. The code now prints
+five and a newline, matching the balance Maya counted.
+The loop is finished, so execution reaches the output
+statement. Only the balance is printed; the index is
+not part of the requested answer.
+
+[Show a wrong condition i<=n; extra attempted access a[4] crosses boundary.]
+If we replace the condition with less than or equal,
+the program attempts an extra iteration at index four.
+There is no fifth element to read. The resulting
+out-of-bounds access is undefined behavior, so we cannot depend
+on it producing a particular wrong number or a convenient
+crash. One more time sounds like a tempting encore,
+but the index range decides whether that extra iteration
+is allowed. We can identify this mistake from the contract
+before running it. Tests can expose the error, but
+the valid-index argument explains why the condition is wrong.
+
+[Proof notation in words: before each condition check, total equals the
+sum of the first i elements. Do not display final numeric state throughout.]
+A complete numerical trace checks one execution. To explain
+why the loop works for every allowed input, state
+an invariant: immediately before each condition check, total
+equals the sum of the first i elements. The
+timing in that sentence is deliberate. During the body,
+the total changes before i changes, so we do
+not claim the same statement holds between every pair
+of instructions. An invariant belongs at a specified program
+point. We will use initialization, preservation and termination
+to connect that statement to the required answer.
+
+[Proof initialization: i0,total0, no processed elements.]
+Initially, i is zero and total is zero.
+The first zero elements form an empty prefix, whose
+sum is zero. The invariant therefore holds before the
+first condition check. This is more than a ritual
+phrase: if total had started at one, the
+statement would already be false. Initialization is part of
+the algorithm. A later correct-looking update cannot undo a
+wrong starting assumption unless the algorithm explicitly accounts for it.
+
+[Proof preservation: symbolic first i elements plus a[i]; then increase i.
+Label symbolic state explicitly; do not leave i4,total5 on screen.]
+Assume the invariant holds and i is less than
+n. The body adds element i, extending the
+sum from the first i elements to the first
+i plus one elements. The increment then increases i
+by one. At the next condition check, total
+again equals the sum of the first i elements,
+using the updated index. That proves preservation. It
+also explains why the assignment and index increment must
+be traced separately: both steps are needed to restore
+the statement at the next check.
+
+[Termination: i reaches n; total covers all n elements.]
+The index starts at zero and increases by one
+on every completed iteration, so it eventually reaches n.
+At that point the condition fails. The invariant then
+says total is the sum of the first n
+elements, which means all the transactions. This gives
+the requested result. We have established both that the
+loop stops and that its ending state means the
+right thing. A loop that maintains a useful property
+forever without terminating would still not print the required answer.
+
+[Empty input LIST: show input0, a=[],i0,total0. Condition0<0 false.
+Distinguish this from a missing input stream.]
+Now test an empty list. The input contains the
+count zero, so the vector has no elements.
+The initialized total is zero and the first condition,
+zero less than zero, is false. The program
+prints zero without entering the body. There is no valid element
+index to read, but there is still a valid
+answer. The program never tries to access element zero. Also distinguish an empty
+list from missing input. A file containing no readable
+count violates this program's input contract, whereas a valid
+count of zero explicitly requests the empty-list case.
+
+[Bounds card: n<=100000,|a[i]|<=10^9; every prefix magnitude<=10^14.]
+The input bounds justify the numeric type. With at
+most one hundred thousand transactions, each of magnitude at
+most one billion, every prefix sum has magnitude at
+most one hundred trillion. Long long can represent that.
+Because total is already long long, adding an int
+element uses the wider arithmetic type. Assigning an already
+overflowed int expression into a wider destination would not
+repair it. The bounds argument covers intermediate prefix totals,
+not only the final answer: large positive and negative
+values can cancel at the end while still creating
+large intermediate results that must fit.
+
+[Cost: n additions; input vector n elements; constant loop-only extra state.]
+The loop performs one addition per transaction, giving linear
+time. Storing the input vector uses linear space, while
+the loop's index and total use constant extra space.
+If only the sum is required, we could read
+and add each transaction immediately, without storing the full
+vector. That streaming version uses constant extra storage for
+the calculation. We keep the vector in this lesson
+to make execution visible, and we will reuse stored
+arrays for later problems that need multiple passes. A
+representation can be pedagogically helpful without being the only
+valid implementation.
+
+[Transfer[-4,0,7,-3]; learner-controlled pause; reveal separate state table.]
+Pause and trace negative four, zero, seven and
+negative three. Record the index and total before every
+condition check, including the final false check. The
+states are zero with zero, one with negative four,
+two with negative four, three with three, and
+four with zero. The zero transaction changes the processed
+prefix length even though it does not change the total.
+That is another reason the index and balance are different
+kinds of state. A positive-only sum would incorrectly give
+seven on this input instead of zero.
+
+[Extension: count refunds too. Two invariant sentences, two result meanings.]
+For a final extension, also count how many transactions
+are negative. Before writing the extra statement, describe
+the new variable: it counts negative values among the
+first i elements. Initialize it to zero and increment
+it exactly when the current value is negative. The
+original total invariant and the new count invariant can
+hold together. On our original input, the final
+sum is five and the refund count is two.
+This is how a clear state definition makes a
+small program easier to extend without losing track of
+what its variables are supposed to mean.

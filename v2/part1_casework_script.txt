@@ -10,7 +10,7 @@ and every guess. We do not know where the pass started. Find the largest score
 that any starting position could produce. A correct guess earns one point.
 The pass does not move because Sam points at it. Only a swap moves it.
 That distinction is our first defense against accidentally programming a
-different game. This is an original festival framing of the simulation pattern
+different game. This is an original school-event framing of the simulation pattern
 you will practice in the official Bronze problem Shell Game. Read that original
 statement separately for its exact format and historical file names.
 
@@ -31,7 +31,7 @@ This is exhaustive casework: divide the possibilities into a finite collection,
 solve every case, and combine the results in the way the question asks. Here
 the question asks for the largest achievable score, so combine by maximum.
 Do not sum the scores: the pass started in one place, not three places at once.
-Our manager calls three simultaneous backstage passes a multiverse promotion.
+Sam jokingly calls three simultaneous backstage passes a multiverse promotion.
 Our contract calls it a different problem.
 
 [Event table: (1,2,1), (2,3,3), (1,3,1). Track start=2.]
@@ -49,9 +49,8 @@ moves the pass to two; guessing one is wrong. Second swap moves the pass from
 two to three; guessing three is correct, giving score one. Third swap moves
 it from three to one; guessing one is correct, giving score two. The key word
 was reset. Reusing the previous score would blend different hypothetical worlds.
-Back, reboot: this is our classroom mnemonic for resetting state between cases,
-not a claim about the meaning of the song reference. The code must actually
-perform the reset. A soundtrack cannot initialize your variables.
+Back, reboot. Rohail starts this hypothetical case with fresh position and
+score values. The code must actually perform the reset. A soundtrack cannot initialize your variables.
 
 [Third column start=3; final scores start1=2, start2=1, start3=0.]
 For start three, the first swap leaves the pass at three and the guess one

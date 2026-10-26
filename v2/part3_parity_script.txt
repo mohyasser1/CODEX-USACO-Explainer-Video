@@ -1,0 +1,155 @@
+PART 3 DRAFT — SAME, DIFFERENT, OR IMPOSSIBLE?
+Status: original narration draft; voice and timing pending. Program:
+parity_constraints.cpp. Official follow-up: The Great Revegetation, Silver.
+
+[Four fictional rehearsal groups, numbered1..4. Two available slots0 and1.
+Rule1: groups1,2 same slot. Rule2: groups2,3 different slots. Group4 independent.]
+Rohail and Maya need to assign rehearsal groups to one of two time slots.
+Some groups must rehearse at the same time because they share a performance.
+Other pairs need different slots because they use the same equipment. In
+our simplified problem there are no room-capacity limits or other scheduling
+rules. We are asking whether these same-or-different constraints can all hold,
+and how many assignments satisfy them. State that contract clearly: a real
+school timetable may require more information than this two-choice model.
+We are studying one precise piece of the scheduling problem.
+
+[Graph vertices are groups; edges labeled S or D, with text as well as color.]
+Represent each group by a vertex. An S edge says its endpoints need the
+same slot. A D edge says different slots. These edges are undirected because
+the relationship is symmetric. If group one must match group two, group two
+must match group one. A connected component is a collection joined by paths
+of constraints. It is not necessarily a clique: a clique would require an
+edge between every pair. Sam calls the connected rehearsal group a clique,
+but Maya asks him to check whether every pair actually has an edge.
+Our path one to two to three is connected without requiring a direct
+edge from one to three.
+
+[Slot colors are bits0,1. Truth table: p0 keeps c; p1 flips c.]
+Use zero and one to represent the two slots. For an S edge, the neighbor
+must have the same bit. For a D edge, it must have the opposite bit.
+We can encode S as parity zero and D as parity one. The expression
+color of u exclusive-or parity gives the required color of v. On these
+single-bit values, exclusive-or zero preserves the bit, and exclusive-or one
+flips it. Verify all four combinations: zero with zero gives zero; one
+with zero gives one; zero with one gives one; one with one gives zero.
+The compact operator is convenient, but the same-or-flip rule is the idea.
+
+[Start component at group1, assign0; queue[1]. Propagate S to2 ->0.]
+Choose group one as a root and temporarily assign slot zero. This is a
+choice of orientation for its entire connected component. Put it in the
+queue. Its S edge to group two requires group two also to have slot
+zero, so assign that and enqueue group two. When group two is processed,
+its D edge to group three requires slot one. Assign one and enqueue
+three. The component's colors are now zero, zero, one. Every step was
+forced once we chose the root's color. We did not need to try every
+possible slot assignment independently.
+
+[Reverse root choice:1,1,0. Flip all component colors together.]
+What if we had started group one in slot one? Then group two would
+also be one, and group three would be zero. That is another valid
+assignment. Flipping every bit in a component preserves whether two endpoints
+are the same or different. Flipping only one arbitrary vertex generally
+does not. Maya compares it to moving an entire rehearsal arrangement to
+the other time slot: its internal relationships stay intact. The analogy
+is useful because the code also treats the component as a connected set
+of constraints, not a bag of independent choices.
+
+[Group4 isolated. Component counter goes from1 to2; its root can be0 or1.]
+Group four has no constraints. It forms a component by itself, so either
+slot is allowed. Combine its two choices with the two choices for groups
+one through three. There are four valid assignments. This multiplication is
+not a guess based on the picture. No edge connects the two components,
+so a choice in one cannot constrain a choice in the other. Independent
+choices multiply. For k consistent components, the total is two to the
+k. That includes isolated vertices, which are easy to forget if you only
+look at the edge list.
+
+[Add S edge1-3. Existing colors0,0,1; new edge demands0==1.]
+Now add a same-slot rule between groups one and three. Our propagation
+already gave them different slots. When we inspect this new edge, it
+requires the opposite of the existing assignment. That is a contradiction.
+Could choosing the other root color fix it? No: flipping all colors
+still leaves one and three different. The two-edge path already forces
+one and three to differ, while the new edge demands that they match.
+Both requirements cannot be true. Report zero assignments rather than
+quietly changing a previously assigned color and breaking an earlier edge.
+
+[Wrong algorithm recolors3 to0 to satisfy new edge, breaking D edge2-3.]
+This is a useful counterexample to an appealing wrong strategy: whenever
+an edge complains, repaint its neighbor. Repainting group three from one
+to zero satisfies the new same edge but violates the different edge from
+group two. A local repair can undo a previous requirement. Our traversal
+instead distinguishes an undiscovered vertex, which can be assigned, from
+an already assigned vertex, which must be checked for consistency. A conflict
+means the model is impossible, not that the program should keep repainting
+until the screen looks calm.
+
+[Code branch: uncolored -> assign/enqueue; already colored -> compare.]
+The color array starts at negative one, our unassigned marker. For every
+vertex in the outer loop, skip it if already assigned. Otherwise start
+a new component, choose root color zero and run a queue traversal. Along
+an edge, compute the required neighbor color. If the neighbor is unassigned,
+store it and enqueue the neighbor. If it is already assigned, compare
+with the required color. A mismatch ends the computation with zero. This
+works even if a component has cycles, because assigned colors are never
+replaced. Each vertex is enqueued only on its first assignment.
+
+[Proof: path forces relative parity; all edges checked; roots are independent.]
+Why is this complete? In any satisfying assignment, fixing one root's bit
+forces the color of every reachable vertex by following a path. Our
+traversal assigns exactly these forced relative colors. If an edge conflicts,
+there cannot be a satisfying assignment with that root color. Flipping
+the root flips the whole component and preserves the same conflict, so
+neither root choice works. If no conflict occurs, every examined edge is
+satisfied, giving a valid assignment. Connectedness makes every vertex reachable
+from the chosen root. There are exactly two assignments for that component,
+one for each root bit, and no other independent choices inside it.
+
+[Self-loops S and D, then parallel identical and contradictory edges.]
+Boundary cases help test the logic. A same-slot self-loop is harmless:
+a vertex is always the same as itself. A different-slot self-loop is
+impossible. Two identical edges do not create new choices, but a same
+edge and a different edge between the same endpoints contradict each other.
+Our implementation naturally checks these cases. We are not assuming a
+simple graph unless the contract says so. When solving an official problem,
+read its exact constraints; when designing a reusable routine, state the
+broader cases it handles rather than relying on a friendly sample.
+
+[Binary output:4=100;8=1000; two-to-k is1 followed by k zeroes.]
+The official transfer problem asks for the number of assignments in binary.
+That is convenient because two to the k is one followed by k zeroes.
+If there are two components, output one zero zero, representing four.
+If the constraints are inconsistent, output the single digit zero. Do not
+compute two to a very large k in a fixed-width integer and then try
+to print it. The result could overflow long before you convert it to
+a string. Constructing the binary representation directly follows from the
+mathematical form of the answer. This is another example of choosing a
+representation that makes correctness simpler.
+
+[Cost summary: O(n+m) traversal/storage; output lengthk+1.]
+Each vertex is assigned and processed once. Each undirected edge is stored
+and inspected in both directions, a constant factor. Traversal takes order
+n plus m time. The adjacency lists use order n plus m space, and
+colors and queue use order n extra space. The output length is k
+plus one, at most n plus one in a consistent nonempty graph. Writing
+those characters is part of the runtime too. Complexity analysis includes
+the required output; a huge answer representation does not print itself
+for free.
+
+[Transfer: triangle all D edges; then three-vertex path all D, plus isolated4.]
+Pause and test two examples. First, three groups form a triangle and every
+edge demands different slots. Can two slots satisfy it? Second, remove one
+edge to make a path, and add an isolated fourth group. How many assignments
+are possible now, and what binary string represents the answer? Draw the
+propagated colors before looking at the solution.
+
+[Answer triangle impossible; path0,1,0 plus isolated ->4 ->100.]
+The all-different triangle is impossible: after assigning zero, one, zero
+along two edges, the final edge demands that the two zeros differ. The
+path is consistent, with two choices for its component. The isolated group
+adds another factor of two, so there are four assignments, written one
+zero zero in binary. To verify our code, an independent test oracle
+enumerates all zero-one assignments on small graphs and checks every edge
+directly. That oracle does not perform our propagation or component counting.
+Its agreement with the implementation, together with the proof, gives us
+stronger evidence than a handful of examples chosen because they look easy.

@@ -2,18 +2,20 @@ PART 1 DRAFT — WHAT A PROGRAM DOES
 Status: original narration draft, not yet synthesized or timed. Bracketed
 directions describe visuals. This precedes the signed-total pilot lesson.
 
-[An imaginary festival poster falls over. Three backstage jobs appear:
-read the contract; model the state; justify the steps.]
-Rohail's festival has a problem. Her manager has booked one hundred thousand
-fans, but his ticket checker compares every fan with every other fan. The
-opening act has finished. The closing act has finished. A blade of grass has
-earned a doctorate. Sam is still comparing wristbands. We are going
-to replace his algorithm, but first we need to understand what an algorithm
-and a program actually are. An algorithm is a precise method for solving a
-problem. A program expresses a method in instructions a computer can execute.
-C plus plus is the language we will use to write those instructions. Being
-fluent in the syntax helps, but a fast program implementing the wrong method
-is still wrong. That is the theme of this tour.
+[School music-night planning board. Three jobs appear: read the contract;
+model the state; justify the steps.]
+Rohail is helping his classmates organize a school music night. He wants to
+make the ticket desk easier to run, so he starts writing small programs to
+check payments and keep the guest list organized. At first, a few dozen
+entries seem manageable. Then Maya asks what would happen if the same idea
+had to serve a much larger event. We will use large hypothetical inputs to
+stress-test their methods, not pretend their school has a hundred thousand
+guests. That is how a familiar project can lead to contest-sized questions.
+An algorithm is a precise method for solving a problem. A program expresses
+that method in instructions a computer can execute. C plus plus is our
+language for writing those instructions. Knowing its syntax helps, but a
+fast program implementing the wrong method is still wrong. Rohail will learn
+to explain what his code means before asking it to run faster.
 
 [Four video cards with prerequisite arrows, not rank promotion promises.]
 These four classes begin with execution and Bronze-style problem solving,
@@ -124,8 +126,7 @@ it is a bug waiting for an entrance cue.
 
 [Boolean light switch. Attribution: SICKO MODE — Travis Scott featuring Drake.
 Brief supplied hook, then a truth table with i<n.]
-Like a light: we are using that short supplied phrase as a classroom mnemonic
-for a Boolean condition. The light is on for true and off for false. With i
+Like a light: Rohail sketches a switch beside the Boolean condition. The light is on for true and off for false. With i
 equal to three and n equal to four, i less than n is true. With i equal to four,
 it is false. The comparison does not move i; it reports a Boolean result.
 An if statement executes its body when its condition is true. An optional
@@ -177,7 +178,6 @@ very different from what the indentation suggests. Braces show which statements
 belong together; indentation helps people see it. Use both. The condition i
 less than n visits indices zero through n minus one. Changing it to less than
 or equal would request one more iteration, but there is no element at index n.
-One more time is a catchy hook from the supplied One Dance text; in this
-classroom reinterpretation, the boundary check decides whether the encore
-is legal. We will now trace a complete signed-total example, including the
+One more time sounds like an encore, but the boundary check decides
+whether another iteration is legal. We will now trace a complete signed-total example, including the
 last false condition check, instead of trusting the rhythm of the loop.

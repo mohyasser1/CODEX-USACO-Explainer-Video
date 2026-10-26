@@ -1,0 +1,6 @@
+{
+  "cases": 103,
+  "passed": true,
+  "oracle": "swap booth identities and tally starting identity guesses",
+  "seed": 19
+}

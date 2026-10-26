@@ -4,9 +4,8 @@ Not yet synthesized or timed. Bracketed directions are not spoken.
 
 [A set-list audition splits into INCLUDE and EXCLUDE lanes. Brief attribution:
 In My Feelings — Drake. User-supplied excerpt; classroom reinterpretation.]
-They gotta make some choices. We are borrowing that supplied song phrase as
-a mnemonic, not explaining the song's meaning. Rohail's next problem really
-does require choices: each transaction is either included or excluded. Given
+They gotta make some choices. Rohail writes two options on the rehearsal
+board: include this item, or leave it out. In our next problem, each transaction is either included or excluded. Given
 a list of signed integers and a target, count how many subsets of indices
 have that target sum. A subset is a choice of positions, not an ordering.
 Selecting the first and third positions is the same subset whether you point

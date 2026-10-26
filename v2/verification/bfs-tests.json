@@ -1,0 +1,6 @@
+{
+  "cases": 103,
+  "passed": true,
+  "seed": 815,
+  "oracle": "Floyd-Warshall distances plus edge/path validation"
+}

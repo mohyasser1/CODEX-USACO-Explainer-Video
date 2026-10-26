@@ -1,0 +1,161 @@
+PART 2 DRAFT — TWO POINTERS NEED A DISCARD PROOF
+Status: narration draft; timing pending. Programs two_sum.cpp and
+nonnegative_window.cpp distinguish their different input assumptions.
+
+[Rohail pairs two distinct items to match a target. Sorted values1,2,4,7,11;
+target9; left at1, right at11. Original indices stay attached to values.]
+Rohail wants to find two different items whose values add to a target.
+Trying every pair would be correct, but it takes quadratic time.
+Can sorting help us rule out many pairs at once? Our first
+example is already sorted: one, two, four, seven, eleven,
+with target nine. Put a left pointer at the smallest value
+and a right pointer at the largest. It go right foot up, left foot slide.
+Rohail borrows the movement image for his two indices, but the comparison
+decides which one moves. A catchy direction is not a reason to discard
+a possible answer.
+
+[1+11=12>9. Cross out right endpoint11 only after its discard argument.]
+One plus eleven is twelve, which is too large. Why
+is it safe to discard eleven? The left value one
+is the smallest remaining possible partner. Pairing eleven with any
+other remaining value would make the sum at least as large.
+Therefore eleven cannot participate in a target-nine pair among these
+candidates. Move the right pointer left to seven. We
+have removed one endpoint and all its remaining pairs with
+a single argument, rather than checking those pairs individually.
+
+[1+7=8<9. Cross out left endpoint1. Then2+7=9.]
+Now one plus seven is eight, which is too small.
+Seven is the largest remaining partner for one, so every
+other remaining partner would produce an equal or smaller sum.
+One cannot work. Move the left pointer right to two.
+Two plus seven is nine, so we have found a
+pair. Each movement depended on sorted order. If the
+values were unsorted, neither endpoint would necessarily be the
+smallest or largest remaining value, and the same discard
+reasoning would fail.
+
+[Candidate region narrows; invariant: any still-possible solution lies between
+the pointers, unless a solution has already been returned.]
+The invariant is that every discarded endpoint has been proved unable
+to form a solution with the remaining candidates. Initially no
+endpoint has been discarded, so every pair is available.
+The too-small and too-large arguments preserve the claim. If
+the pointers meet, fewer than two distinct positions remain,
+so there is no pair left to test. Return no
+solution. If we find equality, the two pointed-to values
+give a valid pair directly. The proof explains both success
+and failure, rather than only explaining why the example
+happens to stop at the right place.
+
+[Condition left<right, not left<=right. Compare[4,4] and[4] for target8.]
+The two positions must be distinct. Two separate entries both
+holding four can make eight, but one entry holding four
+cannot be used twice. That is why the scan condition
+requires left strictly less than right. Duplicates are not
+automatically a problem; deleting them with a set can destroy
+a valid answer. When sorting changes positions, preserve each
+value's original index in a pair. The program can then
+report the original two positions, not their temporary positions
+in the sorted array. Read which form of answer the
+problem actually requests.
+
+[Code: promoted addition1LL*a[left].first+a[right].first.]
+Our code uses int values but a long long target
+and sum. Promote before addition, because two allowed values
+of one billion five hundred million add to three billion.
+Assigning an int addition into long long afterward would be
+too late on a usual thirty-two-bit int system. The
+test suite includes both positive and negative three-billion sums.
+Negative input values do not invalidate this sorted two-sum proof:
+it relies on ordering, not on all values being positive.
+Keep that fact separate from the different assumptions in the
+sliding-window technique we will introduce next.
+
+[Cost: pointers move inward at mostn-1 times; sorting precedes scan.]
+During the scan, every iteration either returns a pair
+or moves one pointer inward. There are at most a
+linear number of such movements. The scan therefore takes
+order n time, but sorting the initially unsorted input
+costs order n log n comparisons. The full program is
+order n log n, not order n. We store
+values and original indices in linear space; the scan
+itself uses constant additional state. If a problem already
+guarantees sorted input and we can use its positions directly,
+the sorting step may be unnecessary. Always analyze the
+program you actually run.
+
+[New contract: longest CONTIGUOUS interval with sum<=4, nonnegative values
+2,1,1,3,1. Do not sort this array.]
+A related two-pointer technique maintains a moving interval, often called
+a sliding window. Now Rohail wants the longest contiguous run
+of values whose sum is at most four. Our values
+are two, one, one, three, one, all
+nonnegative. We must preserve their original order: sorting would
+change which entries are contiguous. Let right extend the window
+and let left remove values when the sum becomes too
+large. This is a new contract and a new proof,
+not just the two-sum algorithm with a different variable name.
+
+[Window grows[0,1),[0,2),[0,3); sums2,3,4; best lengths1,2,3.]
+Add the first value two. The sum is two
+and the current length is one. Add the next one:
+sum three, length two. Add the next one:
+sum four, length three. All are within the
+limit, so the best length is now three. We
+track the best length separately from the current window length,
+because a later necessary shrink should not erase an earlier
+good answer. The current interval and the best result
+have different meanings, just as the loop index and
+running total did in Part One.
+
+[Add3 ->sum7. Remove2 ->5; remove1 ->4. Window[2,4),length2.
+Add final1 ->5; remove1 ->4. Window[3,5),length2. Best remains3.]
+Adding three makes the sum seven, so remove values
+from the left until the sum is at most four.
+Removing two leaves five, still too large. Removing
+the next one leaves four. The current window now
+contains one and three, with length two. After
+adding the final one, the sum becomes five, so
+remove the remaining left one and return to four.
+The best length stays three. Both pointers move only
+forward, so the total number of additions and removals
+is linear despite the nested-looking while loop.
+
+[Discard argument: with nonnegative values, extending right cannot reduce sum.
+For fixed right, removing left cannot increase it.]
+Why can we discard those left boundaries permanently? Once a
+window is too large, adding further nonnegative values cannot
+make that same left boundary valid again. For a
+fixed right boundary, removing values from the left cannot
+increase the sum. These monotonic facts justify the shrink
+rule. After shrinking, the retained window is the longest
+valid one ending at that right boundary. Taking the
+maximum over all right boundaries gives the overall answer.
+The positivity assumption is doing real work in this proof;
+it is not a decorative note beside the input format.
+
+[Counterexample[5,-2],limit3. Naive rule discards5 immediately, loses length2.]
+Allow negative values and the argument can break. With
+five followed by negative two and limit three, the
+whole length-two interval sums to three. But the simple
+window rule sees five first, removes it for being
+too large, and never recovers that left boundary.
+Adding the negative value would have repaired the sum.
+Our nonnegative-window program rejects negative inputs because they violate
+its contract. A different representation or algorithm is needed
+for that broader problem. Owning two pointers does not
+make every interval question a two-pointer problem.
+
+[Transfer: unsorted11,1,7,2,4 target9; then all-zero window with limit0.]
+Pause for two transfer questions. In the unsorted list
+eleven, one, seven, two, four, which
+original positions form target nine? Using zero-based indices, the
+answer is positions two and three, holding seven and
+two; either reporting order is acceptable. For three
+zeros with window limit zero, the whole length-three interval
+is valid. Zeros do not force a shrink. The
+tests verify two-sum against every pair of distinct positions
+and the window method against every subarray on small inputs,
+so they check the claims using independent enumeration rather
+than reproducing our pointer movement rules.

@@ -1,0 +1,7 @@
+{
+  "parity_cases": 245,
+  "subset_cases": 85,
+  "seed": 7139,
+  "passed": true,
+  "oracle": "enumeration of all binary colorings and all index masks"
+}
