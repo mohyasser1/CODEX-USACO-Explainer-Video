@@ -17,7 +17,7 @@ Drive folder: https://drive.google.com/drive/folders/1fhZpaAOOJ5lGtUVgKSvpJsr773
 
 Build sequence:
 1. Download Kokoro ONNX int8 model and voices from upstream model-files-v1.0 release.
-2. python production/narrate.py (resumes matching completed chapter audio)
+2. python production/narrate.py --workers 3 (resumes chapters and cached sentences)
 3. python production/render.py (resumes completed chapter videos)
 4. python production/build_workbook.py
 5. python production/assemble.py (after all chapters finish)

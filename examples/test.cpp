@@ -205,6 +205,60 @@ int main() {
   check(shipping({3, 2, 2, 4, 1, 4}, 3) == 6);
   check(min_coins({1, 3, 4}, 6) == 2);
   check(lis({3, 1, 2, 5, 4}) == 3);
+
+  // Exhaustive spanning-tree oracle on small weighted graphs, including
+  // negatives.
+  for (int rep = 0; rep < 60; ++rep) {
+    int n = 2 + rng() % 4;
+    std::vector<Edge> edges;
+    for (int u = 0; u < n; ++u)
+      for (int v = u + 1; v < n; ++v)
+        if (rng() % 3)
+          edges.push_back({u, v, int(rng() % 15) - 5});
+    ll best = INF;
+    for (int mask = 0; mask < (1 << edges.size()); ++mask) {
+      if (__builtin_popcount((unsigned)mask) != n - 1)
+        continue;
+      std::vector<std::vector<int>> chosen(n);
+      ll cost = 0;
+      for (int e = 0; e < (int)edges.size(); ++e)
+        if (mask >> e & 1) {
+          auto x = edges[e];
+          chosen[x.u].push_back(x.v);
+          chosen[x.v].push_back(x.u);
+          cost += x.w;
+        }
+      auto reach = bfs(chosen, 0);
+      if (std::find(reach.begin(), reach.end(), -1) == reach.end())
+        best = std::min(best, cost);
+    }
+    auto result = kruskal(n, edges);
+    check((result.second == n - 1) == (best != INF));
+    if (best != INF)
+      check(result.first == best);
+  }
+  // Unweighted BFS distances independently checked by all-pairs Floyd-Warshall.
+  for (int rep = 0; rep < 80; ++rep) {
+    int n = 1 + rng() % 12;
+    std::vector<std::vector<int>> g(n), dist(n, std::vector<int>(n, 1000));
+    for (int u = 0; u < n; ++u) {
+      dist[u][u] = 0;
+      for (int v = 0; v < n; ++v)
+        if (u != v && rng() % 5 == 0) {
+          g[u].push_back(v);
+          dist[u][v] = 1;
+        }
+    }
+    for (int k = 0; k < n; ++k)
+      for (int u = 0; u < n; ++u)
+        for (int v = 0; v < n; ++v)
+          dist[u][v] = std::min(dist[u][v], dist[u][k] + dist[k][v]);
+    for (int u = 0; u < n; ++u) {
+      auto actual = bfs(g, u);
+      for (int v = 0; v < n; ++v)
+        check(actual[v] == (dist[u][v] == 1000 ? -1 : dist[u][v]));
+    }
+  }
   std::cout << "PASS: " << checks
             << " deterministic and seeded differential assertions\n";
 }

@@ -116,10 +116,10 @@ def visual(d,kind,t,lesson,beat):
     if kind=='grid':
         for r in range(5):
             for c in range(8):
-                col=MINT if r+c <= step%12 else '#263754'
-                if (r,c) in [(1,3),(2,3),(3,5)]:col='#d36d9d'
+                col=MINT if 1<=r<4 and 2<=c<6 else '#263754'
                 box(d,(160+c*68,225+r*58,220+c*68,275+r*58),col,r=8)
-        text(d,(110,540),'Cells become states; boundaries and blocked cells matter.',22,MUTED);return
+                text(d,(180+c*68,238+r*58),'1',20,BG if col==MINT else WHITE)
+        text(d,(100,535),'Rectangle [1,4) x [2,6): 24 - 6 - 8 + 2 = 12',23,YELLOW);return
     if kind=='interval':
         intervals=[(0,3),(2,5),(3,6),(5,8),(6,9)];sel=step%6
         for j,(a,b) in enumerate(intervals):

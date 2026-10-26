@@ -26,11 +26,12 @@ def draw_special(d,t,lesson,api):
   pts=[(430,260),(250,350),(650,350),(150,450),(350,450)];edges=[(0,1),(0,2),(1,3),(1,4)]
   for u,v in edges:d.line((pts[u],pts[v]),fill='#405475',width=4)
   order=[0,1,3,4,2];active=set(order[:step%6]);labels=list(range(5))
+  if title.startswith('TREE DP'):active={0,3,4} if step%2 else {1,2}
   for j,p in enumerate(pts):node(*p,labels[j],j in active)
   if title.startswith('EULER'):
    text(d,(90,515),'Entry order: [0, 1, 3, 4, 2]',24,MINT,True);text(d,(90,550),'Subtree(1) occupies positions [1,4).',22,YELLOW)
   elif title.startswith('TREE DP'):
-   text(d,(90,515),'Select parent -> every child must be unselected.',24,MINT,True)
+   text(d,(90,515),'Green = selected. Adjacent vertices cannot both be green.',24,MINT,True)
   elif title.startswith('ADVANCED'):
    text(d,(90,515),'A light edge enters a substantially smaller subtree.',23,MINT,True)
   else:text(d,(90,515),'Subtree sizes: node 0 = 5; node 1 = 3.',24,MINT,True)
@@ -49,6 +50,12 @@ def draw_special(d,t,lesson,api):
    ang=2*math.pi*j/7;x=660+100*math.cos(ang);y=415+100*math.sin(ang);node(x,y,j,j==step%7)
   text(d,(100,355),'Multiplicative inverse of 3:',24,MUTED);text(d,(100,400),'5, because the product leaves 1.',25,YELLOW)
   text(d,(100,530),'An inverse exists iff gcd(a, modulus) = 1.',23,MUTED);return True
+ if title.startswith('OFFLINE'):
+  text(d,(100,255),'Standard Mo ordering: O((n + q) sqrt(n))',29,MINT,True)
+  text(d,(100,320),'Endpoint moves; assume O(1) add/remove operations.',24,MUTED)
+  cells(d,[2,7,1,8,2,8],395,130,tuple(range(step%3,step%3+3)))
+  text(d,(100,520),'Know all queries -> reorder -> restore answer order.',23,YELLOW)
+  return True
  if title.startswith('STRING'):
   cells(d,list('ababa'),325,180,(0,1,2));text(d,(100,240),'A border is both a prefix and a suffix.',26,MINT,True)
   text(d,(100,465),'ababa: longest proper border = aba (length 3)',24,YELLOW)
