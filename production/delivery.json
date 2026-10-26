@@ -9,7 +9,6 @@
   "remote_writes_paused": false,
   "repository_visibility": "public",
   "remote_branch": "work",
-  "last_remote_commit": "5c4a9ffe65f55961c065380f7b8ba359af154f77",
   "interim_11_20_id": "1UXq1VZlGT2sGPGQbHy9lY6T8fml381jv",
   "workbook_pages": 54,
   "workbook_bytes": 106199,
@@ -17,5 +16,7 @@
   "video_id": "1uI7niOuJIiobsaIMqGhD5OObBZ2myn1P",
   "video_url": "https://drive.google.com/file/d/1uI7niOuJIiobsaIMqGhD5OObBZ2myn1P/view",
   "video_bytes": 101128139,
-  "video_sha256": "0bb71cc9f23806d0bba65501fc50897a6d5782baa8d051a21604123118380ac8"
+  "video_sha256": "0bb71cc9f23806d0bba65501fc50897a6d5782baa8d051a21604123118380ac8",
+  "pre_resumption_remote_commit": "5c4a9ffe65f55961c065380f7b8ba359af154f77",
+  "interim_21_46_id": "1ef8triYvW2El_VvEVo6caaLAatnQXbVz"
 }
