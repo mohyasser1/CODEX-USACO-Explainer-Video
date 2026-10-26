@@ -1,0 +1,125 @@
+PART 1 DRAFT — FUNCTIONS, OWNERSHIP, AND THE COST OF A PLAN
+Status: original narration draft, not yet synthesized or timed.
+
+[A function card: input contract, result contract, local workspace.]
+We just proved a loop by explaining what its variables mean. A function lets
+us give a piece of behavior a name, with a contract for its inputs and result.
+For example, a function that returns the sum of a vector should say whether
+it changes that vector and which bounds keep arithmetic safe. Calling a function
+passes arguments into its parameters, executes its body, and obtains a return
+value. A function is not a second program running mysteriously in parallel.
+In the ordinary calls we are using, the caller waits for the callee to return.
+When we introduce recursion, that same rule will apply even when the callee
+has the same function name as the caller.
+
+[Two boxes: caller x=7; parameter value=7. Callee changes value to8.]
+Consider a function with an int parameter named value. If we pass x, whose
+value is seven, the parameter receives a copy of seven. Increasing the parameter
+to eight does not change x. They are different variables. If the function
+returns eight and the caller assigns that return value to x, then x changes
+because of that assignment. Keep the two actions separate in your trace.
+Pass by value is a useful default for small numbers because it makes the
+callee's working state independent. A local variable's name is visible only
+within its scope. Another function may have a variable with the same name
+without sharing the same storage. Two DJs called Alex do not automatically
+share one bank account, although Bessie's manager has proposed the efficiency.
+
+[Reference arrow: parameter alias points to caller x.]
+An int reference parameter instead refers to the caller's existing object.
+Changing it changes that object. This is useful when modification is part of
+the function's contract. It is dangerous when a reader expects a harmless
+calculation but the function quietly changes its input. A reference is not
+an independent copy. Draw it as another way to refer to the same box. A const
+reference allows reading through that reference without modifying the object
+through it. For a large vector that a function only inspects, a const reference
+avoids copying all its elements. Passing a vector by value generally makes
+a separate vector copy, which takes time and storage proportional to its size.
+That cost still exists even if the function's own loop looks very small.
+
+[Vector object points to an element buffer; push_back grows the buffer.]
+Our memory pictures are a simplified reasoning model, not promises about exact
+machine addresses. A vector manages storage for its elements. If appending an
+element requires more capacity, it can allocate a new buffer and move or copy
+the elements there. References or pointers to elements in the old buffer then
+become invalid. If you need a stable logical position while growing a vector,
+an index can be safer, provided you recheck that it still denotes the intended
+element after other changes. Do not keep a reference to the first element,
+append until storage grows, and then assume the reference still points to
+a living element. The label remained in your notebook; the storage it referred
+to did not remain there. This is one reason we teach containers as objects
+with rules rather than as magic expanding arrays.
+
+[Scope blocks: function entry creates local state, return ends its lifetime.]
+A local object's lifetime also matters. A reference to a local variable that
+has already gone out of scope does not keep that variable alive. Returning
+such a reference is a bug. Returning a small computed value is different:
+the caller receives the value it needs. In recursive code, each active call
+has its own local parameters and variables, represented by a stack frame in
+our diagrams. Each frame remembers where to return and its pending work.
+A very deep recursion can exhaust available stack space, even if the overall
+algorithm has an attractive time bound. Later, a graph with a long chain may
+be better traversed with an explicit stack or queue. Do not learn that lesson
+only after a hundred thousand cows form the world's least convenient conga line.
+
+[Cost table: n, n log2 n, n^2, 2^n. Highlight which are growth descriptions.]
+Now ask what happens as the input grows. Big O describes an upper bound on
+growth, ignoring fixed constant factors beyond an appropriate input size.
+In contest discussion, we usually give a useful tight growth description for
+the algorithm, rather than an absurdly loose bound that happens to be true.
+A single scan of n elements is linear. Sorting with a comparison sort commonly
+takes order n log n comparisons. Trying every pair is quadratic. Enumerating
+every subset is exponential. These labels do not give exact seconds. Hardware,
+language, implementation and constants matter. But they let us reject a plan
+that would perform ten billion operations before we spend an hour polishing
+its variable names.
+
+[Two nested-loop examples: 3*n versus n*n, counters animate.]
+Do not count indentation levels to determine complexity. An outer loop that
+runs exactly three times and an inner loop of n iterations perform three n
+iterations, which is linear. If both loops run n times, that is n squared.
+If one pointer only moves forward through the array across many apparent
+inner-loop calls, its total movement may still be linear. We will prove that
+in the two-pointer lesson. First write down what each loop can do in total.
+A correct bound is a counting argument. Calling something linear because
+the source code fits on one line is a marketing strategy, not mathematics.
+
+[Memory bars: input vector n; prefix vector n+1; five scalar variables.]
+Space deserves the same attention. Distinguish total stored data from auxiliary
+space used beyond the input representation. Our signed-total loop used constant
+extra state, but the version storing the entire vector used linear total
+storage. A two-dimensional table with r rows and c columns stores roughly
+r times c entries. A table with one hundred thousand rows and one hundred
+thousand columns is not made practical by calling its entries small. Also
+account for element size and container overhead when memory is tight. These
+estimates should happen before allocation. A program that cannot store its
+state cannot redeem itself with a beautiful proof of its recurrence.
+
+[Proof checklist: contract; invariant; preservation; termination; postcondition.]
+Correctness and cost answer different questions. A fast method may be wrong.
+A correct method may be too slow. A loop invariant explains a property preserved
+while a loop runs. Termination explains why it eventually stops. A final
+postcondition connects the ending state to the requested answer. In the sum
+loop, the invariant said total was the sum of the first i elements. The index
+increased toward n, which gave termination. At the end, i equaled n, turning
+the invariant into the answer statement. Tests provided concrete evidence,
+including negative values and the empty list. The proof explained all inputs
+within our contract. We want both, because a proof about a mistaken model can
+coexist with code that faithfully solves the wrong problem.
+
+[Transfer cards, then separate answer reveal.]
+Pause and classify these plans. First, sum a vector of n numbers. Second, try
+all three possible initial locations and process n events for each. Third,
+compare each of n fans with every other fan. Which plans are linear, and
+which is quadratic? If a function receives a vector by value but reads only
+its first element, is the whole call necessarily constant time? Explain the
+hidden work instead of just naming a complexity class.
+
+[Answer scene.]
+The sum and three-case simulation are linear. The all-pairs plan is quadratic.
+Copying the vector into a value parameter can require linear work before
+the function reads its first element, so that call is not necessarily constant
+time. A const reference can avoid that copy when inspection is the intended
+contract. We now have enough vocabulary to design a complete simulation,
+prove that its cases cover every possibility, and inspect the cost. The
+backstage pass is not a memorized formula. It is the ability to explain what
+your program means at every step.

@@ -1,0 +1,183 @@
+PART 1 DRAFT — WHAT A PROGRAM DOES
+Status: original narration draft, not yet synthesized or timed. Bracketed
+directions describe visuals. This precedes the signed-total pilot lesson.
+
+[An imaginary festival poster falls over. Three backstage jobs appear:
+read the contract; model the state; justify the steps.]
+Bessie's festival has a problem. Her manager has booked one hundred thousand
+fans, but his ticket checker compares every fan with every other fan. The
+opening act has finished. The closing act has finished. A blade of grass has
+earned a doctorate. The manager is still comparing wristbands. We are going
+to replace his algorithm, but first we need to understand what an algorithm
+and a program actually are. An algorithm is a precise method for solving a
+problem. A program expresses a method in instructions a computer can execute.
+C plus plus is the language we will use to write those instructions. Being
+fluent in the syntax helps, but a fast program implementing the wrong method
+is still wrong. That is the theme of this tour.
+
+[Four video cards with prerequisite arrows, not rank promotion promises.]
+These four classes begin with execution and Bronze-style problem solving,
+then build through repeated-work techniques, graphs, dynamic programming and
+some Gold foundations. The advanced map explains what to study next. It does
+not turn a brief introduction into mastery. USACO problems mix techniques,
+and divisions are not fixed lists of algorithms. You will need regular coding
+practice, including unfamiliar problems. A video can explain a proof. It cannot
+do your first confused attempt for you. That attempt is where the learning
+becomes yours. Watch in short sessions, pause at exercises, and keep a notebook
+of counterexamples. Your wrong idea is useful when you discover exactly why
+it fails. It is less useful when you rename the variable and hope the bug
+has forgotten where it lives.
+
+[Source file -> compiler -> executable -> process. Input and output arrows.]
+Start with a plain text file named main dot cpp. The source contains the
+instructions. A compiler checks the language rules and translates the source
+into an executable. Running the executable starts a process that carries out
+the program. Source code is like a written set list; compilation prepares a
+performable version; execution is the actual show. This analogy has limits:
+a computer follows defined instructions, not artistic intention. If you change
+the source file but run an old executable without recompiling, you are running
+the old program. That explains a surprising number of claims that the compiler
+is haunted. Check what you built and what you launched before calling an exorcist.
+
+[Complete program displayed, one line at a time.]
+Our first complete program includes the iostream header, defines main, reads
+two long long integers, and prints their sum. The header makes standard input
+and output facilities available. Main is where our program's execution begins.
+Braces group the function body. The type long long declares integer variables
+with enough range for this example. The input operation extracts two numbers
+from standard input into those variables. Spaces and newlines both separate
+these numeric inputs. The output operation sends the computed answer to standard
+output. A newline ends the answer line. We qualify names with std, followed
+by two colons, to say that they come from the standard library's namespace.
+You may see using namespace std in contest code; explicit qualification makes
+the origin clear in our first program.
+
+[Terminal: g++ -std=c++17 -Wall -Wextra main.cpp -o main
+then ./main, input 3 4, output 7.]
+Compile the file using a C plus plus seventeen compiler and enable warnings.
+The command on screen is one example for a shell with g plus plus installed.
+The exact launch command can differ across operating systems and editors.
+Read the build output. If compilation succeeds, run the resulting executable
+and enter three and four. The answer is seven. Now try negative five and eight;
+the answer is three. Try zero and zero; the answer is zero. The judge does not
+need a message saying please enter your numbers, unless the problem explicitly
+asks for one. Extra explanatory output can make a correct calculation fail
+the required output format. Put your debugging messages somewhere you can
+remove or disable before submission.
+
+[Three lanes: COMPILE ERROR, RUNTIME FAILURE, WRONG ANSWER.]
+A missing semicolon can prevent compilation. A runtime error happens while
+an executable is running. A wrong answer means the program completed but did
+not produce the required result. These are different categories. Start with
+the first meaningful compiler diagnostic: one missing brace can trigger many
+later messages. For a wrong answer, write down an input, the expected output,
+and the actual output. Then trace the variables. Saying it does not work is
+an understandable emotion, but it is not yet a test case. The manager's latest
+debugging strategy is to look disappointed at the laptop. We are trying a more
+evidence-based workflow.
+
+[Memory-value boxes labeled count:int, price:long long, open:bool.]
+A variable has a name, a type, and a value during execution. A declaration
+such as int count equals zero creates an integer variable initialized to zero.
+The type affects which values can be represented and which operations make
+sense. Bool holds true or false. Char holds a character value. String stores
+a sequence of characters. Double represents approximate real numbers, which
+is useful for some numerical tasks but is not an automatic replacement for
+large exact integers. Long long is our common choice for integer totals that
+can exceed the usual range of int. Choose from the problem's bounds, not from
+which keyword looks more confident.
+
+[Assignment animation: count 2 -> evaluate count+1 -> store 3.]
+Assignment changes a variable. In count equals count plus one, first evaluate
+the right-hand side using the old count, then store the result on the left.
+This is not an algebraic equation claiming a number equals itself plus one.
+The plus-equals shorthand performs an addition and assignment. The double-equals
+operator compares two values and produces true or false. Mixing a single equals
+with a double equals inside a condition can change your data instead of asking
+a question. Warnings help, but understanding the distinction helps more.
+Uninitialized local numeric variables are another trap: declare your intended
+initial state explicitly. A mystery value is not randomized test coverage.
+
+[Expression tree: int+int evaluated before arrow to long long destination.]
+Here is a subtle rule with very visible consequences. Suppose a and b are
+both int values of one billion five hundred million. Their sum is three billion,
+which exceeds the range of a common thirty two bit signed int. Writing long
+long answer equals a plus b does not first widen the operands just because
+the destination is wide. The expression is evaluated according to its operand
+types. Promote an operand before the operation, for example with an explicit
+long long cast or one L L times a plus b. Signed overflow is undefined behavior
+in C plus plus. Do not build a proof around a particular wrapped result you
+happened to observe on your machine. Later, our total variable itself will
+already be long long, so adding an int element to it uses the wider type.
+
+[Integer quotient and remainder: 7 = 2*3+1.]
+Integer division and real-number division answer different questions. Seven
+divided by two with integer operands is three. Seven modulo two is one, the
+remainder. If you need a real quotient, convert an operand before dividing.
+Again, changing only the destination after evaluation cannot recover a fraction
+already discarded. For positive integers, dividing by two rounds down. With
+negative integers, C plus plus integer division truncates toward zero, so do
+not casually reuse a floor-division formula that assumes nonnegative values.
+The contract determines which cases you must handle. When constraints say
+nonnegative, that is useful information. When they do not, silently assuming
+it is a bug waiting for an entrance cue.
+
+[Boolean light switch. Attribution: SICKO MODE — Travis Scott featuring Drake.
+Brief supplied hook, then a truth table with i<n.]
+Like a light: we are using that short supplied phrase as a classroom mnemonic
+for a Boolean condition. The light is on for true and off for false. With i
+equal to three and n equal to four, i less than n is true. With i equal to four,
+it is false. The comparison does not move i; it reports a Boolean result.
+An if statement executes its body when its condition is true. An optional
+else handles the false case. The program cannot infer which branch you wanted
+from the background music. It evaluates the expression you actually wrote.
+
+[Truth table: x<0, x%2==0, conjunction for -4,-3,0.]
+Logical and requires both conditions to be true. Logical or requires at least
+one. Logical not reverses a Boolean result. To test whether x is negative and
+even, combine x less than zero with x modulo two equal to zero. For negative
+four, both are true. For negative three, the even test is false. For zero,
+the negative test is false. The result is true only for negative four among
+these examples. C plus plus evaluates logical and left to right and skips
+the right operand when the left is false. Logical or similarly skips its right
+operand when the left is true. This short-circuit behavior lets us check an
+index bound before reading an element, provided we put the checks in the
+correct order. Parentheses make intended grouping clear when expressions mix
+operators. Clarity is usually cheaper than remembering a precedence table
+while the contest clock performs a drum solo.
+
+[Container row with indices, then size versus capacity diagram.]
+A vector is an ordered container whose number of elements can change. A vector
+of four ints has four elements, indexed zero through three. Its size is the
+number of existing elements. Its capacity describes how many elements its
+current allocated storage can hold before it must grow that storage. Capacity
+does not create elements you may index. Reserving space for one hundred elements
+in an empty vector still leaves its size zero. Construct a vector with a size,
+or append elements with push back, before accessing them. This distinction
+will prevent a wonderfully confusing bug where the memory looks available
+but the requested element does not exist.
+
+[String BANANA, indices0..5. Counters length6 and A-count3.]
+A string also gives us an indexed sequence. Our neutral counting example is
+BANANA. Its length is six, its valid indices are zero through five, and the
+letter A occurs three times. Length, last valid index and frequency are three
+different quantities. The manager announces that BANANA has five characters
+because the last index is five. The audience hands him a zero-based invoice.
+To read a single whitespace-delimited word, standard extraction works. To
+read an entire line containing spaces, use getline and account for any newline
+left by preceding formatted input. Choose the input method that matches the
+statement; do not patch missing words by guessing what the user meant.
+
+[A loop's four stages: initialize once; check; body; increment; return to check.]
+A loop repeats instructions while a condition allows it. In our standard for
+loop, initialization happens once. The condition is checked before each body
+execution. If true, execute the body, then the increment, then check again.
+If false, leave the loop. An empty body or a missing update can cause behavior
+very different from what the indentation suggests. Braces show which statements
+belong together; indentation helps people see it. Use both. The condition i
+less than n visits indices zero through n minus one. Changing it to less than
+or equal would request one more iteration, but there is no element at index n.
+One more time is a catchy hook from the supplied One Dance text; in this
+classroom reinterpretation, the boundary check decides whether the encore
+is legal. We will now trace a complete signed-total example, including the
+last false condition check, instead of trusting the rhythm of the loop.

@@ -93,8 +93,11 @@ PART 4 — GOLD FOUNDATIONS AND THE ADVANCED MAP (60 min)
  57–60  Mixed technique-selection exercise, test oracle method, training plan.
 
 RUNTIME POLICY
-Draft approximately 28,000–32,000 spoken words, calibrated against the pilot's
-measured speech rate. Target 57–63 minutes per completed part, 228–252 total.
+Initial estimate was 28,000–32,000 words. Measured pilot: 1,041 spoken words
+in 395.183 seconds (~158 words/minute including brief gaps). Revised planning
+estimate: approximately 36,000–38,000 substantive spoken words across four
+parts, with each part measured independently. Target 57–63 minutes per
+completed part, 228–252 total. This is not a claim of completed script duration.
 Measure synthesized audio before finalizing. If short, deepen worked examples;
 if long, move clearly marked extension material into the workbook. Never stretch
 speech unnaturally, repeat passages or add silence to manufacture four hours.
@@ -114,6 +117,17 @@ First produce the signed-total execution/invariant lesson (~5–8 minutes), with
 readable code, synchronized state transitions, captions and a separate solution.
 Request parent QA of teaching pace, humor, voice and diagram legibility before
 full renders. Continue source, exercises and independent tests while QA is pending.
+
+PILOT CHECKPOINT
+6:35.2 MP4 delivered at:
+https://drive.google.com/file/d/1caj52eyJMDL_smkpFcBXUsbwGyW89TFu/view
+7,251,665 bytes; full decode passed; audio/video end difference zero.
+SHA256 0361bbf401d2b3b367b4d1baec2186ba37cde0c1c154026c5711204ee1e07bde
+Downloaded Drive copy independently hashed and MATCHED. Human listening and
+teaching/engagement review remain pending. Initial pilot predates later supplied
+song hooks; consolidated HIP_HOP_TEACHING_NOTES.txt maps those into full lessons.
+Part 1 drafts currently contain roughly 6,500 words, about 41 minutes at the
+pilot rate, not yet a finished hour. Other full-part scripts remain to be written.
 
 VERIFICATION / DELIVERY
 Use separate V2 names/IDs. Cloud only; current free scratch about 29 GB.
