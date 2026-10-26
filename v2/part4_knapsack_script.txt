@@ -154,7 +154,11 @@ different bounds and may need different types.
 
 [Transfer:items(2,4),(3,5),capacity3; then capacity0 and noitems.]
 Pause and solve two items, weight-two value-four and
-weight-three value-five, with capacity three. The answer is
+weight-three value-five, with capacity three. What changes at capacity
+zero, or with no items? Pause the video and work out each answer.
+
+[Answer scene:best5; empty/zero-capacity best0.]
+The answer is
 five, because the two items do not fit together.
 At capacity zero, or with no items, the
 answer is zero under our positive-weight, at-most contract.

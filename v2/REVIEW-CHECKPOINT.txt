@@ -2,10 +2,10 @@ ROHAIL V2 — FOUR-PART FIRST-DRAFT REVIEW CHECKPOINT
 
 All 26 script sections are drafted. Read in course_manifest.json order.
 Part 1: 6,980 spoken words; estimated 59.55 minutes.
-Part 2: 6,864 spoken words; estimated 58.56 minutes.
-Part 3: 6,846 spoken words; estimated 58.40 minutes.
-Part 4: 6,877 spoken words; estimated 58.67 minutes.
-Total: 27,567 words, about 235.2 minutes at the audition's measured overall
+Part 2: 6,892 spoken words; estimated 58.80 minutes.
+Part 3: 6,874 spoken words; estimated 58.64 minutes.
+Part 4: 7,311 spoken words; estimated 62.37 minutes.
+Total: 28,057 words, about 239.4 minutes at the audition's measured overall
 117.22 words/minute. These are estimates, not measured full-part audio.
 
 REVIEW PRIORITIES
@@ -37,3 +37,10 @@ The actual foundations narration now stages the empty cash box, four receipts,
 reported eight dollars versus Maya's counted five, and skipped refunds before
 the loop lesson. No audition viewing is assumed. The coin DP visual now says
 1+dp[0]=1; denomination three chooses the predecessor, not the count increment.
+
+SECOND REVIEW REVISIONS
+Five flagged transfer scenes now separate questions and answer reveals.
+Dijkstra and Fenwick include student predictions, challenges and revisions.
+Fenwick explains the binary 5->6->8 update and why entry 7 is excluded.
+The broader storytelling editorial pass across remaining lessons is unfinished.
+All rendered-media and voice approval gates remain in force.

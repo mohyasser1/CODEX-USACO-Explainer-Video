@@ -31,8 +31,8 @@
     },
     {
       "part": 2,
-      "spoken_words": 6864,
-      "estimated_minutes": 58.56,
+      "spoken_words": 6892,
+      "estimated_minutes": 58.8,
       "scripts": [
         {
           "file": "part2_sorting_script.txt",
@@ -48,7 +48,7 @@
         },
         {
           "file": "part2_two_pointers_script.txt",
-          "spoken_words": 1177
+          "spoken_words": 1205
         },
         {
           "file": "part2_binary_search_script.txt",
@@ -67,8 +67,8 @@
     },
     {
       "part": 3,
-      "spoken_words": 6848,
-      "estimated_minutes": 58.42,
+      "spoken_words": 6874,
+      "estimated_minutes": 58.64,
       "scripts": [
         {
           "file": "part3_graph_models_script.txt",
@@ -84,7 +84,7 @@
         },
         {
           "file": "part3_functional_graph_script.txt",
-          "spoken_words": 612
+          "spoken_words": 638
         },
         {
           "file": "part3_dynamic_programming_script.txt",
@@ -99,16 +99,16 @@
     },
     {
       "part": 4,
-      "spoken_words": 6877,
-      "estimated_minutes": 58.67,
+      "spoken_words": 7311,
+      "estimated_minutes": 62.37,
       "scripts": [
         {
           "file": "part4_knapsack_script.txt",
-          "spoken_words": 1167
+          "spoken_words": 1184
         },
         {
           "file": "part4_dijkstra_script.txt",
-          "spoken_words": 1099
+          "spoken_words": 1228
         },
         {
           "file": "part4_dsu_mst_script.txt",
@@ -116,7 +116,7 @@
         },
         {
           "file": "part4_fenwick_script.txt",
-          "spoken_words": 1137
+          "spoken_words": 1425
         },
         {
           "file": "part4_segment_sparse_script.txt",
@@ -138,5 +138,5 @@
       "missing_drafts": []
     }
   ],
-  "total_spoken_words": 27569
+  "total_spoken_words": 28057
 }

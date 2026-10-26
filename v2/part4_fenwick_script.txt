@@ -15,6 +15,10 @@ definitions explain exactly which entries must change.
 
 [External indices0..7; internal positions1..8. bit[i] covers[i-lowbit(i),i)
 in external zero-based boundaries.]
+Rohail suggests updating every prefix after each new ticket. Maya asks
+him to imagine a correction at the very first position: nearly the
+whole prefix table would change. They need smaller summaries that can
+be combined, and they draw the blocks before writing any bit operations.
 Our public array uses zero-based indices, while the internal
 Fenwick array uses positions one through n. At internal
 position i, store the sum of the block ending
@@ -40,6 +44,10 @@ have different block lengths because their indices have different
 lowest set bits.
 
 [Prefix7 takesbit7[6,7)=2,bit6[4,6)=14,bit4[0,4)=9 ->25.]
+Maya asks for the first seven counts. Rohail points to entry seven,
+then notices that it holds only two, not the whole prefix. His
+first prediction fails because an entry summarizes its own block. He
+needs to collect the missing blocks without counting any position twice.
 To sum the first seven values, start at boundary
 seven. Add entry seven, which covers the last
 one of those values. Subtract its lowbit, moving
@@ -91,6 +99,9 @@ nine. Entry seven also stays two. We change
 the summaries affected by the point, not every summary.
 
 [Requeryprefix7=bit7 2+bit6 17+bit4 9=28;range[2,7)=24.]
+Before recomputing, Maya asks for a prediction: their queried range includes
+the corrected position, so Rohail expects its answer to rise by exactly
+three. That gives them a check independent of the block arithmetic.
 After the update, the first-seven sum becomes two
 plus seventeen plus nine, or twenty-eight. The range
 two through seven becomes twenty-eight minus four, or
@@ -104,8 +115,20 @@ summary entries updated on its behalf.
 
 [Update ancestor rulei+=lowbit(i), blocks grow to next containing block.]
 The upward update rule moves to the next larger
-stored block containing the point. The binary index structure
-ensures the visited blocks grow through the relevant levels,
+stored block containing the point. Maya asks why Rohail skipped entry
+seven when updating internal position five. On the screen, five is
+binary zero-one-zero-one; adding its lowest set bit gives six,
+zero-one-one-zero. Entry six covers internal positions five through six,
+so it contains the changed point. Adding two gives eight, one-zero-zero-zero,
+whose block covers positions one through eight. The intervening entry seven
+is zero-one-one-one: its lowest set bit is one, so it covers only
+position seven and cannot contain position five. Rohail crosses it out.
+More generally, between i and i plus lowbit of i, each intervening
+index has a smaller lowest set bit and its block begins after i.
+It therefore excludes our updated position, which is at or before i.
+The next visited block extends left far enough to contain the current
+block. Adding lowbit clears the current lowest set bit and carries
+into a higher position. There are only logarithmically many binary positions,
 so the number of update steps is logarithmic as
 well. The invariant of the data structure is that
 each entry equals the sum of its defined block.
@@ -150,9 +173,13 @@ sums and deltas because accumulated values can exceed int.
 The array indices can remain int under our stated
 size bound. Type choices follow what each field represents.
 
-[Transfer: add-2 atindex0; which blocks1,2,4,8; effectonrange[2,7)none.]
-Pause and subtract two from original index zero.
-Which internal entries change? They are one, two,
+[Question only:add-2 atindex0. Ask affected blocks and range[2,7); hide answers.]
+Subtract two from original index zero. Which internal entries change,
+and what happens to the range from two through seven, excluding seven?
+Pause the video and sketch the blocks before revealing the answer.
+
+[Answer scene:blocks1,2,4,8; range[2,7)unchanged.]
+The changed internal entries are one, two,
 four and eight. What happens to the range
 two through seven? Nothing, because it excludes index
 zero. Both prefix seven and prefix two decrease

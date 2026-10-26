@@ -64,7 +64,12 @@ all its implementation details. First be able to explain the tail,
 the cycle and the meaning of a step count without a diagram.
 
 [Transfer: successor array1,2,2; start0 versus start2.]
-Pause and trace zero to one to two to two. From zero,
+For the successor array one, two, two, compare starting at zero
+with starting at two. Find the tail and cycle lengths for each start.
+Pause the video now; the next scene reveals the walks and answers.
+
+[Answer scene:0->1->2->2 versus2->2; show lengths only now.]
+From zero,
 the tail length is two and the cycle length is one.
 From two, the tail is empty and the cycle is still one.
 The graph did not change; the start changed the walk's tail.

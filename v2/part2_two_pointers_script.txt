@@ -150,7 +150,12 @@ make every interval question a two-pointer problem.
 [Transfer: unsorted11,1,7,2,4 target9; then all-zero window with limit0.]
 Pause for two transfer questions. In the unsorted list
 eleven, one, seven, two, four, which
-original positions form target nine? Using zero-based indices, the
+original positions form target nine? For three zeros and a window limit
+of zero, what is the longest valid length? Pause the video to work
+out both answers; resume when you are ready.
+
+[Answer reveal only after learner resumes: positions2,3; window length3.]
+Using zero-based indices, the
 answer is positions two and three, holding seven and
 two; either reporting order is acceptable. For three
 zeros with window limit zero, the whole length-three interval

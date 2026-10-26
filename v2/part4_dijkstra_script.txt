@@ -15,6 +15,10 @@ start. The fictional travel story motivates the model; the
 numbers on the edges define what the algorithm must optimize.
 
 [Tentative distances0,inf,inf,inf. Priority queue entries(distance,vertex).]
+Rohail first reaches for the queue from their hallway problem. Maya points
+to the ten-cost direct edge and asks whether arriving in fewer steps
+really saves their travel budget. Rohail puts that queue aside: this time,
+the next route to examine must be chosen by cost.
 Dijkstra's algorithm keeps a tentative best distance for each
 vertex. The start has distance zero, and other
 vertices begin unreachable. A priority queue selects the smallest
@@ -44,7 +48,9 @@ a route to one costing three plus four, or
 seven. Seven improves on ten, so update distance
 one and add a new queue entry for seven.
 The edge to three costs twelve, giving a tentative
-distance of fifteen. The queue still contains the older
+distance of fifteen. Maya asks Rohail to predict whether the old ten-cost note disappears.
+It does not: he has written a better offer, not erased the earlier one.
+The queue still contains the older
 ten-cost entry for vertex one. The standard C plus
 plus priority queue does not conveniently edit that old
 entry in place, so our implementation leaves it there
@@ -64,6 +70,9 @@ array holds the current best values.
 
 [Why extraction is safe: shortest unseen route must cross from settled to
 unsettled, with nonnegative remaining costs.]
+Rohail is ready to call seven final, but Maya asks what would prevent
+a cheaper route arriving later. That is the question the proof must answer,
+not something we settle because the picture looks convincing.
 The essential proof explains why the smallest current tentative
 distance can be finalized. Suppose we select a vertex
 whose tentative distance is smallest among unfinished vertices, but
@@ -142,9 +151,13 @@ often expressed using log n. The important practical point
 is that we are not repeatedly scanning every vertex
 to find the next minimum candidate.
 
-[Transfer: adddirect0->3 cost8, compare old9 and new8. Then change to12.]
-Pause and add a direct edge from zero to
-three of cost eight. The new shortest distance to
+[Question only:add0->3 cost8; separate variant cost12. Hide solution labels.]
+Add a direct edge from zero to three of cost eight. What is the
+new shortest distance? Then consider the separate version where that edge
+costs twelve. Pause the video to compare the routes before continuing.
+
+[Answer scene:cost8 beats old9; cost12 loses to old9.]
+The new shortest distance to
 three is eight, beating the previous route of cost
 nine. If that direct edge instead costs twelve,
 the old multi-edge route still wins. The number of
