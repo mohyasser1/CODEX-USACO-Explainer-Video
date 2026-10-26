@@ -105,7 +105,9 @@ the compressed version equivalent to the two-dimensional recurrence.
 
 [One itemw2,v3,capacity4. Ascending wrong:dp2=3,then dp4=dp2+3=6.
 Descending correct:dp4 reads olddp2=0 ->3,then dp2=3.]
-A minimal counterexample explains the danger. With one weight-two,
+Rohail tries filling capacities upward, as he did for unlimited tokens.
+Maya puts one item on the desk and asks whether his table can invent
+a second copy. A minimal counterexample explains the danger. With one weight-two,
 value-three item and capacity four, the answer must be
 three. If we update capacities upward, capacity two
 becomes three, and then capacity four reads that already
@@ -155,7 +157,8 @@ different bounds and may need different types.
 [Transfer:items(2,4),(3,5),capacity3; then capacity0 and noitems.]
 Pause and solve two items, weight-two value-four and
 weight-three value-five, with capacity three. What changes at capacity
-zero, or with no items? Pause the video and work out each answer.
+zero, or with no items? Also explain the one-item ascending-loop bug.
+Pause the video and work out each answer.
 
 [Answer scene:best5; empty/zero-capacity best0.]
 The answer is

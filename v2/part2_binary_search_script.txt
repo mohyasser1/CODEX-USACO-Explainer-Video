@@ -22,7 +22,8 @@ between trips: after the second box and after the fourth. We did not discard
 the box that failed to fit; it became the first box of the next trip.
 
 [Capacity5, trips [3,2], [2], [4,1], [4]. Counter says4 > allowed3.]
-Now try capacity five. The first trip still takes three and two. The second
+Rohail thinks five might save capacity without adding a trip. Maya asks
+him to draw every trip boundary before claiming it works. Try capacity five. The first trip still takes three and two. The second
 takes the next two, but the following four cannot fit with it. The third
 takes four and one. The final four needs a fourth trip. Four exceeds our
 allowed three, so capacity five fails. Notice the check returns a Boolean:
@@ -76,8 +77,9 @@ single value is the answer.
 [Trace table columns low,high,mid,groups,feasible,next interval.]
 Start with low four and high sixteen. The middle is ten. The greedy check
 uses two trips: three, two, two on the first, and four, one, four on the
-second. Two is at most three, so ten works. The first feasible capacity
-could be ten or smaller. Keep ten and everything below it in our interval:
+second. Two is at most three, so ten works. Rohail proposes throwing ten away because it worked. Maya asks whether
+it could itself be the smallest working value. It could: the first
+feasible capacity could be ten or smaller. Keep ten and everything below it in our interval:
 set high to ten. Do not remove ten itself, because a successful middle value
 might be the minimum. The new interval is four through ten.
 

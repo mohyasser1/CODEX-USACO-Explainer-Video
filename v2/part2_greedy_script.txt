@@ -15,8 +15,8 @@ or required travel time, the same choice rule would
 need a new proof or a different algorithm.
 
 [Earliest-start chooses longA and blocksB,C,D. Earliest-finish choosesB,C,D.]
-Choosing the earliest start seems reasonable until we test
-these requests. The long request from zero to six
+Rohail gives the room to the first request on the clock. Maya lays
+the remaining requests beneath it, and they see who gets locked out. The long request from zero to six
 starts first, but choosing it blocks the three requests
 one to three, three to five and five to
 seven. We could accept three instead of one. A
@@ -54,7 +54,8 @@ exchange argument turns the local choice into a global
 correctness proof.
 
 [Wrong alternative: shortest duration selects[3,5) but blocks[0,4),[4,8).]
-Another tempting rule is to choose the shortest request.
+Sam suggests the shortest request instead. Rohail wants a counterexample
+before replacing one unproved rule with another.
 Consider intervals zero to four, four to eight,
 and three to five. The shortest interval, three
 to five, overlaps both longer ones. Choosing the
@@ -91,7 +92,11 @@ word best attached to an explicit quantity.
 
 [Transfer[0,2),[2,4),[1,3); ask count and endpoint rule.]
 Pause and schedule zero to two, two to four,
-and one to three. Earliest finish selects the first
+and one to three. Pause the video and choose the requests, explaining
+whether touching endpoints are allowed.
+
+[Separate answer reveal:choose[0,2),[2,4);count2.]
+Earliest finish selects the first
 request, skips the overlapping middle request, and accepts
 two to four, giving two. The shared endpoint
 is allowed because of our half-open convention. If a

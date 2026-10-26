@@ -39,6 +39,9 @@ without a cycle.
 
 [Parent forest versus chosen graph edges; parent2 may point to0 although
 accepted graph connection was1-2. Label REPRESENTATIVE LINKS, NOT ROUTES.]
+Rohail copies the DSU arrows onto the proposed cable plan. Maya asks
+where the cost of each copied arrow came from; some were never candidate
+links at all. He keeps a separate list of accepted edges.
 DSU's parent pointers are an internal representation of components,
 not the selected communication links. Union by size may
 attach vertex two's representative directly under zero even though

@@ -1,5 +1,6 @@
 """Count spoken draft text, excluding metadata before first visual and directions."""
 import json,re
+from script_text import narration
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 manifest=json.loads((ROOT/'course_manifest.json').read_text())
@@ -7,8 +8,7 @@ rows=[]
 for part in manifest['parts']:
     scripts=[]
     for name in part['scripts']:
-        raw=(ROOT/name).read_text();raw=raw[raw.index('['):]
-        text=re.sub(r'\[[\s\S]*?\]',' ',raw)
+        text=narration((ROOT/name).read_text())
         assert not re.search(r'\b(Bessie|Alex)\b',text),name
         scripts.append(dict(file=name,spoken_words=len(text.split())))
     words=sum(s['spoken_words'] for s in scripts)

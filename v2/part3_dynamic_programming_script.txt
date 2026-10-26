@@ -93,7 +93,9 @@ structure. That would be a different problem requiring fresh reasoning.
 Our program rejects those values under its stated contract.
 
 [Table columns0..6. Compute dp1 from dp0+1; dp2 from dp1+1.]
-Now fill the actual table. Amount zero is zero tokens. For amount one,
+Rohail has a plan that avoids repeating the same subproblem. Maya asks
+him to build the small amounts first, so every answer he uses already
+has a reason behind it. Amount zero is zero tokens. For amount one,
 only denomination one fits, and dp zero plus one gives one token.
 For amount two, only one fits again, and dp one plus one gives
 two tokens. The row begins zero, one, two. Each table entry answers

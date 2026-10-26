@@ -14,7 +14,9 @@ we will use in the two-pointer lesson. First, however,
 decide whether changing positions is allowed by the problem.
 
 [Contrast inventory values with attendees in a fixed line.]
-For counting distinct prices, the original order is irrelevant.
+Rohail reaches for sort again when Maya asks about a section of the
+guest line. She stops him: sorting would move the people whose positions
+define her question. For counting distinct prices, the original order is irrelevant.
 For answering questions about the people in positions two through
 five of a line, reordering would change the question.
 Sorting is useful information processing, but it is not a

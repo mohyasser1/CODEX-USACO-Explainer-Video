@@ -29,8 +29,9 @@ and element storage have related but different sizes.
 For the second update, add two at boundary two
 and subtract two at boundary five. The difference array
 is now zero, three, two, zero, negative
-three, negative two. Those are events, not the
-final staff counts. Take a running sum across the
+three, negative two. Rohail mistakes the negative entries for negative staff. Maya asks him
+to follow the active addition along the timeline: those are boundary
+events, not the final staff counts. Take a running sum across the
 first five positions. The active addition becomes zero,
 three, five, five and two. The stop
 event at five ensures the second addition ends there,
@@ -88,9 +89,9 @@ through three, both half-open. The desired cells are
 five, six, eight and nine, totaling twenty-eight.
 Start with the large prefix forty-five. Subtract the top
 strip, whose sum is six. Subtract the left
-strip, whose sum is twelve. The top-left cell
-one belonged to both unwanted strips, so it has
-now been subtracted twice. Add it back once. Forty-five
+strip, whose sum is twelve. Rohail gets twenty-seven and checks the four cells directly: they total
+twenty-eight. Maya highlights the top-left one in both crossed-out strips.
+He removed it twice, so he must add it back once. Forty-five
 minus six minus twelve plus one gives twenty-eight.
 
 [General rectangle formula with each boundary tied to a shaded region.]
@@ -121,8 +122,11 @@ distance, so it is not a universal replacement.
 [Transfer cards: earlier range-update result; grid query[0,2)x[1,3).]
 Pause and reconstruct the two one-dimensional updates without looking
 at the finished array. Then query the first two
-rows and last two columns of the grid. The
-range-update result is zero, three, five, five,
+rows and last two columns of the grid. Pause the video to calculate
+both results before continuing.
+
+[Separate answer: reconstructed0,3,5,5,2; rectangle16.]
+The range-update result is zero, three, five, five,
 two. The rectangle contains two, three, five,
 six, totaling sixteen. Our tests compare difference updates
 with direct element-by-element additions, and grid queries with

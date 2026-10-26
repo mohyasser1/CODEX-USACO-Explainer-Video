@@ -13,7 +13,9 @@ When we introduce recursion, that same rule will apply even when the callee
 has the same function name as the caller.
 
 [Two boxes: caller x=7; parameter value=7. Callee changes value to8.]
-Consider a function with an int parameter named value. If we pass x, whose
+Rohail asks a helper function to increase his counter, then finds that
+the caller still has seven. Maya asks him to draw both variables before
+changing the code. Consider an int parameter named value. If we pass x, whose
 value is seven, the parameter receives a copy of seven. Increasing the parameter
 to eight does not change x. They are different variables. If the function
 returns eight and the caller assigns that return value to x, then x changes

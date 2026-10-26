@@ -3,60 +3,60 @@
   "parts": [
     {
       "part": 1,
-      "spoken_words": 6980,
-      "estimated_minutes": 59.55,
+      "spoken_words": 7030,
+      "estimated_minutes": 59.97,
       "scripts": [
         {
           "file": "part1_foundations_script.txt",
-          "spoken_words": 1932
+          "spoken_words": 1949
         },
         {
           "file": "part1_loop_trace_script.txt",
-          "spoken_words": 1475
+          "spoken_words": 1456
         },
         {
           "file": "part1_functions_cost_script.txt",
-          "spoken_words": 1255
+          "spoken_words": 1280
         },
         {
           "file": "part1_casework_script.txt",
-          "spoken_words": 1094
+          "spoken_words": 1105
         },
         {
           "file": "part1_backtracking_script.txt",
-          "spoken_words": 1224
+          "spoken_words": 1240
         }
       ],
       "missing_drafts": []
     },
     {
       "part": 2,
-      "spoken_words": 6892,
-      "estimated_minutes": 58.8,
+      "spoken_words": 7037,
+      "estimated_minutes": 60.03,
       "scripts": [
         {
           "file": "part2_sorting_script.txt",
-          "spoken_words": 797
+          "spoken_words": 815
         },
         {
           "file": "part2_prefix_script.txt",
-          "spoken_words": 1569
+          "spoken_words": 1570
         },
         {
           "file": "part2_ranges_script.txt",
-          "spoken_words": 899
+          "spoken_words": 937
         },
         {
           "file": "part2_two_pointers_script.txt",
-          "spoken_words": 1205
+          "spoken_words": 1230
         },
         {
           "file": "part2_binary_search_script.txt",
-          "spoken_words": 1333
+          "spoken_words": 1361
         },
         {
           "file": "part2_greedy_script.txt",
-          "spoken_words": 685
+          "spoken_words": 720
         },
         {
           "file": "part2_transfer_script.txt",
@@ -67,44 +67,44 @@
     },
     {
       "part": 3,
-      "spoken_words": 6874,
-      "estimated_minutes": 58.64,
+      "spoken_words": 6966,
+      "estimated_minutes": 59.43,
       "scripts": [
         {
           "file": "part3_graph_models_script.txt",
-          "spoken_words": 891
+          "spoken_words": 929
         },
         {
           "file": "part3_bfs_script.txt",
-          "spoken_words": 1633
+          "spoken_words": 1636
         },
         {
           "file": "part3_parity_script.txt",
-          "spoken_words": 1415
+          "spoken_words": 1417
         },
         {
           "file": "part3_functional_graph_script.txt",
-          "spoken_words": 638
+          "spoken_words": 663
         },
         {
           "file": "part3_dynamic_programming_script.txt",
-          "spoken_words": 1734
+          "spoken_words": 1748
         },
         {
           "file": "part3_topological_script.txt",
-          "spoken_words": 563
+          "spoken_words": 573
         }
       ],
       "missing_drafts": []
     },
     {
       "part": 4,
-      "spoken_words": 7311,
-      "estimated_minutes": 62.37,
+      "spoken_words": 7212,
+      "estimated_minutes": 61.53,
       "scripts": [
         {
           "file": "part4_knapsack_script.txt",
-          "spoken_words": 1184
+          "spoken_words": 1208
         },
         {
           "file": "part4_dijkstra_script.txt",
@@ -112,31 +112,31 @@
         },
         {
           "file": "part4_dsu_mst_script.txt",
-          "spoken_words": 690
+          "spoken_words": 726
         },
         {
           "file": "part4_fenwick_script.txt",
-          "spoken_words": 1425
+          "spoken_words": 1352
         },
         {
           "file": "part4_segment_sparse_script.txt",
-          "spoken_words": 843
+          "spoken_words": 854
         },
         {
           "file": "part4_debug_clinic_script.txt",
-          "spoken_words": 497
+          "spoken_words": 511
         },
         {
           "file": "part4_advanced_roadmap_script.txt",
-          "spoken_words": 923
+          "spoken_words": 794
         },
         {
           "file": "part4_practice_script.txt",
-          "spoken_words": 521
+          "spoken_words": 539
         }
       ],
       "missing_drafts": []
     }
   ],
-  "total_spoken_words": 28057
+  "total_spoken_words": 28245
 }

@@ -57,7 +57,9 @@ This proof is also an implementation checklist: if you omit the copy, you
 break the preservation step.
 
 [Highlight query2..5: P[5]=(2,2,1); P[1]=(0,1,0); subtract componentwise.]
-Now answer the query from position two through position five. Prefix five
+Maya asks for positions two through five without counting the line again.
+Rohail reaches for row five, then notices it includes one extra person.
+He needs to remove exactly that earlier prefix. Prefix five
 counts positions one through five. Prefix one counts the unwanted position
 before the query begins. Subtract component by component: two minus zero,
 two minus one, one minus zero. The answer is two one one, matching our direct

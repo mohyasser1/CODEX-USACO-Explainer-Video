@@ -1,0 +1,117 @@
+{
+  "passed": true,
+  "sections": 26,
+  "learner_pause_boundaries": [
+    {
+      "script": "part1_loop_trace_script.txt",
+      "question_scene": 14,
+      "answer_scene": 15
+    },
+    {
+      "script": "part1_functions_cost_script.txt",
+      "question_scene": 9,
+      "answer_scene": 10
+    },
+    {
+      "script": "part1_casework_script.txt",
+      "question_scene": 9,
+      "answer_scene": 10
+    },
+    {
+      "script": "part1_backtracking_script.txt",
+      "question_scene": 10,
+      "answer_scene": 11
+    },
+    {
+      "script": "part2_prefix_script.txt",
+      "question_scene": 12,
+      "answer_scene": 13
+    },
+    {
+      "script": "part2_ranges_script.txt",
+      "question_scene": 10,
+      "answer_scene": 11
+    },
+    {
+      "script": "part2_two_pointers_script.txt",
+      "question_scene": 12,
+      "answer_scene": 13
+    },
+    {
+      "script": "part2_binary_search_script.txt",
+      "question_scene": 12,
+      "answer_scene": 13
+    },
+    {
+      "script": "part2_greedy_script.txt",
+      "question_scene": 7,
+      "answer_scene": 8
+    },
+    {
+      "script": "part2_transfer_script.txt",
+      "question_scene": 0,
+      "answer_scene": 1
+    },
+    {
+      "script": "part3_graph_models_script.txt",
+      "question_scene": 9,
+      "answer_scene": 10
+    },
+    {
+      "script": "part3_bfs_script.txt",
+      "question_scene": 15,
+      "answer_scene": 16
+    },
+    {
+      "script": "part3_parity_script.txt",
+      "question_scene": 13,
+      "answer_scene": 14
+    },
+    {
+      "script": "part3_functional_graph_script.txt",
+      "question_scene": 6,
+      "answer_scene": 7
+    },
+    {
+      "script": "part3_dynamic_programming_script.txt",
+      "question_scene": 16,
+      "answer_scene": 17
+    },
+    {
+      "script": "part4_knapsack_script.txt",
+      "question_scene": 12,
+      "answer_scene": 13
+    },
+    {
+      "script": "part4_dijkstra_script.txt",
+      "question_scene": 11,
+      "answer_scene": 12
+    },
+    {
+      "script": "part4_fenwick_script.txt",
+      "question_scene": 12,
+      "answer_scene": 13
+    },
+    {
+      "script": "part4_debug_clinic_script.txt",
+      "question_scene": 0,
+      "answer_scene": 1
+    },
+    {
+      "script": "part4_debug_clinic_script.txt",
+      "question_scene": 2,
+      "answer_scene": 3
+    },
+    {
+      "script": "part4_practice_script.txt",
+      "question_scene": 0,
+      "answer_scene": 1
+    },
+    {
+      "script": "part4_practice_script.txt",
+      "question_scene": 2,
+      "answer_scene": 3
+    }
+  ],
+  "limitations": "Checks scene boundaries and parser only; cannot detect every semantic spoiler or prove timing/voice quality."
+}

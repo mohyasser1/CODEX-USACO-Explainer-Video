@@ -22,6 +22,9 @@ algorithmic meaning unless our model assigns them one. We will label
 all weights explicitly whenever cost matters.
 
 [Directed edge A->B contrasted with undirected A--B.]
+Rohail draws every connection with arrows both ways. Maya points to
+the microphone test: sound check depends on that test, but the test
+does not wait for sound check. He changes the dependency drawing.
 An undirected connection permits movement in either direction. A directed
 connection from A to B does not automatically permit movement from B
 to A. This affects both reachability and how we store input. For
@@ -98,6 +101,9 @@ onto a problem it was not designed to solve.
 Pause and model a setup rule saying that microphones must be tested
 before the sound check. Is the relationship directed? Should testing
 one microphone create a reverse prerequisite from the sound check?
+Pause the video and draw your directed model.
+
+[Separate answer reveal:test->sound check; no reverse dependency.]
 The answer is a directed dependency from the earlier task to the
 later one, with no automatic reverse edge. We will return to
 that model when we study topological ordering. For now, the key

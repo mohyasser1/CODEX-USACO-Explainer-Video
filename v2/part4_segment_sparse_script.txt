@@ -102,8 +102,9 @@ the query, possibly overlapping.
 
 [Overlapping minblocks safe; example[3,1,4],length3 uses[3,1] and[1,4].
 Minimum1; sums4+5=9 would double-count1 instead oftrue8.]
-The overlap is harmless for minimum because taking the
-minimum of a value with itself changes nothing. This
+Rohail tries adding the two overlapping blocks and gets nine rather than
+eight. Maya points to the repeated middle element. He keeps this overlapping
+query for minimum, where taking the minimum of a value with itself changes nothing. This
 property is called idempotence. On three, one, four,
 the two length-two blocks both include one, but
 their combined minimum is still correct. The same two-block

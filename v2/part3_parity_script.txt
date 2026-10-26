@@ -75,8 +75,8 @@ Both requirements cannot be true. Report zero assignments rather than
 quietly changing a previously assigned color and breaking an earlier edge.
 
 [Wrong algorithm recolors3 to0 to satisfy new edge, breaking D edge2-3.]
-This is a useful counterexample to an appealing wrong strategy: whenever
-an edge complains, repaint its neighbor. Repainting group three from one
+Rohail tries repainting group three to satisfy the new rule. Maya asks
+him to recheck the equipment-sharing pair, not just the edge he fixed. Repainting group three from one
 to zero satisfies the new same edge but violates the different edge from
 group two. A local repair can undo a previous requirement. Our traversal
 instead distinguishes an undiscovered vertex, which can be assigned, from

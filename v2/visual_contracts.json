@@ -9,7 +9,9 @@
     "An empty-list example replaces the previous input and resets n, index and total.",
     "A changed transfer input gets its own display; do not retain the original values.",
     "Label learner-controlled pauses honestly; do not imply an immediate answer allows substantial working time.",
-    "Narration alignment and listening must be reviewed before claiming precise synchronization."
+    "Narration alignment and listening must be reviewed before claiming precise synchronization.",
+    "Stage character predictions and incorrect trial overlays separately from the authoritative algorithm state; reveal their consequences when narrated.",
+    "For learner-controlled exercises, hide answer values and routes until the separately authored answer scene."
   ],
   "worked_examples": [
     {

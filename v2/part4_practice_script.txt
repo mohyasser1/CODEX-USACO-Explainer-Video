@@ -24,7 +24,11 @@ the resources available.
 [Second mixed exercise:shortest route versus cheapest spanningnetwork; limited
 items versus unlimited denominations.]
 Now compare two graph objectives: cheapest route from a
-start, and cheapest total network connecting every station.
+start, and cheapest total network connecting every station. Compare unlimited
+denominations with single-use items too. Pause the video and name the
+different objectives and state meanings.
+
+[Separate answer:nonnegative routes Dijkstra;network MST;distinct DP contracts.]
 The first suggests Dijkstra when weights are nonnegative; the
 second is a minimum-spanning-tree problem such as Kruskal's.
 Compare two selection contracts: unlimited denominations for an exact

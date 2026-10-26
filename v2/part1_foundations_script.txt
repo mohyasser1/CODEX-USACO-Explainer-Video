@@ -31,7 +31,9 @@ it fails. It is less useful when you rename the variable and hope the bug
 has forgotten where it lives.
 
 [Source file -> compiler -> executable -> process. Input and output arrows.]
-Start with a plain text file named main dot cpp. The source contains the
+Rohail saves his first instructions in main dot cpp and expects the file
+to run. Maya asks what turns those words into something the machine
+can execute. The source contains the
 instructions. A compiler checks the language rules and translates the source
 into an executable. Running the executable starts a process that carries out
 the program. Source code is like a written set list; compilation prepares a

@@ -16,8 +16,8 @@ the problem is underspecified.
 Count each vertex's incoming edges. Initially tasks zero and one
 have no prerequisites, so they are ready. Put them in a
 queue. Remove zero, append it to the answer, and remove
-its outgoing prerequisite edge to two. Two's remaining incoming count
-drops from two to one, so it is not ready yet.
+its outgoing prerequisite edge to two. Rohail reaches for task two, but Maya points to its other prerequisite.
+Its remaining count drops from two to one, so it is not ready yet.
 An incoming count means unprocessed prerequisites, not how many times
 we have seen the task mentioned in the narration.
 

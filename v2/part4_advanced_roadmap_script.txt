@@ -4,16 +4,10 @@ Do not present this section as full implementation mastery of advanced topics.
 
 [Roadmap labeled NEXT COURSES, not mastered badges. Arrows show prerequisites
 from graphs,DP,rangequeries and arithmetic rather than a flat list of names.]
-We now have several foundations, but competitive programming has
-more depth than four hours can teach. This next
-section is a study map, not a claim that
-hearing an algorithm's name means you can implement it.
-Follow the branch that matches a problem you can
-already describe. Division labels are approximate learning groups,
-not a fixed exhaustive USACO syllabus. The official archive
-and the community-maintained Guide linked in the companion material
-provide practice and further explanations; the Guide is not
-an official promise about what a division may contain.
+Rohail wants to put every advanced topic on tomorrow's practice list.
+Maya asks him to choose one question he can actually describe. These
+branches are future lessons, not mastered skills. Division labels are
+approximate; the community Guide is not an official USACO syllabus.
 
 [Tree branch: connectedacyclic graph,unique paths; entry-only Euler tour gives
 subtree interval[tin,tout); connect toFenwick lesson.]
@@ -24,9 +18,7 @@ indices. That can turn subtree queries into the range
 queries you already understand. Specify the traversal convention:
 some Euler tours record vertices more than once, so
 their indices do not have exactly the same meaning.
-The technique is valuable because of the subtree-contiguity proof,
-not because calling an array Euler makes a tree
-query disappear.
+Prove subtree contiguity before using the interval.
 
 [BinaryliftingLCA: powers-of-two ancestors; pathdistance depthu+depthv-2depthLCA.]
 Lowest common ancestor queries ask where two root paths
@@ -83,12 +75,8 @@ Further DP lessons include longest increasing subsequences, grid and
 sequence alignment states, interval DP and weighted interval scheduling.
 Each begins with a different state sentence and dependency
 order. Optimizations such as monotone-queue transitions, divide-and-conquer optimization
-or convex-hull techniques require additional structure. Do not apply
-one because a recurrence looks slow. First prove the
-monotonicity, ordering or algebraic form it needs, then
-show that the optimized computation returns the same states
-as the simpler correct method. A slow oracle is
-especially valuable while learning these transformations.
+or convex-hull techniques require additional structure. Prove the required monotonicity or algebraic structure, then compare
+optimized states with a slow oracle.
 
 [Strings branch:prefix-function fallback,KMP,Z,trie; hashingcollision caveat.]
 String algorithms exploit repeated prefix and suffix structure. KMP's
@@ -107,10 +95,7 @@ allow later augmentations to undo earlier routing choices, which
 is why a naive irrevocable greedy assignment can fail
 while a flow method succeeds. Bipartite matching can be
 modeled with unit capacities, and the max-flow/min-cut relationship
-connects a best flow with a limiting cut. This
-is a substantial next lesson, not a few lines
-to insert into a beginner solution without understanding residual
-capacity and correctness.
+connects a best flow with a limiting cut. Study residual capacity before implementing this next lesson.
 
 [Structures/offline/geometry branch with concrete workloads rather than badges.]
 Advanced data structures add new workload guarantees: lazy propagation
@@ -125,11 +110,7 @@ well-understood problem motivates them, and keep a simpler
 reference implementation for small cases whenever possible.
 
 [Roadmap close: select one nexttopic,one prerequisite,one practiceproblem.]
-Rohail does not need to learn every branch tonight.
-He needs a reliable next step. Pick one topic,
-check its prerequisites, work through one full example,
-then solve a new problem without copying the implementation.
-If the prerequisite is shaky, return to it.
-That is a productive training decision, not a demotion.
-The roadmap tells you where the current course ends
-and where sustained problem-solving practice begins.
+Rohail chooses subtree sums next: he already understands range queries,
+but must learn a rooted DFS ordering. He writes that prerequisite
+beside one practice problem. A smaller plan now has an executable
+first step; collecting every topic name did not.

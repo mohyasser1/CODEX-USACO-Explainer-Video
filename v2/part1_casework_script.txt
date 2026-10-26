@@ -24,8 +24,8 @@ distinguishes the two interpretations. We have designed a test before writing
 the program. That is allowed. The compiler will not report you for planning.
 
 [Case menu: start=1, start=2, start=3. Nothing else.]
-The missing initial position looks mysterious, but there are only three
-possibilities. Try each one. For a fixed start, the sequence of swaps completely
+Rohail wants to guess the missing starting booth. Maya gives him three
+blank scorecards instead: they can test every possible start, without guessing. Try each one. For a fixed start, the sequence of swaps completely
 determines what happens next. No guessing remains inside the simulation.
 This is exhaustive casework: divide the possibilities into a finite collection,
 solve every case, and combine the results in the way the question asks. Here

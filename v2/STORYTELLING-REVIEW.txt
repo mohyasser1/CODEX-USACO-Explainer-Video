@@ -1,0 +1,95 @@
+STORYTELLING EDITORIAL PASS — REVIEW CHECKPOINT
+
+Scope: all 26 sections in course_manifest.json, in prerequisite order.
+This is the production author's editorial pass, not independent signoff.
+No narration, voice settings or media were generated or changed.
+
+PART 1
+Foundations: source-versus-executable misunderstanding; preserve signed cash
+ledger incident before the loop. Loop: today's correct cash total leads to
+Maya's question about tomorrow's inputs, motivating the invariant. Functions:
+the unchanged caller counter motivates copies versus references. Casework:
+three scorecards replace guessing a hidden start. Backtracking: Rohail worries
+about a contaminated branch; inspecting the caller reveals value semantics.
+
+PART 2
+Sorting: Maya's positional question prevents destroying the guest-line order.
+Prefix: Rohail notices the unwanted first person in row five. Ranges: negative
+boundary events are distinguished from negative staff; a 27-versus-28 grid
+check motivates adding the doubly subtracted corner back. Two pointers:
+the signed refund ledger challenges the nonnegative-window contract. Binary
+search: trip boundaries test a smaller-capacity prediction; retaining a working
+midpoint answers Maya's challenge. Greedy: the first booking visibly blocks
+three others; Sam's shortest-duration suggestion is tested separately. The
+closing update-then-query transfer already has decisions and consequences;
+its story and numerical states were retained.
+
+PART 3
+Models: copying both arrow directions would invent a reverse prerequisite.
+BFS: Rohail tries to enqueue an already discovered room; existing distance
+and parent explain why he should not. Parity: repairing one edge breaks the
+equipment-sharing edge. Functional graph: waiting longer cannot reach station
+four when the same handoffs repeat. DP: retain the existing largest-first
+failure and Maya's two-token solution; move the table-building decision back
+to the students. Topological order: finishing one prerequisite does not release
+a task with another prerequisite still pending.
+
+PART 4
+Knapsack: the one-item desk challenges an ascending update that invents a copy.
+Dijkstra: retained the previously revised queue choice, stale offer and proof
+challenge. DSU: copying component-parent arrows into a cable plan invents links;
+record accepted edges separately. Fenwick: retained binary update proof and
+predictions, trimmed repeated advice. Segment/sparse: overlapping sum returns
+nine instead of eight, motivating the minimum-specific rule. Debug clinic
+already uses concrete challenges; its assignment exercise now explicitly asks
+for a learner-controlled pause. Roadmap: Rohail narrows an impossible all-topic
+plan to rooted DFS and subtree sums, with prerequisites. Closing practice now
+separates the second mixed-contract prompt from its answer.
+
+CONTINUITY AND REVEALS
+The course introduces Rohail, Maya and Sam before relying on them. The cash
+box starts empty, incoming total eight differs from net five, and all four
+receipts are staged before the loop; no audition is assumed. Later examples
+are introduced as distinct arrays, graphs or contract variants, not changes
+to the original ledger. Hypothetical large inputs remain explicitly labeled.
+All 22 explicit learner exercise pauses lead to separate labeled answer scenes.
+Additional splits repaired loop tracing, range updates/grid queries, greedy,
+graph modeling and closing comparisons. BFS question art no longer includes
+the new target's distance or parent. Production must hide answers during each
+question and label these as learner-controlled pauses, not built-in work time.
+
+VERIFICATION AND LIMITS
+The old word counter leaked some array-index notation from visual directions.
+script_text.py now parses whole-line direction blocks; regression cases include
+nested brackets and empty lists. Revised counts exclude these directions.
+22 final-output fixtures and all 10 authored intermediate fields still pass.
+No C++ algorithm or worked numerical contract changed in this editorial pass.
+No animation, caption timing, integrated pilot or listening approval is claimed.
+Full narration is still gated on slower Voice A feedback; an integrated corrected
+teaching segment must be validated before long-form production.
+
+Changed script files in this pass:
+v2/part1_backtracking_script.txt
+v2/part1_casework_script.txt
+v2/part1_foundations_script.txt
+v2/part1_functions_cost_script.txt
+v2/part1_loop_trace_script.txt
+v2/part2_binary_search_script.txt
+v2/part2_greedy_script.txt
+v2/part2_prefix_script.txt
+v2/part2_ranges_script.txt
+v2/part2_sorting_script.txt
+v2/part2_two_pointers_script.txt
+v2/part3_bfs_script.txt
+v2/part3_dynamic_programming_script.txt
+v2/part3_functional_graph_script.txt
+v2/part3_graph_models_script.txt
+v2/part3_parity_script.txt
+v2/part3_topological_script.txt
+v2/part4_advanced_roadmap_script.txt
+v2/part4_debug_clinic_script.txt
+v2/part4_dsu_mst_script.txt
+v2/part4_fenwick_script.txt
+v2/part4_knapsack_script.txt
+v2/part4_practice_script.txt
+v2/part4_segment_sparse_script.txt

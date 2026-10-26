@@ -35,7 +35,8 @@ whole-array sums. Then inspect an adapter that computes new
 minus old but forgets to update its stored old
 value after the first assignment. The Fenwick implementation itself
 can be perfectly correct while this surrounding state bookkeeping
-produces wrong answers.
+produces wrong answers. Pause the video and calculate both the correct
+and broken adapter results before continuing.
 
 [Correct sums9,9. Deltafirst4,second0. Staleold=-1 would add4again ->13.]
 The original sum is five. The first assignment adds

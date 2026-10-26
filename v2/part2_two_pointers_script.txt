@@ -142,6 +142,9 @@ whole length-two interval sums to three. But the simple
 window rule sees five first, removes it for being
 too large, and never recovers that left boundary.
 Adding the negative value would have repaired the sum.
+Rohail wants to reuse the window for the signed refund ledger. Maya points
+to the failed negative-value example: removing a negative can increase the
+sum, so their shrink argument no longer holds. He keeps the input contract.
 Our nonnegative-window program rejects negative inputs because they violate
 its contract. A different representation or algorithm is needed
 for that broader problem. Owning two pointers does not

@@ -75,6 +75,8 @@ proof obligation. You must show that every completion of the discarded branch
 fails, under the actual input constraints.
 
 [Two side-by-side panels: SUM PASSED BY VALUE; CHOSEN VECTOR SHARED.]
+Rohail worries that including five has contaminated the next branch. Maya
+asks him to inspect the caller's sum instead of resetting everything.
 Where was the undo? In this version, sum is passed by value. Every function
 call receives its own sum variable. The child did not alter the parent's sum,
 so there is nothing to subtract when the child returns. That is a consequence

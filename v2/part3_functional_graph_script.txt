@@ -12,8 +12,10 @@ rule makes the walk deterministic. Once we know the current vertex,
 there is no choice about the next one.
 
 [Walk0,1,2,3,1. Mark first visit positions0,1,2,3.]
-Start at zero. The walk visits one, then two, then three,
-then one again. Why must some vertex eventually repeat in any
+Rohail expects the tag to reach every station if he waits long enough.
+Maya records the actual handoffs: zero, one, two, three, then one again.
+Station four has not been reached. Waiting longer cannot change the
+successor choices, so they need to recognize the repeating part. Why must some vertex eventually repeat in any
 finite functional graph? There are only n possible vertices. A walk
 of n plus one visits cannot contain all distinct vertices. When
 a vertex repeats, its future repeats too, because its successor is

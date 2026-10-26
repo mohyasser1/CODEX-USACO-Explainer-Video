@@ -83,7 +83,9 @@ shortest distance is established. Optimize according to the requested output,
 not according to how exciting it feels to announce that we found it.
 
 [Pop4 sees5 already discovered. No new queue entry. Queue[5].]
-Now remove four. It also has an edge to five. But five was already
+Rohail sees room five again through room four and reaches to add it
+to the queue. Maya points to its existing distance and parent: they
+already have a shortest route. Five was already
 marked when it was enqueued, so we do not enqueue it again or overwrite
 its parent. This graph has two equally short routes to five. Keeping the
 first discovered route is fine because the contract asks for one shortest
@@ -157,7 +159,8 @@ squared storage and force different neighbor-scanning costs. Representation
 affects complexity. Drawing seven vertices makes either representation look
 small; the contest bounds tell you which one scales.
 
-[Transfer: target6 unreachable; add edge5-6; ask newdistance4 and parent5.]
+[Question only:original target6 unreachable; add edge5-6; ask distance and parent.
+Hide new distance and parent until the separate answer scene.]
 Pause for a transfer task. Add one edge between five and six. What
 distance will six receive, and what parent leads to it in this trace?
 Then explain why running another BFS from six in the original disconnected

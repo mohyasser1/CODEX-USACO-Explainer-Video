@@ -146,9 +146,7 @@ make thirteen instead. If a problem requests assignment,
 retain current values or query the point to compute
 new minus old before calling the addition routine. Negative
 deltas are allowed for sums, so a correction can
-decrease a value. Our tests compare many interleaved additions
-and queries with a plain mutable array, rather than
-testing only the initial construction and one convenient update.
+decrease a value. Tests compare interleaved operations with a plain array.
 
 [Limits: prefix subtraction requires invertible sum; arbitrary minimum cannot
 be recovered by subtracting two prefix minima.]
@@ -156,11 +154,8 @@ This version relies on addition and subtraction. You cannot
 replace plus with minimum everywhere and expect arbitrary range
 minimum queries to work by subtracting two prefix minima.
 A minimum does not contain enough information to undo
-an earlier prefix that way. Some specialized Fenwick variants
-support other workloads under additional restrictions, but our current
-contract is point addition and range sum. Keep that
-contract attached to the implementation rather than describing every
-binary-indexed structure as a universal replacement for a segment tree.
+an earlier prefix that way. Other Fenwick variants have other contracts; this one supports
+point addition and range sum.
 
 [Cost O(logn) operations,O(n) storage; initializationhereO(nlogn).]
 The tree uses linear storage. Each update and prefix
@@ -184,7 +179,4 @@ four and eight. What happens to the range
 two through seven? Nothing, because it excludes index
 zero. Both prefix seven and prefix two decrease
 by two, and their difference stays the same.
-This transfer question connects the block-update trace with the
-cancellation proof instead of treating them as separate tricks.
-If you can explain both views, the compact loops
-in the implementation have a meaning you can reconstruct.
+The block trace and prefix cancellation agree.

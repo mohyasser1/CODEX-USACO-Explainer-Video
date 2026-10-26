@@ -88,8 +88,9 @@ the valid-index argument explains why the condition is wrong.
 
 [Proof notation in words: before each condition check, total equals the
 sum of the first i elements. Do not display final numeric state throughout.]
-A complete numerical trace checks one execution. To explain
-why the loop works for every allowed input, state
+Maya accepts the five-dollar result, but asks whether this loop would
+work for tomorrow's different receipts. Rohail cannot prove that by pointing
+to today's cash box. A numerical trace checks one execution. To explain why the loop works for every allowed input, state
 an invariant: immediately before each condition check, total
 equals the sum of the first i elements. The
 timing in that sentence is deliberate. During the body,
@@ -175,8 +176,11 @@ valid implementation.
 [Transfer[-4,0,7,-3]; learner-controlled pause; reveal separate state table.]
 Pause and trace negative four, zero, seven and
 negative three. Record the index and total before every
-condition check, including the final false check. The
-states are zero with zero, one with negative four,
+condition check, including the final false check. Pause the video here
+and write your states before resuming.
+
+[Separate answer reveal: condition states(0,0),(1,-4),(2,-4),(3,3),(4,0).]
+The states are zero with zero, one with negative four,
 two with negative four, three with three, and
 four with zero. The zero transaction changes the processed
 prefix length even though it does not change the total.
