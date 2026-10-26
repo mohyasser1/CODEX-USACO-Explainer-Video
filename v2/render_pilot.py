@@ -1,5 +1,6 @@
 """V2 instructional pilot: state changes follow the relevant spoken sentence."""
 import json, math, subprocess, textwrap, os
+from functools import lru_cache
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
@@ -20,6 +21,7 @@ for beat in np.arange(0,len(speech)/sr,60/88):
 sf.write(OUT/'v2-pilot-mix.wav',np.clip(speech+music,-1,1),sr)
 W,H,FPS=1280,720,15
 BG='#0b1020'; FG='#edf3ff'; MINT='#62f2bc'; PINK='#ff77b7'; YELLOW='#ffdb72'
+@lru_cache(maxsize=24)
 def font(size,mono=False,bold=False):
     name='DejaVuSansMono' if mono else 'DejaVuSans'
     return ImageFont.truetype('/usr/share/fonts/truetype/dejavu/'+name+('-Bold' if bold else '')+'.ttf',size)
@@ -66,19 +68,27 @@ def frame(t):
     incremented='next_total' in s and t>=increment_time(s)
     active=s['i']+int(incremented)
     highlight=2 if incremented else s['line']
+    transfer=False; transfer_answer=False
+    if s is data['scenes'][-1]:
+        transfer_start=next(c['start'] for c in data['cues'] if c['text'].startswith('Your transfer task'))
+        answer_start=next(c['end'] for c in data['cues'] if c['text'].startswith('The totals are'))
+        transfer=t>=transfer_start;transfer_answer=t>=answer_start
+        if transfer:highlight=-1
     for j,line in enumerate(CODE):
         if j==highlight:d.rounded_rectangle((42,136+j*42,725,176+j*42),8,fill='#294c48')
         d.text((50,143+j*42),line,font=font(23,mono=True),fill=MINT if j==highlight else FG)
-    d.text((770,126),'TRANSACTIONS a',font=font(23,bold=True),fill=FG)
+    d.text((770,126),'TRANSFER INPUT' if transfer else 'TRANSACTIONS a',font=font(23,bold=True),fill=FG)
     value=s.get('next_total') if changed else s['total']
-    for j,v in enumerate(VALUES):
+    if transfer:active=4 if transfer_answer else -1;value=0 if transfer_answer else '?'
+    for j,v in enumerate([-4,0,7,-3] if transfer else VALUES):
         x=775+j*110
         d.rounded_rectangle((x,176,x+94,251),10,fill='#294c48' if j==active else '#182239',outline=MINT if j==active else '#51617d',width=3)
         d.text((x+25,193),str(v),font=font(30,mono=True),fill=FG)
         d.text((x+31,261),str(j),font=font(20),fill='#9dacbf')
-    d.text((775,311),f'i = {active}',font=font(29,mono=True),fill=YELLOW)
+    d.text((775,311),f'i = {active if active>=0 else "?"}',font=font(29,mono=True),fill=YELLOW)
     d.text((775,359),f'total = {value}',font=font(29,mono=True),fill=MINT)
     phase='BODY UPDATED; increment next' if changed and not incremented else 'At condition check'
+    if transfer:phase='Final condition check' if transfer_answer else 'Pause and trace this input'
     d.text((775,402),phase,font=font(19),fill=PINK)
     d.text((45,449),'CONTRACT: add ALL signed values, including refunds.',font=font(24,bold=True),fill=FG)
     d.text((45,495),'INVARIANT at each condition check:',font=font(23,bold=True),fill=YELLOW)

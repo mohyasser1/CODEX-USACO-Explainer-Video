@@ -1,0 +1,286 @@
+{
+  "source": "production/curriculum.json",
+  "source_sha256": "99dee7aa1d103198fe294c224eefa22c22bf424ac554a820c61989d02ca5a32b",
+  "chapters": 46,
+  "body_words": 9022,
+  "empty_code_fields": 26,
+  "word_count_definition": "Whitespace-delimited body beat narration only; excludes headings/hooks/questions/answers/code.",
+  "rows": [
+    {
+      "chapter": 1,
+      "title": "BESSIE VS. THE ALGORITHM",
+      "body_words": 206,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 2,
+      "title": "C++: THE FIRST SOUND CHECK",
+      "body_words": 205,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 3,
+      "title": "VARIABLES HAVE A STORAGE LIMIT",
+      "body_words": 198,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 4,
+      "title": "IF STATEMENTS AND THE LOOP TOUR",
+      "body_words": 196,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 5,
+      "title": "ARRAYS, VECTORS, AND STRINGS",
+      "body_words": 187,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 6,
+      "title": "FUNCTIONS, PAIRS, AND THE TOOLBOX",
+      "body_words": 201,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 7,
+      "title": "BIG O: THE BOUNCER OF RUNTIME",
+      "body_words": 192,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 8,
+      "title": "SIMULATION: READ THE FINE PRINT",
+      "body_words": 194,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 9,
+      "title": "BRUTE FORCE IS A VALID OPENING ACT",
+      "body_words": 204,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 10,
+      "title": "SORTING AND THE COMPARATOR COURT",
+      "body_words": 191,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 11,
+      "title": "BRONZE BOSS: THE FESTIVAL AUDIT",
+      "body_words": 192,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 12,
+      "title": "PREFIX SUMS: MIX ONCE, SAMPLE OFTEN",
+      "body_words": 188,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 13,
+      "title": "DIFFERENCE ARRAYS AND 2D PREFIXES",
+      "body_words": 203,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 14,
+      "title": "TWO POINTERS: THE COLLAB THAT MOVES",
+      "body_words": 192,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 15,
+      "title": "BINARY SEARCH: DELETE HALF THE DRAMA",
+      "body_words": 199,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 16,
+      "title": "GREEDY: CONFIDENCE NEEDS A PROOF",
+      "body_words": 189,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 17,
+      "title": "SETS, MAPS, AND COORDINATE COMPRESSION",
+      "body_words": 201,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 18,
+      "title": "GRAPHS: THE FESTIVAL GROUP CHAT",
+      "body_words": 200,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 19,
+      "title": "BFS AND FLOOD FILL",
+      "body_words": 179,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 20,
+      "title": "TREES, PARENTS, AND SUBTREES",
+      "body_words": 195,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 21,
+      "title": "SILVER BOSS: COORDINATE THE TOUR",
+      "body_words": 192,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 22,
+      "title": "DYNAMIC PROGRAMMING: REMEMBER THE REMIX",
+      "body_words": 208,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 23,
+      "title": "KNAPSACK: THE MERCH BAG HAS LIMITS",
+      "body_words": 200,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 24,
+      "title": "SEQUENCE DP, LIS, AND INTERVAL DP",
+      "body_words": 202,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 25,
+      "title": "DAGs, TOPOLOGICAL ORDER, AND CYCLES",
+      "body_words": 190,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 26,
+      "title": "DIJKSTRA: THE TOUR BUS ROUTER",
+      "body_words": 191,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 27,
+      "title": "DISJOINT SET UNION: MERGE THE FAN CLUBS",
+      "body_words": 191,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 28,
+      "title": "MINIMUM SPANNING TREES",
+      "body_words": 199,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 29,
+      "title": "MODULAR ARITHMETIC AND NUMBER THEORY",
+      "body_words": 200,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 30,
+      "title": "BITMASKS AND MEET IN THE MIDDLE",
+      "body_words": 210,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 31,
+      "title": "FENWICK TREES: THE DYNAMIC MIXER",
+      "body_words": 189,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 32,
+      "title": "SEGMENT TREES: THE RANGE QUERY STAGE",
+      "body_words": 193,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 33,
+      "title": "LAZY PROPAGATION: DEFER, DO NOT FORGET",
+      "body_words": 190,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 34,
+      "title": "EULER TOURS AND LOWEST COMMON ANCESTORS",
+      "body_words": 208,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 35,
+      "title": "TREE DP AND REROOTING",
+      "body_words": 190,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 36,
+      "title": "MONOTONIC STACKS, DEQUES, AND SWEEP LINES",
+      "body_words": 201,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 37,
+      "title": "STRONG COMPONENTS, BRIDGES, AND ARTICULATIONS",
+      "body_words": 196,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 38,
+      "title": "OFFLINE QUERIES AND PERSISTENCE",
+      "body_words": 195,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 39,
+      "title": "ADVANCED TREE DECOMPOSITIONS",
+      "body_words": 194,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 40,
+      "title": "STRING ALGORITHMS: FIND THE HOOK",
+      "body_words": 193,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 41,
+      "title": "FLOW, MATCHING, AND MINIMUM CUTS",
+      "body_words": 197,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 42,
+      "title": "GEOMETRY, DP OPTIMIZATION, AND THE FRONTIER",
+      "body_words": 196,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 43,
+      "title": "DEBUGGING: THE BUG HAS NO AURA",
+      "body_words": 195,
+      "on_screen_code": true
+    },
+    {
+      "chapter": 44,
+      "title": "CONTEST STRATEGY: MANAGE THE CLOCK",
+      "body_words": 193,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 45,
+      "title": "THE TRAINING ARC: A PLAN THAT SURVIVES MONDAY",
+      "body_words": 194,
+      "on_screen_code": false
+    },
+    {
+      "chapter": 46,
+      "title": "FINALE: THE PROOF DROPS",
+      "body_words": 203,
+      "on_screen_code": false
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+PART 1 DRAFT — BRANCHES, STACK FRAMES, AND UNDO
+Status: original narration draft with a brief user-supplied attributed hook.
+Not yet synthesized or timed. Bracketed directions are not spoken.
+
+[A set-list audition splits into INCLUDE and EXCLUDE lanes. Brief attribution:
+In My Feelings — Drake. User-supplied excerpt; classroom reinterpretation.]
+They gotta make some choices. We are borrowing that supplied song phrase as
+a mnemonic, not explaining the song's meaning. Bessie's next problem really
+does require choices: each transaction is either included or excluded. Given
+a list of signed integers and a target, count how many subsets of indices
+have that target sum. A subset is a choice of positions, not an ordering.
+Selecting the first and third positions is the same subset whether you point
+at the first or the third one first. But two different positions holding the
+same value are still different choices. These details belong in the contract,
+before we decide what the code should count.
+
+[Two labeled cards: index0 value5; index1 value-3. Target2.]
+Our small input is five and negative three, with target two. The four subsets
+are neither card, only the first, only the second, and both cards. Their sums
+are zero, five, negative three, and two. Exactly one subset works. Listing
+these possibilities by hand is easy with two positions. With twenty positions
+there are over a million subsets. That is still a possible brute-force scale
+for a suitably small problem. With one hundred thousand positions, it is not.
+The technique must fit the constraints. Bessie cannot solve an exponential
+guest list by telling the laptop to lock in harder.
+
+[Function contract: count_subsets(a,i,sum,target). Return value = number of
+ways to decide remaining indices i..n-1 and finish with target.]
+Define the state before writing the recursion. Index i is the next undecided
+position. Sum is the total of the positions selected so far. The function
+returns the number of successful completions using the remaining positions.
+The array and target stay fixed throughout the search. If i equals the array
+length, no decisions remain. Return one if sum equals target, otherwise zero.
+Returning one means this particular complete subset succeeds. It does not mean
+we found a mysterious number one inside the input. Returning zero means that
+leaf contributes no successful completion.
+
+[Root frame (i0,sum0) with an instruction pointer paused at the first call.]
+If a position remains, there are exactly two cases. Exclude it: call the function
+with index i plus one and the same sum. Include it: call with index i plus one
+and sum plus the current value. Add the two returned counts, because their
+successful subsets belong to disjoint cases. No subset both includes and
+excludes the current index. That is why we add, rather than take a maximum.
+Compare this with the previous lesson: there, the contract asked for the best
+score. Here it asks for a count. Similar-looking search trees can require
+different ways to combine answers.
+
+[Stack animation, one frame at a time: (0,0)->(1,0)->(2,0).]
+Now slow down and trace execution. The root frame has index zero and sum zero.
+It first explores excluding five. That creates a new frame with index one and
+sum zero. The root frame waits; it has not vanished. The new frame excludes
+negative three, creating index two, sum zero. Index two equals the array length,
+so this is a leaf. Zero is not the target two. Return zero and remove that
+leaf frame. We are back in the frame at index one, sum zero, with its first
+answer now known. A recursive call returns to the place that called it, not
+to the beginning of the entire program.
+
+[Second child (2,-3) returns0. Frame (1,0) combines0+0 and returns0.]
+The frame at index one now explores including negative three. That leaf has
+sum negative three, so it also returns zero. The two results add to zero.
+Return zero to the root. The root has now learned that no subset excluding
+five can reach target two. That is a result of the explored cases, not a guess.
+Keep its other branch visible but unvisited. A diagram that lights up the whole
+tree at once can hide the most important idea: the program only executes one
+call at a time, while earlier frames remember where to resume.
+
+[Root's second child (1,5). Its leaves (2,5)->0 and (2,2)->1.]
+Next the root includes five. The new frame has index one and sum five.
+Excluding negative three reaches sum five, returning zero. Including negative
+three reaches sum two, returning one. This frame combines zero plus one and
+returns one. The root combines its earlier zero with this one and returns one.
+That is the final count. Notice that five temporarily exceeded target two,
+yet a later negative value brought it back down. Pruning a branch merely because
+sum exceeds target would discard the only successful subset. Pruning is a
+proof obligation. You must show that every completion of the discarded branch
+fails, under the actual input constraints.
+
+[Two side-by-side panels: SUM PASSED BY VALUE; CHOSEN VECTOR SHARED.]
+Where was the undo? In this version, sum is passed by value. Every function
+call receives its own sum variable. The child did not alter the parent's sum,
+so there is nothing to subtract when the child returns. That is a consequence
+of how we represented the state, not a special exemption for recursion.
+If we also maintain one shared vector of chosen indices to print the subset,
+then inclusion pushes an index into that vector. After exploring the child,
+pop that index before exploring another branch. Otherwise the next branch
+inherits a choice it did not make. The original set-list motto is: choose a
+track, explore the stack, undo the change when you come back. That rhyme describes
+shared mutable state. Do not blindly add an undo to an unchanged value parameter.
+
+[Proof tree with each root-to-leaf path labeled by binary choices.]
+Why does enumeration find every subset exactly once? Every subset determines
+one include-or-exclude decision for each index. Following those decisions leads
+to one leaf. Conversely, each leaf's decisions identify one subset of indices.
+Two different decision sequences differ at some index, so they cannot be the
+same index subset. This gives both completeness and absence of duplicates.
+The base case checks exactly the requested sum. Combining the disjoint branch
+counts therefore gives the correct count for every state, including the root.
+Termination is separate: each call increases i by one, so the number of remaining
+undecided positions strictly decreases until it reaches zero.
+
+[Tree levels: 1,2,4,...,2^n leaves. Stack depth n+1, not 2^n.]
+There are two choices at each of n positions, giving two to the n leaves.
+With constant work per call and no copied growing vectors, runtime is order
+two to the n. The recursion stack holds only one active path, so its depth is
+order n. Do not confuse the total number of calls with the number simultaneously
+waiting on the stack. If we copy or print every full subset, the cost can gain
+an extra factor of n. Our count-only implementation does neither. Its contract
+allows at most twenty values, each with magnitude at most one billion. Long
+long safely stores all possible sums here; the maximum count is two to twenty.
+
+[Transfer card: [2,2], target2; [],target0; choose/recurse/undo diagram blank.]
+Pause for three predictions. For two positions both holding two and target two,
+how many subsets work? For an empty input and target zero, how many? Finally,
+if a shared chosen-index vector is not popped after returning from inclusion,
+what wrong state survives into the next branch? Explain the bug in words before
+editing code. Then run the companion program and compare your answers.
+
+[Answers on a new scene, not visible during the pause prompt.]
+The duplicate-value input has two successful singleton subsets, one per index.
+The empty input has one subset, the empty subset, and its sum is zero. The
+missing pop leaves an index selected in a branch that may have excluded it.
+We have learned three habits: define a state precisely, trace call and return
+separately, and justify what gets restored. Later, dynamic programming will
+reuse answers when different paths reach the same meaningful state. First we
+must understand the tree we are trying to avoid recomputing. Memoization is
+not a spell that repairs an incorrectly defined state.

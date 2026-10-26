@@ -1,0 +1,110 @@
+V2 engagement revision: selected user-supplied lyric hooks, 2026-10-26
+
+Use brief, clean hooks within original teaching scenes, never as padding.
+These are classroom mnemonic reinterpretations, not claims about song meaning.
+Attribute the referenced songs: SICKO MODE, Travis Scott featuring Drake;
+God's Plan, Drake. No endorsement is implied. Narration remains an original
+synthetic character; music is original procedural percussion, without the
+recordings, melodies or artist voice imitation. Do not publish raw lyric dumps.
+
+PART 1 — Boolean switch
+Hook: 'Like a light' (SICKO MODE, user-supplied passage).
+Visual: a light switches on exactly when i<n evaluates true. Show i=3,n=4
+and then i=4,n=4. The joke: the compiler does not negotiate for an encore.
+Explain that bool has two values, comparisons produce bool, and condition
+evaluation selects control flow. Distinguish assignment = from equality ==.
+Transfer: evaluate x<0 && x%2==0 for -4, -3, 0; short-circuit explanation.
+
+PART 2 — Plan before performance
+Reference God's Plan by title as a transition to 'write your algorithm's plan.'
+Draw contract -> representation -> candidate method -> proof -> cost -> code.
+The joke: 'Trust me, bro' is neither a feasibility predicate nor a proof.
+During binary search show a full capacity check before moving a bound. Repeated
+checks are necessary at DIFFERENT capacities, unlike redundant DP states.
+Do not falsely imply all repeated work is removable or that a plan proves itself.
+
+PART 3 — Repeated work and cycles
+Use the supplied repeated 'wishin'' motif briefly to introduce duplicate states
+in a coin-change recursion tree. Color identical remaining-amount states alike.
+The joke: six backup singers all solving amount seven do not make six new states.
+Memoization stores one answer per state; first define what the state includes.
+If remaining coin choices differ, equal amounts alone are NOT the same state.
+Use a short 'circle blocks' reference from supplied SICKO MODE to motivate a
+functional-graph walk. Show tail 0->1->2->3->1 and the first repeated vertex.
+Explain why repeat implies a cycle only along a deterministic successor walk;
+ordinary graph revisits need more context than this analogy provides.
+
+PART 4 — Connectivity, not literal physical glue
+Clean hook: 'I'm the glue' (SICKO MODE, supplied passage, profanity omitted).
+Two component colors merge after a successful DSU union. A repeated union of
+already-connected endpoints changes nothing. Explain representative versus
+original graph edge: a parent pointer is an implementation detail, not a road.
+The joke: the manager tries to charge for merging the same friend group twice.
+Use the supplied 'bad things' motif from God's Plan to launch adversarial tests:
+empty input where allowed, duplicates, disconnected graphs, large sums, stale
+priority-queue entries. Show which incorrect algorithm each case exposes.
+
+Rivalry references remain factual and high-level: two competing performers can
+both claim victory, but algorithm choices require a contract, proof and measured
+cost. Avoid allegations, personal attacks or claims of participation/endorsement.
+
+These hooks supplement, rather than replace, the minute-budgeted explanations.
+The initial signed-total pilot predates this engagement revision; integrate the
+hooks in the full scripts after pilot teaching/visual feedback.
+
+ADDITIONAL USER-SUPPLIED MATERIAL
+In My Feelings (Drake): the supplied choices/options passage can open the
+backtracking scene. Immediately draw include/exclude branches, a call stack,
+and the finite remaining-index measure that proves termination. Original joke:
+'Queue, are you FIFO?' introduces the queue discipline; do not label it a lyric.
+The supplied learning passage can accompany a retrieval checkpoint, without
+substituting praise for a concrete answer or an explanation of an error.
+
+F**kin' Problems (A$AP Rocky featuring Drake, 2 Chainz and Kendrick Lamar):
+use an original, sanitized 'I've got a coding problem' refrain for competing
+solutions and counterexamples. Attribute the reference discreetly in companion
+materials. The provided pep-talk/pep-rally fragment can motivate an audience
+of test cases, each holding its expected output. Exclude the explicit material.
+Do not imply that the sanitized original refrain is a quotation from the song.
+
+CONSOLIDATED ADDITIONAL MAPPING (no further pilot rewrites required)
+Hold On, We're Going Home — Drake featuring Majid Jordan: supplied 'left your
+mark' hook -> mark vertices when enqueuing in BFS; 'going home' -> reconstruct
+a route by following parent pointers backward and then reversing. Distinguish
+visited status from distance and parent. DFS also marks visits but does not
+generally find shortest paths in an unweighted graph. Show unreachable vertices.
+
+One Dance — Drake featuring Wizkid and Kyla: supplied 'one more time' hook ->
+the tempting extra loop iteration at i==n, explicitly rejected by i<n. Supplied
+'take it slow' hook -> instruction-by-instruction tracing before optimization.
+Use a neutral word such as BANANA for a counting joke: six characters, three
+A characters. Separate length from frequency and index range 0..5. Do not use
+the supplied alcohol-brand outro or encourage alcohol use.
+
+Attribution overview:
+Part 1: SICKO MODE (Boolean state/reset); In My Feelings (branch choices);
+        One Dance (iteration boundaries and tracing).
+Part 2: God's Plan (algorithm plan and counterexamples).
+Part 3: God's Plan (duplicate DP states); SICKO MODE (functional cycles);
+        Hold On, We're Going Home (BFS discovery and parent paths).
+Part 4: SICKO MODE (DSU); sanitized original coding-problem refrain referencing
+        F**kin' Problems (competing methods); God's Plan (adversarial tests).
+These short hooks are sourced only from passages supplied by the user. The
+surrounding explanations, jokes, diagrams and procedural beat are original.
+
+Additional user-labeled 'Fortworth' text: metadata is unverified; do not assert
+an artist or official title. The supplied 'long distance' fragment can motivate
+fictional weighted routes: a direct edge of cost 10 versus two edges of costs
+3 and 4. BFS minimizes edge count in an unweighted model; Dijkstra minimizes
+total weight when weights are nonnegative. The cheaper route here has MORE
+edges. No actual travel-price claim, recording, or additional lyric retrieval.
+
+User-labeled 'Solar Eclipse' text: title/artist metadata remains unverified.
+The supplied 'I don't even check' phrase is an anti-example: immediately show
+the test that catches an incorrect boundary. Do not reproduce the explicit
+surrounding material or imply testing can replace a proof. Optional fictional
+place-name graph must say its edges/weights are invented, not travel advice.
+
+User-labeled 'High Fives' text: retain only an original high-five celebration
+for passing the test suite. No verses or unverified release claims. Passing
+tests is evidence on tested cases, not a universal proof of correctness.

@@ -1,0 +1,114 @@
+PART 1 DRAFT — SIMULATION AND EXHAUSTIVE CASEWORK
+Status: original narration draft; timing not synthesized. Not a finished lesson.
+Visual directions in brackets are not narrated. Programs use stdin/stdout.
+
+[Contract card: three numbered booths, one golden backstage pass. n events,
+each (left booth, right booth, guessed booth). Swap first, then score the guess.]
+Bessie has hidden one golden pass in one of three booths. The manager keeps
+swapping booth contents, then guessing where the pass is. We know every swap
+and every guess. We do not know where the pass started. Find the largest score
+that any starting position could produce. A correct guess earns one point.
+The pass does not move because the manager points at it. Only a swap moves it.
+That distinction is our first defense against accidentally programming a
+different game. This is an original festival framing of the simulation pattern
+you will practice in the official Bronze problem Shell Game. Read that original
+statement separately for its exact format and historical file names.
+
+[Two timelines: SWAP -> GUESS marked correct; GUESS -> SWAP crossed out.]
+Before designing an algorithm, settle the order of events. On every row, perform
+the swap first and evaluate the guess second. A beautifully optimized solution
+to the wrong order still gets the wrong answer. Let the first row swap booths
+one and two, then guess booth one. If the pass began at booth two, that first
+guess is correct. If you score before swapping, it is not. This one-row example
+distinguishes the two interpretations. We have designed a test before writing
+the program. That is allowed. The compiler will not report you for planning.
+
+[Case menu: start=1, start=2, start=3. Nothing else.]
+The missing initial position looks mysterious, but there are only three
+possibilities. Try each one. For a fixed start, the sequence of swaps completely
+determines what happens next. No guessing remains inside the simulation.
+This is exhaustive casework: divide the possibilities into a finite collection,
+solve every case, and combine the results in the way the question asks. Here
+the question asks for the largest achievable score, so combine by maximum.
+Do not sum the scores: the pass started in one place, not three places at once.
+Our manager calls three simultaneous backstage passes a multiverse promotion.
+Our contract calls it a different problem.
+
+[Event table: (1,2,1), (2,3,3), (1,3,1). Track start=2.]
+Let's trace one case without skipping any state. Suppose the starting position
+is two. Position is two and score is zero. First swap one and two. Because
+position equals the second swapped booth, it becomes one. The guess is one,
+so increase score to one. Second swap two and three. Position is one, which
+is neither endpoint, so position stays one. Guess three is wrong; score stays
+one. Third swap one and three. Position changes from one to three. Guess one
+is wrong. This starting case finishes with score one.
+
+[Same events, start=1. Freeze after second row for prediction.]
+Now reset both position and score. Start at one with score zero. First swap
+moves the pass to two; guessing one is wrong. Second swap moves the pass from
+two to three; guessing three is correct, giving score one. Third swap moves
+it from three to one; guessing one is correct, giving score two. The key word
+was reset. Reusing the previous score would blend different hypothetical worlds.
+Back, reboot: this is our classroom mnemonic for resetting state between cases,
+not a claim about the meaning of the song reference. The code must actually
+perform the reset. A soundtrack cannot initialize your variables.
+
+[Third column start=3; final scores start1=2, start2=1, start3=0.]
+For start three, the first swap leaves the pass at three and the guess one
+misses. The second swap moves it to two and the guess three misses. The final
+swap leaves it at two and the guess one misses. Score zero. We have tested all
+three possible starts. The largest score is two, so that is the answer.
+Keep the table visible while we translate the rule into code. Each row must
+mean the same thing in the picture, the explanation and the program.
+
+[Code focus: if(position==a) position=b; else if(position==b) position=a;]
+If the pass is at the first endpoint, move it to the second. Otherwise, if it
+is at the second endpoint, move it to the first. Otherwise, leave it alone.
+That word otherwise matters. With two independent if statements, a pass at
+the first endpoint could move to the second and immediately move back, because
+the second condition would see the newly changed value. An else-if tests the
+second possibility only when the first did not happen. This is a control-flow
+bug, not a reason to abandon simulation. Try a single swap of one and two
+starting at one; it exposes the mistake immediately.
+
+[Invariant under each event row.]
+Here is the proof. After processing the first k events, position equals the
+pass location produced by those k swaps from this chosen start, and score
+equals the number of correct guesses among those k events. Before processing
+anything, the position is the chosen start and the score is zero. One more
+event moves the position exactly according to its swap, then increases score
+exactly when its guess matches the new position. Both parts of the invariant
+remain true. After all events, score is therefore correct for this start.
+Every possible initial position is one of our three cases. Taking their maximum
+gives an achievable score and cannot miss a better possible initial position.
+That last sentence is the completeness argument. Simulation correctness alone
+would not justify checking only two of the three starts.
+
+[Cost chart: 3n event visits, n stored event triples, constant case state.]
+The outer loop runs three times. The inner loop processes n events each time.
+Three times n grows linearly with n, so the runtime is order n. Not every pair
+of nested loops is quadratic: inspect how many iterations each one performs.
+Storing all events takes order n space. The position, score, and best variables
+use constant extra space. An alternative tracks all three hypothetical starts
+while reading each event once, requiring only three states. That saves event
+storage but makes the beginner trace less direct. Both have linear time. We
+choose the version whose reasoning we can explain clearly before optimizing.
+
+[Practice card, answer hidden on next scene.]
+Transfer task: one event swaps one and three, then guesses two. What is the
+best possible score? Name the successful initial position. Now change the
+question to ask how many starting positions achieve the best score. Explain
+which combination step must change. Pause, write your answer, and run the
+small case before looking at the solution. If you cannot state the invariant
+without reading it, explain one event aloud and rebuild the statement from
+what your variables actually mean.
+
+[Separate answer scene.]
+The best score is one, achieved by starting at two: that pass is not moved,
+and the guess matches it. For counting maximizing starts, first determine the
+best score and count how many case scores equal it, or maintain best and a
+count carefully as you inspect cases. The simulation inside a fixed start is
+unchanged. The question determines how we combine its results. That separation
+between modeling a case and combining cases will appear again in brute force,
+dynamic programming and graph components. It is a small habit with a very
+large backstage pass.
