@@ -1,0 +1,138 @@
+BESSIE'S ALGORITHM TOUR — V2 production plan, 2026-10-26
+
+Status: curriculum proposal; no full V2 render authorized until pilot QA.
+V1 remains preserved. V2 outputs use /workspace/usaco-film-v2/output.
+
+AUDIT OF THE ACTUAL V1
+46 chapters, 9,022 body narration words, 80:42 delivered runtime. Most
+chapters contain 179–210 body words. 26 on-screen code fields are empty.
+This is a useful orientation, but not a sustained beginner curriculum.
+The supplement DOES implement and test many algorithms, including Fenwick,
+DSU, BFS, Dijkstra, knapsack, LIS, Kruskal, segment/lazy trees and rerooting.
+An implementation in that supplement is not evidence of a full film lesson.
+
+Specific repairs:
+* Chapter 4's narrated sum and positive-only displayed sum disagree. V2
+  uses one signed input throughout narration, code, trace and invariant.
+* Chapter 9 needs a real call-stack/choose/recurse/undo trace.
+* Chapter 13 needs numerical four-region inclusion–exclusion.
+* Chapter 15 needs capacity -> packing -> days -> predicate -> bounds.
+* Chapter 19 needs queue state, discovery timing and disconnected graphs.
+* Chapter 24 needs separate DP state meanings and dependency orders.
+* Chapters 37–42 are advanced recognition introductions, not full courses.
+* Explicit casework, functional graphs, sparse tables and Eulerian traversal
+  were missing from narration. Add depth-ranked coverage, not a name dump.
+
+TEACHING CONTRACT
+Deep dive = contract and prerequisites; one continuous numerical trace;
+state/invariant; correctness argument; time and auxiliary space; failing
+alternative; complete runnable program; transfer exercise and separate answer.
+Introduction = mechanism and one trace, explicitly not implementation mastery.
+Roadmap = when useful, prerequisites and follow-up practice; no mastery claim.
+Division names describe approximate learning groups, not an official syllabus.
+
+FOUR-PART MINUTE BUDGET (240 minutes; targets, not measured audio yet)
+Each part includes brief retrieval prompts and answers within these budgets.
+Long coding time is learner-controlled pausing, not padded silence.
+
+PART 1 — FROM SOURCE CODE TO A CORRECT BRONZE SOLUTION (60 min)
+  0–5   Tour contract, compile/run/input/output, errors and debugging loop.
+  5–15  Types, expressions, overflow before assignment, signed arithmetic;
+         statement-by-statement execution and memory-value diagrams.
+ 15–27  Conditions/loops, vectors/string indices, boundaries; signed-total
+         deep dive with empty/negative inputs and a loop invariant.
+ 27–35  Functions, value/reference, scope, call stack, vector size/capacity;
+         complexity and why a reference can be invalidated by reallocation.
+ 35–47  Simulation plus exhaustive casework: three possible starting states;
+         full problem-to-code derivation and tests (Shell Game follow-up).
+ 47–57  Backtracking subsets: choose/recurse/undo, leaf coverage, exponential
+         cost; subset-sum trace and why premature pruning fails with negatives.
+ 57–60  Retrieval, transfer solution, practice route and build checklist.
+
+PART 2 — MAKE REPEATED WORK DISAPPEAR (60 min)
+  0–8   Sorting, comparators, pairs, maps/sets; order versus physical distance.
+  8–20  Prefix sums deep dive: half-open indexing, cancellation proof, counts.
+ 20–27  Difference-array reconstruction and numerical 2D inclusion–exclusion
+         introductions; full implementations in companion exercises.
+ 27–37  Sorted two-sum deep dive; discard proof, overflow; nonnegative window
+         introduction with a negative-value counterexample.
+ 37–52  Binary search on truck capacity deep dive, including greedy predicate
+         proof, infeasible capacities, feasible bound and shrinking interval.
+ 52–58  Interval scheduling greedy introduction and exchange proof; wrong
+         duration-first and earliest-start alternatives.
+ 58–60  Retrieval/transfer and official Breed Counting practice link.
+
+PART 3 — RELATIONSHIPS AND REUSABLE SUBPROBLEMS (60 min)
+  0–8   Graph models, directed/undirected, adjacency lists, disconnected cases.
+  8–21  BFS deep dive: evolving queue, mark-on-enqueue, distances and parents;
+         DFS/flood-fill comparison and recursion-depth risk.
+ 21–33  Parity graph constraints deep dive: same/different edges, propagation,
+         contradiction and components; Great Revegetation follow-up.
+ 33–39  Functional graphs introduction: tail/cycle, visited states and repeated
+         successors; binary jumping linked to part 4's roadmap.
+ 39–55  DP deep dive: minimum coins, state/transition/base/unreachable/order,
+         bottom-up trace, optimal-substructure proof, greedy counterexample.
+ 55–60  DAG/topological order introduction: dependencies, cycle detection;
+         transfer solutions and graph/DP practice plan.
+
+PART 4 — GOLD FOUNDATIONS AND THE ADVANCED MAP (60 min)
+  0–12  0/1 knapsack deep dive: two-dimensional state then descending capacity;
+         show ascending update accidentally reuses an item.
+ 12–23  Dijkstra deep dive: nonnegative weights, stale entries, relaxation,
+         priority queue, finalized-distance proof; negative-edge counterexample.
+ 23–30  DSU/Kruskal introduction: components, path compression, union by size,
+         sorted edges, cycle rejection and cut-property explanation.
+ 30–42  Fenwick deep dive: binary lowbit blocks, prefix query, point addition,
+         interval answer and an update trace; static-prefix contrast.
+ 42–49  Segment tree introduction: associative merge, identity, query/update;
+         sparse-table static idempotent RMQ contrast and limitations.
+ 49–57  Prerequisite-organized roadmap: Euler tour/LCA/tree DP; LIS/interval DP;
+         sieve/GCD/modular arithmetic/bitmask/MITM; SCC/bridges/Eulerian walks;
+         lazy/persistent structures; strings/flow/geometry/DP optimization.
+         These are introductions or named follow-ups, not fully taught units.
+ 57–60  Mixed technique-selection exercise, test oracle method, training plan.
+
+RUNTIME POLICY
+Draft approximately 28,000–32,000 spoken words, calibrated against the pilot's
+measured speech rate. Target 57–63 minutes per completed part, 228–252 total.
+Measure synthesized audio before finalizing. If short, deepen worked examples;
+if long, move clearly marked extension material into the workbook. Never stretch
+speech unnaturally, repeat passages or add silence to manufacture four hours.
+
+ENTERTAINMENT / VISUAL DESIGN
+Original synthetic narrator, DJ Byte, manages Bessie's chaotic festival tour.
+Every joke must reveal a misconception or motivate a state change. A manager
+who calls every algorithm 'linear' loses his backstage pass to a growth chart.
+Queue animation is a concert line; priority is distance, not follower count.
+Backtracking is a set-list audition with visible undo, not random teleporting.
+Original rap transitions recap an invariant in plain language immediately after.
+Song titles and factual high-level Drake–Kendrick rivalry references can frame
+competition; no lyrics, recordings, artist voice imitation or endorsement.
+
+PILOT GATE
+First produce the signed-total execution/invariant lesson (~5–8 minutes), with
+readable code, synchronized state transitions, captions and a separate solution.
+Request parent QA of teaching pace, humor, voice and diagram legibility before
+full renders. Continue source, exercises and independent tests while QA is pending.
+
+VERIFICATION / DELIVERY
+Use separate V2 names/IDs. Cloud only; current free scratch about 29 GB.
+Run C++ boundary and seeded independent-oracle tests. Capture diagram states
+from the same input data, but validate answers using independent calculations.
+Check PDF layout, caption coverage, sampled frames, A/V timestamps and full decode.
+Record hashes and sizes. Keep each final upload below the tool's 100 MiB limit.
+Remote download tools currently cap local round-trip downloads at 32 MiB; do not
+claim large-file remote hash equivalence unless an actual supported route verifies it.
+No full human listening signoff unless explicitly obtained.
+
+SOURCES REVIEWED 2026-10-26
+Official archive/training (not a fixed exhaustive syllabus):
+https://usaco.org/index.php?page=training
+Official resources and current season notices:
+https://usaco.org/index.php?page=resources
+https://usaco.org/
+Practice anchors (historical file I/O; course programs explicitly adapt to stdin):
+https://usaco.org/index.php?page=viewproblem2&cpid=891
+https://usaco.org/index.php?page=viewproblem2&cpid=572
+https://usaco.org/index.php?page=viewproblem2&cpid=920
+Community learning map (not an official USACO syllabus): https://usaco.guide/

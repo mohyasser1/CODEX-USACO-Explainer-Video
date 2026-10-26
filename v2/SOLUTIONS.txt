@@ -1,0 +1,36 @@
+V2 WORKING SOLUTIONS — attempt EXERCISES.txt first
+
+1. Condition-check states: (0,0), (1,-4), (2,-4), (3,3), (4,0).
+For n=0 the first check fails; the initialized total is already the empty sum.
+[-1] distinguishes all-values sum -1 from positive-only sum 0.
+For counting negatives: count equals the number of negative values among the
+first i elements. Initialize count=0; increment only if a[i]<0. Each iteration
+extends the processed prefix by exactly one element, preserving the statement.
+
+2. Both operands are int, so int addition occurs before destination conversion.
+Use 1LL*a+b or static_cast<long long>(a)+b. The magnitude of every prefix sum
+is at most 100000*10^9=10^14, within the standard guaranteed long long range.
+The test suite includes both extremes, but this bound proves all allowed inputs.
+
+3. From (0,0), exclude 5 to (1,0), or include 5 to (1,5).
+Their leaves at i=2 have sums 0,-3,5,2. Exactly one leaf matches target 2.
+Pruning (1,5) because 5>2 discards the include-both solution. With negatives,
+a later choice can reduce the sum. The two singleton index subsets of [2,2]
+are distinct, even though their values match. The empty subset has sum zero.
+Each recursion path selects or excludes every index exactly once, giving a
+bijection between leaves and index subsets. Thus enumeration is complete and
+has no duplicates. Time O(2^n), stack O(n). The function uses value parameters,
+so each child has its own sum; the parent's sum was never changed. A shared
+chosen vector is mutated, so pop_back restores it after exploring a choice.
+
+4. Component {1,2,3} has colors 0,0,1 or 1,1,0. Vertex 4 is independent.
+There are four assignments: binary 100. The additional same edge 1–3
+contradicts the forced different colors, leaving zero assignments.
+Each edge imposes color[v]=color[u] XOR parity. Propagating from a root fixes
+every reachable color. A conflict violates a necessary edge condition. If no
+conflict appears, every checked edge is satisfied. Flipping all colors leaves
+each XOR unchanged, giving exactly two assignments per connected component.
+Components are independent: multiply their choices to obtain 2^components.
+A different self-loop is impossible; a same self-loop imposes no restriction.
+Queue traversal scans each vertex and each adjacency entry a constant number
+of times: O(n+m) time, O(n+m) stored graph and O(n) extra color/queue space.

@@ -1,0 +1,39 @@
+V2 WORKING EXERCISES — solutions are in SOLUTIONS.txt
+These are original course exercises unless an official link is given.
+
+1. Execution and invariant
+Trace [-4,0,7,-3]. Record i and total before every condition check, including
+the final false check. Explain why n=0 prints zero. Write a one-element input
+that distinguishes summing all values from summing only positive values.
+Then change the task to count negative values. State the new invariant first.
+
+2. Overflow
+Two int variables both hold 1,500,000,000. Explain why assigning their sum to
+long long does not necessarily make the expression safe. Supply a safe expression.
+For n<=100000 and |a[i]|<=10^9, prove a long long running total is sufficient.
+
+3. Backtracking
+Count subsets of indices of [5,-3] summing to 2. Draw both branches at each
+position, label (i,sum), and mark the leaves. Explain why pruning whenever
+sum exceeds target loses a valid answer. Are the two singleton subsets of
+[2,2] different when counting subsets of indices? What about the empty subset?
+Extension: maintain a chosen-index vector with push/recurse/pop; explain why
+passing sum by value does not require an explicit subtraction on return.
+
+4. Parity constraints
+Four vertices: 1 same as 2; 2 different from 3; vertex 4 isolated.
+Find the number of assignments and write it in binary. Add edge 1 same as 3:
+what changes? Explain why one arbitrary root color per component is sufficient
+to detect inconsistency, and why flipping every color preserves the constraints.
+Give a self-loop that is impossible and one that is harmless.
+
+5. Official transfer practice (visit original statement for exact contract)
+Shell Game, Bronze, simulation/casework:
+https://usaco.org/index.php?page=viewproblem2&cpid=891
+Breed Counting, Silver, prefix counts:
+https://usaco.org/index.php?page=viewproblem2&cpid=572
+The Great Revegetation, Silver, parity constraints:
+https://usaco.org/index.php?page=viewproblem2&cpid=920
+These historical statements specify file I/O. Course programs explicitly use
+stdin/stdout; adapt file handling if your chosen judge requires historical names.
+Do not inspect an editorial until you have written your model and attempted it.
