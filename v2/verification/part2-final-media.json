@@ -56,5 +56,6 @@
     87,
     88
   ],
-  "frame_inspection": "Passed: 33 actual encoded frames inspected across all eight chapters, including prefix counts, inclusion-exclusion, batch updates, pointer counterexamples, binary-search bounds and interval scheduling."
+  "frame_inspection": "Passed: 33 actual encoded frames inspected across all eight chapters, including prefix counts, inclusion-exclusion, batch updates, pointer counterexamples, binary-search bounds and interval scheduling.",
+  "independent_review": "PASS: parent downloaded65,111,128bytes and matched SHA256; full decode;49 frames across8 chapters;92 exact captions;7 pause/reveal pairs separated. No listening claim."
 }

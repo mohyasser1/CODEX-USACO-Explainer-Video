@@ -1,6 +1,6 @@
 {
   "title": "Rohail's School Music Night: USACO Foundations and Beyond",
-  "production_status": "Full cloud production in progress at approved 1.25x integrated-segment tempo; all 30 sections and four substantive extension labs complete; measured runtimes pending",
+  "production_status": "All four final videos measured, locally checked and uploaded. Independent final media review and remote hashes passed for Parts1,2,3; Part4 independent review pending. No full human listening claim.",
   "provisional_words_per_minute": 144.02032802082323,
   "part_duration_target_seconds": 3600,
   "part_duration_tolerance_seconds": 180,
@@ -18,7 +18,10 @@
         "part1_casework_script.txt",
         "part1_backtracking_script.txt"
       ],
-      "missing_drafts": []
+      "missing_drafts": [],
+      "measured_runtime_seconds": 3603.083333,
+      "local_media_checks": "passed: full decode, clipping, AV timing, exact manuscript captions and bounded sampled-frame review",
+      "independent_final_review": "passed"
     },
     {
       "number": 2,
@@ -33,7 +36,10 @@
         "part2_greedy_script.txt",
         "part2_transfer_script.txt"
       ],
-      "missing_drafts": []
+      "missing_drafts": [],
+      "measured_runtime_seconds": 3669.114,
+      "local_media_checks": "passed: full decode, clipping, AV timing, exact manuscript captions and bounded sampled-frame review",
+      "independent_final_review": "passed"
     },
     {
       "number": 3,
@@ -47,7 +53,10 @@
         "part3_dynamic_programming_script.txt",
         "part3_topological_script.txt"
       ],
-      "missing_drafts": []
+      "missing_drafts": [],
+      "measured_runtime_seconds": 3666.4,
+      "local_media_checks": "passed: full decode, clipping, AV timing, exact manuscript captions and bounded sampled-frame review",
+      "independent_final_review": "passed"
     },
     {
       "number": 4,
@@ -63,16 +72,21 @@
         "part4_advanced_roadmap_script.txt",
         "part4_practice_script.txt"
       ],
-      "missing_drafts": []
+      "missing_drafts": [],
+      "measured_runtime_seconds": 3967.091,
+      "local_media_checks": "passed: full decode, clipping, AV timing, exact manuscript captions and bounded sampled-frame review",
+      "independent_final_review": "pending"
     }
   ],
   "limits": [
-    "Word-count estimates are not measured lesson audio durations.",
-    "Complete first drafts still require editorial, code-to-visual and learner review.",
+    "Historical word-count estimates are retained for drafting provenance; measured runtimes above are authoritative.",
+    "Editorial/code/model checks and bounded final-media sampling do not replace full human listening or learner feedback.",
     "Advanced introductions and roadmap items do not establish implementation mastery.",
-    "Independent coding practice occurs through learner-controlled pauses outside delivered runtime."
+    "Independent coding practice uses learner-controlled pauses outside delivered runtime."
   ],
   "delivery_tempo_multiplier": 1.25,
   "provisional_delivered_words_per_minute": 144.00687713218173,
-  "provisional_rate_basis": "Measured integrated1.25x review851words/354.533285seconds; full parts still require measurement"
+  "provisional_rate_basis": "Historical drafting estimate from integrated1.25x review; superseded by per-part measured_runtime_seconds.",
+  "measured_total_runtime_seconds": 14905.688333,
+  "duration_target_note": "Historical target was60\u00b13minutes per part. Part4 is66:07, retaining substantive worked examples; total4:08:26."
 }
