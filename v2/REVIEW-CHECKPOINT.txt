@@ -18,8 +18,8 @@ independent reviewer additionally ran 142 extension cases.
 Workbook: 41 pages, 32 exercises, separate solutions, complete C++17 programs,
 measured chapter timestamps. No orphan code headings or short spill pages.
 
-All four parts uploaded. Part 1 independent final review and remote hash passed.
-Parts 2–4 local bounded media checks and remote raw-fetch sizes passed;
+All four parts uploaded. Parts 1 and 3 independent final review and remote hashes passed.
+Parts 2 and 4 local bounded media checks and remote raw-fetch sizes passed;
 independent full-file remote hash/final review remain pending.
 Final delivery links and local hashes are in FINAL-DELIVERY.txt.
 Full-file human listening was not performed by this agent.

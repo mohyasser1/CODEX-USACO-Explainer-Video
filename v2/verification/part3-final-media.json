@@ -48,5 +48,6 @@
     88,
     90
   ],
-  "frame_inspection": "Passed: 27 actual encoded frames visually inspected across all 7 chapters, including graph layouts, BFS queue and transfer, grid variants, parity contradiction, functional cycle, DP states/question/reveal and topological cycle."
+  "frame_inspection": "Passed: 27 actual encoded frames visually inspected across all 7 chapters, including graph layouts, BFS queue and transfer, grid variants, parity contradiction, functional cycle, DP states/question/reveal and topological cycle.",
+  "independent_review": "PASS: parent downloaded 65,622,857 bytes and matched SHA256 94f1e438abc249a7370b19158dc6a5e4bb0be29f97d4f6a621017680a408ee13; full decode; AV67ms; exact91 captions;7 contiguous chapters;42 frames and6 question/reveal pairs. No listening claim."
 }
