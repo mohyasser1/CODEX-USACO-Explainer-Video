@@ -143,7 +143,8 @@ Part 1: 7030 narration words; estimated 59.97 minutes at the provisional pace.
 Part 2: 7037 narration words; estimated 60.03 minutes at the provisional pace.
 Part 3: 6966 narration words; estimated 59.43 minutes at the provisional pace.
 Part 4: 7212 narration words; estimated 61.53 minutes at the provisional pace.
-Total: 27567 words, approximately 234 minutes at the candidate pace.
+Total: 28,245 narration words; estimated 240.96 minutes at the
+provisional 117.22 words/minute pace (about 4 hours 1 minute, not measured audio).
 These estimates exclude metadata and stage directions. They are not measured
 full-part audio durations or finished videos. course_manifest.json records
 prerequisite order; draft-progress.json records reproducible counts.
