@@ -190,6 +190,9 @@ def stamp(sec):
  ms=round(sec*1000);h,ms=divmod(ms,3600000);m,ms=divmod(ms,60000);s,ms=divmod(ms,1000)
  return f'{h:02}:{m:02}:{s:02},{ms:03}'
 def render(part):
+ renderer_files=[Path(__file__),ROOT/'production/art.py',ROOT/'production/learner_panels.py']
+ renderer_sha=hashlib.sha256(b''.join(p.read_bytes() for p in renderer_files)).hexdigest()
+ source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
  dest=OUT/f'part{part}';timing=json.loads((dest/'timing.json').read_text());cues=timing['cues'];duration=timing['duration']/TEMPO
  manifest=json.loads((ROOT/'course_manifest.json').read_text());expected=manifest['parts'][part-1]['scripts'];assert set(expected)==set(c['source'] for c in cues),'Missing extended chapters'
  # Save reusable chapter and subtitle references, scaled with audio/video together.
@@ -228,7 +231,7 @@ def render(part):
  muxed.replace(mp4)
  subprocess.run(['ffmpeg','-v','error','-xerror','-i',str(mp4),'-f','null','-'],check=True)
  probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-show_chapters','-of','json',str(mp4)]));ds=[float(s['duration']) for s in probe['streams'] if s['codec_type'] in ['video','audio']];assert max(ds)-min(ds)<.2
- report=dict(part=part,duration=float(probe['format']['duration']),source_audio_duration=timing['duration'],tempo=TEMPO,words=timing['words'],delivered_wpm=timing['words']*60/float(probe['format']['duration']),bytes=mp4.stat().st_size,sha256=hashlib.sha256(mp4.read_bytes()).hexdigest(),full_decode='passed',av_end_difference=max(ds)-min(ds),chapters=len(chapters),caption_paragraphs=len(cues),human_listening='Not performed by agent',state_timing='Authored paragraph-level trace panels, not word-synchronized execution')
+ report=dict(part=part,renderer_sha256=renderer_sha,source_commit=source_commit,pedagogical_status='Authored learner-panel renderer; encoded-frame review pending',duration=float(probe['format']['duration']),source_audio_duration=timing['duration'],tempo=TEMPO,words=timing['words'],delivered_wpm=timing['words']*60/float(probe['format']['duration']),bytes=mp4.stat().st_size,sha256=hashlib.sha256(mp4.read_bytes()).hexdigest(),full_decode='passed',av_end_difference=max(ds)-min(ds),chapters=len(chapters),caption_paragraphs=len(cues),human_listening='Not performed by agent',state_timing='Authored paragraph-level trace panels, not word-synchronized execution')
  assert len(probe.get('chapters',[]))==len(chapters)
  report['embedded_english_subtitles']=any(s['codec_type']=='subtitle' for s in probe['streams'])
  (dest/'verification.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2),flush=True)
