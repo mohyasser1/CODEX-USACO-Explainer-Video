@@ -1,0 +1,432 @@
+{
+  "voice": {
+    "voice": "af_heart",
+    "speed": 0.74,
+    "lang": "en-us",
+    "continuous": false,
+    "sentence_pause": 0.3,
+    "clause_pause": 0.12
+  },
+  "cues": [
+    {
+      "key": "story",
+      "title": "THE TICKET DESK",
+      "text": "Rohail is helping Maya at their school music night. The cash box started empty, and his program reports eight dollars, but Maya counts only five. Before anyone launches a snack-table investigation, she asks him to check the receipts.",
+      "mode": "story",
+      "i": null,
+      "total": null,
+      "highlight": null,
+      "note": "Program: $8     Cash box: $5",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 0,
+      "speech_end": 20.8,
+      "end": 21.3
+    },
+    {
+      "key": "contract",
+      "title": "READ EVERY RECEIPT",
+      "text": "Three dollars came in, two were refunded, another five came in, and one more was refunded. Rohail counted the payments but skipped the refunds. Eight is money received before refunds; their question asks how much remains. He needs a signed total.",
+      "mode": "story",
+      "i": null,
+      "total": null,
+      "highlight": null,
+      "note": "+3 -2 +5 -1     Include refunds",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 21.3,
+      "speech_end": 42.88933333333333,
+      "end": 43.38933333333333
+    },
+    {
+      "key": "input",
+      "title": "THE COUNT IS NOT A PAYMENT",
+      "text": "There's no need for us to rush this through. Maya asks what the first input number means. Four tells the program how many transactions follow; it is not another payment. The next lines create four vector elements and read the signed values into them.",
+      "mode": "input",
+      "i": null,
+      "total": null,
+      "highlight": 2,
+      "note": "Input: 4, then 3 -2 5 -1",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 43.38933333333333,
+      "speech_end": 64.29599999999999,
+      "end": 64.79599999999999
+    },
+    {
+      "key": "initialize",
+      "title": "GIVE THE STATE A MEANING",
+      "text": "Rohail starts total at zero, using long long for the accumulated money. The loop starts its index at zero too. These variables happen to agree now, but they mean different things: the index is a position, and total is a balance.",
+      "mode": "trace",
+      "i": 0,
+      "total": 0,
+      "highlight": 3,
+      "note": "Before the first condition check",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 64.79599999999999,
+      "speech_end": 85.21199999999999,
+      "end": 85.71199999999999
+    },
+    {
+      "key": "check0",
+      "title": "CHECK BEFORE READING",
+      "text": "At the condition check, zero is less than four, so index zero is legal. Rohail points to the first receipt, positive three. Checking the condition gives permission to enter the body; it has not added the receipt yet.",
+      "mode": "trace",
+      "i": 0,
+      "total": 0,
+      "highlight": 4,
+      "note": "0 < 4 is true; body has not run",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 85.71199999999999,
+      "speech_end": 104.76266666666666,
+      "end": 105.26266666666666
+    },
+    {
+      "key": "add0",
+      "title": "ONE STATEMENT CHANGES THE BALANCE",
+      "text": "The highlighted addition reads that three and stores zero plus three in total. The balance is now three, while the index is still zero. Maya keeps her finger on the receipt: changing the balance does not secretly move to the next position.",
+      "mode": "trace",
+      "i": 0,
+      "total": 3,
+      "highlight": 5,
+      "note": "Assignment: 0 + 3 = 3; i unchanged",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 105.26266666666666,
+      "speech_end": 125.46533333333332,
+      "end": 125.96533333333332
+    },
+    {
+      "key": "next1",
+      "title": "MOVE, THEN CHECK AGAIN",
+      "text": "Only now does the increment move the index to one. One is less than four, so the next body execution is allowed. Its selected value is negative two, the refund that the first program ignored.",
+      "mode": "trace",
+      "i": 1,
+      "total": 3,
+      "highlight": 4,
+      "note": "Increment to 1; then 1 < 4 is true",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 125.96533333333332,
+      "speech_end": 143.33066666666664,
+      "end": 143.83066666666664
+    },
+    {
+      "key": "add1",
+      "title": "THE REFUND COUNTS TOO",
+      "text": "Rohail predicts that the balance should fall, and the addition confirms it: three plus negative two is one. Maya does not need a separate refund formula. The sign already tells this same statement which way the balance changes.",
+      "mode": "trace",
+      "i": 1,
+      "total": 1,
+      "highlight": 5,
+      "note": "Assignment: 3 + (-2) = 1",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 143.83066666666664,
+      "speech_end": 163.35066666666665,
+      "end": 163.85066666666665
+    },
+    {
+      "key": "next2",
+      "title": "KEEP THE ORDER OF EXECUTION",
+      "text": "The increment advances to index two, and two is less than four. The five-dollar payment is selected next. The stored balance is still one at this condition check, because the body has not processed that payment yet.",
+      "mode": "trace",
+      "i": 2,
+      "total": 1,
+      "highlight": 4,
+      "note": "2 < 4 is true; total still 1",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 163.85066666666665,
+      "speech_end": 182.49599999999998,
+      "end": 182.99599999999998
+    },
+    {
+      "key": "add2",
+      "title": "THE NEXT PAYMENT",
+      "text": "Adding five changes the balance from one to six. Rohail writes six in the total box and leaves the index at two until the increment runs. His trace follows the actual statements rather than changing every box at once.",
+      "mode": "trace",
+      "i": 2,
+      "total": 6,
+      "highlight": 5,
+      "note": "Assignment: 1 + 5 = 6",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 182.99599999999998,
+      "speech_end": 202.772,
+      "end": 203.272
+    },
+    {
+      "key": "next3",
+      "title": "THE LAST VALID POSITION",
+      "text": "The increment moves to three. Three is less than four, so there is one more valid body execution. Index three selects negative one, the final refund. Four elements have positions zero through three, not one through four.",
+      "mode": "trace",
+      "i": 3,
+      "total": 6,
+      "highlight": 4,
+      "note": "3 < 4 is true; select -1",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 203.272,
+      "speech_end": 223.624,
+      "end": 224.124
+    },
+    {
+      "key": "add3",
+      "title": "MATCH THE CASH BOX",
+      "text": "Six plus negative one gives five, matching the money Maya counted. Rohail wants to celebrate, but the program still has to finish its loop correctly. A correct balance does not give it permission to read beyond the vector.",
+      "mode": "trace",
+      "i": 3,
+      "total": 5,
+      "highlight": 5,
+      "note": "Assignment: 6 + (-1) = 5",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 224.124,
+      "speech_end": 242.85466666666667,
+      "end": 243.35466666666667
+    },
+    {
+      "key": "stop",
+      "title": "THE CHECK THAT STOPS THE LOOP",
+      "text": "The increment makes the index four. Four is less than four is false, so execution leaves the loop without reading an element at index four. Changing the condition to less than or equal would attempt an invalid extra read.",
+      "mode": "trace",
+      "i": 4,
+      "total": 5,
+      "highlight": 4,
+      "note": "4 < 4 is false; no a[4] read",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 243.35466666666667,
+      "speech_end": 262.6186666666667,
+      "end": 263.1186666666667
+    },
+    {
+      "key": "output",
+      "title": "PRINT THE REQUESTED ANSWER",
+      "text": "Now the output statement prints five and a newline. It prints the balance, not the index. The example works, but Maya asks whether tomorrow's different receipts would work too. That question takes us from checking one run to explaining the general rule.",
+      "mode": "trace",
+      "i": 4,
+      "total": 5,
+      "highlight": 7,
+      "note": "Output: 5",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 263.1186666666667,
+      "speech_end": 284.772,
+      "end": 285.272
+    },
+    {
+      "key": "proof0",
+      "title": "PROOF: START WITH NOTHING PROCESSED",
+      "text": "At every condition check, total should equal the sum of the first i values. This is our invariant. Initially, i is zero and total is zero, so the statement holds: the first zero values form an empty prefix with sum zero.",
+      "mode": "proof",
+      "i": 0,
+      "total": 0,
+      "highlight": 3,
+      "note": "Initialization: sum of first 0 values = 0",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 285.272,
+      "speech_end": 305.51733333333334,
+      "end": 306.01733333333334
+    },
+    {
+      "key": "proofstep",
+      "title": "PROOF: EXTEND THE PREFIX",
+      "text": "Suppose the invariant holds at a valid index k. The body adds the next value to the sum of the first k values, producing the sum of the first k plus one values. The increment then advances the index, restoring the invariant for the next check.",
+      "mode": "proof",
+      "i": "k",
+      "total": "prefix(k)",
+      "highlight": 5,
+      "note": "Before: prefix(k)  \u2192  after body: prefix(k+1)\nThen increment: i = k+1",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 306.01733333333334,
+      "speech_end": 327.64933333333335,
+      "end": 328.14933333333335
+    },
+    {
+      "key": "proofend",
+      "title": "PROOF: STOP WITH EVERYTHING PROCESSED",
+      "text": "The index increases by one each iteration until it reaches the count. At that final check, the invariant says total is the sum of all n values, exactly our requested answer. The changing index also explains why the loop eventually stops.",
+      "mode": "proof",
+      "i": "n",
+      "total": "prefix(n)",
+      "highlight": 4,
+      "note": "Termination: first n values = entire input",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 328.14933333333335,
+      "speech_end": 350.592,
+      "end": 351.092
+    },
+    {
+      "key": "empty",
+      "title": "A REAL EMPTY-INPUT CASE",
+      "text": "Maya now supplies a count of zero, with no transactions after it. This is a new input, so the vector is empty and total starts at zero. The first check asks whether zero is less than zero; it is false. No element is read.",
+      "mode": "trace",
+      "i": 0,
+      "total": 0,
+      "highlight": 4,
+      "note": "NEW INPUT: n = 0; 0 < 0 is false",
+      "values": [],
+      "pause": 0.5,
+      "start": 351.092,
+      "speech_end": 371.7,
+      "end": 372.2
+    },
+    {
+      "key": "transfer",
+      "title": "YOUR TURN \u2014 PAUSE THE VIDEO",
+      "text": "Try a fresh list: negative four, zero, seven and negative three. Record the index and balance before every condition check, including the final false check. Pause the video now to make your own trace; the next scene reveals the answer when you resume.",
+      "mode": "question",
+      "i": null,
+      "total": null,
+      "highlight": null,
+      "note": "Write five condition-check states.\nLearner-controlled pause; answer on next scene.",
+      "values": [
+        -4,
+        0,
+        7,
+        -3
+      ],
+      "pause": 3,
+      "start": 372.2,
+      "speech_end": 394.06666666666666,
+      "end": 397.06666666666666
+    },
+    {
+      "key": "answer",
+      "title": "COMPARE YOUR TRACE",
+      "text": "The condition-check states are index zero with total zero, one with negative four, two with negative four, three with three, and four with zero. The zero transaction advanced the processed prefix without changing its sum. The correct final output is zero.",
+      "mode": "answer",
+      "i": null,
+      "total": null,
+      "highlight": null,
+      "note": "(i, total): (0,0), (1,-4), (2,-4), (3,3), (4,0)",
+      "values": [
+        -4,
+        0,
+        7,
+        -3
+      ],
+      "pause": 0.5,
+      "start": 397.06666666666666,
+      "speech_end": 420.192,
+      "end": 420.692
+    },
+    {
+      "key": "cost",
+      "title": "A SMALL PROGRAM WITH A GENERAL ARGUMENT",
+      "text": "The loop makes one addition per transaction, so its time is linear in the input count. This version stores a vector, using linear memory. Rohail now has more than a lucky five-dollar answer: he can trace a new input and explain why the same loop works.",
+      "mode": "closing",
+      "i": null,
+      "total": null,
+      "highlight": null,
+      "note": "Time O(n) \u00b7 stored input O(n) \u00b7 loop state O(1)",
+      "values": [
+        3,
+        -2,
+        5,
+        -1
+      ],
+      "pause": 0.5,
+      "start": 420.692,
+      "speech_end": 442.708,
+      "end": 443.208
+    }
+  ],
+  "duration": 443.208,
+  "words": 851,
+  "overall_wpm": 115.20550170574538,
+  "caption_method": "Full paragraph shown for exact synthesized paragraph interval; no inferred word timestamps.",
+  "voice_user_approval": "2026-10-27 slower Voice A approved; integrated technical QA pending"
+}

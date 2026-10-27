@@ -1,0 +1,28 @@
+INTEGRATED REVIEW — EXACT AUDIO-BASED SCENE BOUNDARIES
+Seconds from start; image changes on next12fps frame.
+
+0.000–20.800 speech; scene ends21.300: story / THE TICKET DESK
+21.300–42.889 speech; scene ends43.389: contract / READ EVERY RECEIPT
+43.389–64.296 speech; scene ends64.796: input / THE COUNT IS NOT A PAYMENT
+64.796–85.212 speech; scene ends85.712: initialize / GIVE THE STATE A MEANING
+85.712–104.763 speech; scene ends105.263: check0 / CHECK BEFORE READING
+105.263–125.465 speech; scene ends125.965: add0 / ONE STATEMENT CHANGES THE BALANCE
+125.965–143.331 speech; scene ends143.831: next1 / MOVE, THEN CHECK AGAIN
+143.831–163.351 speech; scene ends163.851: add1 / THE REFUND COUNTS TOO
+163.851–182.496 speech; scene ends182.996: next2 / KEEP THE ORDER OF EXECUTION
+182.996–202.772 speech; scene ends203.272: add2 / THE NEXT PAYMENT
+203.272–223.624 speech; scene ends224.124: next3 / THE LAST VALID POSITION
+224.124–242.855 speech; scene ends243.355: add3 / MATCH THE CASH BOX
+243.355–262.619 speech; scene ends263.119: stop / THE CHECK THAT STOPS THE LOOP
+263.119–284.772 speech; scene ends285.272: output / PRINT THE REQUESTED ANSWER
+285.272–305.517 speech; scene ends306.017: proof0 / PROOF: START WITH NOTHING PROCESSED
+306.017–327.649 speech; scene ends328.149: proofstep / PROOF: EXTEND THE PREFIX
+328.149–350.592 speech; scene ends351.092: proofend / PROOF: STOP WITH EVERYTHING PROCESSED
+351.092–371.700 speech; scene ends372.200: empty / A REAL EMPTY-INPUT CASE
+372.200–394.067 speech; scene ends397.067: transfer / YOUR TURN — PAUSE THE VIDEO
+397.067–420.192 speech; scene ends420.692: answer / COMPARE YOUR TRACE
+420.692–442.708 speech; scene ends443.208: cost / A SMALL PROGRAM WITH A GENERAL ARGUMENT
+
+Caption timing is paragraph-level, not word-level. The transfer question ends
+at394.067s, followed by a3s pause cue; answers begin397.067s. Learners pause
+the video for whatever working time they need.

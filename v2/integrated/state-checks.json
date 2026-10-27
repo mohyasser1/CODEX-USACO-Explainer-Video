@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "numerical_steps": 8,
+  "proof_states": 3,
+  "empty_input": true,
+  "transfer_answer_separate": true,
+  "input_reading_visible": true,
+  "output_highlight": true,
+  "limits": "Authored state and fixture checks, not listening or independent rendered-frame QA.",
+  "caption_intervals": "21 exact paragraph speech bounds; pauses excluded"
+}

@@ -65,8 +65,8 @@ nested brackets and empty lists. Revised counts exclude these directions.
 22 final-output fixtures and all 10 authored intermediate fields still pass.
 No C++ algorithm or worked numerical contract changed in this editorial pass.
 No animation, caption timing, integrated pilot or listening approval is claimed.
-Full narration is still gated on slower Voice A feedback; an integrated corrected
-teaching segment must be validated before long-form production.
+Slower Voice A was approved on 2026-10-27. An integrated corrected teaching
+segment must still be validated before long-form production.
 
 Changed script files in this pass:
 v2/part1_backtracking_script.txt

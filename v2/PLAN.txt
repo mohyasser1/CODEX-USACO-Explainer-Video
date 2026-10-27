@@ -97,7 +97,7 @@ RUNTIME POLICY
 Target four parts of 57–63 minutes each, approximately four hours total.
 The current Voice A storytelling candidate measures 117.22 overall words/minute:
 170 words in 87.016 seconds, including 5.8 seconds of purposeful reflection.
-The user selected the voice identity; slower delivery approval is still pending.
+The user approved the slower Voice A storytelling delivery on 2026-10-27.
 Use roughly 6900–7500 spoken words per part as a provisional drafting guide,
 approximately 28000–30000 total, then measure each actual synthesized lesson.
 A short audition does not guarantee the pace of a technical explanation.
@@ -121,12 +121,12 @@ pedagogical hooks with original explanations; no additional lyric retrieval,
 recordings, melody copying, artist voice imitation or implied endorsement.
 
 PILOT GATE
-Current slower Voice A storytelling sample awaits user acceptance:
+Approved slower Voice A storytelling sample (2026-10-27):
 https://drive.google.com/file/d/1gbjoxQKnuYsq96xYeQEo94fAFNj2qpXP/view
-After acceptance, validate a short integrated Rohail teaching segment with
+Next validate a short integrated Rohail teaching segment with
 correct semantic state transitions, readable code and captions before scaling
 full renders. Do not reuse the rejected presentation template. Continue scripts,
-complete examples and independent tests while listening feedback is pending.
+complete examples and independent tests while integrated technical QA is pending.
 
 SUPERSEDED PILOT CHECKPOINT — NOT APPROVED VOICE/STORY
 6:35.2 MP4 delivered at:

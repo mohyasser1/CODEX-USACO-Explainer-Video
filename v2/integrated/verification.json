@@ -1,0 +1,24 @@
+{
+  "bytes": 9476899,
+  "sha256": "182053f00b624190352c297fd318edc06eb5e46d4865924212bd4963f9802b36",
+  "duration": 443.25,
+  "overall_wpm": 115.20550170574538,
+  "words": 851,
+  "full_decode": "passed",
+  "av_end_difference": 0.0009999999999763531,
+  "captions": "Exact paragraph audio bounds, quantized to 12fps for burned-in display; no word-level alignment claim",
+  "state_mapping": "One authored semantic state per narration paragraph; checked independently by verify.py",
+  "human_listening": "Not performed by agent; user approved prior slower voice sample; integrated independent QA pending",
+  "encoded_frame_inspection": {
+    "sampled_keys": [
+      "add1",
+      "output",
+      "proof0",
+      "proofstep",
+      "empty",
+      "transfer",
+      "answer"
+    ],
+    "result": "Production agent visually inspected extracted encoded frames; independent QA pending"
+  }
+}
