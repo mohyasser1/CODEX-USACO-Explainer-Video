@@ -21,9 +21,14 @@ def verify(n):
   a=np.frombuffer(raw,dtype=np.float32);assert np.isfinite(a).all();peak=max(peak,float(np.max(np.abs(a))))
  proc.stdout.close();assert proc.wait()==0
  assert peak<1.0,('clipping',peak)
+ important={
+ 'part1_foundations_script.txt':{2,3,15},'part1_loop_trace_script.txt':{3,4,6,9,14,15},'part1_functions_cost_script.txt':{6},'part1_string_lab_script.txt':{9,11,12},'part1_backtracking_script.txt':{4,6,8,10,11},
+ 'part2_prefix_script.txt':{4,5,9,13},'part2_ranges_script.txt':{6,7,8,11},'part2_dashboard_lab_script.txt':{4,9,13},'part2_two_pointers_script.txt':{1,2,8,9,11,13},'part2_binary_search_script.txt':{7,8,9,13},'part2_greedy_script.txt':{2,4,8},'part2_transfer_script.txt':{1},
+ 'part3_graph_models_script.txt':{5},'part3_bfs_script.txt':{3,6,10,15,16},'part3_grid_lab_script.txt':{6,13,14},'part3_parity_script.txt':{4,6,7},'part3_functional_graph_script.txt':{7},'part3_dynamic_programming_script.txt':{9,13,17},'part3_topological_script.txt':{4,6},
+ 'part4_knapsack_script.txt':{4,8,9,10,13},'part4_lis_lab_script.txt':{3,7,9,11,14},'part4_dijkstra_script.txt':{2,3,4,6,12},'part4_dsu_mst_script.txt':{2},'part4_fenwick_script.txt':{3,6,8,9,13},'part4_segment_sparse_script.txt':{2,4,8},'part4_debug_clinic_script.txt':{1,3,4},'part4_practice_script.txt':{1}}
  selected=[]
  for j,c in enumerate(t['cues']):
-  if c['scene']==0 or any(x in c['direction'].lower() for x in ['separate answer','answer scene','empty input','proof initialization','amount3','pop2','point addition index4']):selected.append((j,c))
+  if c['scene']==0 or c['scene'] in important.get(c['source'],set()) or any(x in c['direction'].lower() for x in ['separate answer','answer scene','empty input','proof initialization','amount3','pop2','point addition index4']):selected.append((j,c))
  dest=p/'encoded-frames';dest.mkdir(exist_ok=True)
  for j,c in selected:
   at=c['start']/1.25+.3
