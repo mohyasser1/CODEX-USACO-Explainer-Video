@@ -1,0 +1,28 @@
+PACE REVISION — USER REQUEST 2026-10-27
+
+Apply1.25x pitch-preserving tempo to approved Voice A audio, and divide
+video, caption and chapter times by1.25. The integrated443.25s review becomes
+approximately354.6s (5m55s). Its851words imply about144 delivered words/minute.
+Voice identity/settings remain af_heart/.74/.30/.12; atempo1.25 changes delivery
+speed while preserving pitch. Existing source-audio work remains reusable.
+
+The current28,245-word manuscript would deliver roughly196minutes at144wpm,
+about3h16m (or193minutes by scaling the earlier240.96minute estimate by1.25).
+Both are estimates; measured full-part audio will determine actual duration.
+
+SUBSTANTIVE EXTENSION BUDGET (provisional, before full renders)
+Part1: add roughly10–12minutes on turning a string problem into input contract,
+frequency table, ordered second scan, counterexamples and a full runnable program.
+Part2: add roughly10–12minutes of a complete batch-update/range-query dashboard
+case study: derive combined difference/prefix passes, trace negative corrections,
+separate online/offline requirements, implement and independently test.
+Part3: add roughly10–12minutes on grid BFS: bounds and walls, coordinates versus
+vertex IDs, distance/path trace, unreachable targets and visited-state modeling.
+Part4: add roughly10–12minutes on LIS: define a subsequence, derive quadratic DP,
+then explain minimum-tail compression, strict duplicates, reconstruction limits
+and independent verification against exhaustive subsequences.
+
+Retain reviewed core scripts and proofs. Add separate prerequisite-ordered
+sections with fresh transfer problems and separate answers. No repeated material,
+artificial silence or slowed speech to reach runtime. Reconcile the targets with
+measured audio, keeping the four parts close to an hour each.

@@ -1,6 +1,6 @@
 {
   "title": "Rohail's School Music Night: USACO Foundations and Beyond",
-  "production_status": "Integrated template cleared after opening correction; four-part cloud narration started; graph/DP/range visual checks precede batch rendering",
+  "production_status": "User requested 1.25x integrated-segment pace; source Voice A synthesis retained for pitch-preserving tempo conversion; substantive extensions in preparation before full renders",
   "provisional_words_per_minute": 117.219821642,
   "part_duration_target_seconds": 3600,
   "part_duration_tolerance_seconds": 180,
@@ -67,5 +67,7 @@
     "Complete first drafts still require editorial, code-to-visual and learner review.",
     "Advanced introductions and roadmap items do not establish implementation mastery.",
     "Independent coding practice occurs through learner-controlled pauses outside delivered runtime."
-  ]
+  ],
+  "delivery_tempo_multiplier": 1.25,
+  "provisional_delivered_words_per_minute": 144.00687713218173
 }

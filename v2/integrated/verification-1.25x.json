@@ -1,0 +1,17 @@
+{
+  "tempo": 1.25,
+  "pitch_preservation": "FFmpeg atempo1.25; no sample-rate/pitch change",
+  "duration": 354.533285,
+  "stream_durations": {
+    "video": 354.533285,
+    "audio": 354.512
+  },
+  "words": 851,
+  "overall_wpm": 144.02032802082323,
+  "peak_decoded_audio": 0.8791823983192444,
+  "full_decode": "passed",
+  "answer_start": 317.6533333333333,
+  "bytes": 7998827,
+  "sha256": "7956211293ab73c045b37d782b59856296b7eadf7b7d50308df98af07759a6c1",
+  "human_listening": "Not performed; no intelligibility listening claim"
+}
