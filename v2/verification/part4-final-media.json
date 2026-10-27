@@ -62,5 +62,6 @@
     94
   ],
   "audio_tail_trim": "Only trailing silence: last speech end 3966.746667; video end 3967.083333; audio end 3967.091",
-  "frame_inspection": "38 encoded frames reviewed before bounded MST-label/LIS-code correction; final-file regression inspected frames 17,42,44,94 showing corrected code/labels and intact ending. Other authored panels unchanged."
+  "frame_inspection": "38 encoded frames reviewed before bounded MST-label/LIS-code correction; final-file regression inspected frames 17,42,44,94 showing corrected code/labels and intact ending. Other authored panels unchanged.",
+  "independent_review": "PASS: exact71,180,734bytes/SHA328b62b92a767f06c0e8a5b4b13d782a909b6d370f73d9296326f1bcf9e6e66a; clean full decode;99 captions match source and sidecar;9 chapter starts within0.5ms; peak0.749868, no clipping/NaN/Inf;99 midpoint frames plus enlarged risky examples; final signal ends0.328s before endpoint. No human listening."
 }

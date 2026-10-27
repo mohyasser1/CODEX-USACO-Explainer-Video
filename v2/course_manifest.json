@@ -1,6 +1,6 @@
 {
   "title": "Rohail's School Music Night: USACO Foundations and Beyond",
-  "production_status": "All four final videos measured, locally checked and uploaded. Independent final media review and remote hashes passed for Parts1,2,3; Part4 independent review pending. No full human listening claim.",
+  "production_status": "All four final videos measured, uploaded and independently verified: remote hashes, full decode, caption coverage and bounded visual checks passed. No full human listening claim.",
   "provisional_words_per_minute": 144.02032802082323,
   "part_duration_target_seconds": 3600,
   "part_duration_tolerance_seconds": 180,
@@ -75,7 +75,7 @@
       "missing_drafts": [],
       "measured_runtime_seconds": 3967.091,
       "local_media_checks": "passed: full decode, clipping, AV timing, exact manuscript captions and bounded sampled-frame review",
-      "independent_final_review": "pending"
+      "independent_final_review": "passed"
     }
   ],
   "limits": [
