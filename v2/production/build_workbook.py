@@ -26,6 +26,7 @@ story.append(Preformatted('g++ -std=c++17 -O2 -Wall -Wextra program.cpp -o progr
 story.append(p('Programs use standard input/output. Historical official problems may specify named files; adapt only as their current practice/submission instructions require. Each companion validates its teaching bounds. Do not assume a different problem has identical constraints.'))
 story.append(PageBreak());heading('Course map')
 for part,row in zip(manifest['parts'],progress['parts']):
+ if part['number']==3:story.append(PageBreak())
  group=[p(f"Part {part['number']}: {part['title']}",'Heading')]
  report_path=OUT/f"part{part['number']}"/'verification.json'
  if report_path.exists():

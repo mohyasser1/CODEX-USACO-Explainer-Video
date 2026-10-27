@@ -165,6 +165,7 @@ def apply(m,c):
   if i==9:rows(m,'SIMILAR INPUTS, DIFFERENT STATES',['0/1, at most capacity|Each item once; zero is a valid empty choice','unlimited items|Reuse is allowed; different update logic','exact weight|Unreachable weights need −∞','contract first|Do not copy initialization blindly'])
   if i==10:m['notes']='Capacity 4: density-first takes (weight3,value5). Two (weight2,value3) items give value6 and are better.'
  elif t=='lis_lab':
+  if i in [2,3,4]:m['code']=['vector<int> dp(n, 1);','for (int i=0; i<n; ++i)','  for (int j=0; j<i; ++j)','    if (a[j] < a[i])','      dp[i]=max(dp[i],dp[j]+1);']
   if i==3:m['notes']='dp[i] is the best strict increasing subsequence ending AT i. Extend only earlier j with a[j]<a[i].'
   if i==9:m['notes']='lower_bound finds the first tail ≥ x. Equal values replace a tail, so [2,2,2] has strict LIS length 1.'
   if i==11:m['notes']='For input [2,3,1], final tails [1,3] is not in input order. The true length-two witness is [2,3].'

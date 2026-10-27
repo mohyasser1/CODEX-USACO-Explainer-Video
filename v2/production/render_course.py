@@ -106,7 +106,9 @@ def diagram(d,m,box):
     ang=math.atan2(b[1]-a[1],b[0]-a[0]);tx=b[0]-24*math.cos(ang);ty=b[1]-24*math.sin(ang)
     d.polygon([(tx,ty),(tx-12*math.cos(ang-.5),ty-12*math.sin(ang-.5)),(tx-12*math.cos(ang+.5),ty-12*math.sin(ang+.5))],fill=color)
    if len(edge)>2:
-    tx=(a[0]+b[0])/2;ty=(a[1]+b[1])/2;d.rectangle((tx-16,ty-12,tx+24,ty+16),fill=PALE);d.text((tx-10,ty-10),str(edge[2]),font=font(19,True),fill=INK)
+    tx=(a[0]+b[0])/2;ty=(a[1]+b[1])/2
+    if m['topic']=='dsu_mst' and {u,v}=={1,2}:tx+=30;ty-=28
+    d.rectangle((tx-16,ty-12,tx+24,ty+16),fill=PALE);d.text((tx-10,ty-10),str(edge[2]),font=font(19,True),fill=INK)
   for j,(xx,yy) in coords.items():
    d.ellipse((xx-22,yy-22,xx+22,yy+22),fill='white',outline=GREEN,width=2);d.text((xx-7,yy-13),str(j+m.get('node_offset',0)),font=font(22,True),fill=INK)
    value=m.get('dist',[None]*n)[j]
@@ -211,7 +213,10 @@ def render(part):
  panels=[];blank=[];models=[model(c) for c in cues]
  for c in cues:panels.append(base(c,part,timing['title']));blank.append(base(c,part,timing['title'],False))
  mp4=dest/f'Rohail-USACO-V2-Part-{part}.mp4';temp=mp4.with_suffix('.partial.mp4')
- p=subprocess.Popen(['ffmpeg','-v','error','-y','-f','rawvideo','-pix_fmt','rgb24','-s','1280x720','-r',str(FPS),'-i','-','-i',str(dest/'narration.wav'),'-af',f'atempo={TEMPO},loudnorm=I=-16:TP=-1.5:LRA=11','-c:v','libx264','-preset','veryfast','-crf','26','-threads','2','-pix_fmt','yuv420p','-c:a','aac','-b:a','96k','-shortest','-movflags','+faststart',str(temp)],stdin=subprocess.PIPE)
+ reuse_audio=Path(sys.argv[2]) if len(sys.argv)>2 else None
+ audio_input=reuse_audio if reuse_audio else dest/'narration.wav'
+ audio_options=['-c:a','copy'] if reuse_audio else ['-af',f'atempo={TEMPO},loudnorm=I=-16:TP=-1.5:LRA=11','-c:a','aac','-b:a','96k']
+ p=subprocess.Popen(['ffmpeg','-v','error','-y','-f','rawvideo','-pix_fmt','rgb24','-s','1280x720','-r',str(FPS),'-i','-','-i',str(audio_input),'-map','0:v:0','-map','1:a:0',*audio_options,'-c:v','libx264','-preset','veryfast','-crf','26','-threads','2','-pix_fmt','yuv420p','-shortest','-movflags','+faststart',str(temp)],stdin=subprocess.PIPE)
  idx=0
  try:
   for n in range(math.ceil(duration*FPS)):
@@ -238,6 +243,7 @@ def render(part):
  subprocess.run(['ffmpeg','-v','error','-xerror','-i',str(mp4),'-f','null','-'],check=True)
  probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-show_chapters','-of','json',str(mp4)]));ds=[float(s['duration']) for s in probe['streams'] if s['codec_type'] in ['video','audio']];assert max(ds)-min(ds)<.2
  report=dict(part=part,renderer_sha256=renderer_sha,source_commit=source_commit,pedagogical_status='Authored learner-panel renderer; encoded-frame review pending',duration=float(probe['format']['duration']),source_audio_duration=timing['duration'],tempo=TEMPO,words=timing['words'],delivered_wpm=timing['words']*60/float(probe['format']['duration']),bytes=mp4.stat().st_size,sha256=hashlib.sha256(mp4.read_bytes()).hexdigest(),full_decode='passed',av_end_difference=max(ds)-min(ds),chapters=len(chapters),caption_paragraphs=len(cues),human_listening='Not performed by agent',state_timing='Authored paragraph-level trace panels, not word-synchronized execution')
+ if reuse_audio:report.update(audio_reused_from=str(reuse_audio),audio_level_correction_db=-2,audio_reuse_sha256=hashlib.sha256(reuse_audio.read_bytes()).hexdigest())
  assert len(probe.get('chapters',[]))==len(chapters)
  report['embedded_english_subtitles']=any(s['codec_type']=='subtitle' for s in probe['streams'])
  (dest/'verification.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2),flush=True)

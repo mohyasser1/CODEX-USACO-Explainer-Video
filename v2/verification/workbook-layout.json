@@ -2,19 +2,14 @@
   "pages": 41,
   "short_pages": [],
   "orphan_code_headings": [],
-  "sha256": "1f549afedf4247f47d5459d8ad352fa05ac2b37f43b5cc2c85520ac281853837",
-  "bytes": 129419,
+  "sha256": "839fcdbfb3e2aa7b9c3406b0f77796bf7a9bd37f847fe25217d83c01520ba0da",
+  "bytes": 129479,
   "standalone_givens_added": true,
   "knapsack_solution_expanded": true,
+  "measured_chapter_times": true,
   "visual_review_pages": [
-    6,
-    7,
-    9,
-    11,
-    12,
-    16,
-    18,
-    19,
-    20
-  ]
+    2,
+    3
+  ],
+  "prior_exercise_layout_independently_passed": true
 }

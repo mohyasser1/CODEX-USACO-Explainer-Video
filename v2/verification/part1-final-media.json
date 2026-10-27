@@ -50,5 +50,6 @@
     79,
     80
   ],
-  "frame_inspection": "29 encoded frames inspected, including all chapter openings, repaired proof/cost/code/tree panels, numerical states, empty input and question/reveal boundaries"
+  "frame_inspection": "29 encoded frames inspected, including all chapter openings, repaired proof/cost/code/tree panels, numerical states, empty input and question/reveal boundaries",
+  "independent_review": "PASS: parent independently downloaded and matched SHA256; full decode; 29 frames across six chapters; exact 81 caption paragraphs; no listening claim"
 }
