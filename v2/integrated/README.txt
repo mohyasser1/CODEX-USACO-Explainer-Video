@@ -38,3 +38,8 @@ visually inspected by the production agent; human audio listening and independen
 integrated teaching QA remain unperformed until review. Prior user voice approval
 is preserved and is not being requested again. Do not scale to full-course
 rendering until the coordinator's integrated technical review passes.
+
+OPENING CLARITY REVISION
+The first two story scenes show the explicitly labeled wrong incoming-only
+attempt ($3+$5=$8), with no corrected code. Corrected code first appears
+at the input scene starting43.389s. Narration, voice and timings are unchanged.

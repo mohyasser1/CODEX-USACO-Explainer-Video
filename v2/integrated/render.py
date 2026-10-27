@@ -28,7 +28,11 @@ def base(s,caption=True):
   d.ellipse((x,23,x+30,53),fill=color);d.rounded_rectangle((x-8,55,x+38,77),6,fill=GREEN)
   d.text((x-11,81),name,font=font(16),fill=INK)
  d.rounded_rectangle((25,116,715,445),14,fill='white',outline='#d8d4c5',width=2)
- for j,line in enumerate(CODE):
+ if s['mode']=='story':
+  d.text((48,145),'ROHAIL’S FIRST ATTEMPT',font=font(27,True),fill=INK)
+  for j,line in enumerate(['Count incoming payments only', '$3 + $5 = $8', 'Refunds were skipped', 'Does this answer “money remaining”?']):
+   d.text((48,205+j*53),line,font=font(25,j==1),fill=ORANGE if j==1 else INK)
+ for j,line in enumerate([] if s['mode']=='story' else CODE):
   y=131+j*37;active=j==s['highlight'] or s['mode']=='input' and j in [0,1,2]
   if active:d.rounded_rectangle((35,y-3,705,y+31),6,fill='#d8ebda')
   d.text((44,y),line,font=font(22,mono=True),fill=GREEN if active else INK)
