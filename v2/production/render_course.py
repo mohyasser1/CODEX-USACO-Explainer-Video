@@ -78,14 +78,18 @@ def diagram(d,m,box):
   if m.get('dist'):d.text((sx+width*cell+15,y+15),'Orange = distance',font=font(19),fill=ORANGE)
  elif k=='fenwick':
   cell=w/8
-  for i,v in enumerate(m['values']):d.text((x+i*cell+10,y),str(v),font=font(22,True),fill=INK)
+  for i,v in enumerate(m['values']):
+   d.text((x+i*cell+10,y),str(v),font=font(20,True),fill=INK)
+   d.text((x+i*cell+7,y+23),'idx'+str(i),font=font(12),fill=GREEN)
   # Each row is a stored block, with its own internal index and sum.
   for i in range(1,9):
-   yy=y+32+(i-1)*23;l=i-(i&-i);color='#f0c9b5' if i in m.get('active',[]) else 'white'
+   yy=y+45+(i-1)*21;l=i-(i&-i);color='#f0c9b5' if i in m.get('active',[]) else 'white'
    d.rounded_rectangle((x+l*cell,yy,x+i*cell-3,yy+20),4,fill=color,outline='#b8c6b5')
-   d.text((x+l*cell+4,yy),f'b{i}={m["bit"][i]}',font=font(15),fill=INK)
+   d.text((x+l*cell+4,yy),f'b{i}={m["bit"][i]}',font=font(16),fill=INK)
  elif k=='question':
-  fitted(d,'ROHAIL’S NEXT CHALLENGE\n\nPredict → trace → explain\n\nPause here. Resume for the answer.',(x+25,y+20,w-50,h-20),27,20,True)
+  if m.get('question_model'):
+   diagram(d,m['question_model'],box)
+  else:fitted(d,'ROHAIL’S NEXT CHALLENGE\n\nPredict → trace → explain\n\nPause here. Resume for the answer.',(x+25,y+20,w-50,h-20),27,20,True)
  else:
   fitted(d,m['notes'],(x+15,y+10,w-30,h-20),27,16)
 
@@ -123,7 +127,7 @@ def motion(d,m,scene,elapsed):
   amount={8:2,9:3,10:5,11:6}[scene];x=45+amount*88;alpha=max(1,int(5*(1-elapsed/1.8)))
   d.rounded_rectangle((x,178,x+80,243),8,outline=ORANGE,width=alpha)
  elif m['kind']=='fenwick' and scene==6 and elapsed<3:
-  i=[5,6,8][min(2,int(elapsed))];cell=710/8;l=i-(i&-i);y=175+(i-1)*23
+  i=[5,6,8][min(2,int(elapsed))];cell=710/8;l=i-(i&-i);y=188+(i-1)*21
   d.rounded_rectangle((35+l*cell,y,35+i*cell-3,y+20),4,outline=ORANGE,width=3)
 
 def stamp(sec):
@@ -158,8 +162,18 @@ def render(part):
    if n%(FPS*60)==0:(dest/'render-progress.json').write_text(json.dumps(dict(rendered_seconds=delivered,target_seconds=duration,chapter=c['source'])))
  finally:p.stdin.close()
  assert p.wait()==0;temp.replace(mp4)
+ # Embed navigation chapters and an optional selectable English subtitle track.
+ metadata=[';FFMETADATA1','title=Rohail USACO V2 Part '+str(part)]
+ for j,ch in enumerate(chapters):
+  end=chapters[j+1]['start'] if j+1<len(chapters) else duration
+  metadata.extend(['[CHAPTER]','TIMEBASE=1/1000','START='+str(round(ch['start']*1000)),'END='+str(round(end*1000)),'title='+ch['title']])
+ meta=dest/'chapters.ffmetadata';meta.write_text('\n'.join(metadata)+'\n');muxed=mp4.with_suffix('.chapters.mp4')
+ subprocess.run(['ffmpeg','-v','error','-y','-i',str(mp4),'-i',str(meta),'-i',str(dest/'captions.srt'),'-map','0:v','-map','0:a','-map','2:0','-map_metadata','1','-map_chapters','1','-c','copy','-c:s','mov_text','-metadata:s:s:0','language=eng','-disposition:s:0','0','-movflags','+faststart',str(muxed)],check=True)
+ muxed.replace(mp4)
  subprocess.run(['ffmpeg','-v','error','-xerror','-i',str(mp4),'-f','null','-'],check=True)
- probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(mp4)]));ds=[float(s['duration']) for s in probe['streams'] if s['codec_type'] in ['video','audio']];assert max(ds)-min(ds)<.2
+ probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-show_chapters','-of','json',str(mp4)]));ds=[float(s['duration']) for s in probe['streams'] if s['codec_type'] in ['video','audio']];assert max(ds)-min(ds)<.2
  report=dict(part=part,duration=float(probe['format']['duration']),source_audio_duration=timing['duration'],tempo=TEMPO,words=timing['words'],delivered_wpm=timing['words']*60/float(probe['format']['duration']),bytes=mp4.stat().st_size,sha256=hashlib.sha256(mp4.read_bytes()).hexdigest(),full_decode='passed',av_end_difference=max(ds)-min(ds),chapters=len(chapters),caption_paragraphs=len(cues),human_listening='Not performed by agent',state_timing='Authored paragraph-level trace panels, not word-synchronized execution')
+ assert len(probe.get('chapters',[]))==len(chapters)
+ report['embedded_english_subtitles']=any(s['codec_type']=='subtitle' for s in probe['streams'])
  (dest/'verification.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2),flush=True)
 if __name__=='__main__':render(int(sys.argv[1]))

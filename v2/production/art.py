@@ -28,7 +28,12 @@ def notes(direction):
 def model(c):
  t=topic(c['source']);i=c['scene'];question=is_question(c['text']);d=dict(topic=t,kind='concept',label='MODEL / REASONING',notes=notes(c['direction']),question=question,code=SNIPPETS.get(t,[]))
  if question:
-  d.update(kind='question',label='YOUR TURN',notes='Pause the video to work through the question.\nThe next scene contains the answer.',code=[]);return d
+  d.update(kind='question',label='YOUR TURN · INPUT ONLY',notes='Pause the video to work through the question.\nThe next scene contains the answer.',code=[])
+  inputs={'loop_trace':[-4,0,7,-3],'binary_search':[4,1,1],'prefix':[2,1,3,1,2,1],'two_pointers':[11,1,7,2,4],'functional_graph':[1,2,2],'fenwick':[3,1,4,1,8,9,2,6],'lis_lab':[4,2,3,1,5],'dashboard_lab':[1,0,2]}
+  if t in inputs:d['question_model']=dict(kind='array',values=inputs[t],index_start=1 if t=='prefix' else 0)
+  if t=='grid_lab':d['question_model']=dict(kind='grid',grid=['S#.','..T'],dist={})
+  if t=='bfs':d['question_model']=dict(kind='graph',n=7,edges=BASE_BFS+[(5,6)],dist=[None]*7,queue=[])
+  return d
  if t=='loop_trace':
   d.update(kind='rows',label='SIGNED TOTAL · TRACE',rows=[['input','3, -2, 5, -1'],['count','4'],['answer','5']])
   if i in [1]:d['rows']=[['read count','n = 4'],['create slots','vector<int> a(n)'],['read values','for (int& x:a) cin >> x;']];d['code']=[]
@@ -56,6 +61,7 @@ def model(c):
   if i==13:a[0]-=2
   bit=[0]+[sum(a[j-(j&-j):j]) for j in range(1,9)]
   d.update(kind='fenwick',values=a,bit=bit,label='FENWICK BLOCKS · EXTERNAL INDICES',active=[5,6,8] if i==6 else [7,6,4] if i in [3,7] else [])
+  if i==8:d.update(code=[],notes='Internal update path: 5 = 0101 → 6 = 0110 → 8 = 1000.\nSkipped 7 = 0111 covers only position7, not position5.\nEach visited block contains the updated point.')
   if i==9:d.update(kind='rows',rows=[['assignment','old5 → new8'],['delta','8-5=3'],['wrong add8','old5+8=13']])
  elif t=='prefix':
   a=[2,1,3,1,2,1];rows=[[k]+[a[:k].count(x) for x in [1,2,3]] for k in range(7)]
@@ -67,6 +73,8 @@ def model(c):
   limit={3:2,4:3,5:4}.get(i,1)
   d.update(kind='table',headers=['items','c0','c1','c2','c3','c4','c5'],rows=[[j]+row for j,row in enumerate(rows[:limit])],label='0/1 KNAPSACK · AT MOST CAPACITY')
   if i==8:d.update(kind='rows',rows=[['one item','weight2,value3; capacity4'],['ascending wrong','dp2=3; dp4=6 (reuse!)'],['descending correct','dp4=3; dp2=3']])
+  if i==10:d.update(kind='rows',rows=[['new capacity','4'],['density-first','take(3,5):value5'],['better pair','(2,3)+(2,3):value6']])
+  if i==9:d.update(kind='concept',code=[])
   if i==13:d.update(kind='rows',rows=[['capacity3','best value5'],['capacity0 / no items','best value0']])
  elif t=='dijkstra':
   edges=[(0,1,10),(0,2,3),(2,1,4),(1,3,2),(2,3,12)];dist={1:[0,'∞','∞','∞'],2:[0,10,3,'∞'],3:[0,7,3,15],4:[0,7,3,9]}.get(i,[None]*4)
@@ -76,9 +84,11 @@ def model(c):
  elif t=='binary_search':
   rows=[[4,16,10,2,'yes'],[4,10,7,3,'yes'],[4,7,5,4,'no'],[6,7,6,3,'yes']]
   d.update(kind='array',values=[3,2,2,4,1,4],label='ORDERED BOXES · AT MOST THREE TRIPS',index_label='box')
-  if 6<=i<=8:d.update(kind='table',headers=['lo','hi','mid','trips','works'],rows=rows[:{6:1,7:3,8:4}[i]],label='BINARY SEARCH TRACE')
+  if 7<=i<=9:d.update(kind='table',headers=['lo','hi','mid','trips','works'],rows=rows[:{7:1,8:3,9:4}[i]],label='BINARY SEARCH TRACE')
+  if i==13:d.update(kind='rows',rows=[['new weights','4,1,1'],['two trips','minimum capacity4'],['one / three trips','6 / 4'],['all zero weights','capacity0']])
  elif t=='two_pointers':
   a=[1,2,4,7,11] if i<7 else [2,1,1,3,1];d.update(kind='array',values=a,label='SORTED PAIR · TARGET9' if i<7 else 'CONTIGUOUS WINDOW · LIMIT4',index_label='index',active=[0,4] if i<2 else [1,3] if i<7 else [])
+  if i==4:d.update(kind='rows',rows=[['two positions','[4,4] can make8'],['one position','[4] cannot use itself twice']])
   if i==11:d.update(values=[5,-2],label='NEGATIVE-INPUT COUNTEREXAMPLE · LIMIT3')
   if i==13:d.update(kind='rows',rows=[['pair original indices','2 and3; values7+2=9'],['zero window','length3']])
  elif t=='grid_lab':
@@ -102,6 +112,7 @@ def model(c):
  elif t=='string_lab':
   d.update(kind='array',values=list('SWISS'),label='FIND FIRST GLOBALLY UNIQUE POSITION',index_label='index')
   if i in [4,5,6]:d.update(kind='rows',rows=[['counts','S:3  W:1  I:1'],['scan index0','S repeats →skip'],['scan index1','W occurs once →answer1']])
+  if i==13:d.update(kind='rows',rows=[['new contract','first second occurrence'],['SWISS','second S arrives at index3'],['old contract','globally unique first position1']])
   if i==12:d.update(kind='rows',rows=[['empty / A / AAAA','-1 / 0 / -1'],['BANANA / ZYX','0 / 0'],['order','positions, not alphabet']])
  elif t=='functional_graph':d.update(kind='graph',n=5,edges=[(0,1),(1,2),(2,3),(3,1),(4,4)],directed=True,dist=[None]*5,queue=[],label='ONE SUCCESSOR PER VERTEX')
  elif t=='parity':
@@ -117,8 +128,27 @@ def model(c):
   if i<=4:d.update(kind='rows',rows=[['events','0,3,2,0,-3,-2'],['reconstructed','0,3,5,5,2']],label='DIFFERENCE EVENTS → VALUES')
   elif i<=9:d.update(kind='grid',grid=['123','456','789'],dist={},label='2D PREFIX · FOUR-REGION CANCELLATION')
   elif i==11:d.update(kind='rows',rows=[['updates','0,3,5,5,2'],['rectangle','2+3+5+6=16']])
- elif t=='sorting':d.update(kind='rows',rows=[['original','4,2,4,9,2'],['sorted','2,2,4,4,9'],['distinct','2,4,9']],label='SORTING CHANGES ORDER')
- elif t=='backtracking':d.update(kind='tree',label='CHOOSE / EXPLORE / RETURN',rows=[['root','i0,sum0'],['exclude5','sum0 →0 or-3'],['include5','sum5 →5 or2'],['target2','one successful subset']])
- elif t=='casework':d.update(kind='rows',rows=[['start1','simulate independently'],['start2','simulate independently'],['start3','simulate independently'],['answer','maximum score']],label='THREE COMPLETE CASES')
+ elif t=='sorting':
+  d.update(kind='rows',rows=[['original','4,2,4,9,2'],['sorted','2,2,4,4,9'],['distinct','2,4,9']],label='SORTING CHANGES ORDER')
+  if i==4:d['rows']=[['original pairs','(8,3),(8,1),(6,2)'],['lexicographic','(6,2),(8,1),(8,3)']]
+  if i==6:d['rows']=[['new multiset','[2,2,4]'],['erase value2','[4]'],['erase one iterator','[2,4]']]
+  if i==7:d['rows']=[['values','10,100,1000'],['ranks','0,1,2'],['original gaps','90 and900'],['rank gaps','1 and1: distance not preserved']]
+ elif t=='backtracking':
+  d.update(kind='tree',label='CALL STACK / BRANCH RESULTS',rows=[['input','5,-3; target2'],['decisions','exclude or include each INDEX']])
+  if i in [2,3]:d['rows']=[['frame','i=0,sum=0'],['contract','count ways to finish at target2']]
+  if i==4:d['rows']=[['caller','(i0,sum0)'],['exclude5','(i1,sum0)'],['exclude-3','(i2,sum0) →return0']]
+  if i==5:d['rows']=[['caller','(i1,sum0)'],['include-3','(i2,sum-3) →return0'],['combine','0+0 →return0']]
+  if i==6:d['rows']=[['include5','(i1,sum5)'],['exclude-3','(i2,sum5) →return0'],['include-3','(i2,sum2) →return1'],['combine','0+1 →return1']]
+  if i==7:d['rows']=[['sum by value','child copy; caller unchanged'],['shared chosen vector','push →recurse →pop (undo)']]
+  if i==11:d['rows']=[['[2,2],target2','two singleton subsets'],['[],target0','one empty subset'],['missing undo','shared choices leak into sibling']]
+ elif t=='casework':
+  d.update(kind='rows',rows=[['start1','simulate independently'],['start2','simulate independently'],['start3','simulate independently']],label='THREE COMPLETE CASES')
+  if i in [3,4,5]:
+   start={3:2,4:1,5:3}[i];pos=start;score=0;rows=[['initial',pos,score]]
+   for j,(a,b,g) in enumerate([(1,2,1),(2,3,3),(1,3,1)]):
+    pos=b if pos==a else a if pos==b else pos;score+=pos==g;rows.append([j+1,pos,score])
+   d.update(kind='table',headers=['event','position','score'],rows=rows,label=f'CASE START={start} · SWAP THEN GUESS')
+  if i==6:d.update(kind='concept',code=[])
+  if i==10:d['rows']=[['fresh event','swap1,3; guess2'],['best score','1, starting at2'],['count optimal starts','count ties, not just maximum']]
  if any(word in c['direction'].lower() for word in ['proof','invariant','cost:','cost ','complexity','bounds','limits:','counterexample','state definition','key example']):d['code']=[]
  return d

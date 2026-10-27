@@ -41,6 +41,26 @@ for scene in [3,4,5]:
 # Prefix model counts original slices directly.
 m=get('part2_prefix_script.txt',5);a=[2,1,3,1,2,1]
 for k,*counts in m['rows']:assert counts==[a[:k].count(x) for x in [1,2,3]];checks+=1
+# Casework diagrams use an independent booth-contents representation.
+for scene,start in [(3,2),(4,1),(5,3)]:
+ m=get('part1_casework_script.txt',scene);booths=[1,2,3];score=0
+ expected=[['initial',start,0]]
+ for event,(a,b,guess) in enumerate([(1,2,1),(2,3,3),(1,3,1)]):
+  booths[a-1],booths[b-1]=booths[b-1],booths[a-1]
+  score+=booths[guess-1]==start;expected.append([event+1,booths.index(start)+1,score])
+ assert m['rows']==expected;checks+=len(expected)
+# Feasibility rows: enumerate all contiguous partitions rather than greedy packing.
+weights=[3,2,2,4,1,4]
+for lo,hi,mid,days,works in get('part2_binary_search_script.txt',9)['rows']:
+ possible=[]
+ for mask in range(1<<(len(weights)-1)):
+  groups=[];total=weights[0]
+  for j,w in enumerate(weights[1:]):
+   if mask>>j&1:groups.append(total);total=w
+   else:total+=w
+  groups.append(total)
+  if max(groups)<=mid:possible.append(len(groups))
+ assert min(possible)==days and (works=='yes')==(days<=3);checks+=1
 # Transfer questions must have no model solution rows/code anywhere.
 questions=0
 for part in json.loads((r/'course_manifest.json').read_text())['parts']:

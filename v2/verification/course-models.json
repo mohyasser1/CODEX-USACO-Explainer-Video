@@ -1,6 +1,6 @@
 {
   "passed": true,
-  "independent_numeric_checks": 157,
+  "independent_numeric_checks": 173,
   "hidden_question_models": 26,
   "scope": "BFS queue/distance,coin DP,Fenwick blocks,knapsack,prefix tables; question models across all sections",
   "limits": "Not all narration or rendered media; complete decode and sampled-frame review are separate."
