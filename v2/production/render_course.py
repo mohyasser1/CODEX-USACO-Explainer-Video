@@ -29,7 +29,46 @@ def fitted(d,text,box,maxsize=25,minsize=16,bold=False,mono=False):
 
 def diagram(d,m,box):
  x,y,w,h=box;k=m['kind']
- if k=='array':
+ if k=='flow':
+  steps=m['steps'];cw=w/len(steps)
+  for j,label in enumerate(steps):
+   xx=x+j*cw+5;yy=y+50
+   d.rounded_rectangle((xx,yy,xx+cw-22,yy+100),8,fill='white',outline=GREEN,width=2)
+   fitted(d,label,(xx+10,yy+12,cw-42,78),22,15,True)
+   if j+1<len(steps):d.text((xx+cw-20,yy+35),'→',font=font(24,True),fill=ORANGE)
+ elif k=='work_grids':
+  for j,nr in enumerate([3,4]):
+   bx=x+j*w/2+20;d.text((bx,y),'3 × n = 12' if j==0 else 'n × n = 16',font=font(22,True),fill=INK)
+   for r in range(nr):
+    for col in range(4):
+     xx=bx+col*42;yy=y+40+r*37;d.rounded_rectangle((xx,yy,xx+34,yy+29),4,fill='white',outline=GREEN)
+     d.text((xx+8,yy+3),str(r*4+col+1),font=font(16),fill=INK)
+  d.text((x+420,y+190),'n = 4 in both examples',font=font(18),fill=GREEN)
+ elif k=='decision_tree':
+  coords=[(x+w/2,y+20),(x+w/4,y+87),(x+3*w/4,y+87)]+[(x+w*(2*j+1)/8,y+164) for j in range(4)]
+  for a,b in [(0,1),(0,2),(1,3),(1,4),(2,5),(2,6)]:d.line([coords[a],coords[b]],fill=GREEN,width=2)
+  labels=['i0, sum0','i1, sum0','i1, sum5','sum0 → 0','sum−3 → 0','sum5 → 0','sum2 → 1']
+  for (xx,yy),label in zip(coords,labels):
+   d.rounded_rectangle((xx-72,yy-17,xx+72,yy+24),6,fill='white',outline=GREEN)
+   fitted(d,label,(xx-65,yy-10,130,32),18,14,True)
+  d.text((x+15,y+203),'Left branch: exclude     Right branch: include',font=font(16),fill=GREEN)
+ elif k=='intervals':
+  end=max(b for _,a,b in m['intervals']);scale=(w-105)/max(1,end)
+  for j,(name,a,b) in enumerate(m['intervals']):
+   yy=y+20+j*42;d.text((x,yy),name,font=font(18,True),fill=INK)
+   xx=x+85+a*scale;rr=x+85+b*scale
+   d.rounded_rectangle((xx,yy,rr,yy+29),5,fill='#f0c9b5' if name in m.get('selected',[]) else 'white',outline=GREEN,width=2)
+   fitted(d,f'[{a},{b})',(xx+4,yy+3,rr-xx-8,25),18,12)
+  for value in range(end+1):d.text((x+80+value*scale,y+195),str(value),font=font(16),fill=GREEN)
+ elif k=='grid_regions':
+  cell=62
+  for r,row in enumerate(m['grid']):
+   for col,v in enumerate(row):
+    xx=x+35+col*cell;yy=y+r*cell
+    d.rectangle((xx,yy,xx+cell-3,yy+cell-3),fill='#f0c9b5' if (r,col) in m['selected'] else 'white',outline=GREEN)
+    d.text((xx+20,yy+15),v,font=font(24,True),fill=INK)
+  fitted(d,'Selected cells:\n5 + 6 + 8 + 9 = 28',(x+270,y+40,w-290,130),25,18,True)
+ elif k=='array':
   a=m['values'];gap=min(88,w/max(1,len(a)));start=x+10
   for j,v in enumerate(a):
    xx=start+j*gap;active=j in m.get('active',[])
@@ -114,7 +153,7 @@ def base(c,part,title,caption=True):
  d.rounded_rectangle((778,95,1260,374),12,fill='white',outline='#ded8cb')
  code=m.get('code',[])
  if code and not m['question']:
-  d.text((792,108),'CORE STEPS · COMPANION HAS FULL CODE',font=font(16,True),fill=GREEN)
+  d.text((792,108),m.get('code_heading','CORE STEPS · COMPANION HAS FULL CODE'),font=font(16,True),fill=GREEN)
   fitted(d,'\n'.join(code),(792,146,450,212),19,14,False,True)
  else:
   d.text((792,108),'WHAT TO NOTICE',font=font(18,True),fill=GREEN)
@@ -127,7 +166,15 @@ def base(c,part,title,caption=True):
 
 def motion(d,m,scene,elapsed):
  # Short illustrative transitions follow authored affected objects, never code cycling.
- if m['topic']=='bfs' and scene in [4,5,6,7] and elapsed<1.8:
+ if m['kind']=='work_grids':
+  for j,total in enumerate([12,16]):
+   count=min(total,int(max(0,elapsed)*total/4));bx=35+j*710/2+20
+   for k in range(count):
+    xx=bx+(k%4)*42;yy=143+40+(k//4)*37
+    d.rounded_rectangle((xx,yy,xx+34,yy+29),4,fill='#f0c9b5',outline=GREEN)
+    d.text((xx+8,yy+3),str(k+1),font=font(16),fill=INK)
+   d.text((bx+190,190),f'{count}/{total}',font=font(22,True),fill=ORANGE)
+ elif m['topic']=='bfs' and scene in [4,5,6,7] and elapsed<1.8:
   u,v={4:(0,1),5:(1,3),6:(2,4),7:(3,5)}[scene]
   coords=lambda j:(105+(j%3)*190,183+(j//3)*70)
   a,b=coords(u),coords(v);f=max(0,min(1,elapsed/1.8));x=a[0]+(b[0]-a[0])*f;y=a[1]+(b[1]-a[1])*f

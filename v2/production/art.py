@@ -4,7 +4,7 @@ BASE_BFS=[(0,1),(0,2),(1,3),(2,4),(3,5),(4,5)]
 BFS_STATES={2:([-1]*7,[]),3:([0,-1,-1,-1,-1,-1,-1],[0]),4:([0,1,1,-1,-1,-1,-1],[1,2]),5:([0,1,1,2,-1,-1,-1],[2,3]),6:([0,1,1,2,2,-1,-1],[3,4]),7:([0,1,1,2,2,3,-1],[4,5]),8:([0,1,1,2,2,3,-1],[5]),9:([0,1,1,2,2,3,-1],[])}
 SNIPPETS={
 'loop_trace':['long long total = 0;','for (int i=0; i<n; ++i) {','    total += a[i];','}','cout << total << "\\n";'],
-'string_lab':['array<int,26> frequency{};','for (char c : s) ++frequency[c-\'A\'];','for (int i=0; i<(int)s.size(); ++i)','    if (frequency[s[i]-\'A\']==1)','        return i;','return -1;'],
+'string_lab':['// Inside main; s was read', 'array<int,26> frequency{};', "for (char c:s) ++frequency[c-'A'];", 'for (int i=0;i<(int)s.size();++i)', "  if (frequency[s[i]-'A']==1) {", "    cout << i << '\\n'; return 0;", '  }', "cout << -1 << '\\n';"],
 'prefix':['prefix[i+1] = prefix[i];','++prefix[i+1][category-1];','// Inclusive positions l..r:','answer[c] = prefix[r][c]-prefix[l-1][c];'],
 'binary_search':['while (lo < hi) {','    auto mid = lo + (hi-lo)/2;','    if (feasible(mid)) hi = mid;','    else lo = mid + 1;','}'],
 'bfs':['int u = pending.front();','pending.pop();','for (int v : graph[u])','  if (distance[v] == -1) {','    distance[v] = distance[u] + 1;','    parent[v]=u; pending.push(v); }'],
@@ -18,22 +18,17 @@ SNIPPETS={
 }
 def topic(source):return re.sub(r'^part\d_','',source).replace('_script.txt','')
 def is_question(text):return any(w in text.lower() for w in ['pause and','pause the video','pause for','transfer task:'])
-def notes(direction):
- # Notes are explanatory diagram labels, not commands to a learner.
- s=direction[1:-1].strip();s=re.sub(r'\b(?:Show|Draw|Highlight|Freeze after)\s+', '',s)
- s=re.sub(r'(?<=[a-z])(?=[A-Z])',' ',s);s=re.sub(r'(?<=[a-z])(?=\d)',' ',s)
- s=s.replace(',',', ').replace(':',': ').replace(';','; ').replace('->',' → ').replace('<=',' ≤ ').replace('>=',' ≥ ')
- return s
 
 def model(c):
- t=topic(c['source']);i=c['scene'];question=is_question(c['text']);d=dict(topic=t,kind='concept',label='MODEL / REASONING',notes=notes(c['direction']),question=question,code=SNIPPETS.get(t,[]))
+ t=topic(c['source']);i=c['scene'];question=is_question(c['text']);d=dict(topic=t,kind='concept',label='MODEL / REASONING',notes='',question=question,code=SNIPPETS.get(t,[]))
  if question:
   d.update(kind='question',label='YOUR TURN · INPUT ONLY',notes='Pause the video to work through the question.\nThe next scene contains the answer.',code=[])
   inputs={'loop_trace':[-4,0,7,-3],'binary_search':[4,1,1],'prefix':[2,1,3,1,2,1],'two_pointers':[11,1,7,2,4],'functional_graph':[1,2,2],'fenwick':[3,1,4,1,8,9,2,6],'lis_lab':[4,2,3,1,5],'dashboard_lab':[1,0,2]}
   if t in inputs:d['question_model']=dict(kind='array',values=inputs[t],index_start=1 if t=='prefix' else 0)
   if t=='grid_lab':d['question_model']=dict(kind='grid',grid=['S#.','..T'],dist={})
   if t=='bfs':d['question_model']=dict(kind='graph',n=7,edges=BASE_BFS+[(5,6)],dist=[None]*7,queue=[])
-  return d
+  from learner_panels import apply
+  return apply(d,c)
  if t=='foundations':
   if i==3:d.update(kind='rows',label='FIRST COMPLETE C++17 PROGRAM',rows=[['read','two long long integers'],['compute','their sum'],['print','answer and newline']],code=['#include <iostream>','int main() {','  long long a, b;','  std::cin >> a >> b;','  std::cout << a+b << "\\n";','}'])
   if i==6:d.update(kind='rows',rows=[['int count','0'],['long long price','3000000000'],['bool open','true']],label='NAME · TYPE · VALUE')
@@ -171,4 +166,5 @@ def model(c):
   if i==6:d.update(kind='concept',code=[])
   if i==10:d['rows']=[['fresh event','swap1,3; guess2'],['best score','1, starting at2'],['count optimal starts','count ties, not just maximum']]
  if any(word in c['direction'].lower() for word in ['proof','invariant','cost:','cost ','complexity','bounds','limits:','counterexample','state definition','key example']):d['code']=[]
- return d
+ from learner_panels import apply
+ return apply(d,c)

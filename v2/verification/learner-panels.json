@@ -1,0 +1,8 @@
+{
+  "scenes": 363,
+  "no_production_directions": true,
+  "no_concept_fallback": true,
+  "displayed_string_main_oracle_cases": 6,
+  "passed": true,
+  "scope": "All authored panel text plus compiled displayed string excerpt; rendered frames and audio require separate review"
+}
