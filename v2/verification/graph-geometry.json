@@ -1,0 +1,8 @@
+{
+  "source_commit": "74aa393ae58630b5e920205dfc4753ece94ab30d",
+  "graph_scenes": 64,
+  "nonincident_vertex_overlaps": 0,
+  "minimum_required_center_distance_from_edge_pixels": 24,
+  "method": "For each non-self edge in every authored graph scene, project each nonincident vertex center onto the segment and check Euclidean distance. Node radius is 22 pixels.",
+  "scope": "Graph geometry only; crossing edges without a vertex are permitted. Four representative previews inspected separately; final encoded-frame review remains required."
+}
