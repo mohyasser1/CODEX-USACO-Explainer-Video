@@ -1,0 +1,14 @@
+{
+  "pages": 41,
+  "exercises": 32,
+  "short_pages_under300chars": [],
+  "bytes": 127900,
+  "sha256": "0af5a997f92e4803d2066cdeca75927155ac9963629d0d1a088b71579bd1e66c",
+  "limits": "Text extraction and selected page inspection; no full independent editorial or listening review",
+  "sampled_pages": [
+    1,
+    5,
+    21,
+    41
+  ]
+}

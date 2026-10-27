@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "scenes": 363,
+  "representative_frames": [
+    [
+      "part3_bfs_script.txt",
+      6
+    ],
+    [
+      "part3_dynamic_programming_script.txt",
+      9
+    ],
+    [
+      "part4_fenwick_script.txt",
+      6
+    ],
+    [
+      "part4_knapsack_script.txt",
+      4
+    ],
+    [
+      "part2_prefix_script.txt",
+      5
+    ],
+    [
+      "part3_grid_lab_script.txt",
+      6
+    ],
+    [
+      "part4_lis_lab_script.txt",
+      7
+    ],
+    [
+      "part2_dashboard_lab_script.txt",
+      4
+    ]
+  ],
+  "limits": "Layout bounds only; independent state and visual inspection separate"
+}

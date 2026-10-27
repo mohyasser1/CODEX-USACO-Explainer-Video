@@ -1,0 +1,124 @@
+"""Authored paragraph-level models. They are result/trace panels, not word clocks."""
+import re
+BASE_BFS=[(0,1),(0,2),(1,3),(2,4),(3,5),(4,5)]
+BFS_STATES={2:([-1]*7,[]),3:([0,-1,-1,-1,-1,-1,-1],[0]),4:([0,1,1,-1,-1,-1,-1],[1,2]),5:([0,1,1,2,-1,-1,-1],[2,3]),6:([0,1,1,2,2,-1,-1],[3,4]),7:([0,1,1,2,2,3,-1],[4,5]),8:([0,1,1,2,2,3,-1],[5]),9:([0,1,1,2,2,3,-1],[])}
+SNIPPETS={
+'loop_trace':['long long total = 0;','for (int i=0; i<n; ++i) {','    total += a[i];','}','cout << total << "\\n";'],
+'string_lab':['array<int,26> frequency{};','for (char c : s) ++frequency[c-\'A\'];','for (int i=0; i<(int)s.size(); ++i)','    if (frequency[s[i]-\'A\']==1)','        return i;','return -1;'],
+'prefix':['prefix[i+1] = prefix[i];','++prefix[i+1][category-1];','// Inclusive positions l..r:','answer[c] = prefix[r][c]-prefix[l-1][c];'],
+'binary_search':['while (lo < hi) {','    auto mid = lo + (hi-lo)/2;','    if (feasible(mid)) hi = mid;','    else lo = mid + 1;','}'],
+'bfs':['int u = pending.front();','pending.pop();','for (int v : graph[u])','  if (distance[v] == -1) {','    distance[v] = distance[u] + 1;','    parent[v]=u; pending.push(v); }'],
+'dynamic_programming':['dp[0] = 0;','for (int x=1; x<=target; ++x)','  for (int c : coins)','    if (c<=x && dp[x-c]!=INF)','      dp[x]=min(dp[x],1+dp[x-c]);'],
+'knapsack':['for (auto [weight,value] : items)','  for (int c=capacity; c>=weight; --c)','    dp[c]=max(dp[c],','              dp[c-weight]+value);'],
+'lis_lab':['auto it=lower_bound(tails.begin(),','                    tails.end(), x);','if (it==tails.end()) tails.push_back(x);','else *it=x;','// tails.size() is the LENGTH'],
+'fenwick':['// add at external position p','for (int i=p+1; i<=n; i+=i&-i)','    bit[i] += delta;','// sum first r values','for (int i=r; i>0; i-=i&-i)','    answer += bit[i];'],
+'dijkstra':['auto [du,u] = heap.top(); heap.pop();','if (du != distance[u]) continue;','// Relax each nonnegative edge u->v','if (du+w < distance[v]) {','    distance[v]=du+w;','    heap.push({distance[v],v}); }'],
+'dashboard_lab':['diff[l] += delta; diff[r] -= delta;','active += diff[i];','a[i] += active;','prefix[i+1] = prefix[i] + a[i];','answer = prefix[r] - prefix[l];'],
+'grid_lab':['nr=r+dr[k]; nc=c+dc[k];','if (nr<0 || nr>=h || nc<0 || nc>=w)','    continue;','if (grid[nr][nc]==\'#\') continue;','// Discover only if distance==-1'],
+}
+def topic(source):return re.sub(r'^part\d_','',source).replace('_script.txt','')
+def is_question(text):return any(w in text.lower() for w in ['pause and','pause the video','pause for','transfer task:'])
+def notes(direction):
+ # Notes are explanatory diagram labels, not commands to a learner.
+ s=direction[1:-1].strip();s=re.sub(r'\b(?:Show|Draw|Highlight|Freeze after)\s+', '',s)
+ s=re.sub(r'(?<=[a-z])(?=[A-Z])',' ',s);s=re.sub(r'(?<=[a-z])(?=\d)',' ',s)
+ s=s.replace(',',', ').replace(':',': ').replace(';','; ').replace('->',' → ').replace('<=',' ≤ ').replace('>=',' ≥ ')
+ return s
+
+def model(c):
+ t=topic(c['source']);i=c['scene'];question=is_question(c['text']);d=dict(topic=t,kind='concept',label='MODEL / REASONING',notes=notes(c['direction']),question=question,code=SNIPPETS.get(t,[]))
+ if question:
+  d.update(kind='question',label='YOUR TURN',notes='Pause the video to work through the question.\nThe next scene contains the answer.',code=[]);return d
+ if t=='loop_trace':
+  d.update(kind='rows',label='SIGNED TOTAL · TRACE',rows=[['input','3, -2, 5, -1'],['count','4'],['answer','5']])
+  if i in [1]:d['rows']=[['read count','n = 4'],['create slots','vector<int> a(n)'],['read values','for (int& x:a) cin >> x;']];d['code']=[]
+  if i in [2,8]:d['rows']=[['index','0'],['total','0'],['processed prefix','empty']]
+  if i==3:d['rows']=[['check','i=0, total=0; 0<4'],['add','0+3=3; i still0'],['increment','i becomes1']]
+  if i==4:d['rows']=[['check','i=1, total=3; 1<4'],['add','3+(-2)=1'],['increment','i becomes2']]
+  if i==5:d['rows']=[['index2','1+5=6'],['index3','6-1=5'],['final check','i=4; 4<4 false'],['output','5']]
+  if i in [7,9,10]:d['rows']=[['invariant','total = sum of first i values'],['preserve','add a[i], then increment i'],['finish','i=n; whole input processed']]
+  if i==11:d['rows']=[['new input','n=0; a=[]'],['initial state','i=0,total=0'],['condition','0<0 false'],['output','0']]
+  if i==15:d['rows']=[['i','0  1  2  3  4'],['total','0 -4 -4  3  0']]
+ elif t=='bfs':
+  dist,q=BFS_STATES.get(i,([None]*7,[]));edges=list(BASE_BFS)
+  if i==16:edges.append((5,6));dist=[0,1,1,2,2,3,4]
+  d.update(kind='graph',n=7,edges=edges,dist=dist,queue=q,label='ROOM GRAPH · ONE STEP PER EDGE')
+  if i==12:d['path']=[0,1,3,5]
+ elif t=='dynamic_programming':
+  values=[0]+['?']*6;upto={4:0,8:2,9:3,10:5,11:6,12:6}.get(i,0)
+  for j in range(upto+1):values[j]=[0,1,2,1,1,2,2][j]
+  d.update(kind='array',values=values,label='dp[x] · MINIMUM TOKEN COUNT',index_label='amount',small='Denominations: 1, 3, 4')
+  if i==13:d.update(values=[0,'∞','∞','∞',1,'∞'],small='New denominations: 4, 6; target5')
+  if i==17:d.update(kind='rows',rows=[['target7','2 + 5: two tokens'],['target3','unreachable'],['supply','unlimited copies']])
+ elif t=='fenwick':
+  a=[3,1,4,1,5,9,2,6]
+  if i in [6,7,8,12,13]:a[4]+=3
+  if i==13:a[0]-=2
+  bit=[0]+[sum(a[j-(j&-j):j]) for j in range(1,9)]
+  d.update(kind='fenwick',values=a,bit=bit,label='FENWICK BLOCKS · EXTERNAL INDICES',active=[5,6,8] if i==6 else [7,6,4] if i in [3,7] else [])
+  if i==9:d.update(kind='rows',rows=[['assignment','old5 → new8'],['delta','8-5=3'],['wrong add8','old5+8=13']])
+ elif t=='prefix':
+  a=[2,1,3,1,2,1];rows=[[k]+[a[:k].count(x) for x in [1,2,3]] for k in range(7)]
+  d.update(kind='table',headers=['boundary','cat1','cat2','cat3'],rows=rows,label='PREFIX COUNTS · FIXED LINE')
+  if i==4:d['rows']=rows[:4]+[['wrong P4',1,0,0]];d['label']='WRONG CANDIDATE · DOES NOT COPY PREFIX'
+  if i==11:d.update(kind='array',values=[2,3,3,1,2,1],label='CHANGED INPUT · OLD PREFIX TABLE STALE',index_label='position',index_start=1)
+ elif t=='knapsack':
+  rows=[[0]*6,[0,0,3,3,3,3],[0,0,3,4,4,7],[0,0,3,4,5,7]]
+  limit={3:2,4:3,5:4}.get(i,1)
+  d.update(kind='table',headers=['items','c0','c1','c2','c3','c4','c5'],rows=[[j]+row for j,row in enumerate(rows[:limit])],label='0/1 KNAPSACK · AT MOST CAPACITY')
+  if i==8:d.update(kind='rows',rows=[['one item','weight2,value3; capacity4'],['ascending wrong','dp2=3; dp4=6 (reuse!)'],['descending correct','dp4=3; dp2=3']])
+  if i==13:d.update(kind='rows',rows=[['capacity3','best value5'],['capacity0 / no items','best value0']])
+ elif t=='dijkstra':
+  edges=[(0,1,10),(0,2,3),(2,1,4),(1,3,2),(2,3,12)];dist={1:[0,'∞','∞','∞'],2:[0,10,3,'∞'],3:[0,7,3,15],4:[0,7,3,9]}.get(i,[None]*4)
+  if i==6:edges=[(0,1,2),(0,2,5),(2,1,-4)];dist=[0,1,5]
+  d.update(kind='graph',n=3 if i==6 else 4,edges=edges,dist=dist,directed=True,label='WEIGHTED DIRECTED GRAPH',queue=[])
+  if i==12:d.update(kind='rows',rows=[['new edge cost8','best route cost8'],['new edge cost12','old route cost9 wins']])
+ elif t=='binary_search':
+  rows=[[4,16,10,2,'yes'],[4,10,7,3,'yes'],[4,7,5,4,'no'],[6,7,6,3,'yes']]
+  d.update(kind='array',values=[3,2,2,4,1,4],label='ORDERED BOXES · AT MOST THREE TRIPS',index_label='box')
+  if 6<=i<=8:d.update(kind='table',headers=['lo','hi','mid','trips','works'],rows=rows[:{6:1,7:3,8:4}[i]],label='BINARY SEARCH TRACE')
+ elif t=='two_pointers':
+  a=[1,2,4,7,11] if i<7 else [2,1,1,3,1];d.update(kind='array',values=a,label='SORTED PAIR · TARGET9' if i<7 else 'CONTIGUOUS WINDOW · LIMIT4',index_label='index',active=[0,4] if i<2 else [1,3] if i<7 else [])
+  if i==11:d.update(values=[5,-2],label='NEGATIVE-INPUT COUNTEREXAMPLE · LIMIT3')
+  if i==13:d.update(kind='rows',rows=[['pair original indices','2 and3; values7+2=9'],['zero window','length3']])
+ elif t=='grid_lab':
+  grid=['S..#','.#..','...T'];dist={0:0}
+  if i>=4:dist.update({1:1,4:1})
+  if i>=5:dist.update({2:2,8:2})
+  if i>=6:dist.update({6:3,9:3,7:4,10:4,11:5})
+  d.update(kind='grid',grid=grid,dist=dist,label='GRID BFS · COORDINATES (ROW,COLUMN)')
+  if i==14:d.update(grid=['S#.','..T'],dist={0:0,3:1,4:2,5:3},label='TRANSFER ANSWER · THREE MOVES')
+ elif t=='lis_lab':
+  d.update(kind='array',values=[3,1,2,5,4,6],label='STRICT LIS · KEEP ORIGINAL ORDER',index_label='index')
+  if i==3:d.update(kind='table',headers=['value',3,1,2,5,4,6],rows=[['DP length',1,1,2,3,3,4]],label='QUADRATIC ENDING-LENGTH DP')
+  if i==7:d.update(kind='rows',rows=[['3 →1','[3] → [1]'],['then2,5','[1,2] → [1,2,5]'],['then4,6','[1,2,4] → [1,2,4,6]']],label='MINIMUM-TAIL TRACE')
+  if i==9:d.update(values=[2,2,2],label='STRICT DUPLICATES · LENGTH1')
+  if i==11:d.update(kind='rows',rows=[['input','2,3,1'],['tails','1,3'],['actual witness','2,3; tails is not a witness']])
+  if i==14:d.update(kind='rows',rows=[['DP','1,1,2,1,3'],['tails','1,3,5 (not a witness)'],['real witness','2,3,5; length3'],['equal fives','strict1; nondecreasing3']])
+ elif t=='dashboard_lab':
+  d.update(kind='rows',rows=[['original','2,1,3,0,4'],['updates','+2 on[1,4); -1 on[2,5)'],['timeline','ALL updates before queries']],label='BATCH DASHBOARD')
+  if i in [3,4,5,6,7,8,9]:d['rows']=[['events','0,2,-1,0,-2,1'],['active','0,2,1,1,-1'],['final','2,3,4,1,3'],['prefix','0,2,5,9,10,13']]
+  if i==13:d['rows']=[['final','4,1,0'],['prefix','0,4,5,5'],['queries','5 and1']]
+ elif t=='string_lab':
+  d.update(kind='array',values=list('SWISS'),label='FIND FIRST GLOBALLY UNIQUE POSITION',index_label='index')
+  if i in [4,5,6]:d.update(kind='rows',rows=[['counts','S:3  W:1  I:1'],['scan index0','S repeats →skip'],['scan index1','W occurs once →answer1']])
+  if i==12:d.update(kind='rows',rows=[['empty / A / AAAA','-1 / 0 / -1'],['BANANA / ZYX','0 / 0'],['order','positions, not alphabet']])
+ elif t=='functional_graph':d.update(kind='graph',n=5,edges=[(0,1),(1,2),(2,3),(3,1),(4,4)],directed=True,dist=[None]*5,queue=[],label='ONE SUCCESSOR PER VERTEX')
+ elif t=='parity':
+  edges=[(0,1,'S'),(1,2,'D')]+([(0,2,'S')] if i in [6,7] else [])
+  d.update(kind='graph',n=4,edges=edges,dist=[0,0,1,'?'] if i>=3 else [None]*4,queue=[],label='SAME / DIFFERENT CONSTRAINTS · GROUPS1..4',node_offset=1)
+  if i==14:d.update(kind='rows',rows=[['all-D triangle','impossible'],['path plus isolated','4 assignments = binary100']])
+ elif t=='topological':d.update(kind='graph',n=5,edges=[(0,2),(1,2),(2,3),(1,4)]+([(3,1)] if i==4 else []),directed=True,dist=[None]*5,queue=[],label='PREREQUISITE → DEPENDENT')
+ elif t=='dsu_mst':d.update(kind='graph',n=4,edges=[(0,1,1),(1,2,2),(0,2,3),(2,3,4),(0,3,10)],dist=[None]*4,queue=[],label='MINIMUM NETWORK · CHOOSE EDGES',path=[0,1,2,3] if i>=2 else [])
+ elif t=='segment_sparse':
+  d.update(kind='array',values=[3,1,10 if i in [4,5] else 4,1,5],label='RANGE SUM TREE · POINT ASSIGNMENT',index_label='index')
+  if i==8:d.update(kind='rows',rows=[['input','3,1,4'],['overlap blocks','[3,1] and[1,4]'],['minimum','min(1,1)=1'],['sum fails','4+5=9, true sum8']])
+ elif t=='ranges':
+  if i<=4:d.update(kind='rows',rows=[['events','0,3,2,0,-3,-2'],['reconstructed','0,3,5,5,2']],label='DIFFERENCE EVENTS → VALUES')
+  elif i<=9:d.update(kind='grid',grid=['123','456','789'],dist={},label='2D PREFIX · FOUR-REGION CANCELLATION')
+  elif i==11:d.update(kind='rows',rows=[['updates','0,3,5,5,2'],['rectangle','2+3+5+6=16']])
+ elif t=='sorting':d.update(kind='rows',rows=[['original','4,2,4,9,2'],['sorted','2,2,4,4,9'],['distinct','2,4,9']],label='SORTING CHANGES ORDER')
+ elif t=='backtracking':d.update(kind='tree',label='CHOOSE / EXPLORE / RETURN',rows=[['root','i0,sum0'],['exclude5','sum0 →0 or-3'],['include5','sum5 →5 or2'],['target2','one successful subset']])
+ elif t=='casework':d.update(kind='rows',rows=[['start1','simulate independently'],['start2','simulate independently'],['start3','simulate independently'],['answer','maximum score']],label='THREE COMPLETE CASES')
+ if any(word in c['direction'].lower() for word in ['proof','invariant','cost:','cost ','complexity','bounds','limits:','counterexample','state definition','key example']):d['code']=[]
+ return d

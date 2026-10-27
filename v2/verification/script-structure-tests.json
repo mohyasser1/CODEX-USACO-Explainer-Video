@@ -1,6 +1,6 @@
 {
   "passed": true,
-  "sections": 26,
+  "sections": 30,
   "learner_pause_boundaries": [
     {
       "script": "part1_loop_trace_script.txt",
@@ -11,6 +11,11 @@
       "script": "part1_functions_cost_script.txt",
       "question_scene": 9,
       "answer_scene": 10
+    },
+    {
+      "script": "part1_string_lab_script.txt",
+      "question_scene": 11,
+      "answer_scene": 12
     },
     {
       "script": "part1_casework_script.txt",
@@ -31,6 +36,11 @@
       "script": "part2_ranges_script.txt",
       "question_scene": 10,
       "answer_scene": 11
+    },
+    {
+      "script": "part2_dashboard_lab_script.txt",
+      "question_scene": 12,
+      "answer_scene": 13
     },
     {
       "script": "part2_two_pointers_script.txt",
@@ -63,6 +73,11 @@
       "answer_scene": 16
     },
     {
+      "script": "part3_grid_lab_script.txt",
+      "question_scene": 13,
+      "answer_scene": 14
+    },
+    {
       "script": "part3_parity_script.txt",
       "question_scene": 13,
       "answer_scene": 14
@@ -81,6 +96,11 @@
       "script": "part4_knapsack_script.txt",
       "question_scene": 12,
       "answer_scene": 13
+    },
+    {
+      "script": "part4_lis_lab_script.txt",
+      "question_scene": 13,
+      "answer_scene": 14
     },
     {
       "script": "part4_dijkstra_script.txt",

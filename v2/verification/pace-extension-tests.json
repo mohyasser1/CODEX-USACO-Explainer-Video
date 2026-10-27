@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "seed": 2727,
+  "cases": {
+    "first_unique": 126,
+    "batch_dashboard": 101,
+    "grid_routes": 100,
+    "lis_length": 106
+  },
+  "oracles": [
+    "direct character count per position",
+    "direct element updates and interval sums",
+    "Floyd-Warshall plus path witness checks",
+    "all subsequences with strict-comparison check"
+  ],
+  "boundary_tests": [
+    "dashboard maximum stated positive accumulation1.1e15",
+    "LIS200000 increasing elements"
+  ]
+}

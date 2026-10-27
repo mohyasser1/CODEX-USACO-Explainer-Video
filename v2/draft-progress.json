@@ -3,8 +3,8 @@
   "parts": [
     {
       "part": 1,
-      "spoken_words": 7030,
-      "estimated_minutes": 59.97,
+      "spoken_words": 8482,
+      "estimated_minutes": 58.89,
       "scripts": [
         {
           "file": "part1_foundations_script.txt",
@@ -19,6 +19,10 @@
           "spoken_words": 1280
         },
         {
+          "file": "part1_string_lab_script.txt",
+          "spoken_words": 1452
+        },
+        {
           "file": "part1_casework_script.txt",
           "spoken_words": 1105
         },
@@ -31,8 +35,8 @@
     },
     {
       "part": 2,
-      "spoken_words": 7037,
-      "estimated_minutes": 60.03,
+      "spoken_words": 8444,
+      "estimated_minutes": 58.63,
       "scripts": [
         {
           "file": "part2_sorting_script.txt",
@@ -45,6 +49,10 @@
         {
           "file": "part2_ranges_script.txt",
           "spoken_words": 937
+        },
+        {
+          "file": "part2_dashboard_lab_script.txt",
+          "spoken_words": 1407
         },
         {
           "file": "part2_two_pointers_script.txt",
@@ -67,8 +75,8 @@
     },
     {
       "part": 3,
-      "spoken_words": 6966,
-      "estimated_minutes": 59.43,
+      "spoken_words": 8489,
+      "estimated_minutes": 58.94,
       "scripts": [
         {
           "file": "part3_graph_models_script.txt",
@@ -77,6 +85,10 @@
         {
           "file": "part3_bfs_script.txt",
           "spoken_words": 1636
+        },
+        {
+          "file": "part3_grid_lab_script.txt",
+          "spoken_words": 1523
         },
         {
           "file": "part3_parity_script.txt",
@@ -99,12 +111,16 @@
     },
     {
       "part": 4,
-      "spoken_words": 7212,
-      "estimated_minutes": 61.53,
+      "spoken_words": 8788,
+      "estimated_minutes": 61.02,
       "scripts": [
         {
           "file": "part4_knapsack_script.txt",
           "spoken_words": 1208
+        },
+        {
+          "file": "part4_lis_lab_script.txt",
+          "spoken_words": 1576
         },
         {
           "file": "part4_dijkstra_script.txt",
@@ -138,5 +154,5 @@
       "missing_drafts": []
     }
   ],
-  "total_spoken_words": 28245
+  "total_spoken_words": 34203
 }

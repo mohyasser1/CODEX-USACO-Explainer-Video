@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "panels": 12,
+  "duration_seconds": 36,
+  "full_decode": "passed",
+  "sha256": "223fdf182f37cd48d416c3e578cab94fb9e83989b23a5c028e56168d3cdee8a3",
+  "scope": "Silent graph,coin-DP and Fenwick transition engineering check; numerical oracles in course-models.json; not an audio pacing sample"
+}

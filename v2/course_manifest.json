@@ -1,7 +1,7 @@
 {
   "title": "Rohail's School Music Night: USACO Foundations and Beyond",
   "production_status": "User requested 1.25x integrated-segment pace; source Voice A synthesis retained for pitch-preserving tempo conversion; substantive extensions in preparation before full renders",
-  "provisional_words_per_minute": 117.219821642,
+  "provisional_words_per_minute": 144.02032802082323,
   "part_duration_target_seconds": 3600,
   "part_duration_tolerance_seconds": 180,
   "voice_identity": "af_heart",
@@ -14,6 +14,7 @@
         "part1_foundations_script.txt",
         "part1_loop_trace_script.txt",
         "part1_functions_cost_script.txt",
+        "part1_string_lab_script.txt",
         "part1_casework_script.txt",
         "part1_backtracking_script.txt"
       ],
@@ -26,6 +27,7 @@
         "part2_sorting_script.txt",
         "part2_prefix_script.txt",
         "part2_ranges_script.txt",
+        "part2_dashboard_lab_script.txt",
         "part2_two_pointers_script.txt",
         "part2_binary_search_script.txt",
         "part2_greedy_script.txt",
@@ -39,6 +41,7 @@
       "scripts": [
         "part3_graph_models_script.txt",
         "part3_bfs_script.txt",
+        "part3_grid_lab_script.txt",
         "part3_parity_script.txt",
         "part3_functional_graph_script.txt",
         "part3_dynamic_programming_script.txt",
@@ -51,6 +54,7 @@
       "title": "Gold foundations and an advanced roadmap",
       "scripts": [
         "part4_knapsack_script.txt",
+        "part4_lis_lab_script.txt",
         "part4_dijkstra_script.txt",
         "part4_dsu_mst_script.txt",
         "part4_fenwick_script.txt",
@@ -69,5 +73,6 @@
     "Independent coding practice occurs through learner-controlled pauses outside delivered runtime."
   ],
   "delivery_tempo_multiplier": 1.25,
-  "provisional_delivered_words_per_minute": 144.00687713218173
+  "provisional_delivered_words_per_minute": 144.00687713218173,
+  "provisional_rate_basis": "Measured integrated1.25x review851words/354.533285seconds; full parts still require measurement"
 }

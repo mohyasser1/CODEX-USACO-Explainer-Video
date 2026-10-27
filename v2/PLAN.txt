@@ -32,78 +32,59 @@ Introduction = mechanism and one trace, explicitly not implementation mastery.
 Roadmap = when useful, prerequisites and follow-up practice; no mastery claim.
 Division names describe approximate learning groups, not an official syllabus.
 
-FOUR-PART MINUTE BUDGET (240 minutes; targets, not measured audio yet)
-Each part includes brief retrieval prompts and answers within these budgets.
-Long coding time is learner-controlled pausing, not padded silence.
+FOUR-PART COVERAGE AND PROVISIONAL DURATION
+User requested1.25x the approved integrated segment on2026-10-27.
+Voice A remains af_heart at native speed.74, followed by pitch-preserving
+atempo1.25; video, captions and chapters use the same time conversion.
+Measured faster review:851 words in354.533 seconds, about144.02 words/minute.
+All course runtimes below are estimates until full-part audio is measured.
 
-PART 1 — FROM SOURCE CODE TO A CORRECT BRONZE SOLUTION (60 min)
-  0–5   Tour contract, compile/run/input/output, errors and debugging loop.
-  5–15  Types, expressions, overflow before assignment, signed arithmetic;
-         statement-by-statement execution and memory-value diagrams.
- 15–27  Conditions/loops, vectors/string indices, boundaries; signed-total
-         deep dive with empty/negative inputs and a loop invariant.
- 27–35  Functions, value/reference, scope, call stack, vector size/capacity;
-         complexity and why a reference can be invalidated by reallocation.
- 35–47  Simulation plus exhaustive casework: three possible starting states;
-         full problem-to-code derivation and tests (Shell Game follow-up).
- 47–57  Backtracking subsets: choose/recurse/undo, leaf coverage, exponential
-         cost; subset-sum trace and why premature pruning fails with negatives.
- 57–60  Retrieval, transfer solution, practice route and build checklist.
+PART 1 — C++ execution and Bronze problem solving
+8,482 words; estimated 58.89 minutes.
+  foundations
+  loop trace
+  functions cost
+  string lab
+  casework
+  backtracking
 
-PART 2 — MAKE REPEATED WORK DISAPPEAR (60 min)
-  0–8   Sorting, comparators, pairs, maps/sets; order versus physical distance.
-  8–20  Prefix sums deep dive: half-open indexing, cancellation proof, counts.
- 20–27  Difference-array reconstruction and numerical 2D inclusion–exclusion
-         introductions; full implementations in companion exercises.
- 27–37  Sorted two-sum deep dive; discard proof, overflow; nonnegative window
-         introduction with a negative-value counterexample.
- 37–52  Binary search on truck capacity deep dive, including greedy predicate
-         proof, infeasible capacities, feasible bound and shrinking interval.
- 52–58  Interval scheduling greedy introduction and exchange proof; wrong
-         duration-first and earliest-start alternatives.
- 58–60  Retrieval/transfer and official Breed Counting practice link.
+PART 2 — Avoid repeated work
+8,444 words; estimated 58.63 minutes.
+  sorting
+  prefix
+  ranges
+  dashboard lab
+  two pointers
+  binary search
+  greedy
+  transfer
 
-PART 3 — RELATIONSHIPS AND REUSABLE SUBPROBLEMS (60 min)
-  0–8   Graph models, directed/undirected, adjacency lists, disconnected cases.
-  8–21  BFS deep dive: evolving queue, mark-on-enqueue, distances and parents;
-         DFS/flood-fill comparison and recursion-depth risk.
- 21–33  Parity graph constraints deep dive: same/different edges, propagation,
-         contradiction and components; Great Revegetation follow-up.
- 33–39  Functional graphs introduction: tail/cycle, visited states and repeated
-         successors; binary jumping linked to part 4's roadmap.
- 39–55  DP deep dive: minimum coins, state/transition/base/unreachable/order,
-         bottom-up trace, optimal-substructure proof, greedy counterexample.
- 55–60  DAG/topological order introduction: dependencies, cycle detection;
-         transfer solutions and graph/DP practice plan.
+PART 3 — Graphs and dynamic programming
+8,489 words; estimated 58.94 minutes.
+  graph models
+  bfs
+  grid lab
+  parity
+  functional graph
+  dynamic programming
+  topological
 
-PART 4 — GOLD FOUNDATIONS AND THE ADVANCED MAP (60 min)
-  0–12  0/1 knapsack deep dive: two-dimensional state then descending capacity;
-         show ascending update accidentally reuses an item.
- 12–23  Dijkstra deep dive: nonnegative weights, stale entries, relaxation,
-         priority queue, finalized-distance proof; negative-edge counterexample.
- 23–30  DSU/Kruskal introduction: components, path compression, union by size,
-         sorted edges, cycle rejection and cut-property explanation.
- 30–42  Fenwick deep dive: binary lowbit blocks, prefix query, point addition,
-         interval answer and an update trace; static-prefix contrast.
- 42–49  Segment tree introduction: associative merge, identity, query/update;
-         sparse-table static idempotent RMQ contrast and limitations.
- 49–57  Prerequisite-organized roadmap: Euler tour/LCA/tree DP; LIS/interval DP;
-         sieve/GCD/modular arithmetic/bitmask/MITM; SCC/bridges/Eulerian walks;
-         lazy/persistent structures; strings/flow/geometry/DP optimization.
-         These are introductions or named follow-ups, not fully taught units.
- 57–60  Mixed technique-selection exercise, test oracle method, training plan.
+PART 4 — Gold foundations and an advanced roadmap
+8,788 words; estimated 61.02 minutes.
+  knapsack
+  lis lab
+  dijkstra
+  dsu mst
+  fenwick
+  segment sparse
+  debug clinic
+  advanced roadmap
+  practice
 
-RUNTIME POLICY
-Target four parts of 57–63 minutes each, approximately four hours total.
-The current Voice A storytelling candidate measures 117.22 overall words/minute:
-170 words in 87.016 seconds, including 5.8 seconds of purposeful reflection.
-The user approved the slower Voice A storytelling delivery on 2026-10-27.
-Use roughly 6900–7500 spoken words per part as a provisional drafting guide,
-approximately 28000–30000 total, then measure each actual synthesized lesson.
-A short audition does not guarantee the pace of a technical explanation.
-If short, deepen worked examples; if long, move clearly marked extensions into
-companion material. Never stretch speech, repeat passages or add silence merely
-to manufacture four hours. Learner-controlled coding pauses are outside runtime.
+Target four approximately one-hour parts. Added substantive labs cover
+string frequency,combined offline updates/queries,grid BFS,and strict LIS.
+No padding,repeated passages or slowed delivery to manufacture runtime.
+Learner-controlled coding pauses remain outside delivered runtime.
 
 ENTERTAINMENT / VISUAL DESIGN
 Rohail, a fictional tenth grader, helps Maya and Sam organize a school music
@@ -123,10 +104,10 @@ recordings, melody copying, artist voice imitation or implied endorsement.
 PILOT GATE
 Approved slower Voice A storytelling sample (2026-10-27):
 https://drive.google.com/file/d/1gbjoxQKnuYsq96xYeQEo94fAFNj2qpXP/view
-Next validate a short integrated Rohail teaching segment with
-correct semantic state transitions, readable code and captions before scaling
-full renders. Do not reuse the rejected presentation template. Continue scripts,
-complete examples and independent tests while integrated technical QA is pending.
+Integrated template and1.25x regression passed independent actual-media QA.
+Opening corrected code is hidden until the input lesson. Full production is
+authorized; representative graph/DP/range model tests precede batch rendering.
+Human listening by the agent is not claimed.
 
 SUPERSEDED PILOT CHECKPOINT — NOT APPROVED VOICE/STORY
 6:35.2 MP4 delivered at:
@@ -139,12 +120,11 @@ teaching/engagement review remain pending. Initial pilot predates later supplied
 song hooks; consolidated HIP_HOP_TEACHING_NOTES.txt maps those into full lessons.
 CURRENT WRITING CHECKPOINT
 All four parts have complete first drafts, pending editorial/teaching review.
-Part 1: 7030 narration words; estimated 59.97 minutes at the provisional pace.
-Part 2: 7037 narration words; estimated 60.03 minutes at the provisional pace.
-Part 3: 6966 narration words; estimated 59.43 minutes at the provisional pace.
-Part 4: 7212 narration words; estimated 61.53 minutes at the provisional pace.
-Total: 28,245 narration words; estimated 240.96 minutes at the
-provisional 117.22 words/minute pace (about 4 hours 1 minute, not measured audio).
+Part 1: 8,482 words; estimated 58.89 minutes at the provisional pace.
+Part 2: 8,444 words; estimated 58.63 minutes at the provisional pace.
+Part 3: 8,489 words; estimated 58.94 minutes at the provisional pace.
+Part 4: 8,788 words; estimated 61.02 minutes at the provisional pace.
+Total: 34,203 words; estimated 237.49 minutes. Not measured full-part audio.
 These estimates exclude metadata and stage directions. They are not measured
 full-part audio durations or finished videos. course_manifest.json records
 prerequisite order; draft-progress.json records reproducible counts.

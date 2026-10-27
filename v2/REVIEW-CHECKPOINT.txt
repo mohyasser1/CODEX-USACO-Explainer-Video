@@ -1,48 +1,23 @@
-ROHAIL V2 — FOUR-PART FIRST-DRAFT REVIEW CHECKPOINT
+CURRENT V2 PRODUCTION CHECKPOINT —2026-10-27
 
-All 26 script sections are drafted. Read in course_manifest.json order.
-Part 1: 7,030 spoken words; estimated 59.97 minutes.
-Part 2: 7,037 spoken words; estimated 60.03 minutes.
-Part 3: 6,966 spoken words; estimated 59.43 minutes.
-Part 4: 7,212 spoken words; estimated 61.53 minutes.
-Total: 28,245 words, about 241.0 minutes at the audition's measured overall
-117.22 words/minute. These are estimates, not measured full-part audio.
+User requested1.25x delivered pace; corrected faster integrated review passed
+independent media regression. No new voice approval is required.
 
-REVIEW PRIORITIES
-Check beginner prerequisites, correctness of each continuous example,
-proof versus intuition, cognitive load, and whether the story/humor helps.
-Review each script alongside its named standalone C++ example. Visual stage
-directions are specifications, not evidence that animations already exist.
-check_visual_examples.py verifies final stdout for 22 input/output fixtures.
-check_trace_states.py separately verifies all 10 authored intermediate-data
-fields (loop states, prefix rows, search bounds, queues, component count,
-coin/knapsack DP and Fenwick arrays). Neither check validates rendered media.
-Independent exhaustive/naive-oracle test reports are in verification/;
-2,243 program cases passed across the saved reports, including invalid input
-cases for signed_total. Additional basic-program smoke checks also passed.
-These tests establish sampled code behavior, not correctness of all narration.
-Advanced roadmap topics explicitly do not promise implementation mastery.
+Part 1: 8,482 words; estimated 58.89 minutes at the provisional pace.
+Part 2: 8,444 words; estimated 58.63 minutes at the provisional pace.
+Part 3: 8,489 words; estimated 58.94 minutes at the provisional pace.
+Part 4: 8,788 words; estimated 61.02 minutes at the provisional pace.
+Total: 34,203 words; estimated 237.49 minutes. Not measured full-part audio.
 
-STATUS AND GATES
-The user approved slower Voice A storytelling delivery on 2026-10-27.
-An integrated review segment is in production; full-part narration and long
-renders await integrated technical QA.
-Full independent teaching review, complete semantic animation specifications,
-final student workbook, timed captions, integrated pilot approval, and full
-media QA remain outstanding. Human listening signoff is not claimed.
-V1 and superseded pilots are preserved separately. Active story uses Rohail.
-Cloud scratch has about 29 GB available; no Mac storage is used.
+Four substantive labs were added to preserve approximately four hours at
+the requested pace. Their standalone C++ programs passed433 independent cases.
+The existing2676 total recorded program cases include those433; do not add
+the157 diagram-state checks to that program-case count.
 
-CONTINUITY REVISION
-The actual foundations narration now stages the empty cash box, four receipts,
-reported eight dollars versus Maya's counted five, and skipped refunds before
-the loop lesson. No audition viewing is assumed. The coin DP visual now says
-1+dp[0]=1; denomination three chooses the predecessor, not the count increment.
-
-SECOND REVIEW REVISIONS
-Five flagged transfer scenes now separate questions and answer reveals.
-Dijkstra and Fenwick include student predictions, challenges and revisions.
-Fenwick explains the binary 5->6->8 update and why entry 7 is excluded.
-The broader storytelling editorial pass across all 26 sections is complete;
-independent review and learner/listening approval remain pending.
-Integrated rendered-media QA remains required; slower Voice A is approved.
+Two cloud narration workers are active; paragraph audio is cached by text and
+voice settings. Parts1/3 receive a cache-preserving refresh to include new labs.
+363 scene layouts fit;157 representative graph/DP/range numerical checks pass.
+26 learner pause prompts have separate hidden question/reveal panels.
+Workbook: see verification/workbook-layout.json for current page count;32 exercises plus separate solutions and full C++ companions.
+Full videos, measured final runtimes, encoded-frame QA and durable uploads remain
+in production. No human listening signoff is claimed. V1 remains preserved.
