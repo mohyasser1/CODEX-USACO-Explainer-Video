@@ -11,5 +11,6 @@
     2,
     3
   ],
-  "prior_exercise_layout_independently_passed": true
+  "prior_exercise_layout_independently_passed": true,
+  "remote_readback_sha256_verified": true
 }

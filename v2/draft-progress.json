@@ -1,5 +1,5 @@
 {
-  "status": "Provisional estimates; no full-part narration measured",
+  "status": "Manuscript counts retained; all four final videos measured and uploaded. Estimated minutes are historical drafting estimates.",
   "parts": [
     {
       "part": 1,
@@ -31,7 +31,8 @@
           "spoken_words": 1240
         }
       ],
-      "missing_drafts": []
+      "missing_drafts": [],
+      "measured_video_seconds": 3603.083333
     },
     {
       "part": 2,
@@ -71,7 +72,8 @@
           "spoken_words": 404
         }
       ],
-      "missing_drafts": []
+      "missing_drafts": [],
+      "measured_video_seconds": 3669.114
     },
     {
       "part": 3,
@@ -107,7 +109,8 @@
           "spoken_words": 573
         }
       ],
-      "missing_drafts": []
+      "missing_drafts": [],
+      "measured_video_seconds": 3666.4
     },
     {
       "part": 4,
@@ -151,7 +154,8 @@
           "spoken_words": 539
         }
       ],
-      "missing_drafts": []
+      "missing_drafts": [],
+      "measured_video_seconds": 3967.091
     }
   ],
   "total_spoken_words": 34203

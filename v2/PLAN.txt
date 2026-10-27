@@ -1,8 +1,8 @@
-ROHAIL'S SCHOOL MUSIC NIGHT — V2 production plan, 2026-10-26
+ROHAIL'S SCHOOL MUSIC NIGHT — V2 completed production plan, 2026-10-27
 
-Status: PRESENTATION RECAST after user rejected the original pilot voice/mascot.
-No full V2 render until a new voice/story audition and technical template pass.
-V1 remains preserved. V2 outputs use /workspace/usaco-film-v2/output.
+Status: Four-part production completed and uploaded; local bounded media checks passed. Voice A, Rohail
+storytelling and the 1.25x pace were approved. V1 remains preserved.
+V2 outputs use /workspace/usaco-film-v2/output.
 
 AUDIT OF THE ACTUAL V1
 46 chapters, 9,022 body narration words, 80:42 delivered runtime. Most
@@ -109,28 +109,17 @@ Opening corrected code is hidden until the input lesson. Full production is
 authorized; representative graph/DP/range model tests precede batch rendering.
 Human listening by the agent is not claimed.
 
-SUPERSEDED PILOT CHECKPOINT — NOT APPROVED VOICE/STORY
-6:35.2 MP4 delivered at:
-https://drive.google.com/file/d/1caj52eyJMDL_smkpFcBXUsbwGyW89TFu/view
-Corrected technical revision: 7,397,888 bytes; full decode passed;
-audio/video end difference zero.
-SHA256 6c164593391a8a08919c4706b9bec788025e7c0eced5c03b345c149ff8627839
-Downloaded Drive copy independently hashed and MATCHED. Human listening and
-teaching/engagement review remain pending. Initial pilot predates later supplied
-song hooks; consolidated HIP_HOP_TEACHING_NOTES.txt maps those into full lessons.
-CURRENT WRITING CHECKPOINT
-All four parts have complete first drafts, pending editorial/teaching review.
-Part 1: 8,482 words; estimated 58.89 minutes at the provisional pace.
-Part 2: 8,444 words; estimated 58.63 minutes at the provisional pace.
-Part 3: 8,489 words; estimated 58.94 minutes at the provisional pace.
-Part 4: 8,788 words; estimated 61.02 minutes at the provisional pace.
-Total: 34,203 words; estimated 237.49 minutes. Not measured full-part audio.
-These estimates exclude metadata and stage directions. They are not measured
-full-part audio durations or finished videos. course_manifest.json records
-prerequisite order; draft-progress.json records reproducible counts.
+MEASURED COURSE CHECKPOINT
+Part 1: 8,482 narrated words; measured runtime 60:03.
+Part 2: 8,444 narrated words; measured runtime 61:09.
+Part 3: 8,489 narrated words; measured runtime 61:06.
+Part 4: 8,788 narrated words; measured runtime 66:07.
+Total: 34,203 narrated words; measured runtime approximately 4:08:26.
+All 363 narration paragraphs are synthesized. The user-requested 1.25x tempo is preserved.
+Full human listening is not claimed.
 
 VERIFICATION / DELIVERY
-Use separate V2 names/IDs. Cloud only; current free scratch about 29 GB.
+Use separate V2 names/IDs. Cloud only; current free scratch about 25 GB.
 Run C++ boundary and seeded independent-oracle tests. Capture diagram states
 from the same input data, but validate answers using independent calculations.
 Check PDF layout, caption coverage, sampled frames, A/V timestamps and full decode.

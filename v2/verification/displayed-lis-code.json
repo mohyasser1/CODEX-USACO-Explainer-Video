@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "cases": 100,
+  "sanitizer": "UBSan",
+  "oracle": "Enumerate all subsequences ending at each index; compare every displayed DP value",
+  "displayed_scene": 3
+}

@@ -1,23 +1,25 @@
-CURRENT V2 PRODUCTION CHECKPOINT —2026-10-27
+CURRENT V2 DELIVERY CHECKPOINT — 2026-10-27
 
-User requested1.25x delivered pace; corrected faster integrated review passed
-independent media regression. No new voice approval is required.
+MEASURED COURSE CHECKPOINT
+Part 1: 8,482 narrated words; measured runtime 60:03.
+Part 2: 8,444 narrated words; measured runtime 61:09.
+Part 3: 8,489 narrated words; measured runtime 61:06.
+Part 4: 8,788 narrated words; measured runtime 66:07.
+Total: 34,203 narrated words; measured runtime approximately 4:08:26.
+All 363 narration paragraphs are synthesized. The user-requested 1.25x tempo is preserved.
+Full human listening is not claimed.
 
-Part 1: 8,482 words; estimated 58.89 minutes at the provisional pace.
-Part 2: 8,444 words; estimated 58.63 minutes at the provisional pace.
-Part 3: 8,489 words; estimated 58.94 minutes at the provisional pace.
-Part 4: 8,788 words; estimated 61.02 minutes at the provisional pace.
-Total: 34,203 words; estimated 237.49 minutes. Not measured full-part audio.
+All program and model verification reports are under verification/.
+Recorded main suite: 2676 program cases, including 433 extension cases;
+independent reviewer additionally ran 142 extension cases.
+173 numerical diagram checks; 363 layout/authored-panel checks;
+100 separately enumerated cases for the displayed quadratic LIS recurrence.
+26 learner pause prompts separate questions and answers.
+Workbook: 41 pages, 32 exercises, separate solutions, complete C++17 programs,
+measured chapter timestamps. No orphan code headings or short spill pages.
 
-Four substantive labs were added to preserve approximately four hours at
-the requested pace. Their standalone C++ programs passed433 independent cases.
-The existing2676 total recorded program cases include those433; do not add
-the157 diagram-state checks to that program-case count.
-
-Two cloud narration workers are active; paragraph audio is cached by text and
-voice settings. Parts1/3 receive a cache-preserving refresh to include new labs.
-363 scene layouts fit;157 representative graph/DP/range numerical checks pass.
-26 learner pause prompts have separate hidden question/reveal panels.
-Workbook: see verification/workbook-layout.json for current page count;32 exercises plus separate solutions and full C++ companions.
-Full videos, measured final runtimes, encoded-frame QA and durable uploads remain
-in production. No human listening signoff is claimed. V1 remains preserved.
+All four parts uploaded. Part 1 independent final review and remote hash passed.
+Parts 2–4 local bounded media checks and remote raw-fetch sizes passed;
+independent full-file remote hash/final review remain pending.
+Final delivery links and local hashes are in FINAL-DELIVERY.txt.
+Full-file human listening was not performed by this agent.

@@ -215,8 +215,9 @@ def render(part):
  mp4=dest/f'Rohail-USACO-V2-Part-{part}.mp4';temp=mp4.with_suffix('.partial.mp4')
  reuse_audio=Path(sys.argv[2]) if len(sys.argv)>2 else None
  audio_input=reuse_audio if reuse_audio else dest/'narration.wav'
- audio_options=['-c:a','copy'] if reuse_audio else ['-af',f'atempo={TEMPO},loudnorm=I=-16:TP=-1.5:LRA=11','-c:a','aac','-b:a','96k']
- p=subprocess.Popen(['ffmpeg','-v','error','-y','-f','rawvideo','-pix_fmt','rgb24','-s','1280x720','-r',str(FPS),'-i','-','-i',str(audio_input),'-map','0:v:0','-map','1:a:0',*audio_options,'-c:v','libx264','-preset','veryfast','-crf','26','-threads','2','-pix_fmt','yuv420p','-shortest','-movflags','+faststart',str(temp)],stdin=subprocess.PIPE)
+ gain=',volume=-2dB' if part in [2,4] else ''
+ audio_options=['-c:a','copy'] if reuse_audio else ['-af',f'atempo={TEMPO},loudnorm=I=-16:TP=-1.5:LRA=11{gain}','-c:a','aac','-b:a','96k']
+ p=subprocess.Popen(['ffmpeg','-v','error','-y','-f','rawvideo','-pix_fmt','rgb24','-s','1280x720','-r',str(FPS),'-i','-','-i',str(audio_input),'-map','0:v:0','-map','1:a:0',*audio_options,'-c:v','libx264','-preset','veryfast','-crf','26','-threads','2','-pix_fmt','yuv420p','-movflags','+faststart',str(temp)],stdin=subprocess.PIPE)
  idx=0
  try:
   for n in range(math.ceil(duration*FPS)):

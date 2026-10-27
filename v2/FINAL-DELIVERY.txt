@@ -1,0 +1,65 @@
+ROHAIL’S SCHOOL MUSIC NIGHT — USACO V2
+Four guided lessons, with runnable C++17 companions and separate practice solutions.
+
+Measured total video runtime: 4:08:26
+
+Watch in order. Pause when prompted and attempt the exercise before revealing its answer. The short cue is not intended to supply all the time needed to solve a problem.
+
+PART 1: C++ execution and Bronze problem solving — 1:00:03
+https://drive.google.com/file/d/1Q7dvAcRYmUnYbz7PJoFmRPxp7UpuqYE5/view
+SHA256 78fcc9c2a265928cad5762e1220526f0b91cbe07281563515709168b60d4a676
+  0:00:00  Foundations
+  0:13:54  Loop Trace
+  0:24:11  Functions Cost
+  0:33:12  String Lab
+  0:43:37  Casework
+  0:51:16  Backtracking
+
+PART 2: Avoid repeated work — 1:01:09
+https://drive.google.com/file/d/1NVP9T8Z336MLQBLQ--nXebFkKyVn5GdH/view
+SHA256 1115293e1001469f6289b4ed83d83b08d7a6f7020b17d3218df5475d4e1ef6dc
+  0:00:00  Sorting
+  0:06:05  Prefix
+  0:17:38  Ranges
+  0:24:33  Dashboard Lab
+  0:34:52  Two Pointers
+  0:43:23  Binary Search
+  0:52:44  Greedy
+  0:58:02  Transfer
+
+PART 3: Graphs and dynamic programming — 1:01:06
+https://drive.google.com/file/d/1e4EgliR8YNNDaizmwxg3GQzPxXA6MOR3/view
+SHA256 94f1e438abc249a7370b19158dc6a5e4bb0be29f97d4f6a621017680a408ee13
+  0:00:00  Graph Models
+  0:06:40  Bfs
+  0:18:14  Grid Lab
+  0:29:02  Parity
+  0:39:09  Functional Graph
+  0:43:44  Dynamic Programming
+  0:56:47  Topological
+
+PART 4: Gold foundations and an advanced roadmap — 1:06:07
+https://drive.google.com/file/d/1JdqsY7kIecAGj3l5ZqeTPhR37jjBck05/view
+SHA256 328b62b92a767f06c0e8a5b4b13d782a909b6d370f73d9296326f1bcf9e6e66a
+  0:00:00  Knapsack
+  0:09:14  Lis Lab
+  0:20:26  Dijkstra
+  0:29:19  Dsu Mst
+  0:34:57  Fenwick
+  0:44:42  Segment Sparse
+  0:51:14  Debug Clinic
+  0:55:08  Advanced Roadmap
+  1:01:55  Practice
+
+COMPANIONS
+Workbook: https://drive.google.com/file/d/1wuw-O9CgGLuzWQ0rSpkskgmDSEFf5BcJ/view
+Code, captions and chapter files: https://drive.google.com/file/d/1TrsFw6DlOWI3AYFVNBjtOCKBmlhdRzUi/view
+Source: https://github.com/mohyasser1/CODEX-USACO-Explainer-Video/tree/work/v2
+
+COVERAGE
+C++ and Bronze foundations; selected Silver techniques and Gold foundations. Advanced topics are a prerequisite roadmap, not full implementations or a promise of Platinum mastery. Sustained independent problem solving remains necessary.
+
+PRESENTATION AND CHECKS
+Original synthetic Voice A, delivered at the requested 1.25x tempo. Fictional students; selected user-supplied clean musical hooks, no artist voice or recording.
+Diagrams present authored paragraph-level states, not word-synchronized execution. Full decode, manuscript/caption coverage, AV timing, clipping checks and sampled encoded-frame inspection are recorded separately for each part. The agent did not perform full human listening.
+V1 is preserved separately.
