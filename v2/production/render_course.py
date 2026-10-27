@@ -76,6 +76,15 @@ def diagram(d,m,box):
      d.text((xx+8,yy+5),v,font=font(23,True),fill=INK)
      if r*width+c in m.get('dist',{}):d.text((xx+cell-24,yy+cell-25),str(m['dist'][r*width+c]),font=font(17),fill=ORANGE)
   if m.get('dist'):d.text((sx+width*cell+15,y+15),'Orange = distance',font=font(19),fill=ORANGE)
+ elif k=='grid_compare':
+  for j,grid in enumerate(m['grids']):
+   bx=x+j*w/2;fitted(d,m['case_labels'][j],(bx+8,y,w/2-15,32),19,15,True)
+   cell=58
+   for r,row in enumerate(grid):
+    for c,v in enumerate(row):
+     xx=bx+20+c*cell;yy=y+45+r*cell
+     d.rectangle((xx,yy,xx+cell-3,yy+cell-3),fill='#263c49' if v=='#' else 'white')
+     if v!='#':d.text((xx+16,yy+12),v,font=font(23,True),fill=INK)
  elif k=='fenwick':
   cell=w/8
   for i,v in enumerate(m['values']):

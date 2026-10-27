@@ -61,6 +61,7 @@ def model(c):
   if i==16:edges.append((5,6));dist=[0,1,1,2,2,3,4]
   d.update(kind='graph',n=7,edges=edges,dist=dist,queue=q,label='ROOM GRAPH · ONE STEP PER EDGE')
   if i==12:d['path']=[0,1,3,5]
+  if i==16:d['label']='TRANSFER · AFTER ADDING EDGE 5–6'
  elif t=='dynamic_programming':
   values=[0]+['?']*6;upto={4:0,8:2,9:3,10:5,11:6,12:6}.get(i,0)
   for j in range(upto+1):values[j]=[0,1,2,1,1,2,2][j]
@@ -109,7 +110,7 @@ def model(c):
   if i>=5:dist.update({2:2,8:2})
   if i>=6:dist.update({6:3,9:3,7:4,10:4,11:5})
   d.update(kind='grid',grid=grid,dist=dist,label='GRID BFS · COORDINATES (ROW,COLUMN)')
-  if i==14:d.update(grid=['S#.','..T'],dist={0:0,3:1,4:2,5:3},label='TRANSFER ANSWER · THREE MOVES')
+  if i==14:d.update(kind='grid_compare',grids=[['S#.','..T'],['S#.','.#T']],case_labels=['Original: distance 3','Block (1,1): unreachable'],code=[],label='TRANSFER · TWO SEPARATE CASES',notes='Original route: (0,0) → (1,0) → (1,1) → (1,2).\nAfter blocking (1,1), the target has no route from S.')
  elif t=='lis_lab':
   d.update(kind='array',values=[3,1,2,5,4,6],label='STRICT LIS · KEEP ORIGINAL ORDER',index_label='index')
   if i==3:d.update(kind='table',headers=['value',3,1,2,5,4,6],rows=[['DP length',1,1,2,3,3,4]],label='QUADRATIC ENDING-LENGTH DP')
@@ -133,7 +134,9 @@ def model(c):
   edges=[(0,1,'S'),(1,2,'D')]+([(0,2,'S')] if i in [6,7] else [])
   d.update(kind='graph',n=4,edges=edges,dist=[0,0,1,'?'] if i>=3 else [None]*4,queue=[],label='SAME / DIFFERENT CONSTRAINTS · GROUPS1..4',node_offset=1)
   if i==14:d.update(kind='rows',rows=[['all-D triangle','impossible'],['path plus isolated','4 assignments = binary100']])
- elif t=='topological':d.update(kind='graph',n=5,edges=[(0,2),(1,2),(2,3),(1,4)]+([(3,1)] if i==4 else []),directed=True,dist=[None]*5,queue=[],label='PREREQUISITE → DEPENDENT')
+ elif t=='topological':
+  d.update(kind='graph',n=5,edges=[(0,2),(1,2),(2,3),(1,4)]+([(3,1)] if i==4 else []),directed=True,dist=[None]*5,queue=[],label='PREREQUISITE → DEPENDENT')
+  if i==6:d.update(kind='rows',rows=[['original edge 1→4','task4 waits for task1'],['remove edge 1→4','task4 is ready initially'],['valid output','every remaining edge respected'],['cost','O(n+m) time and space']],label='TRANSFER · REMOVE ONE PREREQUISITE')
  elif t=='dsu_mst':d.update(kind='graph',n=4,edges=[(0,1,1),(1,2,2),(0,2,3),(2,3,4),(0,3,10)],dist=[None]*4,queue=[],label='MINIMUM NETWORK · CHOOSE EDGES',path=[0,1,2,3] if i>=2 else [])
  elif t=='segment_sparse':
   d.update(kind='array',values=[3,1,10 if i in [4,5] else 4,1,5],label='RANGE SUM TREE · POINT ASSIGNMENT',index_label='index')
