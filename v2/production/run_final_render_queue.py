@@ -8,6 +8,11 @@ for n in [1,3,4,2]:
  while not (p/'timing.json').exists():time.sleep(10)
  manifest=json.loads((R/'course_manifest.json').read_text())['parts'][n-1]
  t=json.loads((p/'timing.json').read_text());assert {c['source'] for c in t['cues']}==set(manifest['scripts'])
+ existing=p/'verification.json'
+ if existing.exists():
+  report=json.loads(existing.read_text())
+  if report.get('renderer_sha256') and report.get('full_decode')=='passed' and report.get('manuscript_paragraphs_exact'):
+   print('PRESERVED COMPLETED LEARNER RENDER',n,flush=True);continue
  archive=p/'superseded-before-learner-panels';archive.mkdir(exist_ok=True)
  for name in [f'Rohail-USACO-V2-Part-{n}.mp4','verification.json']:
   if (p/name).exists() and not (archive/name).exists():shutil.copy2(p/name,archive/name)

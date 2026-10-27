@@ -27,6 +27,13 @@ def fitted(d,text,box,maxsize=25,minsize=16,bold=False,mono=False):
  for j,line in enumerate(lines):d.text((x,y+j*(size+5)),line,font=f,fill=INK)
  return size
 
+def graph_coords(n,box):
+ x,y,w,h=box
+ if n==3:return {0:(x+75,y+110),1:(x+470,y+30),2:(x+470,y+185)}
+ if n==4:return {0:(x+75,y+110),1:(x+300,y+35),2:(x+300,y+185),3:(x+530,y+110)}
+ # Convex placement prevents a straight edge from passing through a third vertex.
+ return {j:(x+w/2+w*.38*math.cos(-math.pi/2+2*math.pi*j/n),y+h/2-8+h*.32*math.sin(-math.pi/2+2*math.pi*j/n)) for j in range(n)}
+
 def diagram(d,m,box):
  x,y,w,h=box;k=m['kind']
  if k=='flow':
@@ -89,8 +96,7 @@ def diagram(d,m,box):
     xx=x+col*cw;yy=y+j*rh;d.rectangle((xx,yy,xx+cw-2,yy+rh-2),fill='#d8ebda' if j==0 else 'white')
     fitted(d,str(v),(xx+5,yy+4,cw-10,rh-5),20,12,j==0)
  elif k=='graph':
-  n=m['n'];coords={j:(x+70+(j%3)*190,y+40+(j//3)*70) for j in range(n)}
-  if n==4:coords={0:(x+75,y+110),1:(x+300,y+35),2:(x+300,y+185),3:(x+530,y+110)}
+  n=m['n'];coords=graph_coords(n,box)
   path=set(zip(m.get('path',[]),m.get('path',[])[1:]))
   for edge in m['edges']:
    u,v=edge[:2];a,b=coords[u],coords[v];color=ORANGE if (u,v) in path or (v,u) in path else '#879b88'
@@ -176,8 +182,8 @@ def motion(d,m,scene,elapsed):
    d.text((bx+190,190),f'{count}/{total}',font=font(22,True),fill=ORANGE)
  elif m['topic']=='bfs' and scene in [4,5,6,7] and elapsed<1.8:
   u,v={4:(0,1),5:(1,3),6:(2,4),7:(3,5)}[scene]
-  coords=lambda j:(105+(j%3)*190,183+(j//3)*70)
-  a,b=coords(u),coords(v);f=max(0,min(1,elapsed/1.8));x=a[0]+(b[0]-a[0])*f;y=a[1]+(b[1]-a[1])*f
+  coords=graph_coords(m['n'],(35,143,710,219))
+  a,b=coords[u],coords[v];f=max(0,min(1,elapsed/1.8));x=a[0]+(b[0]-a[0])*f;y=a[1]+(b[1]-a[1])*f
   d.ellipse((x-7,y-7,x+7,y+7),fill=ORANGE)
  elif m['topic']=='dynamic_programming' and scene in [8,9,10,11] and elapsed<1.8:
   amount={8:2,9:3,10:5,11:6}[scene];x=45+amount*88;alpha=max(1,int(5*(1-elapsed/1.8)))
