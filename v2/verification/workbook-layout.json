@@ -1,14 +1,20 @@
 {
   "pages": 41,
-  "exercises": 32,
-  "short_pages_under300chars": [],
-  "bytes": 127900,
-  "sha256": "0af5a997f92e4803d2066cdeca75927155ac9963629d0d1a088b71579bd1e66c",
-  "limits": "Text extraction and selected page inspection; no full independent editorial or listening review",
-  "sampled_pages": [
-    1,
-    5,
-    21,
-    41
+  "short_pages": [],
+  "orphan_code_headings": [],
+  "sha256": "1f549afedf4247f47d5459d8ad352fa05ac2b37f43b5cc2c85520ac281853837",
+  "bytes": 129419,
+  "standalone_givens_added": true,
+  "knapsack_solution_expanded": true,
+  "visual_review_pages": [
+    6,
+    7,
+    9,
+    11,
+    12,
+    16,
+    18,
+    19,
+    20
   ]
 }
