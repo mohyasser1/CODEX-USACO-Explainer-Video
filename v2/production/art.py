@@ -34,13 +34,25 @@ def model(c):
   if t=='grid_lab':d['question_model']=dict(kind='grid',grid=['S#.','..T'],dist={})
   if t=='bfs':d['question_model']=dict(kind='graph',n=7,edges=BASE_BFS+[(5,6)],dist=[None]*7,queue=[])
   return d
- if t=='loop_trace':
+ if t=='foundations':
+  if i==3:d.update(kind='rows',label='FIRST COMPLETE C++17 PROGRAM',rows=[['read','two long long integers'],['compute','their sum'],['print','answer and newline']],code=['#include <iostream>','int main() {','  long long a, b;','  std::cin >> a >> b;','  std::cout << a+b << "\\n";','}'])
+  if i==6:d.update(kind='rows',rows=[['int count','0'],['long long price','3000000000'],['bool open','true']],label='NAME · TYPE · VALUE')
+  if i==7:d.update(kind='rows',rows=[['old count','2'],['evaluate count+1','3'],['store in count','3']],code=['count = count + 1;','// Assignment changes state','bool same = (count == 3);','// Comparison produces a bool'])
+  if i==8:d.update(kind='rows',rows=[['int operands','1500000000 + 1500000000'],['unsafe expression','int + int overflows'],['promote first','1LL*a + b = 3000000000']],code=['int a=1500000000, b=1500000000;','long long good = 1LL*a + b;','// WRONG: long long bad = a+b;'])
+  if i==11:d.update(kind='table',headers=['x','x<0','x%2==0','both'],rows=[[-4,'true','true','true'],[-3,'true','false','false'],[0,'false','true','false']],label='AND REQUIRES BOTH CONDITIONS')
+  if i==13:d.update(kind='array',values=list('BANANA'),label='STRING · SIX CHARACTERS',small='Length = 6; count of A = 3')
+  if i==15:d.update(kind='rows',label='FIRST ATTEMPT · INCORRECT',rows=[['receipts','+3, -2, +5, -1'],['positive-only program','3 + 5 = 8'],['actual net total','3 - 2 + 5 - 1 = 5'],['mistake','refunds were discarded']],code=['// WRONG for a signed total','if (x > 0) total += x;'])
+ elif t=='functions_cost':
+  if i==1:d.update(kind='rows',rows=[['caller before','x = 7'],['local parameter','value: 7 → 8'],['caller after','x = 7']],code=['void bump(int value) {','  ++value;','}','int x=7;','bump(x); // x is still 7'])
+  if i==2:d.update(kind='rows',rows=[['caller before','x = 7'],['reference parameter','alias of caller x'],['caller after','x = 8']],code=['void bump(int& value) {','  ++value;','}','int x=7;','bump(x); // x is now 8'])
+ elif t=='loop_trace':
   d.update(kind='rows',label='SIGNED TOTAL · TRACE',rows=[['input','3, -2, 5, -1'],['count','4'],['answer','5']])
   if i in [1]:d['rows']=[['read count','n = 4'],['create slots','vector<int> a(n)'],['read values','for (int& x:a) cin >> x;']];d['code']=[]
   if i in [2,8]:d['rows']=[['index','0'],['total','0'],['processed prefix','empty']]
   if i==3:d['rows']=[['check','i=0, total=0; 0<4'],['add','0+3=3; i still0'],['increment','i becomes1']]
   if i==4:d['rows']=[['check','i=1, total=3; 1<4'],['add','3+(-2)=1'],['increment','i becomes2']]
   if i==5:d['rows']=[['index2','1+5=6'],['index3','6-1=5'],['final check','i=4; 4<4 false'],['output','5']]
+  if i==6:d.update(code=[],rows=[['wrong condition','i <= n'],['extra index','i=4 with n=4'],['access a[4]','OUT OF BOUNDS'],['valid indices','0,1,2,3']],label='COUNTEREXAMPLE · INVALID EXTRA ITERATION')
   if i in [7,9,10]:d['rows']=[['invariant','total = sum of first i values'],['preserve','add a[i], then increment i'],['finish','i=n; whole input processed']]
   if i==11:d['rows']=[['new input','n=0; a=[]'],['initial state','i=0,total=0'],['condition','0<0 false'],['output','0']]
   if i==15:d['rows']=[['i','0  1  2  3  4'],['total','0 -4 -4  3  0']]
@@ -114,7 +126,9 @@ def model(c):
   if i in [4,5,6]:d.update(kind='rows',rows=[['counts','S:3  W:1  I:1'],['scan index0','S repeats →skip'],['scan index1','W occurs once →answer1']])
   if i==13:d.update(kind='rows',rows=[['new contract','first second occurrence'],['SWISS','second S arrives at index3'],['old contract','globally unique first position1']])
   if i==12:d.update(kind='rows',rows=[['empty / A / AAAA','-1 / 0 / -1'],['BANANA / ZYX','0 / 0'],['order','positions, not alphabet']])
- elif t=='functional_graph':d.update(kind='graph',n=5,edges=[(0,1),(1,2),(2,3),(3,1),(4,4)],directed=True,dist=[None]*5,queue=[],label='ONE SUCCESSOR PER VERTEX')
+ elif t=='functional_graph':
+  d.update(kind='graph',n=5,edges=[(0,1),(1,2),(2,3),(3,1),(4,4)],directed=True,dist=[None]*5,queue=[],label='ONE SUCCESSOR PER VERTEX')
+  if i==7:d.update(n=3,edges=[(0,1),(1,2),(2,2)],dist=[None]*3,label='TRANSFER · 0 → 1 → 2 → 2',notes='Start0: tail length2, cycle length1.\nStart2: tail length0, cycle length1.')
  elif t=='parity':
   edges=[(0,1,'S'),(1,2,'D')]+([(0,2,'S')] if i in [6,7] else [])
   d.update(kind='graph',n=4,edges=edges,dist=[0,0,1,'?'] if i>=3 else [None]*4,queue=[],label='SAME / DIFFERENT CONSTRAINTS · GROUPS1..4',node_offset=1)
@@ -123,6 +137,9 @@ def model(c):
  elif t=='dsu_mst':d.update(kind='graph',n=4,edges=[(0,1,1),(1,2,2),(0,2,3),(2,3,4),(0,3,10)],dist=[None]*4,queue=[],label='MINIMUM NETWORK · CHOOSE EDGES',path=[0,1,2,3] if i>=2 else [])
  elif t=='segment_sparse':
   d.update(kind='array',values=[3,1,10 if i in [4,5] else 4,1,5],label='RANGE SUM TREE · POINT ASSIGNMENT',index_label='index')
+  if i==1:d.update(kind='rows',rows=[['leaves','3,1,4,1,5,0,0,0'],['pairs','4,5,5,0'],['halves','9,5'],['root','14']],label='SUM TREE · BOTTOM-UP LEVELS')
+  if i==2:d.update(kind='rows',rows=[['query','[1,4)'],['first block','[1,2): sum1'],['second block','[2,4): sum5'],['combine','1+5=6']],label='DISJOINT QUERY BLOCKS')
+  if i==4:d.update(kind='rows',rows=[['leaf index2','4 → 10'],['pair [2,4)','5 → 11'],['half [0,4)','9 → 15'],['root [0,8)','14 → 20']],label='ASSIGNMENT · RECOMPUTE ANCESTORS')
   if i==8:d.update(kind='rows',rows=[['input','3,1,4'],['overlap blocks','[3,1] and[1,4]'],['minimum','min(1,1)=1'],['sum fails','4+5=9, true sum8']])
  elif t=='ranges':
   if i<=4:d.update(kind='rows',rows=[['events','0,3,2,0,-3,-2'],['reconstructed','0,3,5,5,2']],label='DIFFERENCE EVENTS → VALUES')

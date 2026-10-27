@@ -27,7 +27,13 @@ story.append(p('Programs use standard input/output. Historical official problems
 story.append(PageBreak());heading('Course map')
 for part,row in zip(manifest['parts'],progress['parts']):
  heading(f"Part {part['number']}: {part['title']}")
- story.append(p(f"{row['spoken_words']:,} narrated words; provisional {row['estimated_minutes']:.1f} minutes at the current measured sample pace."))
+ report_path=OUT/f"part{part['number']}"/"verification.json"
+ if report_path.exists():
+  report=json.loads(report_path.read_text());seconds=round(report["duration"]);runtime=f"{seconds//60}:{seconds%60:02d}"
+  story.append(p(f"Measured video runtime: {runtime}; {row['spoken_words']:,} narrated words."))
+  for ch in json.loads((report_path.parent/"chapters.json").read_text()):
+   sec=round(ch["start"]);story.append(p(f"{sec//60:02d}:{sec%60:02d} — {ch['title'].title()}","Small"))
+ else:story.append(p(f"{row['spoken_words']:,} narrated words; provisional {row['estimated_minutes']:.1f} minutes at the current measured sample pace."))
  for name in part['scripts']:story.append(p('• '+topic(name).replace('_',' ').title()))
 custom={
 'foundations':('Two int operands are each1,500,000,000. Why is assigning their sum to long long insufficient? Also explain why reserve(100) on an empty vector does not make index0 valid.','Promote before addition, for example1LL*a+b. Assignment happens after the expression is evaluated. Reserve changes capacity, not size; construct elements or push_back before indexing.'),
